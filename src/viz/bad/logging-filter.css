@@ -1,0 +1,135 @@
+.lf {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.lf-top {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 1rem 1.5rem;
+  align-items: start;
+}
+.lf-rules {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.lf-rule {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.2rem 0.75rem;
+  padding: 0.4rem 0.7rem;
+  font-size: 0.8125rem;
+}
+.lf-rule code {
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.lf-levels {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.lf-levels ol {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+}
+.lf-levels li {
+  padding: 0.1rem 0.45rem;
+  border-radius: 3px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--ink-2);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  transition:
+    background-color 0.35s var(--ease-out),
+    color 0.35s var(--ease-out);
+}
+.lf-levels li[data-now] {
+  color: var(--paper);
+  background: var(--accent);
+  box-shadow: none;
+}
+
+.lf-table {
+  overflow-x: auto;
+}
+.lf-table .vtable td:first-child,
+.lf-table .vtable th:first-child {
+  white-space: normal;
+}
+.lf-msg {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.1rem 0.6rem;
+  align-items: baseline;
+}
+.lf-lvl {
+  min-width: 6.5rem;
+  font-weight: 600;
+}
+.lf-cat {
+  font-size: 0.75rem;
+}
+.lf-verdict {
+  display: inline-flex;
+  gap: 0.4rem;
+  align-items: baseline;
+}
+.lf-verdict span {
+  font-size: 0.6875rem;
+}
+
+.lf-struct {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+.lf-cards {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 0.75rem;
+}
+.lf-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.lf-code {
+  font-size: 0.75rem;
+  overflow-wrap: anywhere;
+}
+.lf-stored {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.6rem;
+}
+.lf-text {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--ink-2);
+}
+
+@container (max-width: 40rem) {
+  .lf-top,
+  .lf-cards {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .lf-lvl {
+    min-width: 0;
+  }
+  .lf-cat {
+    font-size: 0.6875rem;
+  }
+  /* Smalt: kun ✓/✗; minimumsniveauet står i reglerne ovenfor. */
+  .lf-verdict span {
+    display: none;
+  }
+}

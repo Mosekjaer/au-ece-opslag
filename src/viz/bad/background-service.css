@@ -1,0 +1,237 @@
+.bgs {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.bgs-top > .vnode {
+  flex: 1 1 0;
+  min-width: 0;
+}
+.bgs-top > .vlink {
+  flex: 0 0 4.5rem;
+}
+.bgs-reg {
+  display: block;
+  margin-top: 0.3rem;
+  font-size: 0.75rem;
+  overflow-wrap: break-word;
+}
+.bgs-single .vnode-title code {
+  overflow-wrap: anywhere;
+}
+
+.bgs-ctors {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-top: 0.45rem;
+}
+.bgs-ctor {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.2rem 0.5rem;
+  font-size: 0.75rem;
+}
+.bgs-ctor code {
+  font-size: 0.75rem;
+}
+.bgs-ctor[data-tone='neg'] code {
+  color: var(--neg);
+  text-decoration: line-through;
+  text-decoration-color: color-mix(in oklab, var(--neg) 60%, transparent);
+}
+.bgs-ctor[data-tone='ok'] code {
+  color: var(--accent);
+}
+
+.bgs-muted {
+  font-size: 0.75rem;
+  color: var(--ink-3);
+}
+
+/* Løkken */
+.bgs-loop {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 0.75rem;
+  border-radius: var(--radius-sm);
+  box-shadow: inset 0 0 0 1px var(--rule);
+}
+.bgs-loop-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.35rem 1rem;
+}
+.bgs-loop-head > code {
+  font-size: 0.75rem;
+  font-weight: 500;
+  overflow-wrap: break-word;
+}
+.bgs-token {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.bgs-timeline {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 7.5rem minmax(0, 1fr) 7.5rem;
+  align-items: stretch;
+  gap: 0.5rem;
+}
+
+.bgs-scope {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  min-width: 0;
+}
+.bgs-scope-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.2rem 0.5rem;
+}
+.bgs-scope-head code {
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+.bgs-iter {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--ink-3);
+}
+.bgs-scope-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.bgs-deps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+.bgs-dep {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  padding: 0.12rem 0.45rem;
+  border-radius: 3px;
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+}
+.bgs-dep code {
+  font-size: 0.75rem;
+}
+.bgs-inst {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+.vnode[data-tone='muted'] .bgs-dep {
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--rule);
+}
+.vnode[data-tone='muted'] .bgs-inst {
+  color: var(--ink-3);
+}
+.bgs-work {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.15rem 0.35rem;
+  font-size: 0.75rem;
+}
+.bgs-work code {
+  font-size: 0.6875rem;
+  overflow-wrap: anywhere;
+}
+.bgs-arrow {
+  color: var(--ink-3);
+}
+.bgs-end {
+  min-height: 1.3rem;
+}
+
+/* Ventetid: en streg der tegnes ind (--p 0 → 1). */
+.bgs-delay {
+  --p: 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.35rem;
+  min-width: 0;
+}
+.bgs-delay-line {
+  display: block;
+  height: 0;
+  border-top: 2px dashed var(--accent);
+  transform-origin: left center;
+  transform: scaleX(var(--p));
+}
+.bgs-delay[data-cut] .bgs-delay-line {
+  border-color: var(--neg);
+}
+.bgs-delay-label {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.2rem;
+}
+.bgs-delay-label code {
+  font-size: 0.6875rem;
+}
+
+.bgs-exit {
+  align-self: flex-end;
+  font-size: 0.75rem;
+  color: var(--ink-2);
+}
+.bgs-exit code {
+  font-size: 0.75rem;
+}
+
+@container (max-width: 40rem) {
+  .bgs-top > .vlink {
+    flex: none;
+  }
+  .bgs-timeline {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .bgs-delay {
+    flex-direction: row;
+    align-items: center;
+    gap: 0.75rem;
+    min-height: 3rem;
+    padding-left: 1rem;
+  }
+  .bgs-delay-line {
+    width: 0;
+    height: 2.75rem;
+    flex: none;
+    border-top: 0;
+    border-left: 2px dashed var(--accent);
+    transform-origin: center top;
+    transform: scaleY(var(--p));
+  }
+  .bgs-delay[data-cut] .bgs-delay-line {
+    border-color: var(--neg);
+  }
+  .bgs-delay-label {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .bgs-exit {
+    align-self: flex-start;
+  }
+}

@@ -1,0 +1,457 @@
+.dfi {
+  --dfi-busx: 0.9rem; /* busens x i buscellen */
+  --dfi-j: 0.8rem; /* realiseringens forgrening, venstre for klasserne */
+  --dfi-g: 0.4rem; /* afstand mellem rigtig og fake */
+  --dfi-pad: 0.3rem; /* luft over og under hver række */
+  --dfi-line: var(--ink-3);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* III-stigen */
+.dfi-rungs {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+.dfi-rungs li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.15rem 0.6rem 0.15rem 0.2rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--ink-3);
+  box-shadow: inset 0 0 0 1px var(--rule);
+  transition:
+    color 0.35s var(--ease-out),
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.dfi-rung-n {
+  display: grid;
+  place-items: center;
+  width: 1.2rem;
+  height: 1.2rem;
+  border-radius: 50%;
+  font-size: 0.6875rem;
+  background: var(--paper-3);
+  transition:
+    background-color 0.35s var(--ease-out),
+    color 0.35s var(--ease-out);
+}
+.dfi-rungs li[data-on] {
+  color: var(--accent);
+  box-shadow: inset 0 0 0 1px var(--accent-mid);
+}
+.dfi-rungs li[data-on] .dfi-rung-n {
+  color: var(--paper);
+  background: var(--accent);
+}
+.dfi-rungs li[data-now] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+
+/* -------------------------- Diagrammets gitter -------------------------- */
+.dfi-dia {
+  display: grid;
+  grid-template-columns:
+    [house] minmax(0, 1fr)
+    [bus] 2rem
+    [iface] minmax(0, 9.5rem)
+    [conn] 2.25rem
+    [impl] minmax(0, 10.25rem);
+  column-gap: 0;
+  row-gap: 0;
+  align-items: stretch;
+}
+
+.dfi-house {
+  grid-column: house;
+  grid-row: 2 / span 5;
+  align-self: start;
+  min-width: 0;
+  border-radius: 2px;
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--dfi-line);
+}
+.dfi-house-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.3rem 0.6rem;
+  min-height: 2.1rem;
+  padding: 0.3rem 0.6rem;
+}
+.dfi-house-name {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  font-variant-ligatures: none;
+}
+.dfi-house-head .vtag {
+  font-family: var(--font-ui);
+  font-size: 0.6875rem;
+}
+.dfi-house-op {
+  padding: 0.2rem 0.6rem;
+  border-top: 1px solid var(--dfi-line);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-variant-ligatures: none;
+}
+.dfi-house .dfi-code {
+  border-top: 1px solid var(--dfi-line);
+}
+
+/* Kode */
+.dfi-code {
+  display: flex;
+  flex-direction: column;
+  padding: 0.4rem 0.6rem 0.45rem 0.6rem;
+}
+.dfi-ln-cell {
+  display: grid;
+}
+.dfi-ln-cell > .dfi-ln {
+  grid-area: 1 / 1;
+}
+.dfi-ln-ghost {
+  visibility: hidden;
+}
+.dfi-ln {
+  min-width: 0;
+  text-indent: -2ch;
+  font-size: 0.71875rem;
+  line-height: 1.5;
+}
+.dfi-ln code {
+  display: block;
+  padding: 0;
+  background: none;
+  box-shadow: none;
+  font-size: 0.71875rem;
+  white-space: normal;
+  overflow-wrap: normal;
+  hyphens: manual;
+  color: var(--ink-2);
+}
+.dfi-hl,
+.dfi-new {
+  border-radius: 2px;
+  transition:
+    background-color 0.35s var(--ease-out),
+    color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.dfi-new {
+  display: inline-block;
+  text-indent: 0;
+  padding: 0 0.15em;
+  margin: 0 -0.15em;
+  color: var(--ink);
+  background: var(--paper-3);
+}
+.dfi-hl[data-hl],
+.dfi-new[data-hl] {
+  color: var(--accent);
+  background: var(--accent-soft);
+  box-shadow: inset 0 -1.5px 0 var(--accent);
+}
+
+/* ------------------------------ Bus (House) ------------------------------ */
+.dfi-bus {
+  grid-column: bus;
+  position: relative;
+  color: var(--dfi-line);
+}
+.dfi-bh,
+.dfi-bv,
+.dfi-dline {
+  position: absolute;
+  background: currentColor;
+}
+.dfi-bh {
+  top: 50%;
+  left: var(--dfi-busx);
+  right: 1px;
+  height: 1.5px;
+  margin-top: -0.75px;
+  transform-origin: left center;
+}
+.dfi-bh-house {
+  left: 0;
+  right: auto;
+  width: var(--dfi-busx);
+}
+.dfi-bv {
+  left: var(--dfi-busx);
+  width: 1.5px;
+  margin-left: -0.75px;
+  transform-origin: center top;
+}
+.dfi-bv-up {
+  top: 0;
+  bottom: 50%;
+}
+.dfi-bv-down {
+  top: 50%;
+  bottom: 0;
+}
+.dfi-bv-top {
+  display: none;
+}
+.dfi-bh[data-now],
+.dfi-dline[data-now] {
+  color: var(--accent);
+}
+
+.dfi-head {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: 8px;
+  height: 10px;
+  margin-top: -5px;
+  overflow: visible;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+/* Direkte association før interfacet */
+.dfi-direct {
+  grid-column: iface / impl;
+  position: relative;
+  color: var(--dfi-line);
+  pointer-events: none;
+}
+.dfi-dline {
+  top: 50%;
+  left: 0;
+  right: 1px;
+  height: 1.5px;
+  margin-top: -0.75px;
+  transform-origin: left center;
+}
+.dfi-direct:has(.dfi-dline[data-now]) {
+  color: var(--accent);
+}
+
+/* ------------------------------- Klasser -------------------------------- */
+.dfi-iface-cell {
+  grid-column: iface;
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  padding-block: var(--dfi-pad);
+}
+.dfi-box {
+  min-width: 0;
+  border-radius: 2px;
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--dfi-line);
+  font-size: 0.75rem;
+  line-height: 1.3;
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.dfi-box[data-now] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.dfi-iface {
+  flex: 1 1 auto;
+}
+.dfi-name {
+  display: block;
+  padding: 0.3rem 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-variant-ligatures: none;
+  hyphens: manual;
+  overflow-wrap: normal;
+}
+.dfi-iname {
+  font-style: italic;
+}
+.dfi-op {
+  padding: 0.2rem 0.5rem 0.3rem;
+  border-top: 1px solid var(--dfi-line);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-variant-ligatures: none;
+  color: var(--ink-2);
+}
+
+/* Realisering */
+.dfi-conn {
+  grid-column: conn;
+  position: relative;
+  color: var(--dfi-line);
+}
+.dfi-tri {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 11px;
+  height: 12px;
+  margin-top: -6px;
+  overflow: visible;
+  fill: var(--paper-2);
+  stroke: currentColor;
+  stroke-width: 1.3;
+  stroke-linejoin: round;
+}
+.dfi-rline,
+.dfi-trunk,
+.dfi-real[data-real]::before,
+.dfi-fake::before {
+  position: absolute;
+  color: var(--dfi-line);
+}
+.dfi-rline,
+.dfi-real[data-real]::before,
+.dfi-fake::before {
+  height: 1.5px;
+  margin-top: -0.75px;
+  background: repeating-linear-gradient(90deg, currentColor 0 4px, transparent 4px 7px);
+}
+.dfi-rline {
+  top: 50%;
+  left: 10px;
+  right: var(--dfi-j);
+  transform-origin: left center;
+}
+.dfi-rline[data-now] {
+  color: var(--accent);
+}
+
+.dfi-impl {
+  grid-column: impl;
+  position: relative;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  row-gap: var(--dfi-g);
+  min-width: 0;
+  padding-block: var(--dfi-pad);
+}
+.dfi-real {
+  position: relative;
+  grid-row: 1 / 3;
+  align-self: center;
+}
+.dfi-impl[data-pair] .dfi-real {
+  grid-row: 1;
+  align-self: stretch;
+}
+.dfi-fake {
+  position: relative;
+  grid-row: 2;
+}
+.dfi-real,
+.dfi-fake {
+  grid-column: 1;
+  display: flex;
+  align-items: center;
+}
+.dfi-real[data-real]::before,
+.dfi-fake::before {
+  content: '';
+  top: 50%;
+  left: calc(-1 * var(--dfi-j));
+  width: var(--dfi-j);
+}
+.dfi-fake[data-now]::before {
+  color: var(--accent);
+}
+.dfi-trunk {
+  left: calc(-1 * var(--dfi-j));
+  top: calc(var(--dfi-pad) + (100% - 2 * var(--dfi-pad) - var(--dfi-g)) / 4);
+  bottom: calc(var(--dfi-pad) + (100% - 2 * var(--dfi-pad) - var(--dfi-g)) / 4);
+  width: 1.5px;
+  margin-left: -0.75px;
+  background: repeating-linear-gradient(180deg, currentColor 0 4px, transparent 4px 7px);
+  transform-origin: center top;
+}
+.dfi-trunk[data-now] {
+  color: var(--accent);
+}
+
+/* ------------------------------- Kaldere -------------------------------- */
+.dfi-callers {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+.dfi-caller {
+  min-width: 0;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  transition: box-shadow 0.35s var(--ease-out);
+}
+.dfi-caller[data-now] {
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.dfi-caller-head {
+  padding: 0.45rem 0.7rem 0;
+}
+.dfi-caller .dfi-code {
+  padding-top: 0.3rem;
+}
+.dfi-arg {
+  display: inline-block;
+  text-indent: 0;
+}
+
+/* --------------------------------- Smal --------------------------------- */
+@container (max-width: 40rem) {
+  .dfi {
+    --dfi-busx: 0.5rem;
+    --dfi-j: 0.7rem;
+  }
+  .dfi-dia {
+    grid-template-columns:
+      [bus] 1rem
+      [iface] minmax(0, 1fr)
+      [conn] 1.7rem
+      [impl] minmax(0, 1fr);
+  }
+  .dfi-name {
+    padding: 0.28rem 0.4rem;
+    font-size: 0.6875rem;
+  }
+  .dfi-op {
+    padding: 0.2rem 0.4rem 0.28rem;
+  }
+  .dfi-code {
+    padding-left: 0.45rem;
+    padding-right: 0.45rem;
+  }
+  .dfi-house {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    margin-bottom: 0.9rem;
+  }
+  .dfi-bh-house {
+    display: none;
+  }
+  .dfi-bv-top {
+    display: block;
+    top: -0.9rem;
+    bottom: 50%;
+  }
+  .dfi-callers {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

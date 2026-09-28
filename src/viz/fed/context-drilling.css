@@ -1,0 +1,291 @@
+.cx {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 1rem 1.5rem;
+  align-items: start;
+}
+
+.cx-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  min-width: 0;
+  transition: opacity 0.6s var(--ease-out);
+}
+.cx-col[data-dim] {
+  opacity: 0.45;
+}
+
+.cx-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.15rem 0.6rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 2px solid var(--rule);
+}
+.cx-h {
+  font-weight: 600;
+}
+.cx-sub {
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: var(--ink-3);
+}
+.cx-sub code {
+  font-size: 0.6875rem;
+}
+
+.cx-tree {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+.cx-tree > .vlink.is-v,
+.cx-frame > .vlink.is-v {
+  align-self: center;
+  justify-self: center;
+  height: 1.6rem;
+  min-height: 1.6rem;
+}
+.cx-tree .vnode-sub code {
+  font-size: 0.6875rem;
+  white-space: normal;
+  hyphens: manual;
+}
+.cx-prop {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--accent);
+  white-space: nowrap;
+}
+.cx-note {
+  display: flex;
+  min-height: 1.45rem;
+  margin-top: 0.3rem;
+}
+
+/* Knappen, som temaet farver. */
+.cx-btnrow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.3rem 0.5rem;
+  margin-top: 0.4rem;
+}
+.cx-btn {
+  display: inline-flex;
+  align-items: center;
+  height: 1.55rem;
+  padding: 0 0.7rem;
+  border-radius: 3px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  transition:
+    background-color 0.45s var(--ease-out),
+    color 0.45s var(--ease-out),
+    box-shadow 0.45s var(--ease-out);
+}
+.cx-btn[data-theme='none'] {
+  color: var(--ink-3);
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+}
+.cx-btn[data-theme='Dark'] {
+  color: var(--paper);
+  background: var(--accent);
+  box-shadow: none;
+}
+.cx-btn[data-theme='light'] {
+  color: var(--ink);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1.5px var(--ink-3);
+}
+.cx-cls {
+  font-size: 0.6875rem;
+  color: var(--ink-3);
+}
+.cx-use {
+  display: block;
+  margin-top: 0.3rem;
+  font-size: 0.6875rem;
+  white-space: normal;
+  color: var(--ink-2);
+}
+
+/* Provider-rammen og strålen fra den til knappen. */
+.cx-frame {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 1.4rem;
+  column-gap: 0.25rem;
+  padding: 0.5rem 0.4rem 0.6rem 0.6rem;
+  border-radius: var(--radius);
+  outline: 1px dashed transparent;
+  outline-offset: -1px;
+  transition:
+    background-color 0.45s var(--ease-out),
+    box-shadow 0.45s var(--ease-out),
+    outline-color 0.45s var(--ease-out);
+}
+.cx-frame[data-on] {
+  background: color-mix(in oklab, var(--accent-soft) 55%, transparent);
+  box-shadow: inset 0 0 0 1.5px var(--accent-mid);
+}
+.cx-frame[data-alone] {
+  outline-color: var(--rule-strong);
+}
+.cx-frame-label {
+  grid-column: 1 / -1;
+  display: grid;
+  min-height: 1.5rem;
+  margin-bottom: 0.35rem;
+}
+.cx-prov {
+  grid-area: 1 / 1;
+  font-size: 0.75rem;
+  line-height: 1.35;
+}
+.cx-prov code {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--accent);
+  hyphens: manual;
+}
+.cx-none {
+  color: var(--ink-3);
+  font-style: italic;
+}
+.cx-r1 {
+  grid-column: 1;
+  grid-row: 2;
+}
+.cx-r2 {
+  grid-column: 1;
+  grid-row: 3;
+}
+.cx-r3 {
+  grid-column: 1;
+  grid-row: 4;
+}
+.cx-beam-a,
+.cx-beam-b {
+  grid-column: 2;
+  position: relative;
+  width: 0.9rem;
+  border-right: 2px solid var(--accent);
+}
+.cx-beam-a {
+  grid-row: 2 / 4;
+}
+.cx-beam-b {
+  grid-row: 4;
+  height: 50%;
+  border-bottom: 2px solid var(--accent);
+  border-bottom-right-radius: 6px;
+}
+.cx-beam-b::after {
+  content: '';
+  position: absolute;
+  left: -3px;
+  bottom: -5.25px;
+  border-right: 7px solid var(--accent);
+  border-top: 4.25px solid transparent;
+  border-bottom: 4.25px solid transparent;
+}
+
+.cx-chips {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.cx-chip {
+  align-self: flex-start;
+  padding: 0.25rem 0.5rem;
+  border-radius: 3px;
+  font-size: 0.75rem;
+  white-space: normal;
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.cx-chip[data-hot] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.cx-default {
+  font-size: 0.75rem;
+  line-height: 1.45;
+  color: var(--ink-2);
+}
+.cx-default code {
+  font-size: 0.6875rem;
+}
+
+/* Provider → value → Consumer (s. 20). */
+.cx-legend {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem 0.6rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--rule);
+}
+.cx-lg {
+  padding: 0.15rem 0.55rem;
+  border-radius: 3px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+}
+.cx-lg-arrow {
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  width: 4.5rem;
+  padding-bottom: 0.45rem;
+}
+.cx-lg-arrow code {
+  font-size: 0.6875rem;
+  color: var(--accent);
+}
+.cx-lg-arrow::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 6px;
+  bottom: 0.1rem;
+  height: 1.5px;
+  background: var(--accent);
+}
+.cx-lg-arrow::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: calc(0.1rem - 3.5px);
+  border-left: 7px solid var(--accent);
+  border-top: 4.25px solid transparent;
+  border-bottom: 4.25px solid transparent;
+}
+.cx-legend > .cx-sub {
+  flex: 1 1 16rem;
+  font-size: 0.8125rem;
+  color: var(--ink-2);
+}
+
+@container (max-width: 40rem) {
+  .cx {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+.cx-clsval {
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.35s var(--ease-out);
+}
+.cx-clsval[data-on] {
+  opacity: 1;
+}

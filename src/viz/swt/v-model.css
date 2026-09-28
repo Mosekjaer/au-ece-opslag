@@ -1,0 +1,110 @@
+.vm {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  max-width: 46rem;
+  margin: 0 auto;
+}
+
+.vm-head-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 0.15rem;
+}
+
+/* Hver række rykkes ind, så de to ben danner et V. */
+.vm-row {
+  display: grid;
+  grid-template-columns: 11.5rem minmax(1.5rem, 1fr) 11.5rem;
+  align-items: stretch;
+  padding-inline: calc(var(--i) * 2.6rem);
+}
+.vm-bottom {
+  grid-template-columns: 11.5rem;
+  justify-content: center;
+  padding-inline: 0;
+}
+
+.vm-node {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+}
+.vm-node .vnode-title {
+  hyphens: manual;
+}
+
+.vm-week {
+  display: flex;
+  min-height: 1.35rem;
+  margin-top: 0.3rem;
+}
+.vm-week .vtag {
+  font-family: var(--font-ui);
+  font-size: 0.6875rem;
+}
+
+.vm-pair {
+  position: relative;
+  align-self: center;
+  height: 1rem;
+  margin: 0 0.3rem;
+  color: var(--rule-strong);
+}
+.vm-pair[data-tone='focus'] {
+  color: var(--accent);
+}
+.vm-pair[data-tone='idle'] {
+  color: var(--ink-3);
+}
+.vm-pair-line {
+  position: absolute;
+  left: 6px;
+  right: 6px;
+  top: 50%;
+  height: 1.5px;
+  margin-top: -0.75px;
+  background: currentColor;
+  transform-origin: center;
+}
+.vm-head {
+  position: absolute;
+  top: 50%;
+  margin-top: -4.25px;
+  border-top: 4.25px solid transparent;
+  border-bottom: 4.25px solid transparent;
+}
+.vm-head.is-l {
+  left: 0;
+  border-right: 7px solid currentColor;
+}
+.vm-head.is-r {
+  right: 0;
+  border-left: 7px solid currentColor;
+}
+
+@container (max-width: 40rem) {
+  .vm {
+    gap: 0.45rem;
+  }
+  /* Smal plade: to lige kolonner uden indrykning; parret står stadig på samme række. */
+  .vm-row {
+    grid-template-columns: minmax(0, 1fr) 2rem minmax(0, 1fr);
+    padding-inline: 0;
+  }
+  .vm-bottom {
+    grid-template-columns: minmax(0, 1fr);
+    padding-inline: 20%;
+  }
+  .vm-pair {
+    margin: 0 0.15rem;
+  }
+  .vm-node {
+    padding: 0.5rem 0.55rem 0.55rem;
+  }
+  .vm-node .vnode-title {
+    font-size: 0.8125rem;
+  }
+}

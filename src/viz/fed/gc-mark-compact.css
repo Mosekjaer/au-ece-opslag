@@ -1,0 +1,196 @@
+/* Mark and compact. Geometrien regnes ud fra bredden; pile tegnes i SVG,
+   objekter og tekst er HTML oven på. */
+
+.gcm {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  hyphens: manual;
+}
+
+.gcm-canvas {
+  position: relative;
+  width: 100%;
+}
+
+.gcm-svg {
+  position: absolute;
+  inset: 0;
+  overflow: visible;
+}
+
+/* Roots */
+.gcm-roots {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 0.5rem 0.7rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+}
+.gcm-roots-name {
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+.gcm-roots-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+.gcm-root {
+  font-size: 0.75rem;
+  line-height: 1.35;
+  color: var(--ink-2);
+}
+.gcm-canvas:not([data-wide]) .gcm-roots {
+  gap: 0.25rem;
+  padding: 0.4rem 0.55rem;
+}
+.gcm-canvas:not([data-wide]) .gcm-roots-list {
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.2rem 0.3rem;
+}
+.gcm-canvas:not([data-wide]) .gcm-root {
+  padding: 0 0.35rem;
+  font-size: 0.6875rem;
+  border-radius: 3px;
+  background: var(--paper-2);
+  box-shadow: inset 0 0 0 1px var(--rule);
+}
+
+.gcm-heap-name {
+  position: absolute;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--ink-3);
+}
+
+/* Heapens pladser */
+.gcm-slot {
+  fill: none;
+  stroke: var(--rule-strong);
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+}
+
+/* Pile */
+.gcm-arrow {
+  color: var(--rule-strong);
+  transition: color 0.35s var(--ease-out);
+}
+.gcm-arrow[data-on] {
+  color: var(--accent);
+}
+.gcm-line {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+}
+.gcm-head {
+  fill: currentColor;
+  stroke: none;
+}
+.gcm-ptr {
+  color: var(--ink-2);
+}
+.gcm-brace {
+  fill: none;
+  stroke: var(--ink-3);
+  stroke-width: 1.25;
+}
+
+/* Objekter */
+.gcm-obj {
+  position: absolute;
+  left: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 3px;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--ink);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  transition-property: background-color, box-shadow, color;
+  transition-duration: 0.35s;
+  transition-timing-function: var(--ease-out);
+}
+.gcm-obj[data-tone='muted'] {
+  color: var(--ink-3);
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--rule);
+}
+.gcm-obj[data-tone='ok'] {
+  color: var(--paper);
+  background: var(--accent);
+  box-shadow: none;
+}
+.gcm-obj[data-tone='neg'] {
+  color: var(--neg);
+  background: var(--neg-soft);
+  box-shadow: inset 0 0 0 1px var(--neg);
+  text-decoration: line-through;
+}
+
+.gcm-free {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0.25rem;
+}
+.gcm-free span {
+  padding: 0.1rem 0.4rem;
+  border-radius: 3px;
+  background: var(--paper-2);
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.25;
+  text-align: center;
+  color: var(--accent);
+}
+.gcm-free code {
+  font-size: 0.75rem;
+}
+
+.gcm-ptr-label {
+  position: absolute;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+.gcm-brace-label {
+  position: absolute;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--ink-3);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.gcm-note {
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--ink-2);
+}
+.gcm-note code {
+  font-size: 0.75rem;
+}
+
+@container (max-width: 40rem) {
+  .gcm-obj {
+    font-size: 0.8125rem;
+  }
+  .gcm-free span,
+  .gcm-free code {
+    font-size: 0.6875rem;
+  }
+}

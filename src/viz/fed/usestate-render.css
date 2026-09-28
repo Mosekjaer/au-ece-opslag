@@ -1,0 +1,290 @@
+.us {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  column-gap: 1.5rem;
+}
+
+/* Hver side er kort / pile / lager; subgrid holder rækkerne i niveau. */
+.us-side {
+  display: grid;
+  grid-row: span 3;
+  grid-template-rows: subgrid;
+  row-gap: 0;
+  min-width: 0;
+}
+
+/* Komponentkortet: navn, kode og den renderede skærm. */
+.us-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  padding: 0.65rem 0.75rem 0.75rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  transition:
+    background-color 0.4s var(--ease-out),
+    box-shadow 0.4s var(--ease-out);
+}
+.us-card[data-tone='focus'] {
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.us-card[data-tone='muted-hit'] {
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+}
+.us-card-head {
+  min-height: 1.2rem;
+}
+.us-name {
+  font-weight: 600;
+  hyphens: manual;
+  overflow-wrap: normal;
+}
+
+.us-codebox {
+  padding: 0.45rem 0.55rem;
+  border-radius: 3px;
+  background: var(--paper-2);
+}
+.us-code {
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+.us-line {
+  white-space: pre-wrap;
+  padding-left: 2ch;
+  text-indent: -2ch;
+  overflow-wrap: anywhere;
+}
+.us-comment {
+  color: var(--neg);
+}
+
+.us-screen {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 0.5rem 0.6rem;
+  border-radius: 3px;
+  box-shadow: inset 0 0 0 1px var(--rule);
+}
+.us-screen-p {
+  font-size: 0.875rem;
+}
+.us-num {
+  display: inline-grid;
+  min-width: 1.4em;
+  justify-items: center;
+  padding: 0 0.2em;
+  border-radius: 3px;
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+  transition:
+    background-color 0.35s var(--ease-out),
+    color 0.35s var(--ease-out);
+}
+.us-num > * {
+  grid-area: 1 / 1;
+}
+.us-num[data-changed] {
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+.us-screen-row {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 1.5rem;
+}
+.us-btn {
+  padding: 0.1rem 0.5rem;
+  border-radius: 3px;
+  font-size: 0.75rem;
+  background: var(--paper-2);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+}
+.us-click {
+  display: inline-flex;
+}
+
+/* Mellem kort og lager: pile og mærkater. */
+.us-between {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem 1rem;
+  min-height: 3rem;
+  padding-left: 0.75rem;
+}
+.us-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15rem;
+}
+.us-between .vlink.is-v {
+  height: 2.2rem;
+  min-height: 2.2rem;
+}
+.us-arrow-label {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: var(--ink-3);
+}
+
+/* Lageret: window eller React-runtimen. */
+.us-store {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 0.55rem 0.75rem 0.65rem;
+  border-radius: var(--radius-sm);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  transition:
+    background-color 0.4s var(--ease-out),
+    box-shadow 0.4s var(--ease-out);
+}
+.us-store[data-on] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.us-slot {
+  font-size: 0.8125rem;
+}
+.us-slot-v {
+  display: inline-grid;
+  min-width: 1.4em;
+  padding: 0 0.3em;
+  border-radius: 3px;
+  justify-items: center;
+  font-weight: 650;
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+}
+.us-slot-v > * {
+  grid-area: 1 / 1;
+}
+.us-slot-v[data-hit] {
+  color: var(--accent);
+  box-shadow: inset 0 0 0 1px var(--accent-mid);
+}
+
+.us-calls {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.us-start {
+  font-size: 0.6875rem;
+  color: var(--ink-3);
+}
+.us-start .mono {
+  font-size: 0.6875rem;
+}
+.us-call {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 0.4rem;
+  font-size: 0.75rem;
+}
+.us-call-n {
+  min-width: 2.6rem;
+  font-size: 0.6875rem;
+  color: var(--ink-3);
+}
+.us-call-read {
+  font-size: 0.75rem;
+}
+.us-call-arrow {
+  color: var(--ink-3);
+}
+.us-call-res {
+  font-weight: 650;
+  color: var(--accent);
+}
+.us-why {
+  font-size: 0.6875rem;
+  color: var(--ink-2);
+}
+.us-why .mono {
+  font-size: 0.6875rem;
+}
+
+/* Resultaterne: tre varianter, én linje hver. */
+.us-results {
+  grid-column: 1 / -1;
+  margin-top: 1rem;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.5rem;
+}
+.us-result {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-height: 4.6rem;
+  padding: 0.45rem 0.6rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.us-result[data-tone='ghost'] {
+  background: transparent;
+  box-shadow: none;
+  outline: 1px dashed var(--rule-strong);
+  outline-offset: -1px;
+}
+.us-result[data-tone='ghost'] .us-result-res,
+.us-result[data-tone='ghost'] .us-result-rule {
+  color: transparent;
+}
+.us-result[data-tone='focus'] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.us-result[data-tone='neg'] {
+  background: var(--neg-soft);
+  box-shadow: inset 0 0 0 1.5px var(--neg);
+}
+.us-result-code {
+  font-size: 0.6875rem;
+  color: var(--ink-2);
+  overflow-wrap: anywhere;
+}
+.us-result-res {
+  font-weight: 650;
+  font-size: 0.9375rem;
+  font-variant-numeric: tabular-nums;
+}
+.us-result[data-tone='focus'] .us-result-res {
+  color: var(--accent);
+}
+.us-result[data-tone='neg'] .us-result-res {
+  color: var(--neg);
+}
+.us-result-rule {
+  font-size: 0.75rem;
+  color: var(--ink-3);
+}
+
+@container (max-width: 40rem) {
+  .us {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .us-side + .us-side {
+    margin-top: 1.25rem;
+  }
+  .us-results {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .us-result {
+    min-height: 0;
+  }
+  .us-line {
+    font-size: 0.6875rem;
+  }
+}

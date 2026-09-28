@@ -1,0 +1,209 @@
+.gqf {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.gqf-need {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.35rem 0.5rem;
+}
+.gqf-need code {
+  padding: 0.05rem 0.4rem;
+  border-radius: 3px;
+  font-size: 0.75rem;
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.gqf-lanes {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 1rem;
+  align-items: stretch;
+}
+
+.gqf-lane {
+  container: gqf-lane / inline-size;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 0;
+  padding: 0.75rem 0.85rem 0.8rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  transition: opacity 0.5s var(--ease-out);
+}
+.gqf-lane[data-dim='true'] {
+  opacity: 0.55;
+}
+
+.gqf-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.2rem 0.6rem;
+}
+.gqf-name {
+  font-weight: 600;
+}
+.gqf-note {
+  font-size: 0.75rem;
+  color: var(--ink-3);
+}
+
+.gqf-req {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.45rem;
+  min-height: 1.6rem;
+}
+.gqf-n {
+  display: inline-grid;
+  place-items: center;
+  width: 1.2rem;
+  height: 1.2rem;
+  border-radius: 50%;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--ink-3);
+  box-shadow: inset 0 0 0 1px var(--rule);
+  transition:
+    color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.gqf-n[data-on='true'] {
+  color: var(--accent);
+  box-shadow: inset 0 0 0 1px var(--accent-mid);
+}
+
+/* JSON-blokke og forespørgsel. */
+.gqf-code,
+.gqf-pair {
+  padding: 0.4rem 0.55rem;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  line-height: 1.55;
+  font-variant-ligatures: none;
+  background: var(--paper-2);
+  box-shadow: inset 0 0 0 1px var(--rule);
+  overflow-x: auto;
+  transition: background-color 0.35s var(--ease-out);
+}
+.gqf-code[data-show='false'],
+.gqf-pair[data-show='false'] {
+  background: transparent;
+  box-shadow: none;
+  outline: 1px dashed var(--rule-strong);
+  outline-offset: -1px;
+}
+
+.gqf-line,
+.gqf-cell {
+  white-space: pre;
+  border-radius: 2px;
+  transition:
+    color 0.35s var(--ease-out),
+    background-color 0.35s var(--ease-out);
+}
+
+.gqf-code[data-mark] [data-k='use'] {
+  color: var(--ink);
+  background: var(--accent-soft);
+}
+.gqf-code[data-mark] [data-k='extra'],
+.gqf-code[data-mark] .gqf-x {
+  color: var(--ink-3);
+}
+.gqf-code[data-mark] [data-k='extra'] {
+  text-decoration: line-through;
+  text-decoration-color: color-mix(in oklab, var(--neg) 55%, transparent);
+}
+/* Udeladte felter (…) streges ikke igennem; inline-block stopper arven. */
+.gqf-x {
+  display: inline-block;
+}
+
+/* Forespørgsel og svar side om side, linje for linje. */
+.gqf-pair {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  column-gap: 1.25rem;
+}
+.gqf-sub {
+  margin-bottom: 0.15rem;
+  font-family: var(--font-ui);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--ink-3);
+}
+.gqf-cell[data-match] {
+  color: var(--ink);
+  background: var(--accent-soft);
+}
+.gqf-q.gqf-cell[data-match] {
+  color: var(--accent);
+}
+
+.gqf-trips {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: auto;
+  padding-top: 0.4rem;
+  border-top: 1px solid var(--rule);
+}
+.gqf-count {
+  font-size: 1rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-2);
+  transition: color 0.35s var(--ease-out);
+}
+.gqf-trips[data-strong='true'] .gqf-count {
+  color: var(--accent);
+}
+
+.gqf-caveat {
+  margin-left: auto;
+}
+
+@container gqf-lane (max-width: 23rem) {
+  .gqf-pair {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .gqf-q {
+    order: 0;
+  }
+  .gqf-r {
+    order: 1;
+  }
+  .gqf-r.gqf-sub {
+    margin-top: 0.4rem;
+  }
+  .gqf-q[data-empty] {
+    display: none;
+  }
+}
+
+@container (max-width: 40rem) {
+  .gqf-lanes {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .gqf-lane[data-dim='true'] {
+    opacity: 1;
+  }
+  .gqf-lane {
+    padding: 0.6rem 0.55rem 0.65rem;
+  }
+  .gqf-code,
+  .gqf-pair {
+    padding: 0.35rem 0.4rem;
+  }
+}

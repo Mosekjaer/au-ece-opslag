@@ -1,0 +1,255 @@
+.es {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+/* Kæden fra s. 10. */
+.es-chain {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: center;
+}
+.es-chain-cell {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+.es-darrow {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  color: var(--ink-3);
+}
+.es-darrow svg {
+  width: 2.25rem;
+  height: 0.75rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.es-doc {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 0.6rem 0.6rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--ink-3);
+  font-weight: 600;
+  text-align: center;
+  line-height: 1.25;
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.es-doc[data-now] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+
+.es-body {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: 1.25rem;
+  align-items: start;
+}
+
+/* V-modellen, kompakt. */
+.es-v {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  min-width: 0;
+}
+.es-v-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.es-v-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 1.2rem minmax(0, 1fr);
+  align-items: center;
+  column-gap: 0.25rem;
+  padding: 0.28rem 0.5rem;
+  margin: 0 calc(var(--i, 0) * 0.9rem);
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  line-height: 1.25;
+  color: var(--ink-3);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule);
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out),
+    color 0.35s var(--ease-out);
+}
+.es-v-row[data-hot] {
+  font-weight: 600;
+  color: var(--ink);
+  box-shadow: inset 0 0 0 1px var(--accent-mid);
+}
+.es-v[data-now] .es-v-row[data-hot] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.es-v-r {
+  text-align: right;
+}
+.es-v-arrow {
+  text-align: center;
+  color: var(--ink-3);
+}
+.es-v-bottom {
+  display: block;
+  margin: 0 3.6rem;
+  text-align: center;
+}
+
+/* Gherkin-scenariet (s. 11). */
+.es-spec {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  min-width: 0;
+}
+.es-code {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.6rem 0.7rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule);
+  transition: box-shadow 0.35s var(--ease-out);
+}
+.es-code[data-open] {
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+}
+.es-line {
+  display: grid;
+  grid-template-columns: 4.6rem minmax(0, 1fr);
+  align-items: baseline;
+  column-gap: 0.6rem;
+}
+.es-label {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-align: right;
+  color: var(--ink-3);
+}
+.es-line[data-aaa] .es-label {
+  color: var(--accent);
+}
+.es-text {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.45;
+  font-variant-ligatures: none;
+  color: var(--ink);
+}
+.es-text[data-indent] {
+  padding-left: 1.2rem;
+  text-indent: -0.6rem;
+}
+.es-text em {
+  color: var(--ink-2);
+}
+.es-kw {
+  font-weight: 600;
+  color: var(--accent);
+}
+.es-at {
+  color: var(--ink-3);
+}
+.es-num {
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--accent-mid);
+  text-underline-offset: 2px;
+}
+.es-bdd {
+  display: flex;
+  justify-content: flex-end;
+  min-height: 1.6rem;
+}
+
+/* Verifikation og validering (s. 7). */
+.es-vv {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+.es-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0.6rem 0.8rem 0.65rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.es-card[data-now] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.es-who {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--ink-3);
+}
+.es-q {
+  line-height: 1.35;
+}
+.es-note {
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: var(--ink-2);
+}
+
+@container (max-width: 40rem) {
+  .es-chain {
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
+  }
+  .es-chain-cell {
+    flex-direction: column;
+    width: 100%;
+    max-width: 17rem;
+  }
+  .es-darrow {
+    width: auto;
+    height: 1.6rem;
+  }
+  .es-darrow svg {
+    transform: rotate(90deg);
+  }
+  .es-doc {
+    width: 100%;
+  }
+  .es-body {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .es-v-row {
+    margin: 0 calc(var(--i, 0) * 0.45rem);
+  }
+  .es-v-bottom {
+    margin: 0 2rem;
+  }
+  .es-line {
+    grid-template-columns: 3.4rem minmax(0, 1fr);
+    column-gap: 0.45rem;
+  }
+  .es-label {
+    font-size: 0.6875rem;
+  }
+  .es-vv {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

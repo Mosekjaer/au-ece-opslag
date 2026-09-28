@@ -1,0 +1,318 @@
+.ue {
+  display: grid;
+  grid-template-columns: 20.5rem minmax(0, 1fr);
+  grid-template-areas:
+    'left right'
+    'legend legend';
+  gap: 1rem 1.5rem;
+}
+
+/* ------------------------------ Kode ------------------------------ */
+.ue-left {
+  grid-area: left;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  min-width: 0;
+}
+.ue-code {
+  padding: 0.55rem 0;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  font-size: 0.71875rem;
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+.ue-line {
+  padding: 0 0.7rem 0 calc(0.7rem + 4ch);
+  text-indent: -4ch;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  transition:
+    background-color 0.35s var(--ease-out),
+    color 0.35s var(--ease-out);
+}
+.ue-line[data-kind='deps'] {
+  color: var(--ink);
+  font-weight: 600;
+}
+.ue-line[data-on] {
+  color: var(--ink);
+  background: var(--accent-soft);
+}
+.ue-line[data-kind='deps'][data-on] {
+  color: var(--accent);
+}
+
+.ue-deps {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+  font-size: 0.75rem;
+  background: var(--paper);
+  border-radius: var(--radius-sm);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+}
+.ue-deps th,
+.ue-deps td {
+  padding: 0.28rem 0.6rem;
+  text-align: left;
+  transition: background-color 0.35s var(--ease-out);
+}
+.ue-deps th {
+  font-weight: 600;
+  color: var(--ink-2);
+  border-bottom: 1px solid var(--rule-strong);
+}
+.ue-deps tbody tr + tr td {
+  border-top: 1px solid var(--rule);
+}
+.ue-deps td:first-child {
+  width: 4.5rem;
+}
+.ue-deps tr[data-on] td {
+  background: var(--accent-soft);
+}
+.ue-deps .mono {
+  font-size: 0.75rem;
+}
+
+/* ---------------------------- Tidslinje --------------------------- */
+.ue-right {
+  grid-area: right;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  min-width: 0;
+}
+.ue-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-rows: auto repeat(6, auto);
+  column-gap: 0.5rem;
+}
+.ue-phase {
+  grid-row: 1 / -1;
+  display: grid;
+  grid-template-rows: subgrid;
+  row-gap: 4px;
+  min-width: 0;
+}
+.ue-phase-head {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  padding: 0 0.1rem 0.4rem;
+  margin-bottom: 0.2rem;
+  border-bottom: 2px solid var(--rule);
+  transition: border-color 0.35s var(--ease-out);
+}
+.ue-phase[data-on] .ue-phase-head {
+  border-color: var(--accent-mid);
+}
+.ue-phase[data-now] .ue-phase-head {
+  border-color: var(--accent);
+}
+.ue-phase-name {
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+.ue-phase[data-now] .ue-phase-name {
+  color: var(--accent);
+}
+.ue-life {
+  font-weight: 400;
+  font-size: 0.75rem;
+  color: var(--ink-3);
+}
+.ue-trigger {
+  font-size: 0.6875rem;
+  line-height: 1.3;
+  color: var(--ink-3);
+}
+.ue-phase[data-on] .ue-trigger {
+  color: var(--ink-2);
+}
+
+.ue-cell {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.05rem;
+  min-width: 0;
+  padding: 0.3rem 0.5rem;
+  border-radius: 3px;
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out),
+    color 0.35s var(--ease-out);
+}
+.ue-cell[data-na] {
+  background: transparent;
+  box-shadow: none;
+}
+.ue-cell[data-state='ghost'] {
+  background: transparent;
+  box-shadow: none;
+  outline: 1px dashed var(--rule-strong);
+  outline-offset: -1px;
+  color: var(--ink-3);
+}
+.ue-cell[data-state='now'] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.ue-cell[data-state='on'][data-effect] {
+  box-shadow: inset 0 0 0 1px var(--accent-mid);
+}
+.ue-cell[data-state='skip'] {
+  background: transparent;
+  color: var(--ink-3);
+  box-shadow: inset 0 0 0 1px var(--rule);
+}
+.ue-cell[data-state='skip'] .ue-cell-label {
+  text-decoration: line-through;
+  text-decoration-color: var(--rule-strong);
+}
+.ue-cell-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1.25;
+}
+.ue-cell-sub {
+  font-size: 0.6875rem;
+  line-height: 1.25;
+  color: var(--ink-3);
+}
+.ue-cell-note {
+  font-size: 0.6875rem;
+  line-height: 1.3;
+  color: var(--accent);
+}
+.ue-cell-note .mono {
+  font-size: 0.6875rem;
+}
+.ue-cell[data-state='skip'] .ue-cell-note {
+  color: var(--ink-3);
+}
+
+/* Felter under tidslinjen. */
+.ue-fields {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 0.5rem;
+}
+.ue-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 0.45rem 0.6rem;
+  border-radius: var(--radius-sm);
+  box-shadow: inset 0 0 0 1px var(--rule);
+}
+.ue-field-body {
+  display: grid;
+  min-height: 1.5rem;
+  align-items: center;
+  justify-items: start;
+}
+.ue-field-body > * {
+  grid-area: 1 / 1;
+}
+.ue-log {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.1rem;
+  font-size: 0.75rem;
+  color: var(--ink-2);
+}
+.ue-interval {
+  display: inline-flex;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  white-space: nowrap;
+  color: var(--paper);
+  background: var(--accent);
+}
+.ue-none {
+  font-size: 0.75rem;
+  color: var(--ink-3);
+}
+
+.ue-legend {
+  grid-area: legend;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1.25rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.8125rem;
+  color: var(--ink-2);
+}
+.ue-legend li::before {
+  content: '·';
+  margin-right: 0.4rem;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+@container (max-width: 44rem) {
+  /* Smal plade: kode øverst, tidslinjen, tabellen nederst. */
+  .ue {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: 'code' 'right' 'deps' 'legend';
+  }
+  .ue-left {
+    display: contents;
+  }
+  .ue-code {
+    grid-area: code;
+  }
+  .ue-deps {
+    grid-area: deps;
+  }
+}
+
+@container (max-width: 40rem) {
+  .ue-grid {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: none;
+    row-gap: 0.9rem;
+  }
+  .ue-phase {
+    grid-row: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .ue-cell[data-na] {
+    display: none;
+  }
+  .ue-cell {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: flex-start;
+    gap: 0 0.5rem;
+  }
+  .ue-cell-note {
+    flex-basis: 100%;
+  }
+  .ue-phase-head {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.1rem 0.6rem;
+  }
+  .ue-code {
+    font-size: 0.6875rem;
+  }
+}

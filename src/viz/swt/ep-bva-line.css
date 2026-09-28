@@ -1,0 +1,216 @@
+.eb {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.eb-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.25rem 1rem;
+}
+.eb-sig {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  hyphens: manual;
+}
+.eb-spec {
+  font-size: 0.8125rem;
+  color: var(--ink-2);
+}
+.eb-nw {
+  white-space: nowrap;
+}
+.eb-spec code {
+  font-size: 0.75rem;
+}
+
+/* Tallinjen: to segmenter side om side, stablet på smalle plader. */
+.eb-line {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  padding: 0.25rem 0 0;
+}
+.eb-seg {
+  display: grid;
+  grid-template-rows: auto auto;
+  row-gap: 0.35rem;
+  min-width: 0;
+}
+
+.eb-ep {
+  grid-row: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  padding: 0 3px;
+  min-width: 0;
+}
+.eb-ep-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--ink);
+  white-space: nowrap;
+}
+.eb-ep[data-illegal] .eb-ep-label {
+  color: var(--neg);
+}
+/* Klammen: vandret streg med ender, der peger ned mod tallene. */
+.eb-brace {
+  position: relative;
+  align-self: stretch;
+  height: 0.45rem;
+  border: 1.5px solid var(--ink-3);
+  border-bottom: 0;
+  border-radius: 4px 4px 0 0;
+}
+.eb-ep[data-illegal] .eb-brace {
+  border-color: color-mix(in oklab, var(--neg) 60%, var(--paper));
+}
+
+.eb-cell {
+  grid-row: 2;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 0;
+}
+.eb-num {
+  align-self: stretch;
+  text-align: center;
+  padding: 0.2rem 0 0.25rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  border-bottom: 1.5px solid var(--ink-3);
+  transition:
+    color 0.35s var(--ease-out),
+    background-color 0.35s var(--ease-out);
+}
+.eb-month {
+  min-height: 1.1rem;
+  padding-top: 0.2rem;
+  font-size: 0.6875rem;
+  color: var(--ink-3);
+}
+.eb-cell[data-picked='b'] .eb-num {
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+.eb-cell[data-picked='x'] .eb-num {
+  color: var(--accent);
+}
+.eb-edge {
+  position: absolute;
+  left: -1px;
+  top: -0.35rem;
+  height: calc(100% - 1.6rem);
+  width: 2px;
+  border-radius: 1px;
+  background: var(--accent);
+  transform-origin: center bottom;
+}
+.eb-arrow-slot {
+  display: flex;
+  justify-content: center;
+  height: 1.3rem;
+  padding-top: 0.2rem;
+}
+.eb-arrow-wrap {
+  display: inline-flex;
+}
+.eb-arrow path {
+  fill: var(--accent);
+  stroke: var(--accent);
+  stroke-width: 1.2;
+  stroke-linejoin: round;
+}
+.eb-arrow[data-kind='x'] path {
+  fill: var(--paper);
+}
+
+/* Forklaring */
+.eb-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1.25rem;
+  font-size: 0.75rem;
+  color: var(--ink-2);
+}
+.eb-key {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.eb-key .eb-arrow {
+  width: 12px;
+  height: 14px;
+}
+.eb-key-edge {
+  width: 2px;
+  height: 0.9rem;
+  border-radius: 1px;
+  background: var(--accent);
+}
+
+/* Testværdierne */
+.eb-result {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--rule);
+}
+.eb-cases {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+.eb-case {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.3rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 3px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--ink-2);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  font-variant-ligatures: none;
+}
+.eb-case b {
+  font-weight: 600;
+  color: var(--ink);
+}
+.eb-case[data-kind='b'] {
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.eb-case[data-kind='b'] b {
+  color: var(--accent);
+}
+.eb-case[data-illegal] {
+  color: var(--neg);
+}
+.eb-point {
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--ink-2);
+}
+.eb-point b {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+@container (max-width: 40rem) {
+  .eb-line {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 0.9rem;
+  }
+  .eb-num {
+    font-size: 0.8125rem;
+  }
+}

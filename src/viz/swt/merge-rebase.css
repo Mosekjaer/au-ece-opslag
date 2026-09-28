@@ -1,0 +1,222 @@
+.mrb {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: 1.25rem;
+  align-items: start;
+}
+
+.mrb-stage {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  min-width: 0;
+  padding: 0.7rem 0.8rem 0.8rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+}
+
+.mrb-cmd {
+  min-height: 2.3rem;
+}
+.mrb-cmd-code {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+.mrb-cmd code {
+  font-size: 0.75rem;
+  color: var(--accent);
+  font-weight: 500;
+}
+.mrb-cmd-note {
+  font-size: 0.8125rem;
+  color: var(--ink-2);
+}
+.mrb-cmd-note b {
+  font-weight: 600;
+  color: var(--ink);
+}
+.mrb-cmd-note code {
+  font-size: 0.75rem;
+  color: var(--ink);
+}
+
+/* Grafen: faste spor, commits placeret i procent af bredden. */
+.mrb-graph {
+  position: relative;
+  min-width: 0;
+}
+.mrb-edges {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.mrb-edges line {
+  stroke: var(--ink-3);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+}
+.mrb-edges line[data-cross] {
+  stroke: var(--rule-strong);
+  stroke-width: 2;
+}
+.mrb-edges line[data-dashed] {
+  stroke-dasharray: 5 4;
+}
+.mrb-edges line[data-ghost] {
+  stroke: var(--rule-strong);
+}
+
+.mrb-commit {
+  position: absolute;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 1.7rem;
+  height: 1.7rem;
+  border-radius: 50%;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--ink);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1.5px var(--ink-3);
+  transition:
+    background-color 0.35s var(--ease-out),
+    color 0.35s var(--ease-out);
+}
+.mrb-commit[data-kind='merge'],
+.mrb-commit[data-kind='squash'],
+.mrb-commit[data-kind='new'] {
+  color: var(--paper);
+  background: var(--accent);
+  box-shadow: none;
+}
+.mrb-commit[data-ghost] {
+  color: var(--ink-3);
+  background: transparent;
+  box-shadow: none;
+  outline: 1.5px dashed var(--rule-strong);
+  outline-offset: -1.5px;
+  text-decoration: line-through;
+}
+
+.mrb-elabel {
+  position: absolute;
+  z-index: 2;
+  padding: 0 0.25rem;
+  border-radius: 2px;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  white-space: nowrap;
+  color: var(--ink-2);
+  background: var(--paper);
+}
+
+.mrb-head {
+  position: absolute;
+  z-index: 3;
+  padding: 0.08rem 0.4rem 0.1rem;
+  border-radius: 3px;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  line-height: 1.4;
+  white-space: nowrap;
+  color: var(--ink);
+  background: var(--paper-3);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+}
+.mrb-head.is-feat {
+  color: var(--accent);
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1px var(--accent-mid);
+}
+
+.mrb-verdict {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1rem;
+  font-size: 0.75rem;
+  color: var(--ink-2);
+}
+.mrb-verdict > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+/* Strategierne, der samles op trin for trin. */
+.mrb-rows {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  min-width: 0;
+}
+.mrb-row {
+  display: grid;
+  grid-template-columns: 1.1rem minmax(0, 1fr);
+  grid-template-areas:
+    'n name'
+    '. cmd'
+    '. what';
+  gap: 0.1rem 0.4rem;
+  padding: 0.45rem 0.6rem 0.5rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.mrb-row[data-now] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.mrb-row-n {
+  grid-area: n;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--ink-3);
+}
+.mrb-row-name {
+  grid-area: name;
+  font-weight: 600;
+  font-size: 0.8125rem;
+}
+.mrb-row-cmd {
+  grid-area: cmd;
+  font-size: 0.6875rem;
+  color: var(--ink-2);
+  background: none;
+  box-shadow: none;
+  padding: 0;
+}
+.mrb-row-what {
+  grid-area: what;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: var(--ink-2);
+}
+.mrb-row-what b {
+  font-weight: 600;
+  color: var(--ink);
+}
+.mrb-row-what code {
+  font-size: 0.6875rem;
+}
+
+@container (max-width: 44rem) {
+  .mrb {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .mrb-commit {
+    width: 1.5rem;
+    height: 1.5rem;
+    font-size: 0.6875rem;
+  }
+}

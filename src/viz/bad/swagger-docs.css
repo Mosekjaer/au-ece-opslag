@@ -1,0 +1,218 @@
+.swg {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr) minmax(0, 1.05fr);
+  gap: 1rem;
+  align-items: start;
+}
+
+.swg-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  min-width: 0;
+}
+
+.swg-code,
+.swg-json {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  line-height: 1.6;
+  font-variant-ligatures: none;
+  overflow-x: auto;
+}
+.swg-code > span,
+.swg-json > span {
+  white-space: pre;
+  min-height: 1.6em;
+}
+.swg-code {
+  padding: 0.5rem 0.6rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+}
+.swg-c {
+  color: var(--ink-3);
+  border-radius: 2px;
+  transition:
+    color 0.35s var(--ease-out),
+    background-color 0.35s var(--ease-out);
+}
+.swg-c[data-on] {
+  color: var(--ink);
+  background: var(--accent-soft);
+}
+.swg-code .vtoken,
+.swg-json .vtoken {
+  padding-top: 0;
+  padding-bottom: 0;
+  font-size: 0.6875rem;
+  line-height: 1.6;
+  vertical-align: baseline;
+}
+.swg-text {
+  color: var(--ink);
+}
+
+/* Kæden i midten */
+.swg-step {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+  padding: 0.35rem 0.55rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.swg-step[data-tone='ghost'] {
+  background: transparent;
+  box-shadow: none;
+  outline: 1px dashed var(--rule-strong);
+  outline-offset: -1px;
+}
+.swg-step[data-tone='focus'] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.swg-step > code {
+  font-size: 0.6875rem;
+  overflow-wrap: break-word;
+}
+.swg-file {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--ink-3);
+}
+
+.swg-sec {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-top: 0.2rem;
+}
+.swg-sec-line {
+  font-size: 0.6875rem;
+  overflow-wrap: break-word;
+  transition: color 0.35s var(--ease-out);
+}
+.swg-sec-line[data-tone='focus'] {
+  color: var(--accent);
+}
+.swg-sec-line[data-tone='neg'] {
+  color: var(--neg);
+  text-decoration: line-through;
+}
+
+/* Swagger UI-attrap */
+.swg-app {
+  font-weight: 600;
+  font-size: 0.9375rem;
+}
+.swg-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.swg-group-name {
+  padding-bottom: 0.2rem;
+  font-weight: 600;
+  font-size: 0.8125rem;
+  border-bottom: 1px solid var(--rule-strong);
+}
+.swg-row {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-areas:
+    'verb path lock'
+    'sum sum sum'
+    'meta meta meta';
+  align-items: center;
+  gap: 0.2rem 0.45rem;
+  padding: 0.35rem 0.5rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+}
+.swg-verb {
+  grid-area: verb;
+  min-width: 2.6rem;
+  padding: 0.05rem 0.35rem;
+  border-radius: 3px;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-align: center;
+  color: var(--paper);
+  background: var(--ink-2);
+}
+.swg-row[data-verb='POST'] .swg-verb {
+  background: var(--accent);
+}
+.swg-path {
+  grid-area: path;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+.swg-lockslot {
+  grid-area: lock;
+  display: inline-grid;
+  place-items: center;
+  width: 1.4rem;
+  height: 1.4rem;
+  border-radius: 3px;
+  color: var(--accent);
+}
+.swg-lockslot[data-tone='neg'] {
+  color: var(--neg);
+  background: var(--neg-soft);
+}
+.swg-summary {
+  grid-area: sum;
+  min-height: 1.35rem;
+  font-size: 0.75rem;
+  color: var(--ink-2);
+}
+.swg-summary .vtoken {
+  font-size: 0.6875rem;
+}
+.swg-meta {
+  grid-area: meta;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 1.45rem;
+  font-size: 0.6875rem;
+  color: var(--ink-3);
+}
+.swg-meta .vtag {
+  font-size: 0.6875rem;
+  line-height: 1.3;
+}
+.swg-meta code {
+  font-size: 0.6875rem;
+}
+
+@container (max-width: 52rem) {
+  .swg {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+  .swg-ui {
+    grid-column: 1 / -1;
+  }
+}
+
+@container (max-width: 40rem) {
+  .swg {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

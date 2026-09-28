@@ -1,0 +1,324 @@
+.db {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.db-main {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) 7rem minmax(0, 1fr);
+  gap: 0.75rem;
+  align-items: stretch;
+}
+
+.db-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 0;
+}
+.db-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.2rem 0.6rem;
+}
+.db-head code {
+  font-size: 0.75rem;
+  color: var(--ink-3);
+}
+
+/* View-træet: indlejrede bokse. Binding context farver kanten. */
+.db-box {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 0.5rem 0.6rem 0.6rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  transition: box-shadow 0.4s var(--ease-out);
+}
+.db-box .db-box {
+  background: transparent;
+}
+.db-box[data-ctx] {
+  box-shadow: inset 0 0 0 1px var(--accent-mid);
+}
+.db-box[data-now] {
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.db-box-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.2rem 0.5rem;
+}
+.db-box-head > code {
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+.db-ctx {
+  padding: 0 0.4rem;
+  border-radius: 3px;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+.db-ctx[data-now] {
+  color: var(--paper);
+  background: var(--accent);
+}
+
+.db-attr {
+  position: relative;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.45;
+  color: var(--ink-2);
+  hyphens: manual;
+  font-variant-ligatures: none;
+}
+.db-attr[data-hl] {
+  color: var(--accent);
+  font-weight: 600;
+}
+.db-apptitle {
+  font-weight: 600;
+  font-size: 0.8125rem;
+  color: var(--ink-3);
+}
+
+.db-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-top: 0.2rem;
+}
+.db-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1rem minmax(0, 1fr);
+  gap: 0.6rem;
+  align-items: start;
+  padding: 0.45rem 0.6rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper-2);
+  box-shadow: inset 0 0 0 1px var(--rule);
+  transition: box-shadow 0.35s var(--ease-out);
+}
+.db-card[data-now] {
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.db-check {
+  width: 0.9rem;
+  height: 0.9rem;
+  margin-top: 0.15rem;
+  border-radius: 2px;
+  box-shadow: inset 0 0 0 1.5px var(--ink-3);
+}
+.db-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.05rem;
+  min-width: 0;
+}
+.db-card-title {
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+.db-card-due {
+  font-size: 0.8125rem;
+  color: var(--ink-2);
+}
+.db-bind {
+  font-size: 0.6875rem;
+  color: var(--accent);
+  hyphens: manual;
+}
+.db-card-tag {
+  display: flex;
+  grid-column: 2;
+}
+
+/* Bindingen: fra source til target. */
+.db-wire {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+}
+.db-wire.is-v {
+  display: none;
+}
+.db-wire-line {
+  position: relative;
+  display: flex;
+  align-self: stretch;
+}
+.db-wire-label {
+  font-size: 0.6875rem;
+  color: var(--ink-2);
+  text-align: center;
+}
+.db-pulse {
+  position: absolute;
+  top: 50%;
+  width: 0.55rem;
+  height: 0.55rem;
+  margin: -0.275rem 0 0 -0.275rem;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+/* Source: koden og samlingen. */
+.db-code {
+  position: relative;
+  padding: 0.3rem 0.5rem;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.45;
+  color: var(--ink-2);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  hyphens: manual;
+  font-variant-ligatures: none;
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.db-code[data-hl] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.db-code-key {
+  color: var(--accent);
+  font-weight: 600;
+}
+.db-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 0.45rem;
+  border-radius: var(--radius-sm);
+  outline: 1px dashed var(--rule-strong);
+  outline-offset: -1px;
+}
+.db-item {
+  padding: 0.4rem 0.55rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  transition: box-shadow 0.35s var(--ease-out);
+}
+.db-item[data-now] {
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.db-item-type {
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+.db-item dl {
+  display: flex;
+  flex-direction: column;
+  margin-top: 0.2rem;
+  font-size: 0.75rem;
+}
+.db-item dl > div {
+  display: grid;
+  grid-template-columns: 2.5rem minmax(0, 1fr);
+  gap: 0.4rem;
+  padding: 0 0.25rem;
+  border-radius: 2px;
+  transition: background-color 0.35s var(--ease-out);
+}
+.db-item dl > div[data-now] {
+  background: var(--accent-soft);
+}
+.db-item dt {
+  font-family: var(--font-mono);
+  color: var(--ink-3);
+}
+.db-item dd {
+  font-family: var(--font-mono);
+  color: var(--ink);
+  hyphens: manual;
+  min-width: 0;
+}
+.db-new {
+  font-family: var(--font-ui);
+  font-style: italic;
+  color: var(--accent);
+}
+.db-note {
+  font-size: 0.75rem;
+  line-height: 1.45;
+  color: var(--ink-2);
+  hyphens: manual;
+}
+.db-note code {
+  font-size: 0.6875rem;
+}
+
+.db-legend {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.35rem 1.5rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.8125rem;
+  color: var(--ink-2);
+}
+.db-legend li {
+  padding-left: 0.75rem;
+  border-left: 2px solid var(--accent-mid);
+}
+.db-legend code {
+  font-size: 0.75rem;
+}
+
+@container (max-width: 40rem) {
+  .db-main {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .db-data {
+    order: 1;
+  }
+  .db-wire.is-v {
+    order: 2;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 0.75rem;
+    padding-left: 1.5rem;
+  }
+  .db-wire.is-h {
+    display: none;
+  }
+  .db-wire.is-v .db-wire-line {
+    align-self: auto;
+    order: -1;
+  }
+  .db-wire.is-v .vlink.is-v {
+    height: 2.75rem;
+  }
+  .db-wire.is-v .db-pulse {
+    left: 50%;
+    top: 0;
+    margin: -0.275rem 0 0 -0.275rem;
+  }
+  .db-ui {
+    order: 3;
+  }
+  .db-legend {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

@@ -1,0 +1,186 @@
+.af {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.af-flow {
+  align-items: stretch;
+}
+.af-flow > .vlink {
+  flex: 0 0 2.25rem;
+  min-width: 2.25rem;
+}
+.af-node {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+.af-node .vnode-title code,
+.af-node .vnode-title {
+  font-size: 0.8125rem;
+  overflow-wrap: break-word;
+}
+.af-attr {
+  font-size: 0.6875rem;
+  overflow-wrap: break-word;
+}
+
+.af-slot {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  align-items: center;
+  min-height: 1.7rem;
+  margin-top: 0.4rem;
+}
+.af-slot .vtoken {
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  border-radius: 0.8rem;
+}
+.af-tagline {
+  min-height: 1.4rem;
+  margin-top: 0.2rem;
+}
+
+/* HttpContext.User: udfyldes af authentication, læses af filteret. */
+.af-user {
+  display: grid;
+  grid-template-columns: minmax(0, 14rem) minmax(0, 1fr);
+  gap: 0.5rem 1.25rem;
+  align-items: center;
+  padding: 0.6rem 0.8rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  transition: box-shadow 0.35s var(--ease-out);
+}
+.af-user[data-who='user'],
+.af-user[data-who='admin'] {
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.af-user-head {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+.af-user-head code {
+  font-weight: 600;
+  font-size: 0.8125rem;
+}
+.af-user-sub {
+  font-size: 0.75rem;
+  color: var(--ink-3);
+}
+.af-claims {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.af-claim {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 3px;
+  font-size: 0.75rem;
+  color: var(--ink-3);
+  box-shadow: inset 0 0 0 1px var(--rule);
+  transition:
+    background-color 0.35s var(--ease-out),
+    color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.af-claim-type {
+  font-size: 0.6875rem;
+}
+.af-claim-value {
+  font-family: var(--font-mono);
+  font-weight: 500;
+}
+.af-claim[data-tone='focus'] {
+  color: var(--ink);
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1px var(--accent-mid);
+}
+.af-claim[data-tone='neg'] {
+  color: var(--neg);
+  background: var(--neg-soft);
+  box-shadow: inset 0 0 0 1px var(--neg);
+}
+
+/* Udfaldene: reserveret fra start, fyldes efterhånden. */
+.af-outcomes {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.6rem;
+}
+.af-outcome {
+  padding: 0.55rem 0.75rem 0.65rem;
+  border-radius: var(--radius-sm);
+  outline: 1px dashed var(--rule-strong);
+  outline-offset: -1px;
+}
+.af-outcome[data-done='true'] {
+  outline: 0;
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+}
+.af-outcome[data-done='true'][data-tone='neg'] {
+  box-shadow: inset 0 0 0 1px var(--neg);
+}
+.af-outcome[data-done='true'][data-tone='focus'] {
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.af-outcome-head {
+  font-weight: 600;
+  font-size: 0.8125rem;
+  overflow-wrap: anywhere;
+}
+.af-outcome .af-slot {
+  margin-top: 0.35rem;
+}
+.af-outcome-note {
+  margin-top: 0.3rem;
+  font-size: 0.75rem;
+  color: var(--ink-2);
+}
+
+@container (max-width: 40rem) {
+  .af-user {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .af-outcomes {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .af-node {
+    flex: none;
+  }
+  .af-node .af-slot {
+    min-height: 1.5rem;
+  }
+}
+
+/* Klienten behøver mindst plads; så får pipeline-noderne nok til deres kodenavne. */
+.af-flow > .af-node:first-child {
+  flex-grow: 0.6;
+}
+.af-node .vnode-title code {
+  font-size: 0.75rem;
+  white-space: nowrap;
+}
+@container (max-width: 40rem) {
+  .af-node .vnode-title code {
+    white-space: normal;
+  }
+}
+@container (max-width: 40rem) {
+  /* To claims (Name + Role) står under hinanden her; reservér pladsen fra start. */
+  .af-user {
+    min-height: 7.125rem;
+    align-content: start;
+  }
+}

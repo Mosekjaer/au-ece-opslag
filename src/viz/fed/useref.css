@@ -1,0 +1,264 @@
+.ur {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.ur-lanes {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 0.75rem;
+}
+
+.ur-lane {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.7rem 0.8rem 0.8rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  transition: box-shadow 0.35s var(--ease-out);
+}
+.ur-lane[data-hot] {
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+
+.ur-code {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.ur-line {
+  display: block;
+  padding: 0.15rem 0.4rem 0.15rem 1.6rem;
+  text-indent: -1.2rem;
+  border-radius: 3px;
+  font-size: 0.75rem;
+  line-height: 1.45;
+  white-space: normal;
+  hyphens: manual;
+  color: var(--ink-2);
+  transition:
+    background-color 0.35s var(--ease-out),
+    color 0.35s var(--ease-out);
+}
+.ur-line[data-hot] {
+  color: var(--ink);
+  background: var(--accent-soft);
+  box-shadow: inset 2px 0 0 var(--accent);
+}
+
+.ur-mem {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.35rem;
+  padding: 0.4rem 0.55rem;
+  border-radius: 3px;
+  background: var(--paper-2);
+  box-shadow: inset 0 0 0 1px var(--rule);
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.ur-mem[data-hot] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1px var(--accent-mid);
+}
+.ur-mem code {
+  font-size: 0.8125rem;
+}
+.ur-eq {
+  color: var(--ink-3);
+}
+
+.ur-val {
+  position: relative;
+  display: inline-flex;
+  font-variant-numeric: tabular-nums;
+}
+.ur-val > span {
+  display: inline-block;
+}
+
+/* Render-strimlen mellem komponentens hukommelse og skærmen. */
+.ur-render {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 2rem;
+}
+.ur-render .vlink.is-v {
+  height: 2rem;
+}
+.ur-render-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--ink-3);
+}
+.ur-render .vswap {
+  min-width: 6.5rem;
+}
+
+.ur-screen {
+  padding: 0.6rem 0.8rem 0.75rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  transition: box-shadow 0.35s var(--ease-out);
+}
+.ur-screen[data-hot] {
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.ur-screen-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.25rem 0.6rem;
+  margin-bottom: 0.4rem;
+}
+.ur-screen-sub {
+  font-size: 0.75rem;
+  color: var(--ink-3);
+}
+.ur-cells {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 0.75rem;
+}
+.ur-cell {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem 0.6rem;
+  min-width: 0;
+}
+.ur-cell code {
+  font-size: 0.75rem;
+  color: var(--ink-3);
+}
+.ur-big {
+  font-family: var(--font-mono);
+  font-size: 1.75rem;
+  font-weight: 600;
+  line-height: 1.1;
+  color: var(--ink);
+  transition: color 0.35s var(--ease-out);
+}
+.ur-cell[data-stale] .ur-big {
+  color: var(--ink-3);
+}
+.ur-stale {
+  display: inline-flex;
+}
+
+/* DOM-ref: JSX, ref-objekt → input-felt, udlæsning. */
+.ur-dom {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  margin-top: 0.75rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--rule);
+}
+.ur-domflow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.ur-obj {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  padding: 0.4rem 0.6rem;
+  border-radius: 3px;
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+}
+.ur-obj code {
+  font-size: 0.75rem;
+  hyphens: manual;
+}
+.ur-obj-body {
+  color: var(--ink-2);
+}
+.ur-domlink {
+  max-width: 7rem;
+}
+.ur-field-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.ur-field {
+  display: inline-block;
+  min-width: 9rem;
+  padding: 0.3rem 0.5rem;
+  border-radius: 3px;
+  font-size: 0.8125rem;
+  background: var(--paper);
+  box-shadow:
+    inset 0 0 0 1px var(--ink-3),
+    0 0 0 3px var(--accent-soft);
+}
+.ur-field-sub {
+  font-size: 0.6875rem;
+  color: var(--ink-3);
+}
+.ur-read {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.2rem 0.45rem;
+}
+.ur-read code {
+  font-size: 0.8125rem;
+  hyphens: manual;
+}
+.ur-arrow {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.ur-legend {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1.5rem;
+  margin-top: 0.4rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.8125rem;
+  color: var(--ink-2);
+}
+.ur-legend li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.35rem;
+}
+.ur-legend code {
+  font-size: 0.75rem;
+}
+
+@container (max-width: 40rem) {
+  .ur-lanes {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.5rem;
+  }
+  .ur-domflow {
+    flex-wrap: wrap;
+  }
+  .ur-domlink {
+    flex: 1 1 2rem;
+    min-width: 2.5rem;
+  }
+  .ur-field {
+    min-width: 7.5rem;
+  }
+  .ur-legend {
+    flex-direction: column;
+  }
+}

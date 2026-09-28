@@ -1,0 +1,197 @@
+.mb {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.mb-lane {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 3.5rem minmax(0, 1.15fr);
+  grid-template-areas:
+    'label label label'
+    'req link act';
+  align-items: start;
+  column-gap: 0.5rem;
+  row-gap: 0.35rem;
+  padding: 0.6rem 0.75rem 0.7rem;
+  border-radius: var(--radius-sm);
+  box-shadow: inset 0 0 0 1px var(--rule);
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.mb-lane[data-active] {
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1.5px var(--accent-mid);
+}
+
+.mb-label {
+  grid-area: label;
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+.mb-num {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+
+.mb-req {
+  grid-area: req;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  min-width: 0;
+}
+.mb-url {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  row-gap: 0.2rem;
+  font-size: 0.8125rem;
+}
+.mb-method {
+  margin-right: 0.5rem;
+  font-weight: 600;
+  color: var(--ink-3);
+}
+.mb-seg {
+  display: inline-flex;
+  flex-direction: column;
+  padding: 0 0.1rem;
+  border-radius: 2px;
+  transition:
+    background-color 0.35s var(--ease-out),
+    color 0.35s var(--ease-out);
+}
+.mb-seg[data-role]::after {
+  content: attr(data-role);
+  margin-top: 0.1rem;
+  border-top: 1px solid var(--rule-strong);
+  font-family: var(--font-ui);
+  font-size: 0.625rem;
+  font-weight: 500;
+  color: var(--ink-3);
+}
+.mb-seg[data-tone='focus'] {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+.mb-seg[data-tone='muted'] {
+  color: var(--ink-3);
+  text-decoration: line-through;
+}
+.mb-seg[data-tone='neg'] {
+  background: var(--neg-soft);
+  color: var(--neg);
+}
+
+.mb-body,
+.mb-problem pre {
+  margin: 0;
+  padding: 0.4rem 0.55rem;
+  border-radius: 3px;
+  font-size: 0.6875rem;
+  line-height: 1.45;
+  white-space: pre;
+  overflow-x: auto;
+  box-shadow: inset 0 0 0 1px var(--rule);
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.mb-body[data-tone='focus'] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1px var(--accent-mid);
+}
+
+.mb-link.vlink {
+  grid-area: link;
+  align-self: start;
+  margin-top: 0.05rem;
+}
+
+.mb-act {
+  grid-area: act;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  min-width: 0;
+}
+.mb-sig {
+  align-self: start;
+  max-width: 100%;
+  padding: 0.1rem 0.4rem;
+  border-radius: 3px;
+  font-size: 0.8125rem;
+  overflow-wrap: anywhere;
+  transition:
+    background-color 0.35s var(--ease-out),
+    color 0.35s var(--ease-out);
+}
+.mb-sig[data-tone='focus'] {
+  background: var(--accent-soft);
+}
+.mb-sig[data-tone='muted'] {
+  color: var(--ink-3);
+  text-decoration: line-through;
+}
+.mb-bind {
+  padding-left: 0.4rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem 0.5rem;
+  min-height: 1.45rem;
+}
+.mb-bind code {
+  font-size: 0.75rem;
+}
+.mb-problem {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.3rem;
+  min-width: 0;
+  max-width: 100%;
+}
+.mb-problem pre {
+  max-width: 100%;
+  background: var(--neg-soft);
+}
+
+@container (max-width: 40rem) {
+  .mb-lane {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: 'label' 'req' 'link' 'act';
+  }
+  .mb-link.vlink {
+    width: 1.5rem;
+    height: 1.4rem;
+    flex: none;
+    margin: 0;
+  }
+  .mb-link .vlink-line {
+    left: 50%;
+    right: auto;
+    top: 0;
+    bottom: 6px;
+    width: 1.5px;
+    height: auto;
+    margin: 0 0 0 -0.75px;
+    transform-origin: center top;
+    transform: scaleY(var(--p));
+  }
+  .mb-link .vlink-line::after {
+    right: auto;
+    left: -3.5px;
+    top: auto;
+    bottom: -6px;
+    border-top: 7px solid currentColor;
+    border-left: 4.25px solid transparent;
+    border-right: 4.25px solid transparent;
+    border-bottom: 0;
+  }
+}

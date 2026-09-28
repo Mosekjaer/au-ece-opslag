@@ -1,0 +1,254 @@
+.tc {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+/* ---- Livscyklus (s. 10) ---- */
+.tc-band {
+  align-items: flex-start;
+  gap: 0.4rem;
+}
+.tc-band > .vlink {
+  align-self: flex-start;
+  margin-top: 0.55rem;
+  min-width: 1.5rem;
+  flex: 1 1 1.5rem;
+}
+.tc-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.35rem;
+  flex: none;
+}
+.tc-box.vnode {
+  padding: 0.4rem 0.7rem 0.45rem;
+}
+.tc-box .vnode-title {
+  font-size: 0.8125rem;
+  white-space: nowrap;
+}
+.tc-box .vnode-sub {
+  font-size: 0.6875rem;
+  white-space: nowrap;
+}
+.tc-note {
+  padding: 0.1rem 0.4rem;
+  border-left: 2px solid var(--rule-strong);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: var(--ink-3);
+  hyphens: manual;
+  transition:
+    color 0.35s var(--ease-out),
+    border-color 0.35s var(--ease-out);
+}
+.tc-note[data-on] {
+  color: var(--ink-2);
+  border-color: var(--accent);
+}
+.tc-run {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+/* ---- Paneler ---- */
+.tc-panels {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 0.9rem;
+  align-items: stretch;
+}
+.tc-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  min-width: 0;
+  padding: 0.6rem 0.6rem 0.65rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  transition: box-shadow 0.35s var(--ease-out);
+}
+.tc-panel[data-on] {
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.tc-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.5rem;
+  min-height: 1.6rem;
+}
+.tc-name {
+  font-weight: 600;
+}
+.tc-slot {
+  display: inline-flex;
+  min-height: 1.5rem;
+  align-items: center;
+}
+.tc-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  width: 100%;
+  min-height: 1.5rem;
+}
+.tc-tags .vtag {
+  font-family: var(--font-ui);
+  font-size: 0.6875rem;
+}
+
+.tc-code {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 0.35rem 0.2rem;
+  border-radius: 3px;
+  background: var(--paper-2);
+  transition:
+    background-color 0.35s var(--ease-out),
+    outline-color 0.35s var(--ease-out);
+}
+.tc-code[data-empty] {
+  background: transparent;
+  outline: 1px dashed var(--rule-strong);
+  outline-offset: -1px;
+}
+.tc-code li {
+  padding-top: 0.05rem;
+  padding-bottom: 0.05rem;
+  padding-right: 0.3rem;
+  text-indent: -2ch;
+  border-radius: 2px;
+  font-size: 0.6875rem;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  overflow-wrap: normal;
+  hyphens: manual;
+  color: var(--ink-2);
+  transition:
+    background-color 0.35s var(--ease-out),
+    color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+
+/* Markeringer i TypeScript-panelet. */
+.tc-seg {
+  border-radius: 2px;
+  transition:
+    background-color 0.35s var(--ease-out),
+    color 0.35s var(--ease-out),
+    text-decoration-color 0.35s var(--ease-out);
+}
+.tc-seg[data-state='focus'] {
+  color: var(--ink);
+  background: var(--accent-soft);
+  box-shadow: 0 0 0 1px var(--accent-mid);
+}
+.tc-seg[data-kind='shape'][data-state='on'] {
+  color: var(--accent);
+}
+.tc-seg[data-kind='pub'][data-state='on'] {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 2px;
+}
+.tc-seg[data-state='neg'] {
+  color: var(--neg);
+  background: var(--neg-soft);
+  text-decoration: line-through;
+  text-decoration-color: var(--neg);
+}
+.tc-seg[data-state='gone'] {
+  color: var(--ink-3);
+  text-decoration: line-through;
+  text-decoration-color: color-mix(in oklab, var(--neg) 55%, transparent);
+}
+.tc-seg[data-kind='call'][data-state='ok'] {
+  color: var(--ink);
+  background: var(--accent-soft);
+}
+.tc-seg[data-kind='call'][data-state='on'] {
+  color: var(--ink);
+}
+.tc-check {
+  display: inline-block;
+  margin-left: 0.5ch;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  color: var(--accent);
+  text-indent: 0;
+}
+.tc-code li[data-state='neg'] {
+  color: var(--neg);
+  background: var(--neg-soft);
+}
+.tc-code li[data-state='gone'] {
+  color: var(--ink-3);
+  text-decoration: line-through;
+  text-decoration-color: color-mix(in oklab, var(--neg) 55%, transparent);
+}
+.tc-code li[data-state] .tc-seg {
+  color: inherit;
+  background: none;
+  box-shadow: none;
+}
+
+/* Genererede linjer i JavaScript-panelet. */
+.tc-code li[data-gen] {
+  color: var(--ink);
+  box-shadow: inset 2px 0 0 var(--accent-mid);
+}
+.tc-code li[data-now] {
+  background: var(--accent-soft);
+  box-shadow: inset 2px 0 0 var(--accent);
+}
+
+.tc-small {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.3rem 0.5rem;
+  font-size: 0.75rem;
+  color: var(--ink-3);
+}
+.tc-small code {
+  font-size: 0.6875rem;
+}
+.tc-arrow {
+  color: var(--ink-3);
+}
+
+@container (max-width: 40rem) {
+  .tc-band.vflow.stack {
+    align-items: stretch;
+  }
+  .tc-band.vflow.stack > .vlink {
+    margin-top: 0;
+    align-self: flex-start;
+    margin-left: 2.5rem;
+  }
+  .tc-stage {
+    flex-direction: row;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .tc-box.vnode {
+    min-width: 6.5rem;
+  }
+  .tc-run {
+    flex-direction: row;
+  }
+  .tc-run .tc-box.vnode {
+    min-width: 0;
+  }
+  .tc-panels {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

@@ -1,0 +1,345 @@
+.cc {
+  display: grid;
+  grid-template-columns: minmax(0, auto) 230px minmax(0, 1fr);
+  grid-template-areas:
+    'code graph count'
+    'sets sets sets'
+    'risk risk risk';
+  gap: 1.1rem 1.5rem;
+  align-items: start;
+}
+
+/* Koden */
+.cc-code {
+  grid-area: code;
+  min-width: 11rem;
+  padding: 0.6rem 0;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+}
+.cc-line {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.6rem;
+  padding: 0.05rem 0.75rem;
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.cc-line code {
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  white-space: pre;
+}
+.cc-line[data-hot] {
+  background: var(--accent-soft);
+  box-shadow: inset 3px 0 0 var(--accent);
+}
+.cc-dec {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--accent);
+  white-space: nowrap;
+}
+
+/* Grafen */
+.cc-graph-wrap {
+  grid-area: graph;
+  display: flex;
+  justify-content: center;
+}
+.cc-graph {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.cc-edge path {
+  fill: none;
+  stroke: var(--ink-3);
+  stroke-width: 1.5;
+}
+.cc-edge polygon {
+  fill: var(--ink-3);
+}
+.cc-elabel {
+  font-family: var(--font-ui);
+  font-size: 11px;
+  font-weight: 600;
+  fill: var(--accent);
+}
+.cc-node circle {
+  fill: var(--paper);
+  stroke: var(--ink-2);
+  stroke-width: 1.5;
+  transition:
+    fill 0.35s var(--ease-out),
+    stroke 0.35s var(--ease-out);
+}
+.cc-node[data-kind='entry'] circle {
+  fill: var(--neg);
+  stroke: var(--neg);
+}
+.cc-node[data-kind='exit'] circle {
+  fill: var(--ink);
+  stroke: var(--ink);
+}
+.cc-node[data-hot] circle {
+  fill: var(--accent-soft);
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+.cc-nlabel {
+  font-family: var(--font-ui);
+  font-size: 11px;
+  font-weight: 600;
+  fill: var(--ink-2);
+}
+.cc-node[data-kind='entry'] .cc-nlabel,
+.cc-node[data-kind='exit'] .cc-nlabel {
+  fill: var(--paper);
+}
+.cc-dlabel {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  fill: var(--ink);
+}
+
+/* Tællingen */
+.cc-count {
+  grid-area: count;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  min-width: 0;
+}
+.cc-var {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+}
+.cc-k {
+  min-width: 3.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  font-weight: 600;
+  font-variant-ligatures: none;
+}
+.cc-v {
+  font-size: 0.8125rem;
+  color: var(--ink-2);
+}
+.cc-formula {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  margin-top: 0.2rem;
+  padding: 0.6rem 0.75rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.cc-formula[data-hot] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.cc-formula code {
+  font-size: 0.875rem;
+  font-weight: 600;
+  white-space: pre;
+}
+.cc-alt {
+  font-size: 0.8125rem;
+  color: var(--ink-2);
+}
+.cc-bound {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  font-size: 0.8125rem;
+  color: var(--ink-2);
+}
+.cc-bound b {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--ink);
+}
+
+/* Stisættene */
+.cc-sets {
+  grid-area: sets;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+.cc-set {
+  flex: 2 1 14rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 0.7rem 0.8rem 0.6rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  transition: box-shadow 0.35s var(--ease-out);
+}
+.cc-set + .cc-set {
+  flex-grow: 3;
+}
+.cc-set[data-now] {
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.cc-set-head {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+.cc-set-title {
+  font-weight: 600;
+}
+.cc-set-sub {
+  font-size: 0.75rem;
+  color: var(--ink-3);
+}
+.cc-set-paths {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+}
+.cc-path {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+.cc-path figcaption {
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  line-height: 1.4;
+  color: var(--ink-2);
+  font-variant-ligatures: none;
+  text-align: center;
+  white-space: nowrap;
+}
+.cc-mini {
+  flex: none;
+  display: block;
+}
+.cc-medge path {
+  fill: none;
+  stroke: var(--rule-strong);
+  stroke-width: 1;
+}
+.cc-medge polygon {
+  fill: var(--rule-strong);
+}
+.cc-medge[data-on] path {
+  stroke: var(--accent);
+  stroke-width: 2.25;
+}
+.cc-medge[data-on] polygon {
+  fill: var(--accent);
+}
+.cc-mnode {
+  fill: var(--paper);
+  stroke: var(--rule-strong);
+  stroke-width: 1;
+}
+.cc-mnode[data-on] {
+  stroke: var(--accent);
+  stroke-width: 1.5;
+}
+.cc-mnode[data-kind='entry'] {
+  fill: var(--neg);
+  stroke: var(--neg);
+}
+.cc-mnode[data-kind='exit'] {
+  fill: var(--ink);
+  stroke: var(--ink);
+}
+
+/* Risikoskalaen */
+.cc-risk {
+  grid-area: risk;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 3px;
+}
+.cc-band {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  padding: 0.5rem 0.65rem;
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+}
+.cc-band:first-child {
+  border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+}
+.cc-band:last-child {
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+.cc-band[data-i='2'],
+.cc-band[data-i='3'] {
+  box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--neg) 40%, var(--paper));
+}
+.cc-band[data-i='3'] {
+  background: var(--neg-soft);
+}
+.cc-band[data-hit] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.cc-band-range {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+.cc-band-text {
+  font-size: 0.75rem;
+  color: var(--ink-2);
+}
+.cc-here {
+  position: absolute;
+  top: 0.45rem;
+  right: 0.5rem;
+}
+
+@container (max-width: 44rem) {
+  .cc {
+    grid-template-columns: minmax(0, auto) minmax(0, 1fr);
+    grid-template-areas:
+      'code graph'
+      'count count'
+      'sets sets'
+      'risk risk';
+  }
+}
+@container (max-width: 34rem) {
+  .cc {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: 'code' 'graph' 'count' 'sets' 'risk';
+  }
+  .cc-risk {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .cc-set {
+    padding-inline: 0.6rem;
+  }
+  .cc-set-paths {
+    gap: 0.5rem 0.45rem;
+  }
+  .cc-band,
+  .cc-band:first-child,
+  .cc-band:last-child {
+    border-radius: 3px;
+  }
+}

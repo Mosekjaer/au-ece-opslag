@@ -1,0 +1,442 @@
+.mvm {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  hyphens: manual;
+}
+
+/* Brede plader: fem kolonner og fem rækker (hoved + fire bindinger). View-telefonen og
+   ViewModel-kortet er subgrids, så hver control står ud for sit medlem. */
+.mvm-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) 7rem minmax(0, 1.25fr) 7rem minmax(0, 0.8fr);
+  grid-template-rows: auto repeat(4, auto);
+  column-gap: 0.5rem;
+}
+.mvm-col {
+  display: grid;
+  grid-row: 1 / 6;
+  grid-template-rows: subgrid;
+  row-gap: 0;
+  min-width: 0;
+}
+.mvm-view {
+  grid-column: 1;
+}
+.mvm-vm {
+  grid-column: 3;
+}
+.mvm-model {
+  grid-column: 5;
+}
+
+.mvm-head {
+  display: flex;
+  flex-direction: column;
+  gap: 0.05rem;
+  padding-bottom: 0.6rem;
+}
+.mvm-layer {
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+.mvm-class {
+  font-size: 0.75rem;
+  color: var(--ink-2);
+}
+.mvm-role {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.mvm-phone,
+.mvm-vmcard {
+  grid-row: 2 / 6;
+  display: grid;
+  grid-template-rows: subgrid;
+  row-gap: 0;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+}
+.mvm-phone {
+  border-radius: 0.8rem;
+  box-shadow:
+    inset 0 0 0 1px var(--rule-strong),
+    inset 0 0 0 5px var(--paper-3);
+  padding: 0.35rem 0;
+}
+
+/* View-controls */
+.mvm-ctl {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.4rem 0.75rem;
+  min-width: 0;
+}
+.mvm-label {
+  font-size: 0.6875rem;
+  color: var(--ink-3);
+}
+.mvm-input {
+  display: flex;
+  align-items: center;
+  height: 1.45rem;
+  padding: 0 0.4rem;
+  border-radius: 3px;
+  font-size: 0.8125rem;
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  transition: box-shadow 0.35s var(--ease-out);
+}
+.mvm-ctl[data-on] .mvm-input {
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.mvm-xaml {
+  font-size: 0.6875rem;
+  color: var(--accent);
+  overflow-wrap: anywhere;
+}
+.mvm-btn {
+  align-self: flex-start;
+  padding: 0.2rem 1rem;
+  border-radius: 4px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--accent);
+  box-shadow: inset 0 0 0 1px var(--accent-mid);
+  transition:
+    background-color 0.3s var(--ease-out),
+    color 0.3s var(--ease-out);
+}
+.mvm-btn[data-on] {
+  color: var(--paper);
+  background: var(--accent);
+}
+.mvm-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 0.4rem 0.75rem 0.3rem;
+  margin: 0;
+}
+.mvm-item {
+  display: grid;
+  grid-template-columns: 0.8rem minmax(0, 1fr);
+  column-gap: 0.4rem;
+  align-items: baseline;
+  padding: 0.15rem 0;
+  font-size: 0.8125rem;
+  line-height: 1.25;
+}
+.mvm-item + .mvm-item {
+  border-top: 1px solid var(--rule);
+}
+.mvm-check {
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 2px;
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  align-self: center;
+}
+.mvm-check[data-on] {
+  background: var(--ink-3);
+  box-shadow: none;
+}
+.mvm-item-date {
+  grid-column: 2;
+  font-size: 0.6875rem;
+  color: var(--ink-3);
+}
+.mvm-item-new .mvm-item-title {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* ViewModel-medlemmer, én pr. række */
+.mvm-mem {
+  grid-column: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0.2rem;
+  padding: 0.4rem 0.7rem;
+  min-width: 0;
+  border-left: 2px solid transparent;
+  transition:
+    border-color 0.35s var(--ease-out),
+    background-color 0.35s var(--ease-out);
+}
+.mvm-mem:nth-child(1) {
+  grid-row: 1;
+}
+.mvm-mem:nth-child(2) {
+  grid-row: 2;
+}
+.mvm-mem:nth-child(3) {
+  grid-row: 3;
+}
+.mvm-mem:nth-child(4) {
+  grid-row: 4;
+}
+.mvm-mem + .mvm-mem {
+  border-top: 1px solid var(--rule);
+}
+.mvm-mem[data-on] {
+  border-left-color: var(--accent);
+  background: var(--accent-soft);
+}
+.mvm-mem code {
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1.35;
+}
+.mvm-type {
+  color: var(--ink-3);
+  font-weight: 400;
+}
+.mvm-run {
+  color: var(--accent);
+}
+.mvm-slot {
+  display: flex;
+  min-height: 1.5rem;
+  align-items: center;
+}
+.mvm-val {
+  display: flex;
+  min-height: 1.45rem;
+  align-items: center;
+}
+
+/* Trin 5: toolkit-varianten dækker kolonnen */
+.mvm-kit {
+  grid-row: 1 / -1;
+  grid-column: 1;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  padding: 0.6rem 0.7rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.mvm-kit-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.05rem;
+}
+.mvm-kit code {
+  font-size: 0.75rem;
+  line-height: 1.35;
+}
+.mvm-gen {
+  font-size: 0.75rem;
+  color: var(--ink-3);
+}
+code.mvm-gen {
+  overflow-wrap: anywhere;
+}
+.mvm-gen-note {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+/* Model */
+.mvm-modelbody {
+  grid-row: 2 / 6;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.75rem;
+}
+.mvm-entity {
+  display: flex;
+  flex-direction: column;
+  padding: 0.45rem 0.6rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+}
+.mvm-entity-name {
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+.mvm-entity-f {
+  font-size: 0.6875rem;
+  color: var(--ink-3);
+}
+.mvm-db {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 1.15rem 0.5rem 0.6rem;
+  border-radius: 50% / 0.55rem;
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.mvm-db::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1.1rem;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+}
+.mvm-db[data-on] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.mvm-db[data-on]::before {
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.mvm-db-name {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Forbindelser */
+.mvm-links {
+  grid-column: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.3rem;
+  min-width: 0;
+}
+.mvm-lk-title {
+  grid-row: 2;
+}
+.mvm-lk-due {
+  grid-row: 3;
+}
+.mvm-lk-add {
+  grid-row: 4;
+}
+.mvm-lk-list {
+  grid-row: 5;
+}
+.mvm-links-2 {
+  grid-column: 4;
+  grid-row: 4;
+}
+.mvm-links .vlink {
+  flex: none;
+  align-self: stretch;
+  height: 0.75rem;
+}
+/* Svar og events skriver deres label under stregen. */
+.mvm-links .vlink.is-back .vlink-label {
+  bottom: auto;
+  top: 100%;
+}
+.mvm-links .vlink-label {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+}
+.mvm-ev .vlink-line {
+  background: repeating-linear-gradient(90deg, currentColor 0 4px, transparent 4px 7px);
+}
+.mvm-bl .mvm-ev .vlink-line {
+  background: repeating-linear-gradient(180deg, currentColor 0 4px, transparent 4px 7px);
+}
+
+.mvm-bl {
+  display: none;
+}
+
+.mvm-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.4rem 1.25rem;
+}
+.mvm-legend {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  color: var(--ink-3);
+}
+.mvm-key {
+  display: inline-block;
+  width: 1.4rem;
+  height: 1.5px;
+  background: var(--ink-3);
+}
+.mvm-key-ev {
+  margin-left: 0.6rem;
+  background: repeating-linear-gradient(90deg, var(--ink-3) 0 4px, transparent 4px 7px);
+}
+
+@container (max-width: 40rem) {
+  .mvm-grid {
+    display: flex;
+    flex-direction: column;
+  }
+  .mvm-col {
+    display: flex;
+    flex-direction: column;
+  }
+  .mvm-phone,
+  .mvm-vmcard {
+    grid-template-rows: none;
+  }
+  /* Uden subgrid ville toolkit-kortet skubbe til første række; det lægges over i stedet. */
+  .mvm-vmcard {
+    position: relative;
+  }
+  .mvm-kit {
+    position: absolute;
+    inset: 0;
+  }
+  .mvm-links {
+    display: none;
+  }
+  .mvm-bl {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    padding: 0.35rem 0;
+  }
+  .mvm-bl .vlink-label {
+    white-space: normal;
+    width: max-content;
+    max-width: 7.5rem;
+    font-family: var(--font-mono);
+    line-height: 1.25;
+  }
+  .mvm-bl > .vlink:first-child .vlink-label {
+    left: auto;
+    right: 100%;
+    transform: translate(-0.4rem, -50%);
+    text-align: right;
+  }
+  .mvm-bl .vlink.is-v {
+    height: 2.4rem;
+    min-height: 2.4rem;
+  }
+  .mvm-modelbody {
+    flex-direction: row;
+    align-items: center;
+  }
+  .mvm-entity,
+  .mvm-db {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+}

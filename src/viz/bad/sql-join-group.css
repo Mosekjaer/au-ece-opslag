@@ -1,0 +1,86 @@
+.sjg {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.sjg-sec {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.sjg-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem 0.75rem;
+  min-height: 1.5rem;
+}
+.sjg-note {
+  font-size: 0.75rem;
+  font-style: italic;
+  color: var(--ink-3);
+}
+
+.sjg-join {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
+  gap: 0.9rem 1.5rem;
+  align-items: start;
+}
+.sjg-group {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 0.9fr) minmax(0, 1.3fr);
+  gap: 0.9rem 1.5rem;
+  align-items: start;
+}
+
+.sjg-scroll {
+  min-width: 0;
+  overflow-x: auto;
+}
+
+.sjg-sql {
+  margin: 0;
+  align-self: end;
+  padding: 0.55rem 0.7rem;
+  border-radius: var(--radius-sm);
+  box-shadow: inset 0 0 0 1px var(--rule);
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: var(--ink-2);
+  white-space: pre;
+  overflow-x: auto;
+}
+.sjg-group .sjg-sql {
+  align-self: start;
+  margin-top: 1.4rem;
+}
+.sjg-hl {
+  border-radius: 2px;
+  transition:
+    background-color 0.35s var(--ease-out),
+    color 0.35s var(--ease-out);
+}
+.sjg-hl[data-on='true'] {
+  color: var(--accent);
+  background: var(--accent-soft);
+  box-shadow: 0 0 0 2px var(--accent-soft);
+}
+
+@container (max-width: 40rem) {
+  .sjg-join,
+  .sjg-group {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .sjg-group .sjg-sql {
+    margin-top: 0;
+  }
+}
+
+/* Gruppegrænser i cookie_sales, når rækkerne er samlet. */
+.sjg-group tr[data-tone='focus'] + tr[data-tone='idle'] td,
+.sjg-group tr[data-tone='idle'] + tr[data-tone='focus'] td {
+  border-top-color: var(--accent-mid);
+}

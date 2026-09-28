@@ -1,0 +1,628 @@
+/* ------------------------------------------------------------------
+   Figurer. Pladen er et roligt, forsænket felt; indholdet er blæk på
+   papir med accenten som det eneste der "sker".
+   ------------------------------------------------------------------ */
+
+.fig {
+  margin: var(--s-7) 0 var(--s-8);
+}
+
+.fig-head {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-3);
+  margin-bottom: var(--s-3);
+}
+
+.fig-head .label {
+  color: var(--accent);
+  flex: none;
+}
+
+.fig-title {
+  font-family: var(--font-ui);
+  font-size: var(--fs-small);
+  font-weight: 500;
+  line-height: var(--lh-ui);
+  color: var(--ink-2);
+}
+
+.fig-plate {
+  container-type: inline-size;
+  position: relative;
+  padding: clamp(1.25rem, 3.5cqi, 2.5rem);
+  background: var(--paper-2);
+  border-radius: var(--radius);
+  box-shadow: inset 0 0 0 1px var(--rule);
+  font-family: var(--font-ui);
+  font-size: 0.875rem;
+  line-height: 1.35;
+  color: var(--ink);
+  overflow: hidden;
+}
+
+.fig-plate:focus-visible {
+  outline-offset: 3px;
+}
+
+.fig-foot {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--s-3) var(--s-6);
+  align-items: start;
+  margin-top: var(--s-4);
+}
+
+.fig-caption {
+  display: grid;
+  grid-template-columns: 2.25rem minmax(0, 1fr);
+  align-items: baseline;
+  min-height: 3.2em;
+  font-family: var(--font-text);
+  font-size: 1rem;
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+
+.fig-caption p {
+  max-width: 40rem;
+}
+
+.fig-count {
+  font-family: var(--font-ui);
+  font-size: var(--fs-label);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--accent);
+}
+
+.fig-count-of {
+  color: var(--ink-3);
+  font-weight: 400;
+}
+
+.fig-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--s-3);
+}
+
+.fig-ticks {
+  display: flex;
+  gap: 3px;
+  padding-top: 0.55em;
+}
+
+.fig-tick {
+  position: relative;
+  width: 1.5rem;
+  height: 0.9rem;
+  display: grid;
+  place-items: center;
+}
+
+.fig-tick::before {
+  content: '';
+  width: 100%;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--rule-strong);
+  transition: background-color 0.3s var(--ease-out);
+}
+
+.fig-tick[data-state='past']::before,
+.fig-tick[data-state='now']::before {
+  background: var(--accent);
+}
+
+.fig-tick[data-state='now']:has(.fig-tick-fill)::before {
+  background: var(--accent-mid);
+}
+
+.fig-tick-fill {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  height: 3px;
+  margin-top: -1.5px;
+  border-radius: 2px;
+  background: var(--accent);
+  transform-origin: left center;
+  animation: tick-fill linear both;
+}
+
+@keyframes tick-fill {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.fig-buttons {
+  display: flex;
+  gap: var(--s-1);
+}
+
+.fig-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-2);
+  height: 2rem;
+  min-width: 2rem;
+  padding: 0 var(--s-2);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-ui);
+  font-size: var(--fs-label);
+  font-weight: 500;
+  color: var(--ink-2);
+  box-shadow: inset 0 0 0 1px var(--rule);
+  transition:
+    background-color 0.2s var(--ease-out),
+    color 0.2s var(--ease-out);
+}
+
+.fig-btn:hover:not(:disabled) {
+  background: var(--paper-2);
+  color: var(--ink);
+}
+
+.fig-btn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.fig-btn-text {
+  padding: 0 var(--s-3) 0 var(--s-2);
+}
+
+@media (max-width: 40rem) {
+  .fig-foot {
+    grid-template-columns: 1fr;
+  }
+  .fig-controls {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .fig-ticks {
+    padding-top: 0;
+  }
+  .fig-tick {
+    width: 1rem;
+  }
+}
+
+/* ---------------------------- Primitiver --------------------------- */
+
+.vnode {
+  position: relative;
+  padding: 0.6rem 0.8rem 0.65rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out),
+    color 0.35s var(--ease-out);
+}
+
+.vnode-title {
+  font-weight: 600;
+  font-size: 0.875rem;
+  line-height: 1.3;
+}
+
+.vnode-title.mono,
+.mono {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 0.8125rem;
+  font-variant-ligatures: none;
+}
+
+.vnode-sub {
+  margin-top: 0.15rem;
+  font-size: 0.75rem;
+  line-height: 1.35;
+  color: var(--ink-3);
+}
+
+.vnode[data-tone='focus'] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.vnode[data-tone='focus'] .vnode-sub {
+  color: var(--ink-2);
+}
+.vnode[data-tone='muted'] {
+  color: var(--ink-3);
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--rule);
+}
+.vnode[data-tone='ok'] {
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.vnode[data-tone='neg'] {
+  background: var(--neg-soft);
+  box-shadow: inset 0 0 0 1.5px var(--neg);
+}
+.vnode[data-tone='ghost'] {
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--rule);
+  box-shadow: none;
+  outline: 1px dashed var(--rule-strong);
+  outline-offset: -1px;
+  color: var(--ink-3);
+}
+
+/* Link: en streg med pil. Tegnes ind via --p (0 → 1). */
+.vlink {
+  --p: 0;
+  position: relative;
+  align-self: center;
+  min-width: 2rem;
+  height: 1.5rem;
+  flex: 1 1 2rem;
+  color: var(--rule-strong);
+}
+.vlink[data-tone='focus'] {
+  color: var(--accent);
+}
+.vlink[data-tone='neg'] {
+  color: var(--neg);
+}
+.vlink[data-tone='muted'] {
+  color: var(--rule);
+}
+
+.vlink-line {
+  position: absolute;
+  left: 0;
+  right: 6px;
+  top: 50%;
+  height: 1.5px;
+  margin-top: -0.75px;
+  background: currentColor;
+  transform-origin: left center;
+  transform: scaleX(var(--p));
+}
+.vlink-line::after {
+  content: '';
+  position: absolute;
+  right: -6px;
+  top: -3.5px;
+  border-left: 7px solid currentColor;
+  border-top: 4.25px solid transparent;
+  border-bottom: 4.25px solid transparent;
+  opacity: var(--p);
+}
+.vlink.is-back .vlink-line {
+  left: 6px;
+  right: 0;
+  transform-origin: right center;
+}
+.vlink.is-back .vlink-line::after {
+  right: auto;
+  left: -6px;
+  border-left: 0;
+  border-right: 7px solid currentColor;
+}
+
+.vlink-label {
+  position: absolute;
+  left: 50%;
+  bottom: 100%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: var(--ink-3);
+}
+
+/* Token: det der rejser. */
+.vtoken {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  padding: 0.18rem 0.5rem 0.2rem;
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1.3;
+  white-space: nowrap;
+  color: var(--paper);
+  background: var(--accent);
+  box-shadow: 0 1px 0 rgb(0 0 0 / 0.08);
+  font-variant-ligatures: none;
+}
+.vtoken[data-tone='neg'] {
+  background: var(--neg);
+}
+.vtoken[data-tone='idle'] {
+  color: var(--ink);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+}
+.vtoken[data-tone='muted'] {
+  color: var(--ink-3);
+  background: var(--paper-3);
+}
+
+/* Tag: kort annotation. */
+.vtag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.1rem 0.45rem;
+  border-radius: 3px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1.4;
+  white-space: nowrap;
+  color: var(--accent);
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1px var(--accent-mid);
+}
+.vtag[data-tone='neg'] {
+  color: var(--neg);
+  background: var(--neg-soft);
+  box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--neg) 45%, var(--paper));
+}
+.vtag[data-tone='idle'],
+.vtag[data-tone='muted'] {
+  color: var(--ink-2);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+}
+
+/* Lange labels må brydes, når de får `wrap`. */
+.vtoken.is-wrap,
+.vtag.is-wrap {
+  white-space: normal;
+  overflow-wrap: anywhere;
+  hyphens: manual;
+}
+
+/* Swap: varianter i samme grid-celle. */
+.vswap {
+  display: grid;
+}
+.vswap > * {
+  grid-area: 1 / 1;
+  min-width: 0;
+}
+
+/* Lodret link, uafhængigt af .vflow.stack. */
+.vlink.is-v {
+  height: 1.75rem;
+  min-height: 1.75rem;
+  flex: none;
+  width: 1.5rem;
+  min-width: 1.5rem;
+  align-self: center;
+}
+.vlink.is-v .vlink-line {
+  left: 50%;
+  right: auto;
+  top: 0;
+  bottom: 6px;
+  width: 1.5px;
+  height: auto;
+  margin: 0 0 0 -0.75px;
+  transform-origin: center top;
+  transform: scaleY(var(--p));
+}
+.vlink.is-v .vlink-line::after {
+  right: auto;
+  left: -3.5px;
+  top: auto;
+  bottom: -6px;
+  border-top: 7px solid currentColor;
+  border-left: 4.25px solid transparent;
+  border-right: 4.25px solid transparent;
+  border-bottom: 0;
+}
+.vlink.is-v.is-back .vlink-line {
+  top: 6px;
+  bottom: 0;
+  transform-origin: center bottom;
+}
+.vlink.is-v.is-back .vlink-line::after {
+  top: -6px;
+  bottom: auto;
+  border-top: 0;
+  border-bottom: 7px solid currentColor;
+}
+.vlink.is-v .vlink-label {
+  left: 100%;
+  bottom: auto;
+  top: 50%;
+  transform: translate(0.4rem, -50%);
+}
+
+/* Tabel: en relation. PK understreget (som i materialet), FK kursiv. */
+.vtable {
+  min-width: 0;
+}
+.vtable-name {
+  margin-bottom: 0.35rem;
+  font-weight: 600;
+  font-size: 0.8125rem;
+}
+.vtable table {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+  font-size: 0.8125rem;
+  font-variant-numeric: tabular-nums;
+  background: var(--paper);
+  border-radius: var(--radius-sm);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+}
+.vtable.is-compact table {
+  font-size: 0.75rem;
+}
+.vtable th,
+.vtable td {
+  padding: 0.3rem 0.6rem;
+  text-align: left;
+  white-space: nowrap;
+  transition:
+    background-color 0.35s var(--ease-out),
+    color 0.35s var(--ease-out);
+}
+.vtable.is-compact th,
+.vtable.is-compact td {
+  padding: 0.24rem 0.45rem;
+}
+.vtable th {
+  font-weight: 600;
+  font-size: 0.75rem;
+  color: var(--ink-2);
+  border-bottom: 1px solid var(--rule-strong);
+}
+.vtable th.is-pk {
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 3px;
+  color: var(--ink);
+}
+.vtable th.is-fk {
+  font-style: italic;
+}
+.vtable tbody tr + tr td {
+  border-top: 1px solid var(--rule);
+}
+.vtable [data-tone='focus'] {
+  background: var(--accent-soft);
+  color: var(--ink);
+}
+.vtable th[data-tone='focus'] {
+  color: var(--accent);
+}
+.vtable [data-tone='muted'] {
+  color: var(--ink-3);
+}
+.vtable [data-tone='neg'] {
+  background: var(--neg-soft);
+  color: var(--neg);
+}
+.vtable tr[data-tone='neg'] td {
+  text-decoration: line-through;
+  text-decoration-color: color-mix(in oklab, var(--neg) 60%, transparent);
+}
+.vtable [data-tone='ghost'] {
+  color: transparent;
+}
+.vtable-note {
+  margin-top: 0.4rem;
+  font-size: 0.75rem;
+  color: var(--ink-3);
+}
+
+/* Hjælpere til layout inde i figurer. Figurer stables under 40rem pladebredde. */
+.vrow {
+  display: flex;
+  align-items: stretch;
+  gap: 0.75rem;
+}
+.vcol {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.vflow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.vcaps {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--ink-3);
+  letter-spacing: 0.01em;
+}
+.vnote {
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--ink-2);
+}
+
+@container (max-width: 40rem) {
+  .vflow.stack {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .vflow.stack > .vlink {
+    height: 1.75rem;
+    min-height: 1.75rem;
+    flex: none;
+    width: 1.5rem;
+    align-self: center;
+  }
+  .vflow.stack > .vlink .vlink-line {
+    left: 50%;
+    right: auto;
+    top: 0;
+    bottom: 6px;
+    width: 1.5px;
+    height: auto;
+    margin: 0 0 0 -0.75px;
+    transform-origin: center top;
+    transform: scaleY(var(--p));
+  }
+  .vflow.stack > .vlink .vlink-line::after {
+    right: auto;
+    left: -3.5px;
+    top: auto;
+    bottom: -6px;
+    border-top: 7px solid currentColor;
+    border-left: 4.25px solid transparent;
+    border-right: 4.25px solid transparent;
+    border-bottom: 0;
+  }
+  .vflow.stack > .vlink.is-back .vlink-line {
+    top: 6px;
+    bottom: 0;
+    transform-origin: center bottom;
+  }
+  .vflow.stack > .vlink.is-back .vlink-line::after {
+    top: -6px;
+    bottom: auto;
+    border-top: 0;
+    border-bottom: 7px solid currentColor;
+  }
+  .vflow.stack > .vlink .vlink-label {
+    left: 100%;
+    bottom: auto;
+    top: 50%;
+    transform: translate(0.4rem, -50%);
+  }
+  .vrow.stack {
+    flex-direction: column;
+  }
+}
+
+/* Meget smalle skærme: replay-knappen viser kun ikonet. */
+@media (max-width: 26rem) {
+  .fig-btn-text span {
+    display: none;
+  }
+  .fig-btn-text {
+    padding: 0 var(--s-2);
+  }
+}
+
+/* Pladsholder mens en figur hentes: samme afstand som en figur, rolig flade. */
+.fig-loading {
+  min-height: 24rem;
+  border-radius: var(--radius);
+  background: var(--paper-2);
+  box-shadow: inset 0 0 0 1px var(--rule);
+}

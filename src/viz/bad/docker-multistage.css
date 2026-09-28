@@ -1,0 +1,123 @@
+.dk {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: 1.25rem;
+  align-items: start;
+}
+
+.dk-stage {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 0.75rem;
+  border-radius: var(--radius);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  transition:
+    opacity 0.6s var(--ease-out),
+    box-shadow 0.4s var(--ease-out),
+    background-color 0.4s var(--ease-out);
+}
+.dk-stage[data-tone='muted'] {
+  box-shadow: none;
+  outline: 1px dashed var(--rule-strong);
+  outline-offset: -1px;
+}
+.dk-stage[data-tone='muted'] .dk-layer[data-tone='idle'] {
+  color: var(--ink-3);
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--rule);
+}
+.dk-stage[data-tone='focus'] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+
+.dk-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.35rem 0.75rem;
+  min-height: 1.6rem;
+}
+
+.dk-head .vtag {
+  white-space: normal;
+}
+
+.dk-layers {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.dk-layer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.3rem 0.6rem;
+  min-height: 2.1rem;
+  padding: 0.3rem 0.6rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  transition:
+    background-color 0.4s var(--ease-out),
+    box-shadow 0.4s var(--ease-out),
+    color 0.4s var(--ease-out);
+}
+.dk-layer[data-base] {
+  background: var(--paper-3);
+  box-shadow: none;
+  margin-bottom: 4px;
+}
+.dk-layer[data-tone='focus'] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+
+.dk-code {
+  min-width: 0;
+  max-width: 100%;
+  white-space: normal;
+  padding: 0;
+  background: none;
+  box-shadow: none;
+  font-size: 0.75rem;
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+
+/* Fast bredde til det bredeste mærke, så linjeskift afgøres fra trin 0. */
+.dk-side {
+  display: inline-flex;
+  flex: none;
+  min-width: 6rem;
+  margin-left: auto;
+  justify-content: flex-end;
+  min-height: 1.4rem;
+  align-items: center;
+}
+
+.dk-result {
+  min-height: 3.2em;
+  font-size: 0.8125rem;
+}
+.dk-result code {
+  font-size: 0.75rem;
+}
+
+@container (max-width: 40rem) {
+  .dk {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.75rem;
+  }
+  .dk-stage {
+    padding: 0.6rem;
+  }
+  .dk-result {
+    min-height: 4.6em;
+  }
+}

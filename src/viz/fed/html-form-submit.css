@@ -1,0 +1,296 @@
+/* Én grid: formular | pil | GET/POST | pil | server. Kolonnerne er display: contents,
+   så pilene står på samme række som deres request. */
+.fs {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) 2rem minmax(0, 1.45fr) 2rem minmax(0, 0.75fr);
+  grid-template-rows: auto auto auto;
+  column-gap: 0.4rem;
+  row-gap: 0.6rem;
+}
+.fs-col,
+.fs-links {
+  display: contents;
+}
+.fs .vcaps {
+  grid-row: 1;
+}
+.fs-col-form > .vcaps,
+.fs-form {
+  grid-column: 1;
+}
+.fs-form,
+.fs-server {
+  grid-row: 2 / 4;
+  align-self: stretch;
+}
+.fs-links:nth-of-type(2) .vlink {
+  grid-column: 2;
+}
+.fs-links:nth-of-type(4) .vlink {
+  grid-column: 4;
+}
+.fs-links .vlink:first-child {
+  grid-row: 2;
+}
+.fs-links .vlink:last-child {
+  grid-row: 3;
+}
+.fs-links .vlink {
+  flex: none;
+  align-self: center;
+  min-width: 0;
+}
+.fs-col-req > * {
+  grid-column: 3;
+}
+.fs-col-req > .fs-req:nth-of-type(1) {
+  grid-row: 2;
+}
+.fs-col-req > .fs-req:nth-of-type(2) {
+  grid-row: 3;
+}
+.fs-col-server > * {
+  grid-column: 5;
+}
+
+/* ---------- Formularen ---------- */
+.fs-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+.fs-tag,
+.fs-name,
+.fs-url code,
+.fs-example code {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-variant-ligatures: none;
+}
+.fs-tag {
+  line-height: 1.45;
+  color: var(--ink-2);
+  overflow-wrap: anywhere;
+}
+.fs-method {
+  transition: color 0.35s var(--ease-out);
+}
+.fs-method[data-set] {
+  color: var(--accent);
+  font-weight: 600;
+}
+.fs-input {
+  display: grid;
+  grid-template-columns: 3rem minmax(0, 1fr);
+  grid-template-areas: 'label box' '. name';
+  align-items: center;
+  column-gap: 0.4rem;
+  row-gap: 0.15rem;
+}
+.fs-ilabel {
+  grid-area: label;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+.fs-ibox {
+  grid-area: box;
+  display: flex;
+  align-items: center;
+  height: 1.5rem;
+  padding: 0 0.4rem;
+  border-radius: 2px;
+  font-size: 0.8125rem;
+  color: var(--ink-2);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+}
+.fs-name {
+  grid-area: name;
+  font-size: 0.6875rem;
+  color: var(--accent);
+}
+.fs-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+}
+.fs-btn {
+  padding: 0.12rem 0.55rem;
+  border-radius: 3px;
+  font-size: 0.75rem;
+  background: var(--paper-3);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+}
+.fs-noname {
+  color: var(--ink-3);
+}
+.fs-slot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+  min-height: 3.6rem;
+  align-content: flex-start;
+}
+
+/* ---------- Requests ---------- */
+.fs-req {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.fs-req-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.2rem 0.6rem;
+}
+.fs-verb {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+.fs-req[data-tone='focus'] .fs-verb {
+  color: var(--accent);
+}
+.fs-req-sub {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--ink-3);
+}
+.fs-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+.fs-flabel {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--ink-3);
+}
+.fs-fval {
+  min-height: 1.75rem;
+  padding: 0.2rem 0.4rem;
+  border-radius: 2px;
+  background: var(--paper-2);
+  box-shadow: inset 0 0 0 1px var(--rule);
+}
+.fs-url {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 0.15rem;
+  row-gap: 0.2rem;
+}
+.fs-url > code {
+  line-height: 1.35rem;
+}
+code.fs-sep {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+.fs-tok {
+  display: inline-flex;
+}
+.fs-hint {
+  font-size: 0.6875rem;
+  line-height: 1.35;
+  color: var(--ink-3);
+}
+.fs-hint code {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--accent);
+}
+.fs-nb {
+  white-space: nowrap;
+}
+.fs-empty {
+  font-size: 0.75rem;
+  font-style: italic;
+  color: var(--ink-3);
+  line-height: 1.2rem;
+}
+.fs-body {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+.fs-arrive {
+  display: inline-flex;
+}
+.fs-example {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.15rem 0.5rem;
+  font-size: 0.6875rem;
+  color: var(--ink-3);
+}
+.fs-example code {
+  color: var(--ink-2);
+  hyphens: manual;
+  overflow-wrap: normal;
+}
+
+/* ---------- Server ---------- */
+.fs-server {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.fs-effects {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-top: 0.6rem;
+}
+.fs-effect {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.2rem;
+  min-height: 2.6rem;
+}
+.fs-effect-verb {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--ink-3);
+}
+
+@container (max-width: 40rem) {
+  .fs {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: none;
+  }
+  .fs .vcaps,
+  .fs-form,
+  .fs-server,
+  .fs-col-req > *,
+  .fs-col-server > *,
+  .fs-col-req > .fs-req:nth-of-type(1),
+  .fs-col-req > .fs-req:nth-of-type(2) {
+    grid-column: 1;
+    grid-row: auto;
+  }
+  .fs .vcaps {
+    margin-top: 0.3rem;
+  }
+  .fs-links {
+    display: none;
+  }
+  .fs-slot {
+    min-height: 3.1rem;
+  }
+  .fs-effects {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.4rem 1rem;
+  }
+  .fs-effect {
+    min-height: 2.6rem;
+  }
+}

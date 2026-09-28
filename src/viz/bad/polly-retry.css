@@ -1,0 +1,216 @@
+.ply {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.ply-flow > .vnode {
+  flex: 0 1 auto;
+  min-width: 0;
+}
+.ply-answer {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.35rem;
+}
+.ply-answer-label {
+  font-size: 0.75rem;
+  color: var(--ink-3);
+}
+
+.ply-policy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.ply-rule {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.3rem 0.4rem;
+}
+.ply-code {
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+.ply-muted {
+  font-size: 0.75rem;
+  color: var(--ink-3);
+}
+
+/* Tidsakse: forsøg har fast bredde, ventetider vokser i forhold til ms. */
+.ply-axis-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+.ply-axis {
+  display: flex;
+  align-items: stretch;
+}
+.ply-try,
+.ply-wait {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: 1.6rem 1.4rem 1.2rem;
+  align-items: center;
+  justify-items: center;
+}
+.ply-try {
+  flex: none;
+  width: 4.25rem;
+}
+.ply-wait {
+  flex-basis: 0;
+  flex-shrink: 1;
+  min-width: 0;
+}
+.ply-top,
+.ply-bottom {
+  display: flex;
+  justify-content: center;
+  white-space: nowrap;
+}
+.ply-bottom {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  color: var(--accent);
+}
+.ply-wait[data-unused] .ply-bottom {
+  color: var(--ink-3);
+}
+.ply-wait:last-child .ply-bottom {
+  justify-self: end;
+}
+
+.ply-dot {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 1.3rem;
+  height: 1.3rem;
+  border-radius: 50%;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--ink-3);
+  background: var(--paper-2);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  transition:
+    color 0.35s var(--ease-out),
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.ply-dot[data-tone='neg'] {
+  color: var(--paper);
+  background: var(--neg);
+  box-shadow: none;
+}
+.ply-dot[data-tone='ok'] {
+  color: var(--paper);
+  background: var(--accent);
+  box-shadow: none;
+}
+/* Aksen fortsætter gennem forsøgets kolonne. */
+.ply-try {
+  position: relative;
+}
+.ply-try::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(1.6rem + 0.7rem - 0.75px);
+  height: 1.5px;
+  background: var(--rule-strong);
+}
+
+.ply-track {
+  position: relative;
+  width: 100%;
+  height: 0.55rem;
+  border-radius: 2px;
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+}
+.ply-wait[data-unused] .ply-track {
+  box-shadow: none;
+  outline: 1px dashed var(--rule-strong);
+  outline-offset: -1px;
+}
+.ply-fill {
+  position: absolute;
+  inset: 0;
+  border-radius: 2px;
+  background: var(--accent-mid);
+  transform-origin: left center;
+}
+
+/* Backoff som vandrette søjler. */
+.ply-backoff {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--rule);
+  transition: opacity 0.5s var(--ease-out);
+}
+.ply-backoff[data-on='false'] {
+  opacity: 0.45;
+}
+.ply-formula {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.25rem 0.75rem;
+}
+.ply-formula code {
+  font-size: 0.75rem;
+  overflow-wrap: anywhere;
+}
+.ply-bars {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) 2.5rem;
+  align-items: center;
+  gap: 0.3rem 0.75rem;
+}
+.ply-bars-head {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--ink-3);
+}
+.ply-bars-head.is-right,
+.ply-bar-s {
+  text-align: right;
+}
+.ply-bar-n {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--ink-2);
+  text-align: center;
+}
+.ply-bar-track {
+  height: 0.75rem;
+  border-radius: 2px;
+  background: var(--paper-3);
+}
+.ply-bar {
+  display: block;
+  height: 100%;
+  border-radius: 2px;
+  background: var(--accent);
+  transform-origin: left center;
+}
+.ply-bar-s {
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--accent);
+}
+
+@container (max-width: 40rem) {
+  .ply-try {
+    width: 3.5rem;
+  }
+}

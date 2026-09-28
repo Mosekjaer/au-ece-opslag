@@ -1,0 +1,184 @@
+.ms {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+  gap: 1rem 1.75rem;
+  align-items: start;
+}
+
+/* Kæden: fire noder med lodrette pile imellem. */
+.ms-chain {
+  display: flex;
+  flex-direction: column;
+}
+.ms-step {
+  display: flex;
+  flex-direction: column;
+}
+.ms-node {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.ms-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.1rem 0.6rem;
+}
+.ms-name {
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+.ms-sub {
+  font-size: 0.75rem;
+  color: var(--ink-3);
+}
+.ms-sub code {
+  font-size: 0.75rem;
+}
+.ms-gap {
+  display: flex;
+  padding-left: 1.25rem;
+  min-height: 2rem;
+  align-items: center;
+}
+.ms-gap .vlink-label code {
+  font-size: 0.6875rem;
+}
+.ms-extra {
+  display: flex;
+}
+
+.ms-page {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.4rem 0.75rem;
+}
+.ms-files {
+  font-size: 0.75rem;
+  color: var(--ink-2);
+}
+.ms-files code {
+  font-size: 0.75rem;
+}
+.ms-screen {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.ms-screen-cap {
+  font-size: 0.6875rem;
+  color: var(--ink-3);
+}
+.ms-btn-swap > * {
+  display: flex;
+  justify-content: flex-end;
+}
+.ms-btn {
+  display: inline-block;
+  padding: 0.2rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+  color: var(--paper);
+  background: var(--ink-2);
+}
+.ms-btn[data-on] {
+  background: var(--accent);
+}
+
+/* MainPage i to filer. */
+.ms-files-col {
+  display: flex;
+  flex-direction: column;
+}
+.ms-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.ms-card-name {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--ink-2);
+}
+.ms-mid {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 2.6rem;
+  padding: 0.2rem 0 0.2rem 1.25rem;
+}
+.ms-mid {
+  flex-wrap: wrap;
+}
+.ms-mid-label {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: var(--ink-3);
+  white-space: nowrap;
+}
+.ms-mid-label code {
+  font-size: 0.6875rem;
+}
+.ms-mid-tag {
+  display: flex;
+  margin-left: auto;
+  min-width: 0;
+}
+
+/* Kodeblok: linjer med hængende indrykning, så brudte linjer kan læses. */
+.ms-code {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.5;
+  font-variant-ligatures: none;
+  color: var(--ink-2);
+}
+.ms-ln {
+  position: relative;
+  padding-left: calc((var(--i, 0) + 2) * 1ch);
+  text-indent: -2ch;
+  white-space: pre-wrap;
+  hyphens: manual;
+  overflow-wrap: normal;
+}
+.ms-hl {
+  position: absolute;
+  inset: 0 -0.4rem;
+  border-radius: 2px;
+  background: var(--accent-soft);
+  box-shadow: inset 2px 0 0 var(--accent);
+}
+.vnode[data-tone='focus'] .ms-hl {
+  background: var(--paper);
+}
+.ms-t {
+  position: relative;
+}
+.ms-key {
+  transition: color 0.35s var(--ease-out);
+}
+.ms-key[data-on] {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.ms-foot {
+  grid-column: 1 / -1;
+}
+.ms-foot code {
+  font-size: 0.75rem;
+}
+
+@container (max-width: 40rem) {
+  .ms {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .ms-files-col {
+    padding-top: 0.25rem;
+  }
+}

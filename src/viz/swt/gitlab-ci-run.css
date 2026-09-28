@@ -1,0 +1,322 @@
+.ci {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+/* Sekvensdiagrammet: 6 livslinjer, én række pr. besked. */
+.ci-seq {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-template-rows: auto repeat(9, 1.7rem) 0.4rem;
+  column-gap: 0.4rem;
+}
+.ci-part {
+  grid-row: 1;
+  align-self: end;
+  justify-self: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  max-width: 100%;
+  margin-bottom: 0.3rem;
+  padding: 0.3rem 0.45rem;
+  border-radius: 3px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: center;
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+}
+.ci-part[data-actor] {
+  background: none;
+  box-shadow: none;
+  padding-bottom: 0.2rem;
+}
+.ci-actor {
+  width: 0.9rem;
+  height: 1.15rem;
+  fill: none;
+  stroke: var(--ink-2);
+  stroke-width: 1.2;
+  stroke-linecap: round;
+}
+.ci-life {
+  grid-row: 2 / -1;
+  justify-self: center;
+  width: 0;
+  border-left: 1px dashed var(--rule-strong);
+}
+.ci-act {
+  justify-self: center;
+  width: 0.55rem;
+  margin: 0.55rem 0 0.35rem;
+  border-radius: 1px;
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--ink-3);
+  z-index: 1;
+}
+
+.ci-msg {
+  position: relative;
+  z-index: 2;
+  --in: 0px;
+  color: var(--ink-3);
+  transition: color 0.35s var(--ease-out);
+}
+.ci-msg[data-now] {
+  color: var(--accent);
+}
+.ci-msg-label {
+  position: absolute;
+  left: calc(var(--in) + 0.3rem);
+  bottom: 0.55rem;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+  color: var(--ink-2);
+  padding: 0 0.15rem;
+  border-radius: 2px;
+  background: var(--paper-2);
+}
+.ci-msg[data-now] .ci-msg-label {
+  color: var(--accent);
+  font-weight: 600;
+}
+.ci-msg[data-left] .ci-msg-label {
+  left: auto;
+  right: calc(var(--in) + 0.3rem);
+}
+.ci-line {
+  position: absolute;
+  left: var(--in);
+  right: var(--in);
+  bottom: 0.35rem;
+  height: 0;
+  border-top: 1.5px solid currentColor;
+}
+.ci-msg[data-reply] .ci-line {
+  border-top-style: dashed;
+}
+.ci-line::after {
+  content: '';
+  position: absolute;
+  right: -1px;
+  top: -5.25px;
+  border-left: 7px solid currentColor;
+  border-top: 4.25px solid transparent;
+  border-bottom: 4.25px solid transparent;
+}
+.ci-msg[data-left] .ci-line::after {
+  right: auto;
+  left: -1px;
+  border-left: 0;
+  border-right: 7px solid currentColor;
+}
+
+/* Selvkald: en lille løkke til højre for livslinjen, label til venstre. */
+.ci-self .ci-msg-label {
+  left: auto;
+  right: calc(50% + 0.45rem);
+  padding: 0 0.2rem;
+  border-radius: 2px;
+  background: var(--paper-2);
+}
+.ci-loop {
+  position: absolute;
+  left: calc(50% + 0.3rem);
+  bottom: 0.2rem;
+  width: 0.9rem;
+  height: 0.85rem;
+  border: 1.5px solid currentColor;
+  border-left: 0;
+  transform-origin: left center;
+}
+.ci-loop::after {
+  content: '';
+  position: absolute;
+  left: -2px;
+  bottom: -5px;
+  border-right: 7px solid currentColor;
+  border-top: 4.25px solid transparent;
+  border-bottom: 4.25px solid transparent;
+}
+
+/* Runnerens job og testrapporten. */
+.ci-panels {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: 0.9rem;
+  align-items: stretch;
+}
+.ci-panel {
+  min-width: 0;
+  padding: 0.65rem 0.8rem 0.75rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  transition: box-shadow 0.35s var(--ease-out);
+}
+.ci-panel[data-hot] {
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.ci-panel-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.15rem 0.6rem;
+  margin-bottom: 0.5rem;
+}
+.ci-panel-name {
+  font-weight: 600;
+  font-size: 0.8125rem;
+}
+.ci-panel-head code {
+  font-size: 0.6875rem;
+  color: var(--ink-3);
+}
+
+.ci-script {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.ci-line-code {
+  position: relative;
+  padding: 0.12rem 0.4rem 0.12rem 0.7rem;
+  border-radius: 2px;
+}
+.ci-line-code code {
+  display: block;
+  font-size: 0.6875rem;
+  line-height: 1.45;
+  overflow-wrap: normal;
+  hyphens: manual;
+  color: var(--ink-2);
+  background: none;
+  box-shadow: none;
+  padding: 0;
+}
+.ci-k {
+  color: var(--ink-3);
+}
+.ci-line-code[data-hot] {
+  background: var(--accent-soft);
+}
+.ci-line-code[data-hot] code {
+  color: var(--ink);
+}
+.ci-bar {
+  position: absolute;
+  left: 0;
+  top: 0.15rem;
+  bottom: 0.15rem;
+  width: 2.5px;
+  border-radius: 1px;
+  background: var(--accent);
+  transform-origin: center top;
+}
+
+.ci-report {
+  position: relative;
+}
+.ci-empty {
+  position: absolute;
+  left: 0.8rem;
+  top: 2.4rem;
+  font-size: 0.75rem;
+  font-style: italic;
+  color: var(--ink-3);
+}
+.ci-tests {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.22rem;
+}
+.ci-tests li {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+}
+.ci-tests code {
+  min-width: 0;
+  font-size: 0.6875rem;
+  line-height: 1.4;
+  color: var(--ink-2);
+  background: none;
+  box-shadow: none;
+  padding: 0;
+  hyphens: manual;
+  overflow-wrap: normal;
+}
+.ci-check {
+  flex: none;
+  font-weight: 700;
+  font-size: 0.8125rem;
+  color: var(--accent);
+}
+.ci-status {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.3rem 0.6rem;
+  margin-top: 0.55rem;
+}
+.ci-junit {
+  font-size: 0.6875rem;
+  color: var(--ink-3);
+}
+
+/* Fejlårsagerne. */
+.ci-fails {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--rule);
+}
+.ci-fails-head {
+  font-size: 0.8125rem;
+  color: var(--ink-2);
+}
+.ci-fails-head b {
+  color: var(--neg);
+  font-weight: 600;
+}
+.ci-fails-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+.ci-fails-tags .vtag {
+  font-family: var(--font-ui);
+}
+.ci-fails-tags code {
+  font-size: 0.6875rem;
+}
+.ci-mail {
+  font-size: 0.8125rem;
+  color: var(--ink-2);
+}
+
+@container (max-width: 40rem) {
+  .ci-seq {
+    column-gap: 0.15rem;
+    grid-template-rows: auto repeat(9, 1.75rem) 0.4rem;
+  }
+  .ci-part {
+    padding: 0.25rem 0.15rem;
+    font-size: 0.6875rem;
+    font-weight: 500;
+    overflow-wrap: normal;
+  }
+  .ci-panels {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

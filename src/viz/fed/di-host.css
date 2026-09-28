@@ -1,0 +1,308 @@
+.dih {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  gap: 1.5rem;
+  hyphens: manual;
+}
+.dih-left,
+.dih-right {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  min-width: 0;
+}
+
+/* Kodekortet */
+.dih-code {
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  overflow: hidden;
+}
+.dih-file {
+  padding: 0.35rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--ink-2);
+  border-bottom: 1px solid var(--rule);
+}
+.dih-lines {
+  padding: 0.45rem 0;
+}
+.dih-line {
+  position: relative;
+  padding: 0.1rem 0.75rem 0.1rem calc(0.75rem + 1.5em);
+  text-indent: -1.5em;
+  font-size: 0.75rem;
+  line-height: 1.45;
+}
+.dih-line[data-indent] {
+  padding-left: calc(0.75rem + 3em);
+}
+.dih-line code {
+  position: relative;
+  font-variant-ligatures: none;
+}
+.dih-line[data-dim] code {
+  color: var(--ink-3);
+}
+.dih-hl {
+  position: absolute;
+  inset: 0;
+  background: var(--accent-soft);
+  box-shadow: inset 2px 0 0 var(--accent);
+}
+
+/* Containeren */
+.dih-cont {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 0.55rem 0.7rem 0.6rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  transition: box-shadow 0.35s var(--ease-out);
+}
+.dih-cont[data-built] {
+  box-shadow: inset 0 0 0 2px var(--accent);
+}
+.dih-cont-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  min-height: 1.4rem;
+}
+.dih-cont-name {
+  font-weight: 600;
+  font-size: 0.8125rem;
+}
+.dih-reg {
+  display: flex;
+  flex-direction: column;
+}
+.dih-reg-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr) minmax(0, 0.8fr);
+  column-gap: 0.6rem;
+  padding: 0.28rem 0.35rem;
+  font-size: 0.75rem;
+  line-height: 1.3;
+  border-top: 1px solid var(--rule);
+}
+.dih-reg-th {
+  border-top: 0;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--ink-3);
+}
+.dih-reg-row code {
+  font-size: 0.75rem;
+  font-weight: 500;
+  min-width: 0;
+}
+.dih-life-cell {
+  font-size: 0.75rem;
+  color: var(--ink-2);
+}
+
+/* Resolve-kæden */
+.dih-chain {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-areas:
+    'cap cap'
+    'c1 c2'
+    'k1 k2'
+    'c3 c3'
+    'k3 .'
+    'c4 c4';
+  column-gap: 0.75rem;
+  row-gap: 0.2rem;
+}
+.dih-chain-cap {
+  grid-area: cap;
+  margin-bottom: 0.2rem;
+}
+.dih-c1 {
+  grid-area: c1;
+}
+.dih-c2 {
+  grid-area: c2;
+}
+.dih-c3 {
+  grid-area: c3;
+}
+.dih-c4 {
+  grid-area: c4;
+}
+.dih-k1 {
+  grid-area: k1;
+}
+.dih-k2 {
+  grid-area: k2;
+}
+.dih-k3 {
+  grid-area: k3;
+}
+
+.dih-conn {
+  display: flex;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.1rem 0;
+}
+/* Venstre pil får sin label på venstre side, så de to labels ikke støder sammen. */
+.dih-conn > .vlink:first-child .vlink-label {
+  left: auto;
+  right: 100%;
+  transform: translate(-0.35rem, -50%);
+}
+
+.dih-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+  padding: 0.45rem 0.6rem 0.5rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  transition:
+    background-color 0.4s var(--ease-out),
+    box-shadow 0.4s var(--ease-out),
+    color 0.4s var(--ease-out);
+}
+.dih-card[data-state='ghost'] {
+  background: transparent;
+  box-shadow: none;
+  outline: 1px dashed var(--rule-strong);
+  outline-offset: -1px;
+  color: var(--ink-3);
+}
+.dih-card[data-state='focus'] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.dih-card-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.2rem 0.45rem;
+}
+.dih-card-name {
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+.dih-card-life {
+  font-size: 0.6875rem;
+  color: var(--ink-3);
+}
+.dih-none {
+  font-size: 0.6875rem;
+  color: var(--ink-3);
+}
+.dih-param {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.2rem 0.45rem;
+  min-height: 1.35rem;
+}
+.dih-param code {
+  font-size: 0.75rem;
+  color: var(--ink-2);
+}
+.dih-card[data-state='ghost'] .dih-param code {
+  color: var(--ink-3);
+}
+.dih-inj {
+  display: inline-flex;
+  padding: 0.05rem 0.4rem;
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  white-space: nowrap;
+  color: var(--paper);
+  background: var(--accent);
+}
+.dih-inj[data-same] {
+  color: var(--accent);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--accent-mid);
+}
+
+/* Levetidstabellen */
+.dih-rules {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.dih-life {
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+}
+.dih-life-row {
+  display: grid;
+  grid-template-columns: 5.5rem 4.5rem minmax(0, 1fr);
+  column-gap: 0.6rem;
+  align-items: baseline;
+  padding: 0.35rem 0.6rem;
+  font-size: 0.8125rem;
+}
+.dih-life-row + .dih-life-row {
+  border-top: 1px solid var(--rule);
+}
+.dih-life-kind {
+  font-weight: 600;
+}
+.dih-life-cell[data-life='Singleton'] {
+  color: var(--accent);
+  font-weight: 600;
+}
+.dih-life-why {
+  font-size: 0.75rem;
+  color: var(--ink-2);
+}
+.dih-rules .vnote {
+  font-size: 0.75rem;
+}
+
+@container (max-width: 40rem) {
+  .dih {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .dih-left,
+  .dih-right {
+    display: contents;
+  }
+  .dih-code {
+    order: 1;
+  }
+  .dih-cont {
+    order: 2;
+  }
+  .dih-chain {
+    order: 3;
+  }
+  .dih-rules {
+    order: 4;
+  }
+  .dih-life-row {
+    grid-template-columns: 5.5rem minmax(0, 1fr);
+  }
+  .dih-life-why {
+    grid-column: 2;
+  }
+  /* Den anden LoginPages pile står tæt på den første; labels står allerede ved den første. */
+  .dih-k2 .vlink-label {
+    display: none;
+  }
+}

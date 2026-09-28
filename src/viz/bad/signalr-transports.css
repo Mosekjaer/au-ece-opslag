@@ -1,0 +1,148 @@
+.sgr {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.sgr-time {
+  align-self: flex-end;
+}
+
+.sgr-lane {
+  display: grid;
+  grid-template-columns: 8.5rem minmax(0, 1fr);
+  grid-template-areas: 'name track' '. pc';
+  column-gap: 1rem;
+  row-gap: 0.2rem;
+  padding-bottom: 0.7rem;
+  border-bottom: 1px solid var(--rule);
+}
+.sgr-name {
+  grid-area: name;
+  align-self: center;
+  padding-left: 0.5rem;
+  border-left: 2px solid transparent;
+  font-weight: 600;
+  transition:
+    border-color 0.35s var(--ease-out),
+    color 0.35s var(--ease-out);
+}
+.sgr-lane[data-now] .sgr-name {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.sgr-track {
+  grid-area: track;
+  min-width: 0;
+}
+.sgr-track svg {
+  display: block;
+  overflow: visible;
+}
+
+.sgr-axis {
+  font-size: 11px;
+  fill: var(--ink-3);
+}
+.sgr-line {
+  stroke: var(--rule-strong);
+  stroke-width: 1.5;
+}
+.sgr-label {
+  font-size: 11px;
+  font-weight: 500;
+  fill: var(--ink-2);
+}
+.sgr-label[data-tone='muted'] {
+  fill: var(--ink-3);
+}
+.sgr-label[data-tone='focus'] {
+  fill: var(--accent);
+  font-weight: 600;
+}
+
+.sgr-mark {
+  color: var(--ink-2);
+}
+.sgr-mark[data-tone='muted'] {
+  color: var(--ink-3);
+}
+.sgr-mark[data-tone='focus'] {
+  color: var(--accent);
+}
+.sgr-mark path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+}
+.sgr-mark polygon {
+  fill: currentColor;
+}
+
+.sgr-hold {
+  stroke: var(--accent-mid);
+  stroke-width: 5;
+  stroke-linecap: round;
+}
+.sgr-hold[data-tone='muted'] {
+  stroke: var(--rule-strong);
+}
+.sgr-band {
+  fill: var(--accent-soft);
+  stroke: var(--accent-mid);
+  stroke-width: 1;
+}
+
+.sgr-x line {
+  stroke: var(--accent);
+  stroke-width: 1;
+  stroke-dasharray: 2 2;
+  stroke-width: 1.5;
+}
+.sgr-x text {
+  font-size: 11px;
+  font-weight: 600;
+  fill: var(--accent);
+}
+
+.sgr-pc {
+  grid-area: pc;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.15rem 1.25rem;
+  min-height: 1.2rem;
+  font-size: 0.75rem;
+  color: var(--ink-2);
+}
+
+.sgr-signalr {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.3rem 0.75rem;
+}
+.sgr-sr-name {
+  font-weight: 600;
+}
+.sgr-order {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.3rem;
+  color: var(--ink-3);
+}
+.sgr-order code {
+  font-size: 0.8125rem;
+  color: var(--ink);
+}
+
+@container (max-width: 40rem) {
+  .sgr-lane {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: 'name' 'track' 'pc';
+  }
+  .sgr-pc {
+    flex-direction: column;
+  }
+}

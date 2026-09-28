@@ -1,0 +1,188 @@
+.cors {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Origins: label + tre dele pr. række. */
+.cors-origins {
+  display: grid;
+  grid-template-columns: max-content repeat(3, max-content);
+  align-items: center;
+  gap: 0.3rem 0.35rem;
+}
+.cors-plabel {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--ink-3);
+  padding-left: 0.45rem;
+}
+.cors-rlabel {
+  padding-right: 0.6rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+.cors-eks {
+  font-size: 0.6875rem;
+  font-weight: 400;
+  color: var(--ink-3);
+}
+.cors-part {
+  padding: 0.25rem 0.45rem;
+  border-radius: 3px;
+  box-shadow: inset 0 0 0 1px transparent;
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out),
+    color 0.35s var(--ease-out);
+}
+.cors-part[data-split='true'] {
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+}
+.cors-part[data-tone='focus'] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1px var(--accent-mid);
+}
+.cors-part[data-tone='ok'] {
+  box-shadow: inset 0 0 0 1px var(--accent-mid);
+}
+.cors-part[data-tone='neg'] {
+  background: var(--neg-soft);
+  color: var(--neg);
+  box-shadow: inset 0 0 0 1.5px var(--neg);
+}
+.cors-check {
+  padding-left: 0.45rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+.cors-check[data-same='false'] {
+  color: var(--neg);
+}
+.cors-verdict {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.3rem 0.75rem;
+  min-height: 1.5rem;
+}
+
+.cors-flow {
+  align-items: stretch;
+}
+.cors-browser {
+  flex: 1.6 1 0;
+  min-width: 0;
+}
+.cors-api {
+  flex: 1 1 0;
+  min-width: 0;
+}
+.cors-flow > .vlink {
+  flex: 0 1 4.5rem;
+}
+.cors-inner {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.6rem;
+}
+.cors-script,
+.cors-gate {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 0.45rem 0.6rem;
+  border-radius: 3px;
+  box-shadow: inset 0 0 0 1px var(--rule);
+}
+.cors-script {
+  flex: 1 1 auto;
+}
+.cors-gate {
+  flex: 0 1 8rem;
+  border-left: 3px solid var(--rule-strong);
+  transition:
+    background-color 0.35s var(--ease-out),
+    border-color 0.35s var(--ease-out);
+}
+.cors-gate[data-tone='neg'] {
+  background: var(--paper);
+  border-left-color: var(--neg);
+}
+.cors-gate[data-tone='ok'] {
+  border-left-color: var(--accent);
+}
+.cors-slot {
+  display: flex;
+  align-items: center;
+  min-height: 1.6rem;
+}
+.cors-api .cors-slot {
+  margin-top: 0.5rem;
+}
+
+.cors-bottom {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 1rem 1.5rem;
+  align-items: start;
+}
+.cors-code {
+  margin: 0;
+  padding: 0.6rem 0.75rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  font-size: 0.75rem;
+  line-height: 1.5;
+  white-space: pre;
+  overflow-x: auto;
+}
+.cors-outcomes {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.cors-outcome .vtag {
+  white-space: normal;
+}
+
+@container (max-width: 40rem) {
+  .cors-origins {
+    grid-template-columns: max-content repeat(3, max-content);
+    column-gap: 0.2rem;
+  }
+  .cors-part {
+    padding: 0.2rem 0.3rem;
+    font-size: 0.75rem;
+  }
+  .cors-plabel,
+  .cors-check {
+    padding-left: 0.3rem;
+  }
+  .cors-check {
+    font-size: 0.6875rem;
+  }
+  .cors-flow > .vlink {
+    flex: none;
+  }
+  .cors-inner {
+    flex-direction: column;
+  }
+  .cors-gate {
+    flex: none;
+    border-left: 0;
+    border-bottom: 3px solid var(--rule-strong);
+  }
+  .cors-gate[data-tone='neg'] {
+    border-bottom-color: var(--neg);
+  }
+  .cors-gate[data-tone='ok'] {
+    border-bottom-color: var(--accent);
+  }
+  .cors-bottom {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

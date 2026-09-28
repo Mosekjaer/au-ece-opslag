@@ -1,0 +1,212 @@
+.sr {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.sr-main {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: 1rem 1.75rem;
+  align-items: start;
+}
+
+/* Tre lag, forskudt: jo længere inde, jo snævrere scope. */
+.sr-layers {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.sr-layer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 0.55rem 0.75rem 0.6rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.sr-layer[data-level='1'] {
+  margin-left: 1rem;
+}
+.sr-layer[data-level='2'] {
+  margin-left: 2rem;
+}
+.sr-layer[data-tone='focus'] {
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.sr-layer-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.1rem 0.6rem;
+}
+.sr-layer-name code {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  hyphens: manual;
+}
+.sr-scope {
+  font-size: 0.6875rem;
+  color: var(--ink-3);
+}
+
+.sr-code {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.5;
+  font-variant-ligatures: none;
+  color: var(--ink-2);
+}
+.sr-code:empty {
+  display: none;
+}
+.sr-ln {
+  position: relative;
+  padding-left: calc((var(--i, 0) + 2) * 1ch);
+  text-indent: -2ch;
+  white-space: pre-wrap;
+  hyphens: manual;
+  overflow-wrap: normal;
+}
+.sr-hl {
+  position: absolute;
+  inset: 0 -0.4rem;
+  border-radius: 2px;
+  background: var(--accent-soft);
+  box-shadow: inset 2px 0 0 var(--accent);
+}
+.sr-t,
+.sr-swap {
+  position: relative;
+}
+.sr-ln:has(> .sr-swap) {
+  padding-left: 0;
+  text-indent: 0;
+}
+.sr-swap > * {
+  padding-left: calc((var(--i, 0) + 2) * 1ch);
+  text-indent: -2ch;
+}
+.sr-ln[data-lost] .sr-t {
+  color: var(--ink-3);
+  text-decoration: line-through;
+  text-decoration-color: var(--neg);
+}
+
+/* Forhåndsvisning. */
+.sr-side {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.sr-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.sr-os {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.25rem;
+  font-size: 0.6875rem;
+}
+.sr-os-cap {
+  margin-right: 0.3rem;
+  color: var(--ink-3);
+}
+.sr-os-opt {
+  padding: 0.05rem 0.45rem;
+  border-radius: 999px;
+  color: var(--ink-3);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  transition:
+    background-color 0.35s var(--ease-out),
+    color 0.35s var(--ease-out);
+}
+.sr-os-opt[data-on] {
+  color: var(--paper);
+  background: var(--ink-2);
+  box-shadow: none;
+}
+.sr-screen {
+  position: relative;
+  height: 8.5rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  overflow: hidden;
+  transition: background-color 0.6s var(--ease-out);
+}
+/* OS'ets mørke tema er mørkt i begge temaer på siden. */
+.sr-screen[data-dark] {
+  background: color-mix(in oklab, var(--paper-3) 22%, black);
+}
+.sr-label {
+  position: absolute;
+  margin: 0;
+  padding: 0.5rem 0.7rem;
+  font-weight: 500;
+  line-height: 1.15;
+  white-space: nowrap;
+  color: var(--ink);
+  transition: color 0.6s var(--ease-out);
+}
+.sr-label[data-color='primary'] {
+  color: var(--accent);
+}
+.sr-label[data-color='dark'] {
+  color: color-mix(in oklab, var(--accent) 50%, white);
+}
+
+.sr-table .vtable td,
+.sr-table .vtable th {
+  white-space: normal;
+  hyphens: manual;
+}
+.sr-table .vtable td:nth-child(2) {
+  font-family: var(--font-mono);
+  white-space: nowrap;
+}
+.sr-table .vtable td code {
+  font-size: 0.75rem;
+}
+
+.sr-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--rule);
+}
+.sr-order {
+  font-size: 0.8125rem;
+  color: var(--ink-3);
+}
+.sr-order span {
+  font-weight: 600;
+  color: var(--ink);
+}
+.sr-legend code {
+  font-size: 0.75rem;
+}
+
+@container (max-width: 40rem) {
+  .sr-main {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .sr-side {
+    order: -1;
+  }
+  .sr-layer[data-level='1'] {
+    margin-left: 0.5rem;
+  }
+  .sr-layer[data-level='2'] {
+    margin-left: 1rem;
+  }
+}

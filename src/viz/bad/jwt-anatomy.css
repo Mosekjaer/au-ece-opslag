@@ -1,0 +1,223 @@
+/* Delenes farver: header = blæk 2, payload = accent, signatur = blæk. */
+.jw [data-part='h'] {
+  --jw-c: var(--ink-3);
+  --jw-t: var(--ink-2);
+}
+.jw [data-part='p'] {
+  --jw-c: var(--accent);
+  --jw-t: var(--accent);
+}
+.jw [data-part='s'] {
+  --jw-c: var(--ink);
+  --jw-t: var(--ink);
+}
+
+.jw {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.jw-swap {
+  display: grid;
+}
+.jw-swap > * {
+  grid-area: 1 / 1;
+  min-width: 0;
+}
+
+.jw-parts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-areas:
+    'hj pj sj'
+    'he pe se';
+  gap: 0.35rem 1rem;
+}
+.jw-col-h {
+  grid-area: hj;
+}
+.jw-col-p {
+  grid-area: pj;
+}
+.jw-col-s {
+  grid-area: sj;
+}
+.jw-enc-h {
+  grid-area: he;
+}
+.jw-enc-p {
+  grid-area: pe;
+}
+.jw-enc-s {
+  grid-area: se;
+}
+
+.jw-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  min-width: 0;
+}
+.jw-col[data-now='true'] .vcaps {
+  color: var(--accent);
+}
+.jw-col > .jw-swap,
+.jw-col > .jw-json {
+  flex: 1;
+}
+.jw-swap > * > .jw-json {
+  height: 100%;
+}
+
+.jw-json {
+  padding: 0.45rem 0.6rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: var(--ink-2);
+  font-variant-ligatures: none;
+  overflow-wrap: anywhere;
+}
+.jw-json-line {
+  padding-left: 2ch;
+  transition: color 0.35s var(--ease-out);
+}
+.jw-json-line[data-tone='neg'] {
+  color: var(--neg);
+  font-weight: 600;
+}
+.jw-formula {
+  color: var(--ink);
+}
+.jw-secret {
+  margin-top: 0.35rem;
+  font-size: 0.6875rem;
+  color: var(--ink-3);
+}
+
+.jw-via {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: var(--ink-3);
+}
+
+/* Den kodede del. Farvestreg i venstre side = hvilken del. */
+.jw-enc {
+  min-width: 0;
+  padding: 0.4rem 0.6rem 0.45rem 0.7rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow:
+    inset 3px 0 0 var(--jw-c),
+    inset 0 0 0 1px var(--rule-strong);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.45;
+  color: var(--jw-t);
+  overflow-wrap: anywhere;
+  font-variant-ligatures: none;
+  transition: background-color 0.35s var(--ease-out);
+}
+.jw-enc[data-tone='neg'] {
+  background: var(--neg-soft);
+}
+.jw-empty {
+  font-family: var(--font-ui);
+  color: var(--neg);
+}
+
+.jw-changed {
+  color: var(--neg);
+  background: var(--neg-soft);
+  font-weight: 600;
+  border-radius: 2px;
+}
+
+/* Tokenet samlet. */
+.jw-token,
+.jw-server {
+  display: grid;
+  grid-template-columns: 4rem minmax(0, 1fr);
+  gap: 0.35rem 0.75rem;
+  align-items: start;
+}
+.jw-token .vcaps,
+.jw-server .vcaps {
+  padding-top: 0.15rem;
+}
+.jw-str {
+  display: block;
+  font-size: 0.75rem;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+  color: var(--ink-3);
+}
+.jw-str [data-part] {
+  color: var(--jw-t);
+  text-decoration: underline;
+  text-decoration-color: var(--jw-c);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+.jw-str [data-part='s'] {
+  font-weight: 600;
+}
+.jw-legend {
+  grid-column: 2;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.2rem 0.35rem;
+  font-size: 0.75rem;
+  color: var(--ink-3);
+}
+.jw-legend [data-part] {
+  font-weight: 600;
+  color: var(--jw-t);
+}
+.jw-note {
+  flex-basis: 100%;
+  color: var(--ink-2);
+}
+
+.jw-check {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.3rem 0.75rem;
+  font-size: 0.75rem;
+  color: var(--ink-2);
+}
+.jw-check > code {
+  font-size: 0.75rem;
+  overflow-wrap: anywhere;
+  color: var(--ink);
+}
+.jw-cmp code {
+  font-size: 0.75rem;
+}
+.jw-cmp code[data-tone='neg'] {
+  color: var(--neg);
+}
+
+@container (max-width: 40rem) {
+  .jw-parts {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: 'hj' 'he' 'pj' 'pe' 'sj' 'se';
+  }
+  .jw-enc-h,
+  .jw-enc-p {
+    margin-bottom: 0.6rem;
+  }
+  .jw-token,
+  .jw-server {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .jw-legend {
+    grid-column: 1;
+  }
+}

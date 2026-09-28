@@ -1,0 +1,191 @@
+.hr {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+/* URL'en. Delene har fast polstring fra start, så linjeskift og højde
+   ikke ændrer sig, når URL'en skilles ad. */
+.hr-url {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  row-gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.9375rem;
+  font-variant-ligatures: none;
+}
+.hr-part,
+.hr-sep {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+}
+.hr-part code,
+.hr-sep code {
+  padding: 0.2rem 0.25rem;
+  border-radius: 3px;
+  font-size: inherit;
+  transition:
+    background-color 0.4s var(--ease-out),
+    box-shadow 0.4s var(--ease-out),
+    color 0.4s var(--ease-out);
+}
+.hr-part + .hr-part {
+  margin-left: 2px;
+}
+.hr-url[data-split='true'] .hr-part code {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1px var(--accent-mid);
+}
+.hr-url[data-split='true'] .hr-sep code {
+  color: var(--ink-3);
+}
+.hr-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 0.3rem;
+  min-height: 2rem;
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+.hr-note {
+  font-size: 0.6875rem;
+  font-weight: 400;
+  color: var(--ink-3);
+}
+
+/* Browser — pile — webserver. */
+.hr-flow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(7rem, 0.8fr) minmax(0, 1fr);
+  align-items: stretch;
+  gap: 0.75rem;
+}
+.hr-node {
+  display: flex;
+  flex-direction: column;
+}
+.hr-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.35rem;
+  min-height: 3.6rem;
+  margin-top: 0.6rem;
+}
+.hr-links {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.4rem;
+  padding-top: 0.9rem;
+}
+.hr-links .vlink {
+  flex: none;
+  align-self: stretch;
+}
+
+/* Statusklasser. */
+.hr-status {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.75rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--rule);
+}
+.hr-class dt {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--ink-2);
+}
+.hr-class dd {
+  margin-top: 0.3rem;
+  font-size: 0.8125rem;
+}
+.hr-class dd code {
+  white-space: normal;
+}
+
+@container (max-width: 40rem) {
+  .hr-flow {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.5rem;
+  }
+  .hr-slot {
+    min-height: 3.4rem;
+  }
+  .hr-slot .vtoken {
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+  /* Pilene står lodret: anmodning ned, svar op. */
+  .hr-links {
+    flex-direction: row;
+    justify-content: center;
+    gap: 1rem;
+    padding: 0;
+    height: 2.75rem;
+  }
+  .hr-links .vlink {
+    width: 1.5rem;
+    min-width: 0;
+    height: 100%;
+    align-self: auto;
+  }
+  .hr-links .vlink .vlink-line {
+    left: 50%;
+    right: auto;
+    top: 0;
+    bottom: 6px;
+    width: 1.5px;
+    height: auto;
+    margin: 0 0 0 -0.75px;
+    transform-origin: center top;
+    transform: scaleY(var(--p));
+  }
+  .hr-links .vlink .vlink-line::after {
+    right: auto;
+    left: -3.5px;
+    top: auto;
+    bottom: -6px;
+    border-top: 7px solid currentColor;
+    border-left: 4.25px solid transparent;
+    border-right: 4.25px solid transparent;
+    border-bottom: 0;
+  }
+  .hr-links .vlink.is-back .vlink-line {
+    top: 6px;
+    bottom: 0;
+    transform-origin: center bottom;
+  }
+  .hr-links .vlink.is-back .vlink-line::after {
+    top: -6px;
+    bottom: auto;
+    border-top: 0;
+    border-bottom: 7px solid currentColor;
+  }
+  .hr-links .vlink .vlink-label {
+    left: auto;
+    right: 100%;
+    bottom: auto;
+    top: 50%;
+    transform: translate(-0.4rem, -50%);
+  }
+  .hr-links .vlink.is-back .vlink-label {
+    left: 100%;
+    right: auto;
+    transform: translate(0.4rem, -50%);
+  }
+  .hr-status {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

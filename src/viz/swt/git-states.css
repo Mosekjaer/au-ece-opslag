@@ -1,0 +1,323 @@
+.gs {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.gs-flow {
+  display: flex;
+  align-items: stretch;
+  gap: 0.35rem;
+}
+
+.gs-col {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 0.6rem 0.65rem 0.7rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.gs-col[data-hot] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.gs-col-head {
+  display: flex;
+  flex-direction: column;
+  gap: 0.05rem;
+}
+.gs-col-title {
+  font-weight: 600;
+  font-size: 0.8125rem;
+  line-height: 1.25;
+}
+.gs-col-sub {
+  font-size: 0.6875rem;
+  color: var(--ink-3);
+}
+.gs-col-body {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+/* Filen i working directory: navn + tilstand. */
+.gs-file {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.gs-file-name {
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+.gs-states {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+.gs-state {
+  padding: 0.05rem 0.35rem 0.08rem;
+  border-radius: 3px;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  line-height: 1.4;
+  color: var(--ink-3);
+  box-shadow: inset 0 0 0 1px var(--rule);
+  transition:
+    color 0.35s var(--ease-out),
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.gs-state[data-now] {
+  font-weight: 600;
+  color: var(--accent);
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.gs-state[data-now][data-neg] {
+  color: var(--neg);
+  background: var(--neg-soft);
+  box-shadow: inset 0 0 0 1.5px var(--neg);
+}
+
+.gs-origin {
+  position: relative;
+  height: 0;
+}
+
+.gs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.gs-slot {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 1.5rem;
+  min-width: 0;
+}
+.gs .vtoken {
+  font-size: 0.6875rem;
+}
+.gs-hide {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+.gs-ph {
+  display: block;
+  width: 5.5rem;
+  max-width: 100%;
+  height: 1.3rem;
+  border-radius: 999px;
+  outline: 1px dashed var(--rule-strong);
+  outline-offset: -1px;
+}
+
+.gs-merge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.18rem 0.5rem 0.2rem;
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  line-height: 1.3;
+  white-space: nowrap;
+  font-variant-ligatures: none;
+  color: var(--accent);
+  outline: 1px dashed var(--accent);
+  outline-offset: -1px;
+  transition:
+    color 0.35s var(--ease-out),
+    background-color 0.35s var(--ease-out);
+}
+.gs-merge[data-done] {
+  outline: none;
+  color: var(--ink);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+}
+
+.gs-test {
+  min-height: 1.4rem;
+}
+.gs-test .vtag {
+  font-size: 0.6875rem;
+}
+
+/* Operationerne mellem områderne. */
+.gs-flow > .gs-op,
+.gs-sync > .gs-op {
+  flex: 0 0 4.6rem;
+  min-width: 4.6rem;
+}
+.gs-op .vlink-label code {
+  font-size: 0.6875rem;
+  color: var(--ink-2);
+}
+.gs-op[data-tone='focus'] .vlink-label code {
+  color: var(--accent);
+  font-weight: 600;
+}
+.gs-sync {
+  flex: 0 0 4.6rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.6rem;
+}
+
+/* Pull–test–push-cyklussen (GitWorkflow.pdf s. 7, forkortet). */
+.gs-cycle-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--rule);
+}
+.gs-cycle {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.3rem;
+  align-items: center;
+}
+.gs-cycle-item {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  padding: 0.15rem 0.55rem 0.2rem 0.45rem;
+  border-radius: 3px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--ink-2);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out),
+    color 0.35s var(--ease-out);
+}
+.gs-cycle-step {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+.gs-cycle-arrow {
+  font-size: 0.75rem;
+  color: var(--ink-3);
+}
+.gs-cycle-n {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+}
+.gs-cycle-item[data-done] {
+  box-shadow: inset 0 0 0 1px var(--accent-mid);
+  color: var(--ink);
+}
+.gs-cycle-item[data-now] {
+  color: var(--ink);
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.gs-cycle-item[data-now] .gs-cycle-n {
+  color: var(--accent);
+}
+.gs-loop {
+  font-size: 0.8125rem;
+  color: var(--ink-2);
+}
+.gs-loop b {
+  font-weight: 600;
+  color: var(--ink);
+}
+.gs-loop-mark {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+@container (max-width: 40rem) {
+  .gs-flow {
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+  .gs-col {
+    display: grid;
+    grid-template-columns: 6.25rem minmax(0, 1fr);
+    column-gap: 0.6rem;
+    align-items: start;
+  }
+
+  /* Lodrette operationer. */
+  .gs-flow > .gs-op,
+  .gs-sync > .gs-op {
+    flex: none;
+    height: 1.9rem;
+    min-height: 1.9rem;
+    width: 1.5rem;
+    min-width: 1.5rem;
+    align-self: center;
+  }
+  .gs-sync {
+    flex: none;
+    flex-direction: row;
+    justify-content: center;
+    gap: 6rem;
+    margin-right: 4rem;
+  }
+  .gs-op .vlink-line {
+    left: 50%;
+    right: auto;
+    top: 0;
+    bottom: 6px;
+    width: 1.5px;
+    height: auto;
+    margin: 0 0 0 -0.75px;
+    transform-origin: center top;
+    transform: scaleY(var(--p));
+  }
+  .gs-op .vlink-line::after {
+    right: auto;
+    left: -3.5px;
+    top: auto;
+    bottom: -6px;
+    border-top: 7px solid currentColor;
+    border-left: 4.25px solid transparent;
+    border-right: 4.25px solid transparent;
+    border-bottom: 0;
+  }
+  .gs-op.is-back .vlink-line {
+    top: 6px;
+    bottom: 0;
+    transform-origin: center bottom;
+  }
+  .gs-op.is-back .vlink-line::after {
+    top: -6px;
+    bottom: auto;
+    border-top: 0;
+    border-bottom: 7px solid currentColor;
+  }
+  .gs-op .vlink-label {
+    left: 100%;
+    bottom: auto;
+    top: 50%;
+    transform: translate(0.4rem, -50%);
+  }
+}

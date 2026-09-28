@@ -1,0 +1,339 @@
+.aaa {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  grid-template-areas:
+    'code uut'
+    'code name'
+    'code run';
+  grid-template-rows: auto auto 1fr;
+  gap: 0.8rem 1rem;
+  align-items: start;
+}
+
+.aaa code {
+  background: none;
+  box-shadow: none;
+  padding: 0;
+  border-radius: 0;
+}
+
+/* ---------- Koden ---------- */
+.aaa-code {
+  grid-area: code;
+  min-width: 0;
+  padding: 0.65rem 0 0.7rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+}
+.aaa-code-head {
+  padding: 0 0.8rem 0.45rem;
+}
+.aaa-grid {
+  display: grid;
+  grid-template-columns: 4.6rem minmax(0, 1fr);
+  column-gap: 0.35rem;
+}
+
+.aaa-band {
+  grid-column: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1px 0 1px 0.55rem;
+  border-radius: 3px;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--ink-3);
+  outline: 1px dashed var(--rule-strong);
+  outline-offset: -1px;
+  transition:
+    background-color 0.35s var(--ease-out),
+    color 0.35s var(--ease-out),
+    outline-color 0.35s var(--ease-out);
+}
+.aaa-band[data-tone='focus'] {
+  color: var(--paper);
+  background: var(--accent);
+  outline-color: transparent;
+}
+.aaa-band[data-tone='ok'] {
+  color: var(--accent);
+  background: var(--accent-soft);
+  outline: 1px solid var(--accent-mid);
+}
+
+.aaa-line {
+  grid-column: 2;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 1.45rem;
+  padding: 0.08rem 0.7rem 0.08rem calc(var(--ind) * 1.5ch + 0.4rem);
+  transition: background-color 0.35s var(--ease-out);
+}
+.aaa-line code {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-size: 0.75rem;
+  line-height: 1.45;
+  white-space: normal;
+  hyphens: manual;
+  color: var(--ink-2);
+  transition: color 0.35s var(--ease-out);
+}
+.aaa-line[data-attr] code {
+  color: var(--ink-3);
+}
+.aaa-line[data-hot] {
+  background: var(--accent-soft);
+  box-shadow: inset 3px 0 0 var(--accent);
+}
+.aaa-line[data-hot] code {
+  color: var(--ink);
+}
+
+.aaa-slot {
+  flex: none;
+  display: inline-flex;
+  min-width: 1.6rem;
+  justify-content: flex-end;
+}
+.aaa-check {
+  flex: none;
+  font-family: var(--font-ui);
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+/* Udgangspunkt for et rejsende objekt: fylder intet og ses ikke. */
+.aaa-origin {
+  position: absolute;
+  right: 0.7rem;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ---------- UUT ---------- */
+.aaa-uut {
+  grid-area: uut;
+  min-width: 0;
+  padding: 0.65rem 0.8rem 0.75rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  transition: box-shadow 0.35s var(--ease-out);
+}
+.aaa-uut[data-hot] {
+  box-shadow: inset 0 0 0 1.5px var(--accent-mid);
+}
+.aaa-uut-head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.aaa-uut-head .vcaps {
+  font-family: var(--font-mono);
+}
+.aaa-uut-note {
+  font-size: 0.6875rem;
+  color: var(--ink-3);
+}
+.aaa-uut-body {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem 0.6rem;
+  min-height: 1.7rem;
+}
+.aaa-uut-slot {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.6rem;
+}
+.aaa-uut-slot .aaa-origin {
+  right: auto;
+  left: 0;
+}
+.aaa-empty {
+  display: inline-flex;
+  align-items: center;
+  height: 1.5rem;
+  padding: 0 0.6rem;
+  border-radius: 999px;
+  font-size: 0.6875rem;
+  color: var(--ink-3);
+  outline: 1px dashed var(--rule-strong);
+  outline-offset: -1px;
+}
+.aaa-returns {
+  font-size: 0.75rem;
+  color: var(--ink-2);
+}
+
+/* ---------- Navnet ---------- */
+.aaa-name {
+  grid-area: name;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 0.2rem 0.15rem;
+  padding: 0.6rem 0.8rem 0.65rem;
+  border-radius: var(--radius-sm);
+  box-shadow: inset 0 0 0 1px var(--rule);
+  transition: box-shadow 0.35s var(--ease-out);
+}
+.aaa-name[data-on] {
+  box-shadow: inset 0 0 0 1.5px var(--accent-mid);
+}
+.aaa-us {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  line-height: 1.6rem;
+  color: var(--ink-3);
+}
+.aaa-part {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.2rem;
+}
+.aaa-part code {
+  display: inline-block;
+  padding: 0.15rem 0.35rem;
+  border-radius: 3px;
+  font-size: 0.8125rem;
+  color: var(--ink-2);
+  box-shadow: inset 0 -1.5px 0 var(--rule-strong);
+  transition:
+    color 0.35s var(--ease-out),
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.aaa-name[data-on] .aaa-part code {
+  color: var(--ink);
+  background: var(--accent-soft);
+  box-shadow: inset 0 -1.5px 0 var(--accent);
+}
+.aaa-part-label {
+  padding-left: 0.35rem;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: var(--accent);
+}
+
+/* ---------- Runneren ---------- */
+.aaa-run {
+  grid-area: run;
+  min-width: 0;
+  padding: 0.6rem 0.8rem 0.7rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper-3);
+  box-shadow: inset 0 0 0 1px var(--rule);
+}
+.aaa-run-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.1rem 0.6rem;
+  margin-bottom: 0.4rem;
+}
+.aaa-run-sub {
+  font-size: 0.6875rem;
+  color: var(--ink-3);
+}
+.aaa-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+.aaa-test,
+.aaa-case {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  min-width: 0;
+  font-size: 0.75rem;
+}
+.aaa-test code,
+.aaa-case code {
+  font-size: 0.75rem;
+  hyphens: manual;
+  min-width: 0;
+}
+.aaa-case {
+  padding-left: 1.5rem;
+  flex-wrap: wrap;
+  column-gap: 0.5rem;
+}
+.aaa-case-args {
+  min-width: 10.5rem;
+  white-space: nowrap;
+  color: var(--ink-2);
+}
+.aaa-case-setup {
+  color: var(--ink-3);
+  font-size: 0.75rem;
+}
+.aaa-case-setup code {
+  color: var(--ink-2);
+}
+.aaa-mark {
+  flex: none;
+  width: 0.9rem;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  color: var(--ink-3);
+  transition: color 0.35s var(--ease-out);
+}
+.aaa-test[data-state='run'] .aaa-mark {
+  color: var(--accent-mid);
+}
+[data-state='ok'] > .aaa-mark {
+  color: var(--accent);
+}
+.aaa-test[data-state='ok'] code {
+  color: var(--ink);
+}
+
+@container (max-width: 40rem) {
+  .aaa {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: 'code' 'uut' 'name' 'run';
+    grid-template-rows: none;
+  }
+  .aaa-grid {
+    grid-template-columns: 3.6rem minmax(0, 1fr);
+    column-gap: 0.2rem;
+  }
+  .aaa-band {
+    margin-left: 0.4rem;
+  }
+  .aaa-line {
+    padding: 0.08rem 0.5rem 0.08rem calc(var(--ind) * 1ch + 0.3rem);
+  }
+  .aaa-line code {
+    font-size: 0.6875rem;
+  }
+  .aaa-case {
+    display: grid;
+    grid-template-columns: 0.8rem max-content max-content;
+    justify-content: start;
+    column-gap: 0.35rem;
+    padding-left: 0.5rem;
+  }
+  .aaa-case code,
+  .aaa-case-setup {
+    font-size: 0.6875rem;
+  }
+  .aaa-case-args {
+    min-width: 9.7rem;
+  }
+}

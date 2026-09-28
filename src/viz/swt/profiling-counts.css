@@ -1,0 +1,211 @@
+.pc {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: 1rem 1.5rem;
+  align-items: start;
+}
+
+/* Koden med tællere */
+.pc-code {
+  --pc-n: 1.75rem;
+  --pc-indent: 2ch;
+  --pc-bar: minmax(4rem, 9rem);
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 0.6rem 0 0.7rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+}
+.pc-head,
+.pc-line {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--pc-n) var(--pc-bar);
+  align-items: center;
+  column-gap: 0.6rem;
+  padding: 0.14rem 0.8rem;
+}
+.pc-head {
+  padding-bottom: 0.4rem;
+}
+.pc-head-n {
+  grid-column: 2 / 4;
+}
+.pc-line {
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.pc-line code {
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  white-space: pre;
+  overflow: hidden;
+  text-overflow: clip;
+}
+.pc-line.is-fn {
+  margin-top: 0.35rem;
+}
+.pc-line.is-fn:first-of-type {
+  margin-top: 0;
+}
+.pc-line.is-fn code {
+  font-weight: 600;
+  color: var(--ink);
+}
+.pc-line:not(.is-fn) code {
+  color: var(--ink-2);
+}
+.pc-n {
+  line-height: 1.2;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+/* Søjlen: én streg pr. udførsel, som slidets stjerner. */
+.pc-bar {
+  position: relative;
+  height: 0.6rem;
+  border-radius: 2px;
+  background: var(--paper-3);
+  overflow: hidden;
+}
+.pc-fill {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--ink-3) 0,
+    var(--ink-3) calc(100% / 15 - 1.5px),
+    transparent calc(100% / 15 - 1.5px),
+    transparent calc(100% / 15)
+  );
+  background-size: 100% 100%;
+  transition: background 0.35s var(--ease-out);
+}
+.pc-line[data-grew] {
+  background: var(--accent-soft);
+  box-shadow: inset 3px 0 0 var(--accent);
+}
+.pc-line[data-grew] .pc-n {
+  color: var(--accent);
+}
+.pc-line[data-grew] .pc-fill,
+.pc-line[data-hot] .pc-fill {
+  background: repeating-linear-gradient(
+    90deg,
+    var(--accent) 0,
+    var(--accent) calc(100% / 15 - 1.5px),
+    transparent calc(100% / 15 - 1.5px),
+    transparent calc(100% / 15)
+  );
+}
+.pc-line[data-hot] {
+  background: var(--accent-soft);
+  box-shadow: inset 3px 0 0 var(--accent);
+}
+.pc-line[data-hot] code,
+.pc-line[data-hot] .pc-n {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* Kaldene og målemåderne */
+.pc-side {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  min-width: 0;
+}
+.pc-calls {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.pc-call-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+.pc-call {
+  display: flex;
+  flex-direction: column;
+  gap: 0.05rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 3px;
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.pc-call code {
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+.pc-call-sub {
+  font-size: 0.6875rem;
+  color: var(--ink-3);
+  white-space: nowrap;
+}
+.pc-call[data-tone='focus'] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.pc-call[data-tone='ok'] {
+  box-shadow: inset 0 0 0 1px var(--accent-mid);
+}
+.pc-hot {
+  min-height: 1.6rem;
+}
+.pc-methods {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.pc-method {
+  display: grid;
+  grid-template-columns: minmax(0, auto) minmax(0, 1fr);
+  column-gap: 0.75rem;
+  padding: 0.4rem 0.6rem;
+  border-radius: 3px;
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+}
+.pc-method-name {
+  font-weight: 600;
+}
+.pc-method-traits {
+  justify-self: end;
+  text-align: right;
+  font-size: 0.8125rem;
+  color: var(--accent);
+  font-weight: 500;
+}
+.pc-method-how {
+  grid-column: 1 / -1;
+  font-size: 0.75rem;
+  color: var(--ink-3);
+}
+
+@container (max-width: 40rem) {
+  .pc {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .pc-code {
+    --pc-n: 1.4rem;
+    --pc-bar: minmax(2rem, 4rem);
+    --pc-indent: 1.5ch;
+  }
+  .pc-head,
+  .pc-line {
+    column-gap: 0.4rem;
+    padding-inline: 0.6rem;
+  }
+  .pc-line code {
+    font-size: 0.6875rem;
+  }
+}

@@ -1,0 +1,103 @@
+.dt {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.dt-canvas {
+  position: relative;
+  width: 100%;
+}
+
+.dt-lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.dt-narrow {
+  display: none;
+}
+
+.dt-line {
+  fill: none;
+  stroke: var(--ink-3);
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+  transition: stroke 0.35s var(--ease-out);
+}
+.dt-line[data-now] {
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+
+.dt-box {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: calc(var(--w) * 1%);
+  height: 2rem;
+  padding: 0 0.3rem;
+  transform: translate(-50%, -50%);
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--ink-3);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.15;
+  text-align: center;
+  hyphens: manual;
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.dt-box[data-tone='focus'] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+
+.dt-cd {
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 0.75rem;
+  font-style: italic;
+  color: var(--ink-3);
+}
+
+.dt-looptag {
+  position: absolute;
+  transform: translateY(-50%);
+  padding: 0.05rem 0.3rem;
+  border-radius: 3px;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  line-height: 1.35;
+  white-space: nowrap;
+  color: var(--accent);
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1px var(--accent-mid);
+}
+
+.dt-rules {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  min-width: 0;
+}
+
+@container (max-width: 40rem) {
+  .dt-wide {
+    display: none;
+  }
+  .dt-narrow {
+    display: block;
+  }
+  .dt-box {
+    width: calc(var(--wn) * 1%);
+    height: 2.5rem;
+    padding: 0 0.2rem;
+    font-size: 0.75rem;
+  }
+}

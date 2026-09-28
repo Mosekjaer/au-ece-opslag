@@ -1,0 +1,335 @@
+.fg {
+  --fg-gap: 0.6rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 1rem;
+  align-items: stretch;
+}
+
+.fg-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-width: 0;
+  padding: 0.85rem 0.9rem 0.9rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  transition:
+    box-shadow 0.4s var(--ease-out),
+    background-color 0.4s var(--ease-out);
+}
+.fg-panel[data-tone='focus'] {
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.fg-panel[data-tone='ghost'] {
+  background: transparent;
+  box-shadow: none;
+  outline: 1px dashed var(--rule-strong);
+  outline-offset: -1px;
+}
+.fg-panel[data-tone='ghost'] .fg-head {
+  color: var(--ink-3);
+}
+
+.fg-head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+.fg-title {
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+.fg-sub {
+  font-size: 0.75rem;
+  color: var(--ink-3);
+}
+
+/* ---------- Flex-scenen: cross axis til venstre, main axis under ---------- */
+.fg-stage {
+  display: grid;
+  grid-template-columns: 1.1rem minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  column-gap: 0.5rem;
+  row-gap: 0.35rem;
+}
+.fg-cross {
+  position: relative;
+  grid-row: 1;
+  height: 6.5rem;
+}
+.fg-axis-v {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 6px;
+  width: 1.5px;
+  margin-left: -0.75px;
+  background: var(--accent);
+}
+.fg-axis-v::after {
+  content: '';
+  position: absolute;
+  left: -3.5px;
+  bottom: -6px;
+  border-top: 7px solid var(--accent);
+  border-left: 4.25px solid transparent;
+  border-right: 4.25px solid transparent;
+}
+.fg-cross .fg-axis-label {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  padding: 0.2rem 0;
+  background: var(--paper);
+  writing-mode: vertical-rl;
+  transform: translate(-50%, -50%) rotate(180deg);
+  white-space: nowrap;
+}
+.fg-axis-label {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.fg-main {
+  grid-column: 2;
+  grid-row: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+.fg-axis-h {
+  position: relative;
+  display: block;
+  height: 1.5px;
+  margin-right: 6px;
+  background: var(--accent);
+}
+.fg-axis-h::after {
+  content: '';
+  position: absolute;
+  right: -6px;
+  top: -3.5px;
+  border-left: 7px solid var(--accent);
+  border-top: 4.25px solid transparent;
+  border-bottom: 4.25px solid transparent;
+}
+.fg-axis-ends {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  font-size: 0.6875rem;
+  color: var(--ink-3);
+  white-space: nowrap;
+}
+
+/* Boksen: målestok for items (15cqi) og reserveret højde for normal flow. */
+.fg-box {
+  container-type: inline-size;
+  position: relative;
+  grid-column: 2;
+  grid-row: 1;
+  min-height: 7.6rem;
+}
+
+.fg-flex {
+  display: block;
+  width: 100%;
+  border-radius: 3px;
+  background: var(--paper-2);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+}
+.fg-flex[data-mode='flex'],
+.fg-flex[data-mode='even'],
+.fg-flex[data-mode='wrap'] {
+  display: flex;
+}
+.fg-flex[data-mode='even'],
+.fg-flex[data-mode='wrap'] {
+  height: 6.5rem;
+  justify-content: space-evenly;
+  align-items: stretch;
+}
+.fg-flex[data-mode='wrap'] {
+  width: 72%;
+  flex-wrap: wrap;
+}
+
+.fg-item {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  margin: 0.2em;
+  padding: 0.15rem 0.35rem;
+  border-radius: 2px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1.3;
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1px var(--accent-mid);
+}
+.fg-flex:not([data-mode='flow']) .fg-item {
+  width: 15cqi;
+  justify-content: center;
+}
+
+.fg-guides {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 72%;
+  z-index: 1;
+  height: 6.5rem;
+  display: flex;
+  justify-content: space-evenly;
+  pointer-events: none;
+}
+.fg-guides span {
+  width: 15cqi;
+  margin: 0 0.2em;
+  border-left: 1px dashed var(--accent);
+  border-right: 1px dashed var(--accent);
+}
+
+/* ---------- Grid-scenen ---------- */
+.fg-gstage {
+  position: relative;
+  padding-top: 1.1rem;
+  min-height: 11.6rem;
+}
+.fg-lines {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 1rem;
+}
+.fg-lnum {
+  position: absolute;
+  top: 0;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  line-height: 1rem;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+.fg-lnum[data-n='1'] {
+  left: 0;
+}
+.fg-lnum[data-n='2'] {
+  left: calc((100% - 2 * var(--fg-gap)) / 3 + var(--fg-gap) / 2);
+  transform: translateX(-50%);
+}
+.fg-lnum[data-n='3'] {
+  left: calc((100% - 2 * var(--fg-gap)) / 3 * 2 + var(--fg-gap) * 1.5);
+  transform: translateX(-50%);
+}
+.fg-lnum[data-n='4'] {
+  right: 0;
+}
+
+.fg-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--fg-gap);
+  padding: 0;
+  border-radius: 3px;
+}
+.fg-grid[data-mode='areas'] {
+  grid-auto-rows: minmax(1.9rem, auto);
+  grid-template-areas:
+    'a a a'
+    'b c c'
+    '. . d'
+    'e e d';
+}
+
+.fg-cell {
+  position: relative;
+  min-width: 0;
+  padding: 0.3rem 0.45rem;
+  border-radius: 2px;
+  font-size: 0.75rem;
+  line-height: 1.3;
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1px var(--accent-mid);
+}
+.fg-cell-in {
+  display: flex;
+  flex-direction: column;
+}
+.fg-cell b {
+  font-weight: 600;
+}
+.fg-more {
+  color: var(--ink-2);
+}
+.fg-area {
+  position: absolute;
+  top: 0.25rem;
+  right: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+.fg-dot {
+  display: grid;
+  place-items: center;
+  border-radius: 2px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--ink-3);
+  outline: 1px dashed var(--rule-strong);
+  outline-offset: -1px;
+}
+
+/* ---------- Kode og noter ---------- */
+.fg-code {
+  display: grid;
+  padding: 0.5rem 0.65rem;
+  border-radius: 3px;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  background: var(--paper-2);
+  box-shadow: inset 0 0 0 1px var(--rule);
+  font-variant-ligatures: none;
+}
+.fg-line {
+  display: block;
+  color: var(--ink-2);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  transition: color 0.35s var(--ease-out);
+}
+.fg-line[data-now] {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.fg-notes .vswap > div {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  gap: 0.35rem;
+}
+.fg-rule {
+  margin: 0;
+  margin-top: auto;
+  font-size: 0.8125rem;
+  color: var(--ink-2);
+}
+.fg-rule em {
+  font-style: italic;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+@container (max-width: 40rem) {
+  .fg {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

@@ -1,0 +1,110 @@
+.nf {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  /* Plads til det højeste trin, så pladen ikke hopper. */
+  min-height: 26rem;
+}
+
+.nf-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1rem;
+}
+
+.nf-ladder {
+  display: flex;
+  gap: 2px;
+}
+.nf-rung {
+  padding: 0.12rem 0.55rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--ink-3);
+  box-shadow: inset 0 0 0 1px var(--rule);
+  transition:
+    color 0.4s var(--ease-out),
+    background-color 0.4s var(--ease-out),
+    box-shadow 0.4s var(--ease-out);
+}
+.nf-rung:first-child {
+  border-radius: 3px 0 0 3px;
+}
+.nf-rung:last-child {
+  border-radius: 0 3px 3px 0;
+}
+.nf-rung[data-on='true'] {
+  color: var(--accent);
+  box-shadow: inset 0 0 0 1px var(--accent-mid);
+}
+.nf-rung[data-now='true'] {
+  color: var(--paper);
+  background: var(--accent);
+  box-shadow: none;
+}
+
+.nf-anomalies {
+  display: inline-flex;
+  gap: 0.35rem;
+}
+
+.nf-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-areas:
+    'med proja'
+    'afd proj';
+  gap: 0.25rem 1.5rem;
+  align-items: start;
+}
+.nf-grid.is-wide {
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas: 'raw';
+}
+.nf-raw {
+  grid-area: raw;
+}
+.nf-med {
+  grid-area: med;
+}
+.nf-afd {
+  grid-area: afd;
+}
+.nf-proj-a {
+  grid-area: proja;
+}
+.nf-proj {
+  grid-area: proj;
+}
+/* Før 2NF står Projekt(1) øverst til højre. */
+.nf-grid:not(:has(.nf-proj-a)) .nf-proj {
+  grid-area: proja;
+}
+
+.nf-cell {
+  min-width: 0;
+}
+.nf-cell .vtable {
+  overflow-x: auto;
+}
+.nf-fd {
+  min-height: 1.75rem;
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: 0.35rem;
+}
+
+@container (max-width: 40rem) {
+  .nf {
+    min-height: 45.5rem;
+  }
+  .nf-grid,
+  .nf-grid.is-wide {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: 'raw' 'med' 'afd' 'proja' 'proj';
+  }
+  .nf-grid:not(:has(.nf-proj-a)) .nf-proj {
+    grid-area: proj;
+  }
+}

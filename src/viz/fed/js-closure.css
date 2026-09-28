@@ -1,0 +1,256 @@
+.jc {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr);
+  gap: 1.25rem 1.75rem;
+  align-items: start;
+}
+
+.jc-left,
+.jc-right {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+/* ---- Koden ---- */
+.jc-code {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 0.45rem 0.35rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  overflow-x: auto;
+}
+.jc-code li {
+  padding: 0.12rem 0.5rem;
+  border-radius: 3px;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  white-space: pre;
+  color: var(--ink-2);
+  transition:
+    background-color 0.35s var(--ease-out),
+    color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.jc-code li[data-tone='focus'] {
+  background: var(--accent-soft);
+  color: var(--ink);
+  box-shadow: inset 2px 0 0 var(--accent);
+}
+
+/* ---- Udregningen under koden ---- */
+.jc-eval {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 0.5rem 0.65rem;
+  border-radius: var(--radius-sm);
+  box-shadow: inset 0 0 0 1px var(--rule);
+}
+.jc-eval-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 1.6rem;
+  font-size: 0.8125rem;
+}
+.jc-eval-row > code {
+  font-size: 0.75rem;
+  color: var(--ink-2);
+  transition: color 0.35s var(--ease-out);
+}
+.jc-eval-row[data-now] > code {
+  color: var(--accent);
+}
+.jc-slot {
+  display: inline-flex;
+  align-items: center;
+  min-width: 1.6rem;
+  min-height: 1.4rem;
+}
+.jc-res {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--ink-2);
+}
+.jc-res b,
+.jc-total b {
+  color: var(--accent);
+  font-weight: 600;
+}
+.jc-out {
+  margin-top: 0.15rem;
+  padding-top: 0.4rem;
+  border-top: 1px solid var(--rule);
+}
+.jc-total {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
+.jc-out[data-on] .jc-total b {
+  font-size: 1rem;
+  line-height: 1;
+}
+.jc-eval-row .jc-slot[data-gone] {
+  min-width: 0;
+}
+
+/* ---- Environments ---- */
+.jc-global,
+.jc-env {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.jc-env-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.15rem 0.5rem;
+  margin-bottom: 0.25rem;
+}
+.jc-env-name {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--ink-2);
+}
+.jc-env-sig {
+  font-size: 0.75rem;
+  color: var(--ink-3);
+  hyphens: manual;
+}
+.jc-ptr {
+  display: none;
+  margin-left: auto;
+}
+.jc-env-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.jc-row {
+  display: grid;
+  grid-template-columns: minmax(0, auto) minmax(0, 1fr);
+  align-items: center;
+  column-gap: 0.75rem;
+  min-height: 1.55rem;
+  padding: 0 0.4rem;
+  border-radius: 3px;
+  font-size: 0.8125rem;
+  transition: background-color 0.35s var(--ease-out);
+}
+.jc-row[data-tone='focus'] {
+  background: var(--accent-soft);
+}
+.jc-k {
+  font-size: 0.75rem;
+  hyphens: manual;
+}
+.jc-v {
+  font-size: 0.75rem;
+  color: var(--ink-2);
+  text-align: right;
+  justify-self: end;
+}
+.jc-num {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+.jc-row[data-tone='focus'] .jc-num {
+  color: var(--accent);
+}
+
+.jc-calls {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 0 0.75rem;
+}
+.jc-callcol {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.jc-link.vlink.is-v {
+  height: 2.25rem;
+  min-height: 2.25rem;
+}
+.jc-link .vlink-label code {
+  font-size: 0.6875rem;
+}
+
+.jc-keeps {
+  margin: 0.1rem 0 0.15rem;
+  padding: 0 0.4rem;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: var(--accent);
+}
+
+/* Kaldet add(1): sit eget lille environment, indlejret i det huskede. */
+.jc-inner {
+  margin-top: 0.3rem;
+  padding: 0.35rem 0.3rem 0.3rem;
+  border-radius: 3px;
+  outline: 1px dashed var(--rule-strong);
+  outline-offset: -1px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out),
+    outline-color 0.35s var(--ease-out);
+}
+.jc-inner[data-on] {
+  outline-color: transparent;
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+}
+.jc-inner[data-now] {
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.jc-inner-name {
+  padding: 0 0.4rem;
+  font-size: 0.6875rem;
+  color: var(--ink-3);
+}
+.jc-inner-name code {
+  font-size: 0.6875rem;
+}
+.jc-inner .jc-slot {
+  justify-content: flex-end;
+}
+.jc-sum .jc-k {
+  color: var(--ink-3);
+}
+
+.jc-react {
+  font-size: 0.75rem;
+  color: var(--ink-3);
+}
+
+@container (max-width: 40rem) {
+  .jc {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .jc-calls {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.6rem;
+  }
+  /* Stablet: pilen ville pege fra kald 1 til kald 2. Pegeren står i kaldets hoved i stedet. */
+  .jc-link {
+    display: none;
+  }
+  .jc-ptr {
+    display: inline-flex;
+  }
+}

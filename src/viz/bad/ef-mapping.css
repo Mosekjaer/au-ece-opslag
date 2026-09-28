@@ -1,0 +1,120 @@
+.efm {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.efm-map {
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.efm-side {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.efm-map > .vlink {
+  flex: 0 0 3rem;
+  align-self: center;
+}
+
+.efm-class {
+  padding: 0.5rem 0.7rem 0.55rem;
+}
+.efm-class-name {
+  margin-bottom: 0.3rem;
+  font-weight: 600;
+}
+.efm-kw {
+  color: var(--ink-3);
+  font-weight: 400;
+}
+.efm-props {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.efm-prop {
+  padding: 0.05rem 0.35rem;
+  margin: 0 -0.35rem;
+  border-radius: 3px;
+  font-size: 0.75rem;
+  color: var(--ink-2);
+  overflow-wrap: anywhere;
+  transition:
+    background-color 0.35s var(--ease-out),
+    color 0.35s var(--ease-out);
+}
+.efm-prop[data-tone='focus'] {
+  background: var(--accent-soft);
+  color: var(--accent);
+  box-shadow: inset 0 0 0 1px var(--accent-mid);
+}
+
+.efm-side .vtable {
+  overflow-x: auto;
+}
+
+.efm-join {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+/* To tags deler samme plads, så højden ikke hopper. */
+.efm-join-tags {
+  display: grid;
+  justify-items: start;
+}
+.efm-join-tags > * {
+  grid-area: 1 / 1;
+}
+
+.efm-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--rule);
+}
+.efm-legend ul {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+  gap: 0.35rem 1.25rem;
+}
+.efm-legend li {
+  display: grid;
+  grid-template-columns: 7rem 1.25rem minmax(0, 1fr);
+  align-items: baseline;
+  font-size: 0.8125rem;
+  color: var(--ink-2);
+}
+.efm-legend li[data-now] {
+  color: var(--accent);
+  font-weight: 600;
+}
+.efm-arrow {
+  color: var(--ink-3);
+}
+
+@container (max-width: 40rem) {
+  .efm-map > .vlink {
+    flex: none;
+  }
+  .efm-side {
+    width: 100%;
+    flex: none;
+  }
+  .efm-legend ul {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  /* Samlingen skifter til ICollection<AuthorFanclub> og kan brydes over to linjer. */
+  .efm-prop[data-nav] {
+    min-height: calc(2 * 1.35em + 0.1rem);
+  }
+}

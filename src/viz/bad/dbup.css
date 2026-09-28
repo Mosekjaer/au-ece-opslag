@@ -1,0 +1,151 @@
+.dbu {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.dbu-top {
+  display: flex;
+  align-items: stretch;
+  gap: 0.5rem;
+}
+.dbu-folder {
+  flex: 1.3 1 0;
+  min-width: 0;
+}
+.dbu-runner {
+  flex: 1 1 0;
+  min-width: 0;
+}
+.dbu-link {
+  flex: 0 1 4rem;
+}
+
+.dbu-files,
+.dbu-phases {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-top: 0.6rem;
+}
+.dbu-file {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.25rem 0.5rem;
+  min-height: 2rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 3px;
+  box-shadow: inset 0 0 0 1px var(--rule);
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.dbu-file .mono {
+  font-size: 0.75rem;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.dbu-file[data-tone='focus'] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1px var(--accent-mid);
+}
+.dbu-status {
+  display: inline-flex;
+  min-width: 5.5rem;
+  justify-content: flex-end;
+}
+
+.dbu-phase {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  padding: 0.12rem 0.35rem;
+  border-radius: 3px;
+  font-size: 0.8125rem;
+  color: var(--ink-3);
+  transition:
+    background-color 0.35s var(--ease-out),
+    color 0.35s var(--ease-out);
+}
+.dbu-phase[data-on='true'] {
+  color: var(--ink);
+  background: var(--paper);
+}
+.dbu-pnum {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+.dbu-result {
+  min-height: 1.6rem;
+  margin-top: 0.5rem;
+}
+
+.dbu-db {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.dbu-dbhead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.25rem 0.75rem;
+}
+.dbu-read {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--accent);
+}
+.dbu-scroll {
+  min-width: 0;
+  overflow-x: auto;
+}
+.dbu-scroll td:nth-child(2),
+.dbu-scroll td:nth-child(3) {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+}
+
+@container (max-width: 40rem) {
+  .dbu-top {
+    flex-direction: column;
+  }
+  .dbu-link.vlink {
+    width: 1.5rem;
+    height: 1.75rem;
+    flex: none;
+    align-self: center;
+  }
+  .dbu-link .vlink-line {
+    left: 50%;
+    right: auto;
+    top: 0;
+    bottom: 6px;
+    width: 1.5px;
+    height: auto;
+    margin: 0 0 0 -0.75px;
+    transform-origin: center top;
+    transform: scaleY(var(--p));
+  }
+  .dbu-link .vlink-line::after {
+    right: auto;
+    left: -3.5px;
+    top: auto;
+    bottom: -6px;
+    border-top: 7px solid currentColor;
+    border-left: 4.25px solid transparent;
+    border-right: 4.25px solid transparent;
+    border-bottom: 0;
+  }
+  .dbu-link .vlink-label {
+    left: 100%;
+    bottom: auto;
+    top: 50%;
+    transform: translate(0.4rem, -50%);
+  }
+}

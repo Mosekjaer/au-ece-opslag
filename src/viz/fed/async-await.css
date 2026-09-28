@@ -1,0 +1,306 @@
+/* await frigiver UI-tråden: kode til venstre, to baner til højre. */
+
+.asy {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: 1.25rem 1.75rem;
+  align-items: start;
+  hyphens: manual;
+}
+
+/* ---- Koden ---- */
+.asy-code {
+  padding: 0.6rem 0.25rem 0.6rem 0;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.55;
+  font-variant-ligatures: none;
+}
+.asy-ln {
+  --i: 0;
+  position: relative;
+  padding: 0 0.4rem 0 calc((var(--i) + 2) * 1ch + 0.6rem);
+  text-indent: -2ch;
+  white-space: pre-wrap;
+  border-left: 3px solid transparent;
+  transition: border-color 0.35s var(--ease-out);
+}
+.asy-ln[data-sync] {
+  border-left-color: var(--accent-mid);
+}
+.asy-hl {
+  position: absolute;
+  inset: 0;
+  background: var(--accent-soft);
+  pointer-events: none;
+}
+.asy-t {
+  position: relative;
+}
+.asy-seg {
+  border-radius: 3px;
+  transition:
+    background-color 0.35s var(--ease-out),
+    color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+/* async og await er ringet ind på slidet. */
+.asy-seg[data-kw] {
+  padding: 0 1px;
+  box-shadow: 0 0 0 1px var(--rule-strong);
+}
+.asy-seg[data-on] {
+  color: var(--paper);
+  background: var(--accent);
+  box-shadow: 0 0 0 1.5px var(--accent);
+}
+
+/* Continuation-rammen om linjen efter await. */
+.asy-ln[data-cont]::after {
+  content: '';
+  position: absolute;
+  inset: -2px 0.15rem -2px 0.25rem;
+  border-radius: 3px;
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+  pointer-events: none;
+}
+.asy-cont-label {
+  position: absolute;
+  right: 0.3rem;
+  top: 100%;
+  margin-top: 3px;
+  z-index: 1;
+  padding: 0 0.35rem;
+  border-radius: 3px;
+  font-family: var(--font-ui);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  line-height: 1.5;
+  text-indent: 0;
+  color: var(--paper);
+  background: var(--accent);
+}
+
+/* ---- Kørslen ---- */
+.asy-run {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-width: 0;
+}
+
+.asy-field {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.asy-field-name {
+  font-size: 0.75rem;
+  color: var(--ink-2);
+}
+.asy-field-box {
+  flex: 1;
+  max-width: 11rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 3px;
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  font-size: 0.8125rem;
+}
+.asy-field-box code {
+  font-size: 0.75rem;
+}
+.asy-field-sym {
+  color: var(--accent);
+}
+
+.asy-lanes {
+  display: grid;
+  grid-template-columns: 4.25rem minmax(0, 1fr);
+  align-items: center;
+  row-gap: 0.4rem;
+}
+.asy-lane-name {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--ink-2);
+}
+
+.asy-track {
+  position: relative;
+  display: flex;
+  height: 1.6rem;
+}
+.asy-track::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1px;
+  background: var(--rule-strong);
+}
+.asy-seg-slot {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-grow: 0;
+  flex-shrink: 0;
+  min-width: 0;
+}
+
+.asy-bar {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  border-radius: 3px;
+  background: var(--accent);
+  color: var(--paper);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.asy-bar span {
+  padding-left: 0.4rem;
+}
+.asy-free {
+  width: calc(100% - 4px);
+  height: 100%;
+  margin-left: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  outline: 1.5px dashed var(--accent-mid);
+  outline-offset: -1.5px;
+  background: var(--paper-2);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+.asy-cont-slot {
+  padding-left: 2px;
+}
+
+.asy-http {
+  height: 70%;
+  border-radius: 3px;
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1px var(--accent-mid);
+}
+.asy-http-end {
+  padding-left: 0.3rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--accent);
+  white-space: nowrap;
+}
+.asy-http-end span {
+  padding: 0 0.2rem;
+  background: var(--paper-2);
+}
+
+/* Task-objektet mellem banerne. */
+.asy-band {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.35rem;
+  padding: 0.15rem 0;
+}
+.asy-band-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.asy-task-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+.asy-task-tok {
+  display: inline-flex;
+  padding: 0.18rem 0.5rem 0.2rem;
+  border-radius: 999px;
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+  transition:
+    background-color 0.35s var(--ease-out),
+    color 0.35s var(--ease-out);
+}
+.asy-task-tok code {
+  font-size: 0.75rem;
+  background: none;
+  padding: 0;
+  color: inherit;
+}
+.asy-task-tok[data-done] {
+  color: var(--paper);
+  background: var(--accent);
+}
+.asy-hidden-str {
+  position: absolute;
+  left: 0.5rem;
+  top: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+.asy-cont-home {
+  min-height: 1.45rem;
+  min-width: 6.5rem;
+  display: flex;
+}
+.asy-unwrap {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  min-height: 1.5rem;
+}
+.asy-unwrap-arrow {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--ink-3);
+}
+.asy-unwrap-var {
+  font-size: 0.75rem;
+}
+.asy-unwrap-slot {
+  display: flex;
+  min-width: 3.5rem;
+}
+
+.asy-note {
+  grid-column: 1 / -1;
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.8125rem;
+  color: var(--ink-2);
+}
+.asy-note code {
+  font-size: 0.75rem;
+  color: var(--ink);
+}
+
+@container (max-width: 44rem) {
+  .asy {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .asy-lanes {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 0.25rem;
+  }
+  .asy-band-name {
+    display: none;
+  }
+  .asy-lane-name {
+    margin-top: 0.2rem;
+  }
+  .asy-code {
+    font-size: 0.6875rem;
+  }
+}

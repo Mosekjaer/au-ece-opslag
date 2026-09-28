@@ -1,0 +1,406 @@
+.rr {
+  display: grid;
+  grid-template-columns: 16.5rem minmax(0, 1fr);
+  grid-template-areas:
+    'code stage'
+    'legend legend';
+  gap: 1rem 1.5rem;
+}
+
+/* ------------------------------ Kode ------------------------------ */
+.rr-code {
+  grid-area: code;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 0;
+}
+.rr-code-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  min-height: 1.5rem;
+}
+.rr-pre {
+  padding: 0.6rem 0.7rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  font-size: 0.75rem;
+  line-height: 1.5;
+  white-space: pre;
+  overflow-x: auto;
+  color: var(--ink-2);
+}
+.rr-swapline {
+  margin: 0 -0.7rem;
+  padding: 0 0.7rem;
+  color: var(--ink);
+  transition: background-color 0.35s var(--ease-out);
+}
+.rr-swapline[data-on] {
+  background: var(--accent-soft);
+}
+.rr-gap {
+  height: 0.6rem;
+}
+.rr-code-note {
+  display: flex;
+}
+
+/* ---------------------------- Scenen ------------------------------ */
+.rr-stage {
+  grid-area: stage;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.rr-layer {
+  padding: 0.6rem 0.75rem 0.75rem;
+  border-radius: var(--radius-sm);
+  box-shadow: inset 0 0 0 1px var(--rule);
+  transition: box-shadow 0.4s var(--ease-out);
+}
+.rr-layer[data-on] {
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+}
+.rr-layer-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.1rem 0.6rem;
+  margin-bottom: 0.5rem;
+}
+.rr-layer-name {
+  font-weight: 600;
+  font-size: 0.8125rem;
+}
+.rr-layer-kind {
+  font-size: 0.75rem;
+  color: var(--ink-3);
+}
+
+.rr-vdom {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 3rem minmax(0, 1fr);
+  align-items: start;
+}
+.rr-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  min-width: 0;
+}
+.rr-col-label {
+  min-height: 1rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--ink-3);
+}
+.rr-aside {
+  font-size: 0.6875rem;
+  color: var(--ink-3);
+}
+.rr-f {
+  display: flex;
+  align-items: center;
+  align-self: center;
+  padding: 1.2rem 0.35rem 0;
+}
+.rr-f .vlink {
+  min-width: 0;
+}
+.rr-fn {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+/* Træ: indrykket liste med en lodret streg fra roden. */
+.rr-tree {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.rr-el {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 0.45rem;
+  min-width: 0;
+  padding: 0.22rem 0.5rem;
+  border-radius: 3px;
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out),
+    color 0.35s var(--ease-out);
+}
+.rr-el[data-depth='1'] {
+  margin-left: 1rem;
+  position: relative;
+}
+.rr-el[data-depth='1']::before {
+  content: '';
+  position: absolute;
+  left: -0.6rem;
+  top: -3px;
+  bottom: 50%;
+  width: 0.5rem;
+  border-left: 1px solid var(--rule-strong);
+  border-bottom: 1px solid var(--rule-strong);
+}
+.rr-el-name {
+  font-size: 0.75rem;
+}
+.rr-tree[data-kind='html'] .rr-el-name {
+  color: var(--ink-2);
+}
+.rr-el-text {
+  font-size: 0.75rem;
+  color: var(--ink-2);
+  overflow-wrap: anywhere;
+}
+.rr-el[data-tone='focus'] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.rr-el[data-tone='focus'] .rr-el-text {
+  color: var(--accent);
+  font-weight: 600;
+}
+.rr-el[data-tone='muted'] {
+  background: transparent;
+  color: var(--ink-3);
+  box-shadow: inset 0 0 0 1px var(--rule);
+}
+.rr-el[data-tone='muted'] .rr-el-text {
+  color: var(--ink-3);
+}
+.rr-el[data-tone='ghost'] {
+  background: transparent;
+  box-shadow: none;
+  outline: 1px dashed var(--rule-strong);
+  outline-offset: -1px;
+}
+.rr-tree .rr-el[data-tone='ghost'] > * {
+  color: transparent;
+}
+.rr-el[data-tone='ghost']::before {
+  border-color: var(--rule);
+}
+
+/* ------------------------------ Bånd ------------------------------ */
+.rr-band {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 3rem minmax(0, 1fr);
+  align-items: center;
+  min-height: 3.6rem;
+  padding: 0.4rem 0.75rem;
+}
+.rr-band-left {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 1rem;
+}
+.rr-band-right {
+  grid-column: 3;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.rr-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15rem;
+}
+.rr-band .vlink.is-v {
+  height: 2.6rem;
+  min-height: 2.6rem;
+}
+.rr-arrow-label {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: var(--ink-3);
+  line-height: 1.2;
+}
+.rr-diff {
+  display: flex;
+  flex-direction: column;
+  gap: 0.05rem;
+  padding: 0.35rem 0.6rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.rr-diff[data-tone='focus'] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.rr-diff-name {
+  font-weight: 600;
+  font-size: 0.8125rem;
+}
+.rr-diff-sub {
+  font-size: 0.6875rem;
+  line-height: 1.3;
+  color: var(--ink-2);
+}
+.rr-diff-sub code {
+  font-size: 0.6875rem;
+}
+
+/* ------------------------------- DOM ------------------------------ */
+.rr-dom {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 3rem minmax(0, 1fr);
+  align-items: start;
+}
+.rr-dom > .rr-tree {
+  grid-column: 3;
+}
+.rr-screen {
+  min-height: 5.2rem;
+  padding: 0.55rem 0.7rem;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  outline: 1px dashed var(--rule-strong);
+  outline-offset: -1px;
+  transition: background-color 0.35s var(--ease-out);
+}
+.rr-screen[data-on] {
+  background: var(--paper);
+  outline: none;
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+}
+.rr-screen-body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.45rem;
+}
+.rr-screen-h1 {
+  font-weight: 650;
+  font-size: 0.9375rem;
+  line-height: 1.2;
+}
+.rr-screen-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+}
+.rr-screen-btn {
+  display: inline-block;
+  text-align: center;
+  padding: 0.12rem 0.5rem;
+  border-radius: 3px;
+  font-size: 0.75rem;
+  background: var(--paper-2);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.rr-screen-btn[data-changed] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.rr-click {
+  display: inline-flex;
+  min-height: 1.4rem;
+}
+
+/* ----------------------------- Legende ---------------------------- */
+.rr-legend {
+  grid-area: legend;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1.25rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.8125rem;
+  color: var(--ink-2);
+}
+.rr-legend li::before {
+  content: '·';
+  margin-right: 0.4rem;
+  color: var(--accent);
+  font-weight: 700;
+}
+.rr-legend .rr-formula::before {
+  content: none;
+}
+.rr-formula code {
+  font-weight: 600;
+  color: var(--accent);
+}
+
+@container (max-width: 44rem) {
+  .rr {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: 'code' 'stage' 'legend';
+  }
+}
+
+@container (max-width: 30rem) {
+  .rr-vdom,
+  .rr-band,
+  .rr-dom {
+    grid-template-columns: minmax(0, 1fr) 1.75rem minmax(0, 1fr);
+  }
+  .rr-band {
+    padding: 0;
+  }
+  .rr-layer {
+    padding: 0.5rem;
+  }
+  .rr-f {
+    padding: 1.2rem 0.15rem 0;
+  }
+  .rr-el[data-depth='1'] {
+    margin-left: 0.6rem;
+  }
+  .rr-el[data-depth='1']::before {
+    left: -0.45rem;
+    width: 0.4rem;
+  }
+  .rr-el {
+    padding: 0.2rem 0.35rem;
+  }
+  .rr-el-name,
+  .rr-el-text {
+    font-size: 0.6875rem;
+  }
+  .rr-band-right {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+  }
+  .rr-dom {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .rr-dom > .rr-tree {
+    grid-column: 1;
+    margin-top: 0.5rem;
+  }
+  .rr-screen {
+    min-height: 4.8rem;
+  }
+}
+
+@container (max-width: 22rem) {
+  .rr-pre {
+    font-size: 0.6875rem;
+    padding: 0.5rem;
+  }
+}

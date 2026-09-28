@@ -1,0 +1,350 @@
+.ci {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: 1rem;
+  align-items: start;
+}
+
+.ci-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-width: 0;
+  padding: 0.8rem 0.9rem 0.9rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  transition: opacity 0.35s var(--ease-out);
+}
+.ci-panel[data-dim] {
+  opacity: 0.55;
+}
+
+.ci-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.2rem 0.6rem;
+}
+.ci-name {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+.ci-sub,
+.ci-sdesc {
+  font-size: 0.75rem;
+  line-height: 1.35;
+  color: var(--ink-3);
+}
+.ci-sdesc code {
+  font-size: 0.6875rem;
+  hyphens: manual;
+}
+
+.ci-code {
+  display: block;
+  font-size: 0.75rem;
+  line-height: 1.45;
+  white-space: normal;
+  hyphens: manual;
+  color: var(--ink-2);
+}
+
+/* Det tegnede formularfelt. */
+.ci-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  flex: none;
+}
+.ci-form-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 1.6rem;
+}
+.ci-label {
+  font-size: 0.8125rem;
+}
+.ci-input {
+  display: inline-flex;
+  align-items: center;
+  width: 7.5rem;
+  height: 1.75rem;
+  padding: 0 0.45rem;
+  border-radius: 3px;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--ink-3);
+  transition: box-shadow 0.35s var(--ease-out);
+}
+.ci-input[data-hot] {
+  box-shadow:
+    inset 0 0 0 1.5px var(--accent),
+    0 0 0 3px var(--accent-soft);
+}
+.ci-input-sm {
+  width: auto;
+  height: 1.5rem;
+  font-size: 0.75rem;
+}
+.ci-caret {
+  width: 1px;
+  height: 1rem;
+  margin-left: 1px;
+  background: var(--ink-2);
+}
+.ci-val {
+  position: relative;
+  display: inline-flex;
+}
+.ci-val > span {
+  display: inline-block;
+}
+.ci-submit {
+  display: inline-flex;
+  align-items: center;
+  height: 1.5rem;
+  padding: 0 0.55rem;
+  border-radius: 3px;
+  font-size: 0.75rem;
+  color: var(--ink-2);
+  background: var(--paper-2);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+}
+
+/* Felt ← value ← state. */
+.ci-top {
+  align-items: center;
+  gap: 0.6rem;
+}
+.ci-top > .vlink {
+  min-width: 3rem;
+  max-width: 7rem;
+}
+.ci-state {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.45rem 0.6rem;
+  border-radius: 3px;
+  background: var(--paper-2);
+  box-shadow: inset 0 0 0 1px var(--rule);
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.ci-state[data-hot] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1px var(--accent-mid);
+}
+.ci-state code {
+  font-size: 0.8125rem;
+  white-space: nowrap;
+}
+.ci-str {
+  display: inline-flex;
+  min-width: 1.6em;
+}
+
+/* Løkken: fem stationer og en returbue i venstre side. */
+.ci-ring {
+  position: relative;
+  padding-left: 1.1rem;
+}
+.ci-loop {
+  position: absolute;
+  left: 0;
+  top: 1.1rem;
+  bottom: 1.1rem;
+  width: 0.7rem;
+  border: 1.5px solid var(--accent);
+  border-right: 0;
+  border-radius: 6px 0 0 6px;
+}
+.ci-loop::after {
+  content: '';
+  position: absolute;
+  right: -2px;
+  top: -4.75px;
+  border-left: 7px solid var(--accent);
+  border-top: 4.25px solid transparent;
+  border-bottom: 4.25px solid transparent;
+}
+.ci-stations {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.ci-station {
+  display: grid;
+  grid-template-columns: 1.4rem minmax(0, 1fr) 3rem;
+  align-items: center;
+  column-gap: 0.5rem;
+  min-height: 2.6rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 3px;
+  background: var(--paper-2);
+  box-shadow: inset 0 0 0 1px var(--rule);
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.ci-station[data-tone='focus'] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.ci-station[data-tone='ok'] {
+  box-shadow: inset 0 0 0 1px var(--accent-mid);
+}
+.ci-num {
+  display: inline-grid;
+  place-items: center;
+  width: 1.3rem;
+  height: 1.3rem;
+  border-radius: 999px;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--ink-3);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  transition:
+    color 0.35s var(--ease-out),
+    background-color 0.35s var(--ease-out);
+}
+.ci-station[data-tone='focus'] .ci-num {
+  color: var(--paper);
+  background: var(--accent);
+  box-shadow: none;
+}
+.ci-station[data-tone='ok'] .ci-num {
+  color: var(--accent);
+  box-shadow: inset 0 0 0 1px var(--accent-mid);
+}
+.ci-what {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.05rem 0.5rem;
+  min-width: 0;
+}
+.ci-sname {
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+.ci-sname code {
+  font-size: 0.75rem;
+}
+.ci-slot {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* HexColor. */
+.ci-hex {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding-top: 0.65rem;
+  border-top: 1px solid var(--rule);
+}
+.ci-hex-head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+.ci-hex-head code {
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+.ci-hex-flow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.45rem;
+}
+.ci-hex-flow code {
+  font-size: 0.75rem;
+}
+.ci-hex-in {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+.ci-x {
+  color: var(--neg);
+  text-decoration: line-through;
+}
+.ci-arrow {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* Uncontrolled: submit-forløbet. */
+.ci-submitflow {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  padding-top: 0.65rem;
+  border-top: 1px solid var(--rule);
+}
+.ci-submitflow li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.25rem 0.45rem;
+}
+.ci-submitflow code {
+  font-size: 0.75rem;
+  hyphens: manual;
+}
+.ci-blocked {
+  align-items: center;
+}
+.ci-reload {
+  font-size: 0.75rem;
+  color: var(--ink-3);
+  text-decoration: line-through;
+  text-decoration-color: var(--neg);
+}
+
+@container (max-width: 40rem) {
+  .ci {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .ci-panel {
+    padding: 0.7rem 0.7rem 0.8rem;
+  }
+  .ci-top > .vlink {
+    max-width: none;
+  }
+  .ci-ring {
+    padding-left: 0.95rem;
+  }
+  .ci-station {
+    grid-template-columns: 1.4rem minmax(0, 1fr) 2.6rem;
+    padding: 0.25rem 0.4rem;
+  }
+}
+
+.ci-pair {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.45rem;
+}
+.ci-stops {
+  font-size: 0.75rem;
+  color: var(--ink-3);
+}
+.ci-verdict {
+  min-height: 1.4rem;
+  padding-left: 0.6rem;
+  border-left: 2px solid var(--accent);
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: var(--ink-2);
+}

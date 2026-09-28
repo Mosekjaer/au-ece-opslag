@@ -1,0 +1,174 @@
+.em {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+  align-items: stretch;
+}
+
+.em-case {
+  display: grid;
+  grid-template-rows: auto auto 1fr auto auto;
+  grid-template-areas: 'head' 'strip' 'top' 'bottom' 'rule';
+  gap: 0.6rem;
+  min-width: 0;
+  padding: 0.75rem;
+  border-radius: var(--radius);
+  box-shadow: inset 0 0 0 1px var(--rule);
+  transition:
+    background-color 0.4s var(--ease-out),
+    box-shadow 0.4s var(--ease-out);
+}
+.em-case[data-active] {
+  box-shadow: inset 0 0 0 1.5px var(--accent-mid);
+}
+
+.em-head {
+  grid-area: head;
+}
+.em-kind {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--ink-3);
+  transition: color 0.35s var(--ease-out);
+}
+.em-case[data-active] .em-kind {
+  color: var(--accent);
+}
+
+/* Chen-stump. Fast bredde; skaleres kun ned. */
+.em-strip {
+  grid-area: strip;
+  display: block;
+  max-width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.em-strip line {
+  stroke: var(--rule-strong);
+  stroke-width: 1.5;
+}
+.em-strip rect,
+.em-strip polygon {
+  fill: var(--paper);
+  stroke: var(--ink-3);
+  stroke-width: 1.3;
+}
+.em-strip text {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  text-anchor: middle;
+  dominant-baseline: central;
+  fill: var(--ink-2);
+}
+.em-strip .em-ent {
+  font-weight: 600;
+  fill: var(--ink);
+}
+.em-strip .em-card {
+  font-weight: 700;
+  fill: var(--accent);
+}
+
+.em-top {
+  grid-area: top;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+.em-bottom {
+  grid-area: bottom;
+  padding-top: 0.35rem;
+  border-top: 1px dashed var(--rule);
+}
+.em-case .vtable {
+  overflow-x: auto;
+}
+.em-top .vtable {
+  flex: 0 1 auto;
+}
+.em-bottom .vtable table {
+  width: auto;
+  min-width: 60%;
+}
+
+/* Kolonnenavne er identifikatorer: mono. Et token i overskriften fylder
+   præcis som teksten, så tabellen ikke ændrer mål, når nøglen lander. */
+.em .vtable th {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 0.6875rem;
+  font-variant-ligatures: none;
+}
+.em .vtable th .vtoken {
+  font-size: inherit;
+  line-height: inherit;
+  padding: 0 0.3rem;
+  margin: 0 -0.3rem;
+}
+.em .vtable th.is-pk .vtoken {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.em .vtable th.is-fk .vtoken {
+  font-style: italic;
+}
+.em-ghost {
+  visibility: hidden;
+}
+.em-note {
+  font-family: var(--font-mono);
+  opacity: 0;
+  transition: opacity 0.35s var(--ease-out);
+}
+.em-note[data-on='true'] {
+  opacity: 1;
+}
+
+.em-rule {
+  grid-area: rule;
+  min-height: 2.6em;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--accent);
+}
+
+/* Mellembredde: hvert tilfælde på sin egen række, Chen til venstre. */
+@container (max-width: 50rem) {
+  .em {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.75rem;
+  }
+  .em-case {
+    grid-template-columns: 252px minmax(0, 1fr);
+    grid-template-rows: auto auto 1fr auto;
+    grid-template-areas:
+      'head top'
+      'strip top'
+      'strip bottom'
+      'rule bottom';
+    column-gap: 1.25rem;
+  }
+  .em-rule {
+    min-height: 0;
+  }
+}
+
+@container (max-width: 40rem) {
+  .em-case {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: none;
+    grid-template-areas: 'head' 'strip' 'top' 'bottom' 'rule';
+    /* Uden sideramme, så Chen-stumpen får hele bredden. */
+    padding: 0.6rem 0 0.25rem;
+    border-radius: 0;
+    box-shadow: inset 0 1px 0 var(--rule);
+  }
+  .em-case[data-active] {
+    box-shadow: inset 0 1.5px 0 var(--accent);
+  }
+  .em-rule {
+    min-height: 2.6em;
+  }
+}

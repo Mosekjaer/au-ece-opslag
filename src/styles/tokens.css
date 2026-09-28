@@ -1,0 +1,199 @@
+/* ------------------------------------------------------------------
+   Designtokens. Alt visuelt på siden udledes herfra.
+   Farver: varmt papir og blæk. Hvert fag har én accent, intet andet.
+   ------------------------------------------------------------------ */
+
+:root {
+  /* Typefamilier */
+  --font-text: 'Source Serif 4 Variable', 'Source Serif 4', Georgia, serif;
+  --font-ui: 'IBM Plex Sans', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', monospace;
+
+  /* Typeskala. Tre niveauer med reel kontrast: fag > emne > begreb.
+     Brødtekst 18 px; resten er udledt, ikke en ratio kørt mekanisk. */
+  --fs-course: clamp(2.75rem, 1.9rem + 2.6vw, 4.25rem); /* 44 → 68 */
+  --fs-topic: clamp(2.125rem, 1.7rem + 1.4vw, 3rem); /* 34 → 48 */
+  --fs-concept: 1.5rem; /* 24 */
+  --fs-lede: clamp(1.1875rem, 1.1rem + 0.35vw, 1.375rem); /* 19 → 22 */
+  --fs-body: 1.125rem; /* 18 */
+  --fs-small: 0.9375rem; /* 15 */
+  --fs-label: 0.8125rem; /* 13 */
+  --fs-code: 0.875rem; /* 14 i mono ≈ 17 i serif optisk */
+
+  --lh-tight: 1.06;
+  --lh-head: 1.18;
+  --lh-body: 1.65;
+  --lh-ui: 1.4;
+
+  /* Rum. Én skala; alt afstands-arbejde sker med disse. */
+  --s-1: 0.25rem;
+  --s-2: 0.5rem;
+  --s-3: 0.75rem;
+  --s-4: 1rem;
+  --s-5: 1.5rem;
+  --s-6: 2rem;
+  --s-7: 3rem;
+  --s-8: 4rem;
+  --s-9: 6rem;
+  --s-10: 8rem;
+
+  /* Grid. Tekstsøjle, margen og mellemrum. Visualiseringer spænder
+     tekst + mellemrum + margen. */
+  --col-text: 42rem;
+  --col-gap: 2.5rem;
+  --col-margin: 13rem;
+  --col-wide: calc(var(--col-text) + var(--col-gap) + var(--col-margin));
+  --sidebar: 17rem;
+
+  --radius: 6px;
+  --radius-sm: 4px;
+
+  /* Easing med vægt. */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* Lys (standard) */
+  --paper: #f6f4ee;
+  --paper-2: #efece3;
+  --paper-3: #e6e2d7;
+  --ink: #1c1b18;
+  --ink-2: #47443e;
+  --ink-3: #7a756b;
+  --rule: #dcd6ca;
+  --rule-strong: #c4bdae;
+  --neg: #b42318;
+  --neg-soft: color-mix(in oklab, var(--neg) 10%, var(--paper));
+  --shadow: 0 1px 0 rgb(0 0 0 / 0.03), 0 8px 24px -12px rgb(40 30 10 / 0.18);
+
+  /* Fagaccenter */
+  --bad: #1d6a72;
+  --fed: #b04a2f;
+  --swt: #4a7638;
+  --swd: #9a6a0e;
+  --oop: #6a4c93;
+  --pla: #8a3b5c;
+  --sts: #5b6b1f;
+  --doa: #1f5f8b;
+  --knp: #4f5b62;
+  --sys: #4d5a8c;
+  --projekt: #6b5b3e;
+
+  /* Kodefarver (bruges af Shiki via css-variabler) */
+  --code-foreground: #2a2824;
+  --code-background: transparent;
+  --code-token-keyword: #8a3b12;
+  --code-token-string: #3f6b2a;
+  --code-token-string-expression: #3f6b2a;
+  --code-token-comment: #8b857a;
+  --code-token-constant: #1f5f8b;
+  --code-token-function: #1f4e79;
+  --code-token-parameter: #6b4c1a;
+  --code-token-punctuation: #6a655b;
+  --code-token-link: #1d6a72;
+  --code-token-inserted: #3f6b2a;
+  --code-token-deleted: #b42318;
+  --code-token-changed: #9a6a0e;
+}
+
+/* Brede skærme: tekstsøjlen beholder sin linjelængde; margen og mellemrum
+   vokser, så figurerne (der spænder hele bredden) får mere plads. */
+@media (min-width: 100rem) {
+  :root {
+    --col-gap: 3.5rem;
+    --col-margin: 16rem;
+  }
+}
+@media (min-width: 125rem) {
+  :root {
+    --col-gap: 4.5rem;
+    --col-margin: 19rem;
+  }
+}
+
+/* Mørk. Ikke sort: dyb varm grå, så teksten ikke gløder ved sene aftener. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --paper: #171614;
+    --paper-2: #1f1e1b;
+    --paper-3: #292724;
+    --ink: #e8e4da;
+    --ink-2: #bdb7ab;
+    --ink-3: #8c867b;
+    --rule: #33302b;
+    --rule-strong: #47433c;
+    --neg: #ef7b6e;
+    --shadow: 0 1px 0 rgb(0 0 0 / 0.2), 0 10px 30px -14px rgb(0 0 0 / 0.7);
+    --bad: #6fb3b8;
+    --fed: #e38b6f;
+    --swt: #97bf82;
+    --swd: #d9aa55;
+    --oop: #b39ddb;
+    --pla: #e08fb0;
+    --sts: #bccb6f;
+    --doa: #8ec1e0;
+    --knp: #aab6bd;
+    --sys: #a3b0e0;
+    --projekt: #cbb896;
+    --code-foreground: #e2ddd2;
+    --code-token-keyword: #e3a27f;
+    --code-token-string: #a9c98f;
+    --code-token-string-expression: #a9c98f;
+    --code-token-comment: #8a847a;
+    --code-token-constant: #8ec1e0;
+    --code-token-function: #9fc3e8;
+    --code-token-parameter: #dcc08f;
+    --code-token-punctuation: #a39d91;
+    --code-token-link: #6fb3b8;
+  }
+}
+:root[data-theme='dark'] {
+  --paper: #171614;
+  --paper-2: #1f1e1b;
+  --paper-3: #292724;
+  --ink: #e8e4da;
+  --ink-2: #bdb7ab;
+  --ink-3: #8c867b;
+  --rule: #33302b;
+  --rule-strong: #47433c;
+  --neg: #ef7b6e;
+  --shadow: 0 1px 0 rgb(0 0 0 / 0.2), 0 10px 30px -14px rgb(0 0 0 / 0.7);
+  --bad: #6fb3b8;
+  --fed: #e38b6f;
+  --swt: #97bf82;
+  --swd: #d9aa55;
+  --oop: #b39ddb;
+  --pla: #e08fb0;
+  --sts: #bccb6f;
+  --doa: #8ec1e0;
+  --knp: #aab6bd;
+  --sys: #a3b0e0;
+  --projekt: #cbb896;
+  --code-foreground: #e2ddd2;
+  --code-token-keyword: #e3a27f;
+  --code-token-string: #a9c98f;
+  --code-token-string-expression: #a9c98f;
+  --code-token-comment: #8a847a;
+  --code-token-constant: #8ec1e0;
+  --code-token-function: #9fc3e8;
+  --code-token-parameter: #dcc08f;
+  --code-token-punctuation: #a39d91;
+  --code-token-link: #6fb3b8;
+}
+
+/* Accent pr. fag. Sættes på et omsluttende element med data-course. */
+[data-course] {
+  --accent-soft: color-mix(in oklab, var(--accent) 11%, var(--paper));
+  --accent-mid: color-mix(in oklab, var(--accent) 45%, var(--paper));
+}
+[data-course='bad'] { --accent: var(--bad); }
+[data-course='fed'] { --accent: var(--fed); }
+[data-course='swt'] { --accent: var(--swt); }
+[data-course='swd'] { --accent: var(--swd); }
+[data-course='oop'] { --accent: var(--oop); }
+[data-course='pla'] { --accent: var(--pla); }
+[data-course='sts'] { --accent: var(--sts); }
+[data-course='doa'] { --accent: var(--doa); }
+[data-course='knp'] { --accent: var(--knp); }
+[data-course='sys'] { --accent: var(--sys); }
+[data-course='projekt'] { --accent: var(--projekt); }
+:root { --accent: var(--ink-2); --accent-soft: var(--paper-2); --accent-mid: var(--rule-strong); }

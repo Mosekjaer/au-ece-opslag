@@ -1,0 +1,206 @@
+.gl {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.gl-main {
+  display: grid;
+  grid-template-columns: minmax(0, 19rem) minmax(0, 1fr);
+  gap: 1rem 2rem;
+  align-items: start;
+}
+
+/* Rammen: siden, med kolonneindeks over og rækkeindeks til venstre. */
+.gl-stage {
+  padding: 1.2rem 0 0 1.3rem;
+}
+.gl-frame {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  width: 100%;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+}
+.gl-extent {
+  position: absolute;
+  top: -3px;
+  bottom: -3px;
+  border-radius: 3px;
+  outline: 1px dashed transparent;
+  transition: outline-color 0.35s var(--ease-out);
+}
+.gl-extent[data-on] {
+  outline-color: var(--accent-mid);
+}
+.gl-slot,
+.gl-hatch,
+.gl-lcd,
+.gl-btn {
+  position: absolute;
+}
+.gl-slot {
+  box-shadow: inset 0 0 0 1px var(--rule);
+}
+.gl-hatch {
+  background: repeating-linear-gradient(135deg, var(--rule) 0 1px, transparent 1px 7px);
+}
+
+.gl-btn {
+  display: grid;
+  place-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--ink);
+  background: var(--paper-3);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  transition:
+    background-color 0.35s var(--ease-out),
+    color 0.35s var(--ease-out);
+}
+.gl-btn[data-on] {
+  color: var(--paper);
+  background: var(--accent);
+  box-shadow: none;
+}
+
+.gl-lcd {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 0.25rem 0.45rem;
+  overflow: hidden;
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1px var(--accent-mid);
+  transition: box-shadow 0.35s var(--ease-out);
+}
+.gl-lcd[data-on] {
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.gl-lcd-text {
+  font-family: var(--font-mono);
+  font-size: 1.125rem;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+}
+
+.gl-idx {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-3);
+  transition: color 0.35s var(--ease-out);
+}
+.gl-idx[data-on] {
+  color: var(--accent);
+}
+.gl-idx-c {
+  top: -1.2rem;
+  height: 1rem;
+}
+.gl-idx-r {
+  left: -1.3rem;
+  width: 1rem;
+}
+
+/* Kodekortet. */
+.gl-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 0.6rem 0.8rem 0.7rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  margin-top: 1.2rem;
+}
+.gl-card-name {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--ink-2);
+}
+.gl-code {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.5;
+  font-variant-ligatures: none;
+  color: var(--ink-2);
+}
+.gl-ln {
+  position: relative;
+  padding-left: calc((var(--i, 0) + 2) * 1ch);
+  text-indent: -2ch;
+  white-space: pre-wrap;
+  hyphens: manual;
+  overflow-wrap: normal;
+}
+.gl-hl {
+  position: absolute;
+  inset: 0 -0.4rem;
+  border-radius: 2px;
+  background: var(--accent-soft);
+  box-shadow: inset 2px 0 0 var(--accent);
+}
+.gl-t,
+.gl-swap {
+  position: relative;
+}
+.gl-close[data-off] {
+  opacity: 0;
+}
+.gl-key {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* Legenden bygges op, efterhånden som hver slags spor bliver brugt. */
+.gl-legend {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.4rem 1.5rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--rule);
+}
+.gl-legend li {
+  display: grid;
+  grid-template-columns: 2.75rem minmax(0, 1fr);
+  align-items: baseline;
+  gap: 0.5rem;
+  font-size: 0.8125rem;
+  color: var(--ink-2);
+}
+.gl-legend li code {
+  font-size: 0.75rem;
+}
+.gl-legend-code {
+  justify-self: start;
+  padding: 0.05rem 0.4rem;
+  border-radius: 3px;
+  font-weight: 600;
+  color: var(--accent);
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1px var(--accent-mid);
+}
+
+@container (max-width: 40rem) {
+  .gl-main {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .gl-stage {
+    max-width: 19rem;
+  }
+  .gl-card {
+    margin-top: 0;
+  }
+  .gl-legend {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
