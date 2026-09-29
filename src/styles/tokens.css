@@ -77,6 +77,10 @@
   --knp: #4f5b62;
   --sys: #4d5a8c;
   --projekt: #6b5b3e;
+  --oprg: #7b3f6e;
+  --ide: #2e7a5c;
+  --msys: #8d4a1c;
+  --lmek: #3b4f9e;
 
   /* Kodefarver (bruges af Shiki via css-variabler) */
   --code-foreground: #2a2824;
@@ -134,6 +138,10 @@
     --knp: #aab6bd;
     --sys: #a3b0e0;
     --projekt: #cbb896;
+    --oprg: #d59ac4;
+    --ide: #7fcaa8;
+    --msys: #e0a070;
+    --lmek: #9aa9e8;
     --code-foreground: #e2ddd2;
     --code-token-keyword: #e3a27f;
     --code-token-string: #a9c98f;
@@ -168,6 +176,10 @@
   --knp: #aab6bd;
   --sys: #a3b0e0;
   --projekt: #cbb896;
+  --oprg: #d59ac4;
+  --ide: #7fcaa8;
+  --msys: #e0a070;
+  --lmek: #9aa9e8;
   --code-foreground: #e2ddd2;
   --code-token-keyword: #e3a27f;
   --code-token-string: #a9c98f;
@@ -196,4 +208,8 @@
 [data-course='knp'] { --accent: var(--knp); }
 [data-course='sys'] { --accent: var(--sys); }
 [data-course='projekt'] { --accent: var(--projekt); }
+[data-course='oprg'] { --accent: var(--oprg); }
+[data-course='ide'] { --accent: var(--ide); }
+[data-course='msys'] { --accent: var(--msys); }
+[data-course='lmek'] { --accent: var(--lmek); }
 :root { --accent: var(--ink-2); --accent-soft: var(--paper-2); --accent-mid: var(--rule-strong); }

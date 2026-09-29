@@ -10,9 +10,13 @@ import { doa } from './doa'
 import { sys } from './sys'
 import { knp } from './knp'
 import { projekt } from './projekt'
+import { oprg } from './oprg'
+import { ide } from './ide'
+import { msys } from './msys'
+import { lmek } from './lmek'
 
 /* Registret over fag. Et nyt fag = én datafil + én linje her. */
-export const courses: Course[] = [projekt, bad, fed, swt, swd, sys, knp, doa, oop, pla, sts]
+export const courses: Course[] = [projekt, bad, fed, swt, swd, sys, knp, doa, oop, pla, sts, oprg, ide, msys, lmek]
 
 /** Fag grupperet efter semester, nyeste først. Fag uden semester (på tværs) står øverst. */
 export function coursesBySemester(): { semester?: number; courses: Course[] }[] {

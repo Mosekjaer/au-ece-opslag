@@ -1,7 +1,7 @@
 /* Indholdsmodellen. Et fag er én datafil, der eksporterer et `Course`.
    Layout og komponenter læser kun disse typer. */
 
-export type CourseId = 'bad' | 'fed' | 'swt' | 'swd' | 'oop' | 'pla' | 'sts' | 'doa' | 'knp' | 'sys' | 'projekt'
+export type CourseId = 'bad' | 'fed' | 'swt' | 'swd' | 'oop' | 'pla' | 'sts' | 'doa' | 'knp' | 'sys' | 'projekt' | 'oprg' | 'ide' | 'msys' | 'lmek'
 
 /** Henvisning til kursusmaterialet. `path` er relativ til sem4-mappen. */
 export interface SourceRef {
