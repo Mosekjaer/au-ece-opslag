@@ -1,0 +1,137 @@
+/* Prim og Kruskal side om side på samme graf (L11 s. 11–34). */
+.dpk {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem 2rem;
+  align-items: start;
+}
+.dpk-side {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  min-width: 0;
+}
+.dpk-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.15rem 0.6rem;
+}
+.dpk-name {
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: var(--ink);
+}
+.dpk-sub {
+  font-size: 0.75rem;
+  color: var(--ink-2);
+}
+.dpk-graph {
+  margin-block: 0.5rem 0.2rem;
+}
+/* viewBox 338 bred: lidt større tekst, så vægtene er ≥ 11 px ved 375. */
+.dpk-graph .vg-w {
+  font-size: 13px;
+}
+.dpk-graph .vg-label {
+  font-size: 14px;
+}
+
+.dpk-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.dpk-chip {
+  display: inline-flex;
+  align-items: center;
+  height: 1.6rem;
+  padding: 0 0.45rem;
+  border-radius: 3px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-variant-ligatures: none;
+  white-space: nowrap;
+  color: var(--ink);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out),
+    color 0.35s var(--ease-out);
+}
+.dpk-chip b {
+  font-weight: 700;
+}
+.dpk-chip sup {
+  font-size: 0.6875rem;
+  line-height: 0;
+}
+.dpk-chip[data-tone='ghost'] {
+  background: transparent;
+  box-shadow: none;
+  outline: 1px dashed var(--rule-strong);
+  outline-offset: -1px;
+}
+.dpk-chip[data-tone='todo'] {
+  color: var(--ink-2);
+}
+.dpk-chip[data-tone='skip'] {
+  color: var(--ink-3);
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--rule);
+}
+.dpk-chip[data-tone='ok'] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1px var(--accent-mid);
+}
+.dpk-chip[data-tone='now'],
+.dpk-chip[data-tone='diff'] {
+  color: var(--paper);
+  background: var(--accent);
+  box-shadow: none;
+}
+.dpk-chip[data-tone='rej'] {
+  color: var(--neg);
+  background: var(--neg-soft);
+  box-shadow: inset 0 0 0 1px var(--neg);
+  text-decoration: line-through;
+}
+
+.dpk-sum {
+  font-size: 0.8125rem;
+  color: var(--ink-2);
+}
+.dpk-sum strong {
+  color: var(--ink);
+  font-size: 0.875rem;
+}
+.dpk-done {
+  font-size: 0.75rem;
+  color: var(--ink-2);
+}
+
+.dpk-verdict {
+  grid-column: 1 / -1;
+  margin: 0;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+.dpk-verdict strong {
+  color: var(--accent);
+}
+.dpk-own {
+  font-size: 0.75rem;
+  font-style: italic;
+  color: var(--ink-3);
+}
+
+@container (max-width: 40rem) {
+  .dpk {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

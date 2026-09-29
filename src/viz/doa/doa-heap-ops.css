@@ -1,0 +1,47 @@
+/* doa-heap-ops: træet til venstre, arrayet til højre; stables på smalle skærme. */
+.dho {
+  display: grid;
+  grid-template-columns: minmax(0, 22rem) minmax(0, 1fr);
+  gap: 1rem 2rem;
+  align-items: center;
+}
+
+.dho-tree {
+  min-width: 0;
+}
+
+.dho-side {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  min-width: 0;
+}
+
+.dho-op code {
+  font-size: 0.75rem;
+}
+
+.dho-line {
+  min-height: 2.4rem;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--ink-2);
+}
+.dho-line code {
+  font-size: 0.75rem;
+}
+
+@container (max-width: 40rem) {
+  .dho {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  /* Otte celler skal kunne stå uden vandret scroll ved 375 px. */
+  .dho .varr-grid {
+    width: 100%;
+  }
+  .dho-tree {
+    max-width: 22rem;
+    width: 100%;
+    margin: 0 auto;
+  }
+}

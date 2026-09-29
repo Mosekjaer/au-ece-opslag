@@ -1,0 +1,120 @@
+/* Stakken til venstre, array-køen til højre. */
+.dsq {
+  display: grid;
+  grid-template-columns: minmax(0, 11rem) minmax(0, 1fr);
+  gap: 1.5rem 2.5rem;
+  align-items: start;
+}
+
+.dsq-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  min-width: 0;
+}
+
+/* Stakken */
+.dsq-stack-wrap {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+.dsq-stack {
+  display: grid;
+  gap: 3px;
+  width: 3.4rem;
+  padding: 3px;
+  border: 1.5px solid var(--rule-strong);
+  border-top: none;
+  border-radius: 0 0 4px 4px;
+}
+.dsq-slot {
+  display: grid;
+  height: 2rem;
+  border-radius: 3px;
+  outline: 1px dashed var(--rule);
+  outline-offset: -1px;
+}
+.dsq-item {
+  display: grid;
+  place-items: center;
+  border-radius: 3px;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+}
+.dsq-item[data-tone='focus'] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.dsq-top {
+  margin-top: 0.45rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--accent);
+  white-space: nowrap;
+}
+
+/* Køens variable og kode */
+.dsq-vars {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1rem;
+}
+.dsq-vars code {
+  font-size: 0.8125rem;
+  color: var(--ink-3);
+  transition: color 0.35s var(--ease-out);
+}
+.dsq-vars[data-active] code {
+  color: var(--ink-2);
+}
+.dsq-vars code[data-now] {
+  color: var(--accent);
+  font-weight: 600;
+}
+.dsq-code code {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--ink-2);
+  overflow-wrap: anywhere;
+}
+
+/* Udskrift */
+.dsq-out {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+}
+.dsq-out-k {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--ink-3);
+}
+.dsq-out-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+.dsq-out-v {
+  display: flex;
+  gap: 0.45rem;
+  min-height: 1.2rem;
+}
+.dsq-out-v code {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+@container (max-width: 40rem) {
+  .dsq {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .dsq-stack-panel .dsq-stack-wrap {
+    justify-content: flex-start;
+  }
+}

@@ -1,0 +1,160 @@
+/* doa-growth: vækstkurver (SVG) + tabeludsnit fra L02 s. 19. */
+.dgr {
+  display: grid;
+  grid-template-columns: minmax(0, 22rem) minmax(0, 1fr);
+  gap: 1.25rem 2rem;
+  align-items: start;
+}
+
+.dgr-plot {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  min-width: 0;
+}
+.dgr-svg {
+  display: block;
+  width: 100%;
+  max-width: 22rem;
+  height: auto;
+  overflow: visible;
+}
+.dgr-grid {
+  stroke: var(--rule);
+  stroke-width: 1;
+}
+.dgr-axis {
+  stroke: var(--rule-strong);
+  stroke-width: 1.25;
+}
+.dgr-tick {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  fill: var(--ink-3);
+}
+.dgr-axt {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  font-style: italic;
+  fill: var(--ink-2);
+}
+.dgr-line {
+  fill: none;
+  stroke: var(--ink-2);
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: stroke 0.35s var(--ease-out);
+}
+.dgr-label {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  fill: var(--ink-2);
+  transition: fill 0.35s var(--ease-out);
+}
+.dgr-curve[data-tone='focus'] .dgr-line {
+  stroke: var(--accent);
+  stroke-width: 2.5;
+}
+.dgr-curve[data-tone='focus'] .dgr-label {
+  fill: var(--accent);
+}
+
+.dgr-cross {
+  margin: 0;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--ink-2);
+}
+
+.dgr-side {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 0;
+}
+.dgr-tablewrap {
+  overflow-x: auto;
+  min-width: 0;
+}
+.dgr-table {
+  border-collapse: collapse;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-variant-numeric: tabular-nums;
+  font-variant-ligatures: none;
+}
+.dgr-table th,
+.dgr-table td {
+  padding: 0.3rem 0.55rem;
+  text-align: right;
+  white-space: nowrap;
+  border-bottom: 1px solid var(--rule);
+  transition:
+    background-color 0.35s var(--ease-out),
+    color 0.35s var(--ease-out);
+}
+.dgr-table thead th {
+  font-weight: 600;
+  color: var(--ink-3);
+  border-bottom-color: var(--rule-strong);
+}
+.dgr-table thead th[data-on] {
+  color: var(--ink);
+}
+.dgr-table tbody th {
+  font-weight: 600;
+  color: var(--ink-2);
+}
+.dgr-table [data-now] {
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+.dgr-table sup {
+  font-size: 0.7em;
+  line-height: 0;
+}
+
+.dgr-foot {
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--ink-3);
+}
+
+.dgr-rank {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.4rem;
+  margin: 0.25rem 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.875rem;
+}
+.dgr-rank li {
+  display: inline-flex;
+  gap: 0.4rem;
+}
+.dgr-rank .mono {
+  font-weight: 600;
+  color: var(--ink);
+}
+.dgr-lt {
+  color: var(--ink-3);
+}
+
+@container (max-width: 40rem) {
+  .dgr {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .dgr-svg {
+    margin-inline: auto;
+  }
+  .dgr-table {
+    font-size: 0.75rem;
+  }
+  .dgr-table th,
+  .dgr-table td {
+    padding: 0.3rem 0.3rem;
+  }
+}

@@ -1,0 +1,53 @@
+/* doa-binary-search: to søgninger (L08 fundet, L12 ikke fundet) under hinanden på brede
+   skærme side om side. */
+.dbs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem 2rem;
+  align-items: start;
+}
+
+.dbs-case {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.dbs-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.2rem 0.6rem;
+}
+.dbs-arr {
+  font-size: 0.75rem;
+  color: var(--ink-2);
+  overflow-wrap: anywhere;
+}
+
+.dbs-line {
+  min-height: 1.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-variant-ligatures: none;
+  color: var(--ink);
+}
+.dbs-line strong {
+  color: var(--accent);
+}
+
+.dbs-trail {
+  font-size: 0.75rem;
+  color: var(--ink-3);
+}
+.dbs-trail .mono {
+  font-weight: 600;
+  color: var(--ink-2);
+}
+
+@container (max-width: 40rem) {
+  .dbs {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

@@ -1,0 +1,183 @@
+/* doa-loop-count: kodelisting + optællingstabel for partialsum.c. */
+.dlc {
+  display: grid;
+  grid-template-columns: minmax(0, 21rem) minmax(0, 1fr);
+  gap: 1.25rem 2rem;
+  align-items: start;
+}
+
+.dlc-code {
+  min-width: 0;
+  padding: 0.6rem 0.2rem 0.7rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule);
+}
+.dlc-file {
+  padding: 0 0.7rem 0.35rem;
+}
+.dlc-lines {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.dlc-lines li {
+  display: grid;
+  grid-template-columns: 1.6rem minmax(0, 1fr);
+  align-items: baseline;
+  min-height: 1.45rem;
+  padding: 0.05rem 0.5rem 0.05rem 0;
+  border-radius: 3px;
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.dlc-lines li[data-now] {
+  background: var(--accent-soft);
+  box-shadow: inset 2px 0 0 var(--accent);
+}
+.dlc-lines li[data-done] .dlc-ln {
+  color: var(--accent);
+  font-weight: 600;
+}
+.dlc-ln {
+  text-align: right;
+  padding-right: 0.55rem;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--ink-3);
+}
+.dlc-lines code {
+  padding: 0 0 0 4ch;
+  text-indent: -4ch;
+  font-size: 0.75rem;
+  line-height: 1.45;
+  white-space: pre-wrap;
+  color: var(--ink);
+  background: none;
+  box-shadow: none;
+  border-radius: 0;
+}
+.dlc-lines code b {
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.dlc-side {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-width: 0;
+}
+.dlc-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8125rem;
+}
+.dlc-table th,
+.dlc-table td {
+  padding: 0.35rem 0.45rem;
+  text-align: left;
+  vertical-align: baseline;
+  border-bottom: 1px solid var(--rule);
+}
+.dlc-table th {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--ink-3);
+  border-bottom-color: var(--rule-strong);
+}
+.dlc-table .is-num {
+  text-align: right;
+  white-space: nowrap;
+}
+.dlc-table td.mono {
+  font-variant-ligatures: none;
+}
+.dlc-table tr {
+  transition: background-color 0.35s var(--ease-out);
+}
+.dlc-table tr[data-now] {
+  background: var(--accent-soft);
+}
+.dlc-ops {
+  line-height: 1.4;
+  color: var(--ink-2);
+}
+.dlc-table td.is-num.mono:not(.dlc-big) {
+  font-weight: 600;
+  color: var(--ink);
+}
+.dlc-big {
+  color: var(--accent);
+  white-space: normal !important;
+  min-width: 5.5rem;
+}
+
+.dlc-total {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.dlc-sum {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  font-variant-ligatures: none;
+  color: var(--ink);
+}
+.dlc-sum.is-ghost {
+  color: var(--ink-3);
+}
+.dlc-sum strong {
+  color: var(--accent);
+}
+.dlc-rule {
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--ink-2);
+}
+
+@container (max-width: 40rem) {
+  .dlc {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  /* Smal: hver række bliver et lille kort — linje, antal og O øverst, operationerne under. */
+  .dlc-table thead {
+    display: none;
+  }
+  .dlc-table tbody,
+  .dlc-table tr {
+    display: block;
+  }
+  .dlc-table tr {
+    display: grid;
+    grid-template-columns: 1.4rem minmax(0, 1fr) auto;
+    grid-template-areas:
+      'ln cnt big'
+      '. ops ops';
+    gap: 0.1rem 0.5rem;
+    padding: 0.35rem 0.3rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .dlc-table td {
+    padding: 0;
+    border: 0;
+  }
+  .dlc-table td:nth-child(1) {
+    grid-area: ln;
+  }
+  .dlc-table td:nth-child(2) {
+    grid-area: ops;
+  }
+  .dlc-table td:nth-child(3) {
+    grid-area: cnt;
+    text-align: left;
+  }
+  .dlc-table td:nth-child(4) {
+    grid-area: big;
+    min-width: 0;
+  }
+  .dlc-big {
+    white-space: nowrap !important;
+  }
+}

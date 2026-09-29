@@ -1,0 +1,146 @@
+/* Dijkstra fra v1: graf med afstande, prioritetskø og known/dv/pv-tabel. */
+.ddj {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 1.25rem 2rem;
+  align-items: start;
+  min-width: 0;
+}
+.ddj-graph,
+.ddj-side {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  min-width: 0;
+}
+
+
+/* Prioritetskøen som slidets sorterede liste */
+.ddj-q {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 0.4rem 0.6rem;
+}
+.ddj-k {
+  font-size: 0.75rem;
+  color: var(--ink-3);
+}
+.ddj-chips {
+  position: relative;
+  display: flex;
+  gap: 4px;
+  min-height: 1.75rem;
+  align-items: center;
+}
+.ddj-chip {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.3rem;
+  height: 1.75rem;
+  padding: 0 0.4rem;
+  line-height: 1.75rem;
+  border-radius: 3px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.ddj-chip b {
+  font-weight: 700;
+  color: var(--accent);
+}
+.ddj-chip.is-out {
+  color: var(--paper);
+  background: var(--accent);
+  box-shadow: none;
+}
+.ddj-chip.is-out b {
+  color: var(--paper);
+}
+.ddj-chip[data-hi] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.ddj-empty {
+  position: absolute;
+  left: 0;
+  font-size: 0.75rem;
+  font-style: italic;
+  color: var(--ink-3);
+}
+
+/* known / dv / pv som på slidet */
+.ddj-table {
+  border-collapse: collapse;
+  font-size: 0.8125rem;
+  font-variant-numeric: tabular-nums;
+}
+.ddj-table th {
+  padding: 0.2rem 0.6rem;
+  border-bottom: 1px solid var(--rule-strong);
+  font-weight: 500;
+  font-style: italic;
+  text-align: left;
+  color: var(--ink-2);
+}
+.ddj-table td {
+  padding: 0.22rem 0.6rem;
+  border-bottom: 1px solid var(--rule);
+  transition:
+    background-color 0.35s var(--ease-out),
+    color 0.35s var(--ease-out);
+}
+.ddj-table td[data-t] {
+  color: var(--accent);
+  font-weight: 600;
+}
+.ddj-table tr[data-cur] td {
+  background: var(--accent-soft);
+}
+.ddj-table tr[data-path] td:first-child {
+  color: var(--accent);
+  font-weight: 700;
+}
+.ddj-dv {
+  min-width: 5.2rem;
+  white-space: nowrap;
+}
+.ddj-dv s {
+  margin-right: 0.35rem;
+  color: var(--ink-3);
+}
+.ddj-dv span {
+  font-weight: 600;
+}
+.ddj-dv[data-hi] span {
+  color: var(--accent);
+}
+
+.ddj-path {
+  max-width: 17rem;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--ink-2);
+}
+.ddj-path code {
+  font-size: 0.75rem;
+}
+.ddj-path strong {
+  color: var(--accent);
+}
+
+@container (max-width: 40rem) {
+  .ddj {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .ddj-path {
+    max-width: none;
+  }
+}
+.ddj-path code {
+  white-space: nowrap;
+}

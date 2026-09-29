@@ -1,0 +1,115 @@
+/* Graf → adjacency matrix og adjacency lists. */
+.dgr {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) auto auto;
+  gap: 1.25rem 1.75rem;
+  align-items: start;
+  min-width: 0;
+}
+
+.dgr-graph,
+.dgr-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  min-width: 0;
+}
+
+.dgr-set {
+  font-size: 0.75rem;
+  line-height: 1.45;
+  color: var(--ink-2);
+  overflow-wrap: anywhere;
+}
+
+.dgr-note {
+  max-width: 13rem;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: var(--ink-2);
+}
+.dgr-note code {
+  font-size: 0.6875rem;
+}
+
+/* Adjacency lists: hovedcelle + op til fire naboer */
+.dgr-lists {
+  display: grid;
+  gap: 4px;
+}
+.dgr-row {
+  display: grid;
+  grid-template-columns: 1.7rem repeat(4, auto);
+  justify-content: start;
+  align-items: center;
+}
+.dgr-head {
+  display: grid;
+  place-items: center;
+  height: 1.7rem;
+  border-radius: 3px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  background: var(--paper-3);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.dgr-row[data-hi] .dgr-head {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.dgr-item {
+  display: inline-flex;
+  align-items: center;
+}
+.dgr-item i {
+  width: 0.95rem;
+  text-align: center;
+  font-style: normal;
+  font-size: 0.75rem;
+  color: var(--ink-3);
+}
+.dgr-box {
+  display: grid;
+  place-items: center;
+  width: 1.7rem;
+  height: 1.7rem;
+  border-radius: 3px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.dgr-box[data-tone='focus'] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+
+@container (max-width: 52rem) {
+  .dgr {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+  .dgr-graph {
+    grid-column: 1 / -1;
+  }
+}
+
+@container (max-width: 40rem) {
+  .dgr {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .dgr-note {
+    max-width: none;
+  }
+}
+.dgr-note code {
+  white-space: nowrap;
+}
+.dgr-nw {
+  white-space: nowrap;
+}

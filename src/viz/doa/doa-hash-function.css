@@ -1,0 +1,164 @@
+/* Nøgle → hashværdi → indeks (slide 17), koden under. */
+.dhf {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.dhf-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-inline: auto;
+  overflow: visible;
+}
+
+.dhf-head {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-weight: 600;
+  fill: var(--ink-3);
+}
+
+.dhf-box {
+  fill: var(--paper);
+  stroke: var(--rule-strong);
+  stroke-width: 1;
+  transition:
+    fill 0.35s var(--ease-out),
+    stroke 0.35s var(--ease-out);
+}
+.dhf-t {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-weight: 500;
+  fill: var(--ink);
+}
+.dhf-t.is-mono {
+  font-family: var(--font-mono);
+  font-weight: 600;
+}
+.dhf-cell[data-dim] .dhf-t {
+  fill: var(--ink-3);
+}
+.dhf-cell[data-tone='focus'] .dhf-box {
+  fill: var(--accent-soft);
+  stroke: var(--accent);
+  stroke-width: 1.5;
+}
+.dhf-cell[data-tone='neg'] .dhf-box {
+  fill: var(--neg-soft);
+  stroke: var(--neg);
+  stroke-width: 1.5;
+}
+
+.dhf-fn-box {
+  fill: none;
+  stroke: var(--rule);
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+  transition: stroke 0.35s var(--ease-out);
+}
+.dhf-fn-t {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  fill: var(--ink-2);
+  transition: fill 0.35s var(--ease-out);
+}
+.dhf-fn[data-on] .dhf-fn-box {
+  stroke: var(--accent);
+}
+.dhf-fn[data-on] .dhf-fn-t {
+  fill: var(--accent);
+}
+
+.dhf-arrow {
+  color: var(--ink-3);
+  transition: color 0.35s var(--ease-out);
+}
+.dhf-arrow[data-tone='neg'] {
+  color: var(--neg);
+}
+.dhf-line {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.2;
+}
+.dhf-arrow[data-tone='neg'] .dhf-line {
+  stroke-width: 1.7;
+}
+.dhf-arrow[data-dashed] .dhf-line {
+  stroke-dasharray: 4 3;
+}
+.dhf-ahead {
+  fill: currentColor;
+}
+
+/* Koden */
+.dhf-code {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 0.6rem 1.5rem;
+}
+.dhf-snip {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  min-width: 0;
+  padding: 0.5rem 0.7rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule);
+  transition: box-shadow 0.35s var(--ease-out);
+}
+.dhf-snip[data-on] {
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.dhf-snip-name {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.2rem 0.6rem;
+}
+.dhf-snip-name code {
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+.dhf-src {
+  font-size: 0.75rem;
+  color: var(--ink-3);
+}
+.dhf-swap {
+  display: grid;
+}
+.dhf-swap > * {
+  grid-area: 1 / 1;
+}
+.dhf-snip pre {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.45;
+  color: var(--ink-2);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.dhf-where {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem 0.8rem;
+}
+.dhf-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+@container (max-width: 40rem) {
+  .dhf-code {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

@@ -1,0 +1,40 @@
+/* doa-avl-rotation: enkeltrotation og dobbeltrotation side om side; stables på smalle skærme. */
+.davl {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem 2rem;
+  align-items: start;
+}
+
+.davl-case {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  min-width: 0;
+}
+.davl-case .vcaps code {
+  font-size: 0.6875rem;
+}
+
+.davl-tree {
+  width: 100%;
+  max-width: 20rem;
+  margin: 0 auto;
+}
+
+.davl-line {
+  min-height: 1.4rem;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--ink-2);
+}
+.davl-line code {
+  font-size: 0.75rem;
+  white-space: nowrap;
+}
+
+@container (max-width: 40rem) {
+  .davl {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

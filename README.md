@@ -3,7 +3,7 @@
 Visuelt opslagsværk til eksamenslæsning. 4. semester: BAD, FED, SWT, SWD. 3. semester:
 SYS, KNP, DOA. 2. semester: OOP, PLA, STS. 1. semester: OPRG, IDE, MSYS, LMEK. Plus en generisk projektguide. Fagene grupperes
 efter `semester` i datafilen. Materialet til 1.–3. semester ligger i `context/` (1. semester i `context/sem1/`). BAD (27 emner), FED
-(30 emner i to spor: MAUI og web), SWT (25 emner), SWD (30 emner) og projektguiden (28 emner) er fuldt udfyldt med
+(30 emner i to spor: MAUI og web), SWT (25 emner), SWD (30 emner), SYS (31 emner), DOA (27 emner) og projektguiden (28 emner) er fuldt udfyldt med
 figur, forklaring, kode, eksamenssætninger og kildehenvisninger. De øvrige fag har en stub
 med læringsmål og eksamensform.
 

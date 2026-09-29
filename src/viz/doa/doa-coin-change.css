@@ -1,0 +1,235 @@
+/* Greedy coin changing: dollar, $11 med (1, 5, 6, 9), og bro til DP. */
+.dcc {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  min-width: 0;
+}
+
+.dcc-case {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 0;
+}
+.dcc-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.2rem 0.75rem;
+}
+.dcc-q {
+  font-size: 0.8125rem;
+  color: var(--ink-2);
+}
+.dcc-q strong {
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+.dcc-q code {
+  font-size: 0.75rem;
+}
+.dcc-own {
+  font-size: 0.6875rem;
+  font-style: italic;
+  color: var(--ink-3);
+}
+
+/* Sedler og mønter */
+.dcc-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  min-height: 1.9rem;
+}
+.dcc-chip {
+  display: inline-grid;
+  place-items: center;
+  min-width: 2.4rem;
+  height: 1.9rem;
+  padding: 0 0.45rem;
+  border-radius: 3px;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  font-variant-ligatures: none;
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out),
+    color 0.35s var(--ease-out);
+}
+.dcc-chip[data-tone='ghost'] {
+  background: transparent;
+  box-shadow: none;
+  outline: 1px dashed var(--rule-strong);
+  outline-offset: -1px;
+}
+.dcc-chip[data-tone='focus'] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.dcc-chip[data-tone='ok'] {
+  color: var(--paper);
+  background: var(--accent);
+  box-shadow: none;
+}
+.dcc-chip[data-tone='neg'] {
+  background: var(--neg-soft);
+  box-shadow: inset 0 0 0 1.5px var(--neg);
+}
+
+.dcc-verdict {
+  font-size: 0.8125rem;
+  color: var(--ink-2);
+}
+.dcc-verdict strong {
+  color: var(--ink);
+}
+.dcc-verdict .is-ok {
+  color: var(--accent);
+}
+.dcc-verdict .is-neg {
+  color: var(--neg);
+}
+.dcc-why {
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: var(--ink-2);
+}
+
+/* To baner: greedy og optimalt */
+.dcc-lanes {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: 0.75rem;
+}
+.dcc-lane {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 0;
+  padding: 0.6rem 0.75rem 0.7rem;
+  border-radius: var(--radius-sm);
+  box-shadow: inset 0 0 0 1px var(--rule);
+  transition: box-shadow 0.35s var(--ease-out);
+}
+.dcc-lane[data-tone='neg'] {
+  box-shadow: inset 0 0 0 1px var(--neg);
+}
+.dcc-lane[data-tone='ok'] {
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.dcc-lane-name {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--ink-2);
+}
+.dcc-rest {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.35rem;
+  font-size: 0.8125rem;
+  font-variant-numeric: tabular-nums;
+}
+.dcc-rest-k {
+  font-size: 0.75rem;
+  color: var(--ink-3);
+}
+
+/* DP-strimmel: 12 celler der krymper med pladen */
+.dcc-dp {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 2.4rem));
+  gap: 3px;
+}
+.dcc-dp-col {
+  display: grid;
+  min-width: 0;
+}
+.dcc-dp-cell {
+  display: grid;
+  place-items: center;
+  height: 2rem;
+  border-radius: 3px;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out),
+    color 0.35s var(--ease-out);
+}
+.dcc-dp-cell[data-tone='ghost'] {
+  background: transparent;
+  box-shadow: none;
+  outline: 1px dashed var(--rule-strong);
+  outline-offset: -1px;
+}
+.dcc-dp-cell[data-tone='focus'] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.dcc-dp-cell[data-tone='ok'] {
+  color: var(--paper);
+  background: var(--accent);
+  box-shadow: none;
+}
+.dcc-dp-cell[data-tone='neg'] {
+  background: var(--neg-soft);
+  box-shadow: inset 0 0 0 1.5px var(--neg);
+}
+.dcc-dp-idx {
+  padding-top: 0.15rem;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--ink-3);
+}
+.dcc-dp-note {
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--ink-2);
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.dcc-dp-note code {
+  font-size: 0.75rem;
+}
+.dcc-dp-note strong {
+  color: var(--accent);
+}
+.dcc-dp-terms {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 6px;
+}
+.dcc-dp-term {
+  padding: 0.1rem 0.45rem;
+  border-radius: 3px;
+  font-size: 0.75rem;
+  white-space: nowrap;
+  box-shadow: inset 0 0 0 1px var(--rule);
+}
+.dcc-dp-term[data-tone='ok'] {
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+  color: var(--accent);
+}
+.dcc-dp-term[data-tone='neg'] {
+  box-shadow: inset 0 0 0 1.5px var(--neg);
+  color: var(--neg);
+}
+
+@container (max-width: 40rem) {
+  .dcc-lanes {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .dcc-dp {
+    gap: 2px;
+  }
+}

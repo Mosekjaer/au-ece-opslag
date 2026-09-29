@@ -1,0 +1,103 @@
+/* doa-iterators: iterator over numbers = {10, 20, 30, 40} + resultatliste. */
+.dit {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 17rem);
+  gap: 1.25rem 2rem;
+  align-items: start;
+}
+
+.dit-main {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.dit-code code {
+  display: block;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--ink);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.dit-main .varr-label code {
+  font-size: 0.75rem;
+}
+
+.dit-note {
+  margin: 0;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--ink-2);
+}
+.dit-note code {
+  font-size: 0.75rem;
+}
+
+.dit-side {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 0;
+}
+.dit-out {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+}
+.dit-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.4rem 0.65rem 0.45rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule);
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.dit-row[data-now] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.dit-what {
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: var(--ink-2);
+  overflow-wrap: anywhere;
+}
+.dit-what code {
+  font-size: 0.75rem;
+}
+.dit-res {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+.dit-res .mono {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+.dit-src {
+  font-size: 0.6875rem;
+  color: var(--ink-3);
+  white-space: nowrap;
+}
+
+@container (max-width: 40rem) {
+  .dit {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+.dit-cm {
+  color: var(--ink-3);
+  white-space: nowrap;
+}

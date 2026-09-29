@@ -1,0 +1,40 @@
+/* doa-buildheap: slidets buildHeap og bogens heapsort side om side; stables på smalle skærme. */
+.dbh {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem 2rem;
+  align-items: start;
+}
+
+.dbh-case {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  min-width: 0;
+}
+
+.dbh-tree {
+  width: 100%;
+  max-width: 20rem;
+  margin: 0 auto;
+}
+
+.dbh-line {
+  min-height: 1.4rem;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--ink-2);
+}
+.dbh-line code {
+  font-size: 0.75rem;
+}
+
+@container (max-width: 40rem) {
+  .dbh {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  /* Syv celler skal kunne stå uden vandret scroll ved 375 px. */
+  .dbh .varr-grid {
+    width: 100%;
+  }
+}

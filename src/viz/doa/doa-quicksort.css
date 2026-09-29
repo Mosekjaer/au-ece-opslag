@@ -1,0 +1,101 @@
+/* doa-quicksort: array med pointere og partitionsklammer (venstre), kørselslog (højre). */
+.dqs {
+  display: grid;
+  grid-template-columns: minmax(0, 27rem) minmax(0, 1fr);
+  gap: 1.25rem 2.5rem;
+  align-items: start;
+}
+.dqs section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+/* ArrayRow og klammerne deler samme 10 kolonner, så klammerne står under cellerne. */
+.dqs .varr-scroll {
+  overflow-x: visible;
+}
+.dqs .varr-grid,
+.dqs-parts {
+  width: 100%;
+  grid-template-columns: repeat(10, minmax(0, 1fr)) !important;
+  gap: 0 3px;
+}
+.dqs-parts {
+  display: grid;
+  align-items: start;
+}
+.dqs-part {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.1rem;
+  padding-top: 0.35rem;
+  border-top: 1.5px solid var(--rule-strong);
+  font-size: 0.75rem;
+  line-height: 1.25;
+  text-align: center;
+  color: var(--ink-2);
+}
+.dqs-part b {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--ink);
+}
+.dqs-part.is-pivot {
+  white-space: nowrap;
+  border-top-color: var(--accent);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* Log */
+.dqs-log ol {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+.dqs-log li {
+  display: grid;
+  grid-template-columns: 8.5rem auto;
+  gap: 0.6rem;
+  align-items: baseline;
+  padding: 0.28rem 0;
+  border-bottom: 1px solid var(--rule);
+  font-size: 0.8125rem;
+}
+.dqs-log li .mono {
+  font-size: 0.75rem;
+  white-space: nowrap;
+}
+.dqs-what {
+  color: var(--ink-3);
+  font-size: 0.75rem;
+}
+.dqs-log li[data-now] .mono,
+.dqs-log li[data-now] .dqs-what {
+  color: var(--accent);
+  font-weight: 600;
+}
+.dqs-note {
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: var(--ink-2);
+}
+.dqs-note code {
+  font-size: 0.75rem;
+  white-space: nowrap;
+}
+
+@container (max-width: 40rem) {
+  .dqs {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .dqs-log li {
+    grid-template-columns: 7.5rem auto;
+  }
+  .dqs-part.is-pivot {
+    white-space: normal;
+  }
+}

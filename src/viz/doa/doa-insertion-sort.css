@@ -1,0 +1,121 @@
+/* doa-insertion-sort: array + tmp (venstre), gennemløbslog (højre). */
+.dis {
+  display: grid;
+  grid-template-columns: minmax(0, auto) minmax(0, 1fr);
+  gap: 1.25rem 2.5rem;
+  align-items: start;
+}
+.dis section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.dis-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 0.5rem 1.25rem;
+}
+.dis-tmp {
+  display: grid;
+  justify-items: center;
+}
+.dis-tmp-name {
+  padding-top: 0.15rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--ink-2);
+}
+.dis-tmp-cell {
+  display: grid;
+  place-items: center;
+  width: 2.6rem;
+  height: 2.1rem;
+  border-radius: 3px;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--ink);
+  outline: 1px dashed var(--rule-strong);
+  outline-offset: -1px;
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.dis-tmp-cell[data-on] {
+  outline: none;
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.dis-legend {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.3rem 0.35rem;
+  font-size: 0.75rem;
+  color: var(--ink-3);
+}
+.dis-key {
+  display: inline-block;
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 2px;
+  margin-left: 0.4rem;
+}
+.dis-key.is-ok {
+  margin-left: 0;
+  background: var(--accent);
+}
+.dis-key.is-focus {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+
+/* Log */
+.dis-log table {
+  border-collapse: collapse;
+  font-size: 0.8125rem;
+  font-variant-numeric: tabular-nums;
+}
+.dis-log th {
+  padding: 0 0.7rem 0.3rem 0;
+  text-align: left;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--ink-3);
+  border-bottom: 1px solid var(--rule-strong);
+}
+.dis-log td {
+  padding: 0.28rem 0.7rem 0.28rem 0;
+  border-bottom: 1px solid var(--rule);
+  white-space: nowrap;
+}
+.dis-log td:first-child,
+.dis-log td:last-child {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+.dis-log td:last-child,
+.dis-log th:last-child {
+  text-align: right;
+  padding-right: 0;
+}
+.dis-log td.mono {
+  font-size: 0.75rem;
+}
+.dis-log tr[data-now] td {
+  color: var(--accent);
+  font-weight: 600;
+}
+.dis-sum {
+  font-size: 0.8125rem;
+  color: var(--ink-2);
+}
+
+@container (max-width: 40rem) {
+  .dis {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

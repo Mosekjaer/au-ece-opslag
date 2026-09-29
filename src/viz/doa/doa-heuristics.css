@@ -1,0 +1,256 @@
+/* Afstandsmål på gitteret (venstre) og h(S) som søjler mod den sande cost (højre). */
+.dhe {
+  display: grid;
+  grid-template-columns: minmax(0, 18rem) minmax(0, 1fr);
+  gap: 1rem 2rem;
+  align-items: start;
+}
+.dhe-left,
+.dhe-right {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 0;
+}
+.dhe-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.2rem 0.7rem;
+}
+.dhe-q {
+  font-size: 0.75rem;
+  color: var(--ink-2);
+}
+.dhe-own {
+  font-size: 0.6875rem;
+  font-style: italic;
+  color: var(--ink-3);
+}
+.dhe-note {
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--ink-3);
+}
+
+/* Gitteret */
+.dhe-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 21rem;
+  overflow: visible;
+}
+.dhe-cell {
+  fill: var(--paper);
+  stroke: var(--rule);
+  stroke-width: 1;
+}
+.dhe-end {
+  fill: var(--accent-soft);
+  stroke: var(--accent);
+  stroke-width: 1.5;
+}
+.dhe-wall {
+  fill: var(--ink-3);
+}
+.dhe-axis text {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  fill: var(--ink-3);
+}
+.dhe-st {
+  font-family: var(--font-ui);
+  font-size: 14px;
+  font-weight: 700;
+  fill: var(--ink);
+  paint-order: stroke;
+  stroke: var(--accent-soft);
+  stroke-width: 5px;
+  stroke-linejoin: round;
+}
+.dhe-line {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+  opacity: 0.55;
+  transition: stroke-width 0.35s var(--ease-out);
+}
+.dhe-line[data-active] {
+  stroke-width: 3.5;
+}
+.dhe-line[data-line='man'] {
+  stroke: var(--accent);
+}
+.dhe-line[data-line='diag'] {
+  stroke: var(--ink-2);
+  stroke-dasharray: 7 5;
+}
+.dhe-line[data-line='euc'] {
+  stroke: var(--neg);
+  stroke-dasharray: 1 5;
+}
+
+/* Søjlerne */
+.dhe-rows {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+.dhe-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.dhe-row-top {
+  display: flex;
+  align-items: baseline;
+  gap: 0.2rem 0.5rem;
+  flex-wrap: wrap;
+  font-size: 0.8125rem;
+}
+.dhe-name {
+  font-weight: 600;
+  color: var(--ink-3);
+  transition: color 0.35s var(--ease-out);
+}
+.dhe-row[data-on] .dhe-name {
+  color: var(--ink);
+}
+.dhe-row[data-now] .dhe-name {
+  color: var(--accent);
+}
+.dhe-calc {
+  font-size: 0.75rem;
+  color: var(--ink-2);
+  font-variant-ligatures: none;
+}
+.dhe-meta {
+  display: contents;
+}
+.dhe-star {
+  font-family: var(--font-ui);
+  font-size: 0.6875rem;
+  line-height: 0;
+}
+.dhe-val {
+  margin-left: auto;
+  font-weight: 600;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+.dhe-row[data-over] .dhe-val {
+  color: var(--neg);
+}
+.dhe-sw {
+  flex: none;
+  align-self: center;
+  width: 1.1rem;
+  height: 0;
+  border-top: 3px solid transparent;
+}
+.dhe-sw[data-line='man'] {
+  border-top-color: var(--accent);
+}
+.dhe-sw[data-line='diag'] {
+  border-top: 3px dashed var(--ink-2);
+}
+.dhe-sw[data-line='euc'] {
+  border-top: 3px dotted var(--neg);
+}
+
+.dhe-track {
+  position: relative;
+  height: 0.8rem;
+  margin-right: 1.2rem;
+  border-radius: 2px;
+  background: var(--paper-2);
+  box-shadow: inset 0 0 0 1px var(--rule);
+}
+.dhe-bar {
+  position: absolute;
+  inset: 0 auto 0 0;
+  border-radius: 2px;
+  background: var(--accent);
+}
+.dhe-row[data-over] .dhe-bar {
+  background: var(--neg);
+}
+.dhe-break {
+  position: absolute;
+  left: calc(100% + 0.2rem);
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--neg);
+  line-height: 1;
+}
+.dhe-true {
+  position: absolute;
+  top: -0.2rem;
+  bottom: -0.2rem;
+  width: 0;
+  border-left: 2px solid var(--ink);
+}
+
+.dhe-axisrow {
+  position: relative;
+  height: 1rem;
+  margin-right: 1.2rem;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--ink-3);
+}
+.dhe-tick {
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+.dhe-tick:first-child {
+  transform: none;
+}
+.dhe-tick:nth-child(2) {
+  color: var(--ink);
+  font-weight: 600;
+}
+.dhe-spectrum {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.2rem 1rem;
+  font-size: 0.75rem;
+  color: var(--ink-2);
+}
+.dhe-spectrum strong {
+  color: var(--accent);
+}
+.dhe-spectrum .is-neg {
+  color: var(--neg);
+}
+
+@container (max-width: 40rem) {
+  .dhe {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .dhe-left {
+    align-items: center;
+  }
+  .dhe-left .dhe-head,
+  .dhe-note {
+    align-self: stretch;
+  }
+  .dhe-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.2rem 0.5rem;
+    order: 3;
+    flex-basis: 100%;
+  }
+}

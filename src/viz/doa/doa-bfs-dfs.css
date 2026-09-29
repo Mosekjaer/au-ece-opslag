@@ -1,0 +1,149 @@
+/* DFS mod BFS på slidets graf. */
+.dbf {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  min-width: 0;
+}
+.dbf-sides {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 1rem 1.75rem;
+}
+.dbf-side {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  min-width: 0;
+}
+.dbf-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.2rem 0.6rem;
+}
+.dbf-name {
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.dbf-line {
+  display: grid;
+  grid-template-columns: 3.4rem minmax(0, 1fr);
+  align-items: center;
+  gap: 0.5rem;
+}
+.dbf-k {
+  font-size: 0.75rem;
+  color: var(--ink-3);
+}
+
+/* Stak / kø */
+.dbf-chips {
+  position: relative;
+  display: flex;
+  gap: 4px;
+  min-height: 1.7rem;
+  align-items: center;
+}
+.dbf-chip {
+  display: grid;
+  place-items: center;
+  width: 1.7rem;
+  height: 1.7rem;
+  border-radius: 3px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.dbf-empty {
+  position: absolute;
+  left: 0;
+  font-size: 0.75rem;
+  font-style: italic;
+  color: var(--ink-3);
+}
+
+/* Besøgsrækkefølge: otte faste pladser */
+.dbf-order {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1.7rem));
+  gap: 3px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.dbf-slot {
+  display: grid;
+  place-items: center;
+  height: 1.7rem;
+  border-radius: 3px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  outline: 1px dashed var(--rule-strong);
+  outline-offset: -1px;
+  transition:
+    background-color 0.35s var(--ease-out),
+    color 0.35s var(--ease-out);
+}
+.dbf-slot[data-on] {
+  outline: none;
+  color: var(--paper);
+  background: var(--accent);
+}
+
+.dbf-verdict {
+  font-size: 0.8125rem;
+  color: var(--ink-2);
+}
+.dbf-verdict strong {
+  color: var(--accent);
+}
+.dbf-verdict code {
+  font-size: 0.75rem;
+}
+
+/* Signaturforklaring */
+.dbf-legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.5rem;
+  font-size: 0.75rem;
+  color: var(--ink-3);
+}
+.dbf-dot {
+  display: inline-block;
+  width: 0.8rem;
+  height: 0.8rem;
+  margin-left: 0.4rem;
+  border-radius: 50%;
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1.25px var(--rule-strong);
+}
+.dbf-dot:first-child {
+  margin-left: 0;
+}
+.dbf-dot[data-tone='focus'] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 2px var(--accent);
+}
+.dbf-dot[data-tone='ok'] {
+  background: var(--accent);
+  box-shadow: none;
+}
+.dbf-bar {
+  display: inline-block;
+  width: 1.1rem;
+  height: 2px;
+  margin-left: 0.4rem;
+  background: var(--accent);
+}
+
+@container (max-width: 40rem) {
+  .dbf-sides {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.4rem;
+  }
+}

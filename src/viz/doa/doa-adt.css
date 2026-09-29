@@ -1,0 +1,297 @@
+/* doa-adt: klient → List<T>, tre realiseringer (UML, s. 47) + Method 1/2 (s. 52–53). */
+.dadt {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.dadt-top {
+  display: grid;
+  grid-template-columns: minmax(0, 9.5rem) 3.75rem minmax(0, 1fr);
+  align-items: start;
+}
+
+/* Klient */
+.dadt-client {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  margin-top: 1.4rem;
+  padding: 0.55rem 0.7rem 0.6rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.dadt-client[data-now] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.dadt-client code {
+  font-size: 0.75rem;
+  overflow-wrap: anywhere;
+}
+.dadt-tag {
+  margin-top: 0.3rem;
+}
+
+/* “bruger”-afhængighed: stiplet linje, åben pilespids */
+.dadt-usewrap {
+  margin-top: 3rem;
+}
+.dadt-use {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  color: var(--ink-2);
+}
+.dadt-use svg {
+  display: block;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.4;
+}
+.dadt-use svg path:not(.is-head) {
+  stroke-dasharray: 4 3;
+}
+.dadt-use-h {
+  width: 3.4rem;
+  height: 0.9rem;
+}
+.dadt-use-v {
+  display: none !important;
+  width: 0.9rem;
+  height: 2.1rem;
+}
+.dadt-use-label {
+  font-size: 0.6875rem;
+  color: var(--ink-3);
+}
+
+/* List<T> */
+.dadt-right {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.dadt-iface {
+  align-self: center;
+  max-width: 100%;
+  border-radius: 3px;
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.dadt-iface[data-now] {
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.dadt-head {
+  display: flex;
+  justify-content: center;
+  padding: 0.4rem 0.8rem;
+  border-bottom: 1px solid var(--rule-strong);
+}
+.dadt-name {
+  position: relative;
+  font-weight: 600;
+  font-style: italic;
+  font-size: 0.875rem;
+}
+.dadt-t {
+  position: absolute;
+  top: -0.95rem;
+  left: calc(100% + 0.5rem);
+  padding: 0 0.3rem;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-style: normal;
+  font-weight: 500;
+  background: var(--paper);
+  outline: 1px dashed var(--rule-strong);
+}
+.dadt-ops {
+  margin: 0;
+  padding: 0.4rem 0.8rem 0.5rem;
+  list-style: none;
+}
+.dadt-ops li {
+  line-height: 1.4;
+}
+.dadt-ops code {
+  padding: 0;
+  background: none;
+  box-shadow: none;
+  font-size: 0.75rem;
+  font-style: italic;
+  color: var(--ink-2);
+}
+
+/* Realisering: hul trekant, stiplet stamme, stiplet tværstreg, stiplede dråber */
+.dadt-real {
+  display: grid;
+  justify-items: center;
+}
+.dadt-tri {
+  display: block;
+  width: 16px;
+  height: 12px;
+  margin-top: -1px;
+  fill: var(--paper-2);
+  stroke: var(--ink-2);
+  stroke-width: 1.3;
+}
+.dadt-stem {
+  width: 0;
+  height: 0.9rem;
+  border-left: 1.4px dashed var(--ink-2);
+}
+.dadt-bar {
+  justify-self: stretch;
+  margin-inline: calc(100% / 6);
+  height: 0;
+  border-top: 1.4px dashed var(--ink-2);
+}
+
+.dadt-impls {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.5rem;
+}
+.dadt-impl {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  margin-top: 0.9rem;
+  padding: 0.45rem 0.55rem 0.5rem;
+  border-radius: 3px;
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  min-width: 0;
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.dadt-impl:not([data-on]) {
+  background: transparent;
+  box-shadow: none;
+  outline: 1px dashed var(--rule-strong);
+  outline-offset: -1px;
+}
+.dadt-impl[data-now] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.dadt-drop {
+  position: absolute;
+  left: 50%;
+  top: -0.9rem;
+  height: 0.9rem;
+  border-left: 1.4px dashed var(--ink-2);
+}
+.dadt-iname {
+  font-weight: 600;
+  font-size: 0.8125rem;
+  hyphens: manual;
+}
+.dadt-field {
+  font-size: 0.6875rem;
+  color: var(--ink-2);
+}
+.dadt-helper {
+  font-size: 0.6875rem;
+  color: var(--ink-3);
+}
+.dadt-same {
+  margin: 0.5rem 0 0;
+  font-size: 0.8125rem;
+  color: var(--ink-2);
+}
+
+/* Method 1 og 2 */
+.dadt-methods {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem 1rem;
+}
+.dadt-method {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  min-width: 0;
+  padding: 0.6rem 0.75rem 0.7rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule);
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.dadt-method[data-now] {
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.dadt-method pre {
+  margin: 0;
+  overflow-x: auto;
+}
+.dadt-method pre code {
+  display: block;
+  padding-left: 4ch;
+  text-indent: -4ch;
+  font-size: 0.75rem;
+  line-height: 1.45;
+  white-space: pre-wrap;
+}
+.dadt-verdict {
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--ink-2);
+}
+.dadt-verdict strong {
+  color: var(--ink);
+}
+.dadt-verdict code {
+  font-size: 0.75rem;
+}
+
+@container (max-width: 40rem) {
+  .dadt-top {
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: stretch;
+  }
+  .dadt-client {
+    margin-top: 0;
+  }
+  .dadt-usewrap {
+    margin-top: 0;
+    justify-self: start;
+    padding-left: 2rem;
+  }
+  .dadt-use {
+    grid-template-columns: auto auto;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .dadt-use-h {
+    display: none !important;
+  }
+  .dadt-use-v {
+    display: block !important;
+  }
+  .dadt-impls {
+    gap: 0.3rem;
+  }
+  .dadt-impl {
+    padding: 0.4rem 0.4rem 0.45rem;
+  }
+  .dadt-methods {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .dadt-method pre code {
+    font-size: 0.6875rem;
+  }
+}
