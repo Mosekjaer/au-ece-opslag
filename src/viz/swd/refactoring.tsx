@@ -210,6 +210,18 @@ function Refactoring({ step }: { step: number }) {
         <BirdBefore step={step} />
         <div className="rf-after-wrap">
         <div className="rf-after-note">
+          <motion.div
+            className="rf-removed"
+            aria-hidden={!at(step, ABSTRACT) || undefined}
+            initial={false}
+            animate={{ opacity: at(step, ABSTRACT) ? 1 : 0 }}
+            transition={at(step, ABSTRACT) ? { ...t.fade, delay: 0.3 } : t.fade}
+          >
+            <span className="rf-removed-h">fjernet fra Bird</span>
+            <code>_type</code>
+            <code>switch (_type) {'{ … }'}</code>
+            <code>throw new RuntimeException(…)</code>
+          </motion.div>
           <motion.blockquote
             className="rf-recipe"
             aria-hidden={!at(step, ABSTRACT) || undefined}

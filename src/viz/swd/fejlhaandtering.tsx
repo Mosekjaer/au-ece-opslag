@@ -260,8 +260,15 @@ function Seq({ L, state, className }: { L: SD; state: 'ghost' | 'hot' | 'done'; 
               className="swd-fe-msgline"
               d={`M${x1} ${m.y} H${x2}`}
               initial={false}
-              animate={{ pathLength: on ? 1 : 0, opacity: on ? 1 : 0 }}
-              transition={on ? { pathLength: { ...t.travel, duration: 0.5, delay }, opacity: { ...t.fade, delay } } : t.fade}
+              /* pathLength overskriver stroke-dasharray; et svar (stiplet) toner derfor bare ind. */
+              animate={m.reply ? { opacity: on ? 1 : 0 } : { pathLength: on ? 1 : 0, opacity: on ? 1 : 0 }}
+              transition={
+                on
+                  ? m.reply
+                    ? { ...t.fade, delay }
+                    : { pathLength: { ...t.travel, duration: 0.5, delay }, opacity: { ...t.fade, delay } }
+                  : t.fade
+              }
             />
             <motion.path
               className="swd-fe-msghead"

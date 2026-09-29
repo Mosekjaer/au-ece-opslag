@@ -241,7 +241,7 @@
 .ast-ev-h {
   fill: var(--accent);
 }
-.ast-legend li:nth-child(4) .ast-ev-h {
+.ast-conn-h {
   fill: var(--ink-3);
 }
 .ast-net-sw {
@@ -274,5 +274,9 @@
   }
   .ast-legend {
     justify-content: flex-start;
+  }
+  /* Den smalle variant tegner constraints som tekst uden pile. */
+  .ast-legend li[data-wide-only] {
+    display: none;
   }
 }

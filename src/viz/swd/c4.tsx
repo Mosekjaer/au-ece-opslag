@@ -601,12 +601,12 @@ const NARROW: Record<1 | 2 | 3, NarrowLevel> = {
   },
 }
 
-function Card({ id, full, hot }: { id: Id; full: boolean; hot?: boolean }) {
+function Card({ id, full, hot, short }: { id: Id; full: boolean; hot?: boolean; short?: boolean }) {
   const e = EL[id]
   return (
     <div className="c4n-card" data-kind={e.kind} data-ext={e.ext || undefined} data-hot={hot || undefined}>
       <b>{e.name}</b>
-      <span className="c4n-type">[{e.type}]</span>
+      <span className="c4n-type">[{short ? e.type.split(':')[0] : e.type}]</span>
       {full && <span className="c4n-desc">{e.desc}</span>}
     </div>
   )
@@ -669,42 +669,266 @@ function NarrowCode() {
   )
 }
 
-/* ------------------------------ Miniaturer ------------------------------ */
+/* ------------------------------ Slutramme ------------------------------ */
+/* Fire små, men læsbare diagrammer (viewBox 400 bred ≈ 1:1 ved 1280/1440 px): navn + [type]
+   på hvert element, pile uden etiketter (etiketterne står på trin 1–5). Personer og eksterne
+   systemer står samme sted på level 1 og 2, så man ser, at det er samme system. */
 
-function Thumb({ lv }: { lv: Lv }) {
-  const target = lv < 4 ? ZOOM[lv as 1 | 2 | 3] : null
+const MW = 400
+interface MBox {
+  id: string
+  kind: Kind
+  x: number
+  y: number
+  w: number
+  name: string[]
+  type: string
+  ext?: boolean
+  hot?: boolean
+}
+interface MFrame {
+  x: number
+  y: number
+  w: number
+  h: number
+  label: string[]
+  lx: number
+  ly: number
+}
+interface Mini {
+  h: number
+  boxes: MBox[]
+  frame?: MFrame
+  arrows: [number, number, number, number][]
+}
+const PERSON_HEAD = 17
+const DB_TOP = 8
+function mh(b: MBox) {
+  const core = 19 + (b.name.length - 1) * 14 + 14 + 7
+  return core + (b.kind === 'person' ? PERSON_HEAD : b.kind === 'db' ? DB_TOP : 0)
+}
+const mb = (id: string, kind: Kind, x: number, y: number, w: number, name: string[], type: string, o: Partial<MBox> = {}): MBox => ({
+  id, kind, x, y, w, name, type, ...o,
+})
+const CUST = mb('cust', 'person', 105, 0, 190, ['Personal Banking Customer'], 'Person')
+const MINI: Record<1 | 2 | 3, Mini> = {
+  1: {
+    h: 280,
+    boxes: [
+      CUST,
+      mb('ibs', 'box', 105, 130, 190, ['Internet Banking System'], 'Software System', { hot: true }),
+      mb('mail', 'box', 20, 238, 150, ['E-mail System'], 'Software System', { ext: true }),
+      mb('main', 'box', 190, 238, 190, ['Mainframe Banking System'], 'Software System', { ext: true }),
+    ],
+    arrows: [
+      [200, 57, 200, 130],
+      [165, 170, 120, 238],
+      [235, 170, 280, 238],
+      [45, 238, 105, 46],
+    ],
+  },
+  2: {
+    h: 280,
+    frame: { x: 2, y: 72, w: 396, h: 150, label: ['Internet Banking', 'System', '[Software System]'], lx: 280, ly: 180 },
+    boxes: [
+      CUST,
+      mb('web', 'box', 12, 84, 112, ['Web', 'Application'], 'Container'),
+      mb('spa', 'box', 144, 84, 112, ['Single-Page', 'Application'], 'Container'),
+      mb('mob', 'box', 276, 84, 112, ['Mobile App'], 'Container'),
+      mb('db', 'db', 12, 156, 112, ['Database'], 'Container'),
+      mb('api', 'box', 144, 156, 112, ['API', 'Application'], 'Container', { hot: true }),
+      mb('mail', 'box', 20, 238, 150, ['E-mail System'], 'Software System', { ext: true }),
+      mb('main', 'box', 190, 238, 190, ['Mainframe Banking System'], 'Software System', { ext: true }),
+    ],
+    arrows: [
+      [130, 50, 70, 84],
+      [200, 57, 200, 84],
+      [270, 50, 332, 84],
+      [124, 111, 144, 111],
+      [200, 138, 200, 156],
+      [320, 124, 256, 172],
+      [144, 187, 124, 187],
+      [175, 210, 120, 238],
+      [225, 210, 270, 238],
+    ],
+  },
+  3: {
+    h: 316,
+    frame: { x: 2, y: 68, w: 396, h: 180, label: ['API Application', '[Container]'], lx: 10, ly: 228 },
+    boxes: [
+      mb('spa', 'box', 60, 0, 130, ['Single-Page', 'Application'], 'Container'),
+      mb('mob', 'box', 210, 0, 130, ['Mobile App'], 'Container'),
+      mb('signin', 'box', 10, 80, 120, ['Sign In', 'Controller'], 'Component'),
+      mb('reset', 'box', 140, 80, 120, ['Reset Password', 'Controller'], 'Component'),
+      mb('acc', 'box', 270, 80, 120, ['Accounts Summary', 'Controller'], 'Component'),
+      mb('sec', 'box', 10, 152, 120, ['Security', 'Component'], 'Component'),
+      mb('emailc', 'box', 140, 152, 120, ['E-mail', 'Component'], 'Component'),
+      mb('facade', 'box', 270, 152, 120, ['Mainframe', 'Banking System', 'Facade'], 'Component', { hot: true }),
+      mb('db', 'db', 10, 262, 120, ['Database'], 'Container'),
+      mb('mail', 'box', 140, 262, 120, ['E-mail System'], 'Software System', { ext: true }),
+      mb('main', 'box', 270, 262, 120, ['Mainframe', 'Banking System'], 'Software System', { ext: true }),
+    ],
+    arrows: [
+      [95, 54, 60, 80],
+      [120, 54, 180, 80],
+      [150, 54, 300, 80],
+      [225, 40, 100, 80],
+      [260, 40, 215, 80],
+      [300, 40, 340, 80],
+      [70, 134, 70, 152],
+      [160, 134, 120, 152],
+      [210, 134, 210, 152],
+      [330, 134, 330, 152],
+      [120, 206, 120, 262],
+      [200, 206, 200, 262],
+      [330, 220, 330, 262],
+    ],
+  },
+}
+
+function MiniBoxView({ b }: { b: MBox }) {
+  const h = mh(b)
+  const cx = b.x + b.w / 2
+  const off = b.kind === 'person' ? PERSON_HEAD : b.kind === 'db' ? DB_TOP : 0
+  const body = b.y + off
   return (
-    <svg className="c4-thumb" viewBox={`-8 -8 ${VB.w + 16} ${VB.h + 16}`} aria-hidden="true">
-      {lv < 4 &&
-        REL[lv].map((r, i) => (
-          <path key={i} className="c4-th-rel" d={`M${r.a[0]} ${r.a[1]} L${r.b[0]} ${r.b[1]}`} />
+    <g className="c4-el c4-mini-el" data-ext={b.ext || undefined} data-hot={b.hot || undefined}>
+      {b.kind === 'person' && (
+        <>
+          <rect className="c4-shape" x={b.x} y={body} width={b.w} height={h - off} rx={14} />
+          <circle className="c4-shape" cx={cx} cy={b.y + 9} r={9} />
+        </>
+      )}
+      {b.kind === 'db' && (
+        <>
+          <path className="c4-shape" d={`M${b.x} ${b.y + 6} V${b.y + h - 6} A${b.w / 2} 6 0 0 0 ${b.x + b.w} ${b.y + h - 6} V${b.y + 6}`} />
+          <ellipse className="c4-shape" cx={cx} cy={b.y + 6} rx={b.w / 2} ry={6} />
+        </>
+      )}
+      {b.kind === 'box' && <rect className="c4-shape" x={b.x} y={b.y} width={b.w} height={h} rx={4} />}
+      <text className="c4-mini-n" x={cx} y={body + 19}>
+        {b.name.map((l, i) => (
+          <tspan key={i} x={cx} dy={i === 0 ? 0 : 14}>
+            {l}
+          </tspan>
         ))}
-      {IDS.map((id) => {
-        const o = own(id, lv)
-        if (!o) return null
-        if (o.mode === 'frame') {
-          return lv === 4 ? (
-            <rect key={id} className="c4-th-bound" x={o.x} y={o.y} width={o.w} height={o.h} rx={4} />
-          ) : (
-            <rect key={id} className="c4-th-bound" x={o.x} y={o.y} width={o.w} height={o.h} rx={8} />
-          )
-        }
+      </text>
+      <text className="c4-mini-t" x={cx} y={body + 19 + (b.name.length - 1) * 14 + 14}>
+        [{b.type}]
+      </text>
+    </g>
+  )
+}
+
+function MiniView({ m }: { m: Mini }) {
+  return (
+    <svg className="c4-svg c4-thumb" viewBox={`-2 -2 ${MW + 4} ${m.h + 4}`} aria-hidden="true">
+      {m.frame && (
+        <>
+          <rect className="c4-bound" x={m.frame.x} y={m.frame.y} width={m.frame.w} height={m.frame.h} rx={4} />
+          <text className="c4-bound-t" x={m.frame.lx} y={m.frame.ly}>
+            {m.frame.label.map((l, i) => (
+              <tspan key={i} x={m.frame!.lx} dy={i === 0 ? 0 : 13} className={l.startsWith('[') ? undefined : 'c4-bound-n'}>
+                {l}
+              </tspan>
+            ))}
+          </text>
+        </>
+      )}
+      {m.arrows.map(([x1, y1, x2, y2], i) => {
+        const p = relPath([x1, y1], [x2, y2])
         return (
-          <rect
-            key={id}
-            className="c4-th-box"
-            data-ext={EL[id].ext || undefined}
-            data-target={id === target || undefined}
-            x={o.x}
-            y={o.y}
-            width={o.w}
-            height={o.h}
-            rx={EL[id].kind === 'person' ? 30 : 8}
-          />
+          <g key={i} className="c4-rel">
+            <path className="c4-rel-l" d={p.line} />
+            <path className="c4-rel-h" d={p.head} />
+          </g>
         )
       })}
-      {lv === 4 &&
-        Object.values(C4_WIDE.cls).map((c) => <rect key={c.name} className="c4-th-box" x={c.x} y={c.y} width={c.w} height={CH} />)}
+      {m.boxes.map((b) => (
+        <MiniBoxView key={b.id} b={b} />
+      ))}
+    </svg>
+  )
+}
+
+/* Level 4 i miniature: samme klasser og relationer som s. 17, lagt om til 400 bredde. */
+const M4 = {
+  h: 316,
+  cls: [
+    { n: ['InternetBanking', 'SystemException'], x: 242, y: 0, w: 150 },
+    { n: ['MainframeBanking', 'SystemFacadeImpl'], x: 8, y: 106, w: 150 },
+    { n: ['MainframeBanking', 'SystemException'], x: 242, y: 106, w: 150 },
+    { n: ['GetBalanceRequest'], x: 8, y: 180, w: 140 },
+    { n: ['GetBalanceResponse'], x: 252, y: 180, w: 140 },
+    { n: ['BankingSystemConnection'], x: 110, y: 232, w: 180 },
+    { n: ['AbstractRequest'], x: 8, y: 280, w: 140, abstract: true },
+    { n: ['AbstractResponse'], x: 252, y: 280, w: 140 },
+  ],
+  deps: [
+    { a: [158, 127], b: [242, 127], label: '+throws', at: [200, 120], anchor: 'middle' },
+    { a: [50, 148], b: [50, 180], label: '+creates', at: [56, 169], anchor: 'start' },
+    { a: [110, 148], b: [170, 232], label: '+uses', at: [154, 198], anchor: 'start' },
+    { a: [140, 148], b: [310, 180], label: '+parses', at: [222, 160], anchor: 'start' },
+    { a: [150, 262], b: [90, 280], label: '+sends', at: [100, 268], anchor: 'end' },
+    { a: [250, 262], b: [310, 280], label: '+receives', at: [296, 268], anchor: 'start' },
+  ] as { a: [number, number]; b: [number, number]; label: string; at: [number, number]; anchor: 'start' | 'middle' | 'end' }[],
+  gens: [
+    { d: 'M40 210 V269', tip: [40, 280] as [number, number], dir: 'down' as const },
+    { d: 'M360 210 V269', tip: [360, 280] as [number, number], dir: 'down' as const },
+    { d: 'M317 106 V53', tip: [317, 42] as [number, number], dir: 'up' as const },
+  ],
+}
+
+function MiniCode() {
+  return (
+    <svg className="c4-svg c4-thumb" viewBox={`-2 -2 ${MW + 4} ${M4.h + 4}`} aria-hidden="true">
+      <path className="c4-pkg" d="M2 50 V34 H150 V50" />
+      <rect className="c4-pkg" x={2} y={50} width={396} height={262} rx={2} />
+      <text className="c4-pkg-n" x={10} y={68}>
+        <tspan x={10}>com.bigbankplc.internetbanking.</tspan>
+        <tspan x={10} dy={13}>
+          component.mainframe
+        </tspan>
+      </text>
+      <path className="c4-uml" d="M88 97 V106" />
+      <circle className="c4-lolly" cx={88} cy={90} r={7} />
+      <text className="c4-cls-n c4-iface" x={100} y={94} style={{ textAnchor: 'start' }}>
+        MainframeBankingSystemFacade
+      </text>
+      {M4.deps.map((d, i) => {
+        const p = relPath(d.a, d.b)
+        return (
+          <g key={i} className="c4-dep">
+            <path className="c4-dep-l" d={p.line} />
+            <path className="c4-dep-h" d={p.head} />
+            <text className="c4-dep-t" x={d.at[0]} y={d.at[1]} textAnchor={d.anchor}>
+              {d.label}
+            </text>
+          </g>
+        )
+      })}
+      {M4.gens.map((g, i) => (
+        <g key={i} className="c4-gen">
+          <path d={g.d} />
+          <path className="c4-gen-h" d={tri(g.tip, g.dir)} />
+        </g>
+      ))}
+      {M4.cls.map((c) => {
+        const h = 16 + c.n.length * 13
+        return (
+          <g key={c.n.join('')} className="c4-cls">
+            <rect x={c.x} y={c.y} width={c.w} height={h} />
+            <path d={`M${c.x} ${c.y + h - 10} H${c.x + c.w} M${c.x} ${c.y + h - 5} H${c.x + c.w}`} />
+            <text className="c4-cls-n" x={c.x + c.w / 2} y={c.y + 14} fontStyle={c.abstract ? 'italic' : undefined}>
+              {c.n.map((l, i) => (
+                <tspan key={i} x={c.x + c.w / 2} dy={i === 0 ? 0 : 13}>
+                  {l}
+                </tspan>
+              ))}
+            </text>
+          </g>
+        )
+      })}
     </svg>
   )
 }
@@ -716,19 +940,84 @@ const LADDER: { lv: Lv; name: string; who: ReactNode; into?: string }[] = [
   { lv: 4, name: 'Code', who: 'valgfrit (slidet)' },
 ]
 
+/** Smal slutramme: kompakte kort (navn + [type]) pr. niveau, rammen som stiplet boks. */
+const CODE_NAMES: ReactNode[] = [
+  <>InternetBanking<wbr />SystemException</>,
+  <>MainframeBanking<wbr />SystemFacadeImpl</>,
+  <>MainframeBanking<wbr />SystemException</>,
+  'GetBalanceRequest',
+  'GetBalanceResponse',
+  <>BankingSystem<wbr />Connection</>,
+  <i key="a">AbstractRequest</i>,
+  'AbstractResponse',
+]
+function NarrowFinalLevel({ l }: { l: 1 | 2 | 3 }) {
+  const N = NARROW[l]
+  const hot = HOT[l]
+  const cards = (ids: Id[]) => ids.map((id) => <Card key={id} id={id} full={false} short hot={id === hot} />)
+  return (
+    <div className="c4nf-body">
+      <div className="c4nf-grid">{cards(N.above)}</div>
+      {N.frame ? (
+        <div className="c4n-frame">
+          <div className="c4nf-grid">{cards(N.inside)}</div>
+          <span className="c4n-frame-l">{N.frame.label}</span>
+        </div>
+      ) : (
+        <div className="c4nf-grid">{cards(N.inside)}</div>
+      )}
+      <div className="c4nf-grid">{cards(N.below)}</div>
+    </div>
+  )
+}
+
 function Final() {
   return (
-    <ol className="c4-final">
-      {LADDER.map((l) => (
-        <li key={l.lv} className="c4-final-lv">
-          <Thumb lv={l.lv} />
-          <span className="c4-final-n">
-            Level {l.lv} · <b>{l.name}</b> <span className="c4-final-who">— {l.who}</span>
-          </span>
-          {l.into && <span className="c4-final-into">zoom in → {l.into}</span>}
-        </li>
-      ))}
-    </ol>
+    <>
+      <ol className="c4-final">
+        {LADDER.map((l) => (
+          <li key={l.lv} className="c4-final-lv">
+            {l.lv < 4 ? <MiniView m={MINI[l.lv as 1 | 2 | 3]} /> : <MiniCode />}
+            <span className="c4-final-n">
+              Level {l.lv} · <b>{l.name}</b> <span className="c4-final-who">— {l.who}</span>
+            </span>
+            {l.into ? (
+              <span className="c4-final-into">zoom in → {l.into}</span>
+            ) : (
+              <span className="c4-final-who">Pileetiketter og beskrivelser: se trin 1–5.</span>
+            )}
+          </li>
+        ))}
+      </ol>
+      <ol className="c4-final-nar">
+        {LADDER.map((l) => (
+          <li key={l.lv} className="c4nf-lv">
+            <span className="c4-final-n">
+              Level {l.lv} · <b>{l.name}</b> <span className="c4-final-who">— {l.who}</span>
+            </span>
+            {l.lv < 4 ? (
+              <NarrowFinalLevel l={l.lv as 1 | 2 | 3} />
+            ) : (
+              <div className="c4n-frame c4nf-code">
+                <span className="c4n-frame-l mono">com.bigbankplc.internetbanking.<wbr />component.mainframe</span>
+                <ul className="c4nf-cls">
+                  {CODE_NAMES.map((n, i) => (
+                    <li key={i} className="mono">
+                      {n}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            {l.into ? (
+              <span className="c4-final-into">zoom in ↓ {l.into}</span>
+            ) : (
+              <span className="c4-final-who">Pileetiketter og beskrivelser: se trin 1–5.</span>
+            )}
+          </li>
+        ))}
+      </ol>
+    </>
   )
 }
 

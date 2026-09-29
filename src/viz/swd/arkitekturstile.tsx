@@ -2,6 +2,7 @@ import { motion } from 'motion/react'
 import type { ReactNode } from 'react'
 import type { VizDef } from '../kit/types'
 import { t } from '../kit/motion'
+import { Swap } from '../kit/primitives'
 import './arkitekturstile.css'
 
 /* 2-SW-Architecture - Process 2.pdf (PDF-sider): s. 21 (“almost never limited to a
@@ -408,60 +409,74 @@ function Diagram({ L, step, className }: { L: Layout; step: number; className: s
   )
 }
 
-function Legend({ step }: { step: number }) {
-  const items: { on: boolean; sw: ReactNode; label: string }[] = [
-    {
-      on: step >= 1,
-      sw: (
-        <svg viewBox="0 0 32 12">
-          <path className="ast-dep-l" d="M2 6 H28" />
-          <path className="ast-dep-l" d="M22 2 L29 6 L22 10" />
-        </svg>
-      ),
-      label: 'afhængighed (nedad)',
-    },
-    {
-      on: step >= 1,
-      sw: (
-        <svg viewBox="0 0 32 12">
-          <path className="ast-ev-l" d="M2 6 H25" />
-          <path className="ast-ev-h" d="M23 2.5 L30 6 L23 9.5 Z" />
-        </svg>
-      ),
-      label: 'event: data op (illustrativt)',
-    },
-    {
-      on: step >= 3,
-      sw: (
-        <svg viewBox="0 0 32 12">
-          <path className="ast-net-sw" d="M1 6 H31" />
-        </svg>
-      ),
-      label: 'tier-grænse (netværk)',
-    },
-    {
-      on: step >= 3,
-      sw: (
-        <svg viewBox="0 0 32 12">
-          <path className="ast-conn-l" d="M7 6 H25" />
-          <path className="ast-ev-h" d="M8 2.5 L2 6 L8 9.5 Z M24 2.5 L30 6 L24 9.5 Z" />
-        </svg>
-      ),
-      label: 'forbindelse',
-    },
-    { on: step >= 6, sw: <span className="ast-sw ast-sw-tier" />, label: 'tier (fysisk)' },
-    { on: step >= 6, sw: <span className="ast-sw ast-sw-layer" />, label: 'layer (logisk)' },
-  ]
+/* Nøglen viser kun det, der står i billedet i den aktuelle fase: tre lister stablet i
+   samme celle (Swap), så højden ikke hopper. */
+const SW = {
+  layer: <span className="ast-sw ast-sw-layer" />,
+  tier: <span className="ast-sw ast-sw-tier" />,
+  dep: (
+    <svg viewBox="0 0 32 12">
+      <path className="ast-dep-l" d="M2 6 H28" />
+      <path className="ast-dep-l" d="M22 2 L29 6 L22 10" />
+    </svg>
+  ),
+  up: (
+    <svg viewBox="0 0 32 12">
+      <path className="ast-ev-l" d="M2 6 H25" />
+      <path className="ast-ev-h" d="M23 2.5 L30 6 L23 9.5 Z" />
+    </svg>
+  ),
+  net: (
+    <svg viewBox="0 0 32 12">
+      <path className="ast-net-sw" d="M1 6 H31" />
+    </svg>
+  ),
+  conn: (
+    <svg viewBox="0 0 32 12">
+      <path className="ast-conn-l" d="M7 6 H25" />
+      <path className="ast-conn-h" d="M8 2.5 L2 6 L8 9.5 Z M24 2.5 L30 6 L24 9.5 Z" />
+    </svg>
+  ),
+  connHot: (
+    <svg viewBox="0 0 32 12">
+      <path className="ast-ev-l" d="M7 6 H25" />
+      <path className="ast-ev-h" d="M8 2.5 L2 6 L8 9.5 Z M24 2.5 L30 6 L24 9.5 Z" />
+    </svg>
+  ),
+}
+type Item = { on: boolean; sw: ReactNode; label: string; wideOnly?: boolean }
+function LegendList({ items }: { items: Item[] }) {
   return (
     <ul className="ast-legend">
       {items.map((it) => (
-        <motion.li key={it.label} {...vis(it.on)}>
+        <motion.li key={it.label} data-wide-only={it.wideOnly || undefined} {...vis(it.on)}>
           <span className="ast-legend-sw">{it.sw}</span>
           {it.label}
         </motion.li>
       ))}
     </ul>
   )
+}
+function Legend({ step }: { step: number }) {
+  const ph = phaseOf(step)
+  const lists: Record<Phase, Item[]> = {
+    A: [
+      { on: true, sw: SW.layer, label: 'layer (logisk)' },
+      { on: step >= 1, sw: SW.dep, label: 'afhængighed (nedad)' },
+      { on: step >= 1, sw: SW.up, label: 'event: data op (illustrativt)' },
+    ],
+    B: [
+      { on: true, sw: SW.net, label: 'tier-grænse (netværk)' },
+      { on: true, sw: SW.connHot, label: 'forbindelse over netværket' },
+    ],
+    C: [
+      { on: true, sw: SW.tier, label: 'tier (fysisk)' },
+      { on: true, sw: SW.layer, label: 'layer (logisk)' },
+      { on: true, sw: SW.conn, label: 'forbindelse' },
+      { on: step >= 5, sw: SW.up, label: 'constraint på forbindelsen', wideOnly: true },
+    ],
+  }
+  return <Swap show={'ABC'.indexOf(ph)} items={(['A', 'B', 'C'] as Phase[]).map((k) => <LegendList key={k} items={lists[k]} />)} />
 }
 
 function Styles({ step }: { step: number }) {

@@ -404,29 +404,36 @@ const wb = (s: string) =>
     </Fragment>
   ))
 
-function Client({ step }: { step: number }) {
-  const variants: ReactNode[] = [
-    <Code
-      key={0}
-      lines={['// Create a Føtex weight', 'var føtexWs = new WeighingSystem(', <>{'    '}{wb('new FøtexWeighingUnit(), new FøtexPrinter(), new FøtexDisplay());')}</>]}
-    />,
-    <div key={1} className="saf-combos">
+/** De otte kombinationer; med `factory` kan kun de to rene familier laves. */
+function Combos({ factory }: { factory?: boolean }) {
+  return (
+    <div className="saf-combos">
       <div className="saf-combos-head">
-        <span className="saf-count">2 · 2 · 2 = 8 kombinationer</span>
+        <span className="saf-count">{factory ? 'Med en factory: 2 af 8 kan laves' : '2 · 2 · 2 = 8 kombinationer'}</span>
         <span className="saf-legend">F = Føtex, N = Netto (unit · printer · display)</span>
       </div>
       <ol className="saf-combos-grid">
         {COMBOS.map((c, i) => {
           const ok = c.every((f) => f === c[0])
           return (
-            <li key={i} data-ok={ok || undefined}>
+            <li key={i} data-ok={ok || undefined} data-off={(factory && !ok) || undefined}>
               <span className="saf-fam">{c.map((f) => (f === 'f' ? 'F' : 'N')).join(' ')}</span>
-              {ok && <span className="saf-ok">rigtig vægt</span>}
+              {ok && <span className="saf-ok">{factory ? (c[0] === 'f' ? 'Føtex\u00adFactory' : 'Netto\u00adFactory') : 'rigtig vægt'}</span>}
             </li>
           )
         })}
       </ol>
-    </div>,
+    </div>
+  )
+}
+
+function Client({ step }: { step: number }) {
+  const variants: ReactNode[] = [
+    <Code
+      key={0}
+      lines={['// Create a Føtex weight', 'var føtexWs = new WeighingSystem(', <>{'    '}{wb('new FøtexWeighingUnit(), new FøtexPrinter(), new FøtexDisplay());')}</>]}
+    />,
+    <Combos key={1} />,
     <div key={2}>
       <Code
         lines={[
@@ -462,13 +469,15 @@ function Client({ step }: { step: number }) {
       ]}
     />,
     <Code key={4} lines={['// Create a Netto weight', <>var nettoWs = {wb('new WeighingSystem(')}{hl('new NettoFactory()')});</>]} />,
-    <Code
-      key={5}
-      lines={[
-        <>var nettoWs = {wb('new WeighingSystem(new NettoFactory());')}</>,
-        <>var føtexWs = {wb('new WeighingSystem(')}{hl('new FøtexFactory()')});</>,
-      ]}
-    />,
+    <div key={5} className="saf-final">
+      <Code
+        lines={[
+          <>var nettoWs = {wb('new WeighingSystem(new NettoFactory());')}</>,
+          <>var føtexWs = {wb('new WeighingSystem(')}{hl('new FøtexFactory()')});</>,
+        ]}
+      />
+      <Combos factory />
+    </div>,
   ]
   return (
     <div className="saf-client">
