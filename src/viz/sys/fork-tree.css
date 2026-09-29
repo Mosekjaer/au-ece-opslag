@@ -1,0 +1,178 @@
+.sx-fork {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 1.25rem 1.75rem;
+  align-items: start;
+}
+
+.sx-fork-codewrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  min-width: 0;
+}
+
+.sx-fork-code {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 0.4rem 0.35rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+}
+.sx-fork-code li {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  min-height: 1.65rem;
+  padding: 0 0.35rem 0 0.2rem;
+  border-radius: 3px;
+  color: var(--ink-2);
+  transition:
+    background-color 0.35s var(--ease-out),
+    color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.sx-fork-code li[data-tone='focus'] {
+  background: var(--accent-soft);
+  color: var(--ink);
+  box-shadow: inset 2px 0 0 var(--accent);
+}
+.sx-fork-gut {
+  display: flex;
+  gap: 2px;
+  flex: none;
+}
+.sx-fork-slot {
+  display: inline-flex;
+  justify-content: center;
+  width: 1.45rem;
+}
+.sx-fork-slot .vtoken {
+  padding: 0.05rem 0.4rem;
+  font-size: 0.6875rem;
+}
+.sx-fork-line {
+  min-width: 0;
+  padding: 0;
+  background: none;
+  box-shadow: none;
+  border-radius: 0;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-variant-ligatures: none;
+}
+
+.sx-fork-out {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-height: 2rem;
+  padding: 0.3rem 0.65rem;
+  border-radius: var(--radius-sm);
+  box-shadow: inset 0 0 0 1px var(--rule);
+}
+.sx-fork-out code {
+  font-size: 0.75rem;
+  color: var(--ink);
+}
+
+/* Processerne */
+.sx-fork-procs {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.sx-fork-proc {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.sx-fork-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.5rem;
+  margin-bottom: 0.15rem;
+}
+.sx-fork-badge {
+  display: inline-grid;
+  place-items: center;
+  width: 1.3rem;
+  height: 1.3rem;
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--paper);
+  background: var(--accent);
+}
+.sx-fork-name {
+  font-weight: 600;
+}
+.sx-fork-state {
+  margin-left: auto;
+}
+.sx-fork-proc[data-tone='muted'] .sx-fork-badge,
+.sx-fork-proc[data-tone='ghost'] .sx-fork-badge {
+  background: var(--ink-3);
+}
+
+.sx-fork-row {
+  display: grid;
+  grid-template-columns: 6rem minmax(0, 1fr);
+  align-items: baseline;
+  gap: 0.5rem;
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+  font-size: 0.8125rem;
+  transition: background-color 0.35s var(--ease-out);
+}
+.sx-fork-row[data-tone='focus'] {
+  background: var(--accent-soft);
+}
+.sx-fork-k {
+  font-size: 0.75rem;
+  color: var(--ink-3);
+}
+.sx-fork-k code,
+.sx-fork-v code {
+  font-size: 0.75rem;
+}
+.sx-fork-v {
+  min-width: 0;
+  color: var(--ink);
+}
+.sx-fork-dim {
+  color: var(--ink-3);
+}
+.sx-fork-proc[data-tone='muted'] .sx-fork-v {
+  color: var(--ink-3);
+}
+
+.sx-fork-links {
+  display: flex;
+  gap: 5.5rem;
+  padding-left: 1.5rem;
+  margin: 0.2rem 0;
+}
+.sx-fork-link .vlink-label code {
+  font-size: 0.6875rem;
+}
+
+@container (max-width: 40rem) {
+  .sx-fork {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .sx-fork-row {
+    grid-template-columns: 5.25rem minmax(0, 1fr);
+  }
+  .sx-fork-links {
+    gap: 4.5rem;
+    padding-left: 1rem;
+  }
+}

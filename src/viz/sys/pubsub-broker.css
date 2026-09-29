@@ -1,0 +1,208 @@
+/* Publish–subscribe: publishers → «Singleton» Broker → subscribers pr. topic. */
+.sps {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+.sps-flow {
+  align-items: center;
+}
+.sps-flow > .vlink {
+  flex: 0 0 4.75rem;
+  min-width: 4.75rem;
+}
+
+.sps-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  flex: 0 1 10.5rem;
+  min-width: 0;
+}
+.sps-subs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.sps-node {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+  padding: 0.4rem 0.6rem 0.45rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.sps-node[data-now] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.sps-title {
+  font-weight: 600;
+  font-size: 0.8125rem;
+  line-height: 1.3;
+}
+.sps-sub {
+  font-size: 0.6875rem;
+  color: var(--ink-3);
+  background: none;
+  box-shadow: none;
+  padding: 0;
+}
+.sps-slot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.3rem;
+  min-height: 1.45rem;
+}
+.sps-stack {
+  display: grid;
+}
+.sps-stack > * {
+  grid-area: 1 / 1;
+}
+
+/* Brokeren */
+.sps-broker {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  flex: 1 1 22rem;
+  min-width: 0;
+  padding: 0.6rem 0.75rem 0.7rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1.5px var(--rule-strong);
+  transition: box-shadow 0.35s var(--ease-out);
+}
+.sps-broker[data-now] {
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.sps-bhead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.1rem 0.5rem;
+}
+.sps-stereo {
+  font-size: 0.75rem;
+  color: var(--ink-3);
+}
+.sps-bhead .sps-sub {
+  flex-basis: 100%;
+}
+.sps-map {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.sps-maptype {
+  font-size: 0.6875rem;
+  color: var(--ink-2);
+  background: none;
+  box-shadow: none;
+  padding: 0 0 0.15rem;
+  overflow-wrap: normal;
+}
+.sps-row {
+  display: grid;
+  grid-template-columns: 7.2rem minmax(0, 1fr);
+  grid-template-areas: 'key h' 'slot h';
+  align-items: center;
+  gap: 0.25rem 0.5rem;
+  padding: 0.35rem 0.45rem;
+  border-radius: 3px;
+  box-shadow: inset 0 0 0 1px var(--rule);
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.sps-row[data-now] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1px var(--accent-mid);
+}
+.sps-key {
+  grid-area: key;
+  align-self: start;
+  padding-top: 0.1rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--ink-3);
+  background: none;
+  box-shadow: none;
+  padding-inline: 0;
+  transition: color 0.35s var(--ease-out);
+}
+.sps-row[data-on] .sps-key {
+  color: var(--ink);
+}
+.sps-handlers {
+  grid-area: h;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  min-height: 1.35rem;
+}
+.sps-row .sps-slot {
+  grid-area: slot;
+}
+.sps-h {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.05rem 0.4rem;
+  border-radius: 3px;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--ink-2);
+  background: var(--paper-2);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  white-space: nowrap;
+}
+
+.sps-note {
+  font-size: 0.8125rem;
+  color: var(--ink-2);
+  text-align: center;
+}
+.sps-note code {
+  font-size: 0.75rem;
+}
+
+@container (max-width: 40rem) {
+  .sps-flow.vflow.stack {
+    align-items: stretch;
+  }
+  .sps-flow > .vlink {
+    flex: none;
+  }
+  .sps-col {
+    flex: none;
+  }
+  .sps-col:first-child {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .sps-col:first-child > .vcaps {
+    grid-column: 1 / -1;
+  }
+  .sps-subs {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .sps-broker {
+    flex: none;
+  }
+  .sps-row {
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas: 'key slot' 'h h';
+  }
+  .sps-note {
+    text-align: left;
+  }
+}

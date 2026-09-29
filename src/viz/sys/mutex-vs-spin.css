@@ -1,0 +1,138 @@
+.sx-ms {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+.sx-ms-panels {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+.sx-ms-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+.sx-ms-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.1rem 0.6rem;
+  margin-bottom: 0.3rem;
+}
+.sx-ms-kind {
+  font-weight: 600;
+  font-size: 0.9375rem;
+}
+.sx-ms-type {
+  padding: 0;
+  background: none;
+  box-shadow: none;
+  font-size: 0.75rem;
+  color: var(--ink-3);
+}
+
+.sx-ms-slot {
+  display: grid;
+  grid-template-columns: 6.5rem minmax(0, 1fr);
+  align-items: center;
+  column-gap: 0.6rem;
+  min-height: 2.5rem;
+  padding: 0.3rem 0.6rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.sx-ms-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--ink-3);
+}
+.sx-ms-tokens {
+  display: flex;
+  gap: 0.4rem;
+  min-height: 1.6rem;
+  align-items: center;
+}
+
+.sx-ms-lock[data-tone='held'] {
+  box-shadow: inset 0 0 0 1.5px var(--ink-3);
+}
+.sx-ms-lockval {
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
+.sx-ms-lockval code {
+  padding: 0;
+  background: none;
+  box-shadow: none;
+  font-size: 0.8125rem;
+}
+.sx-ms-cs[data-tone='focus'] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+
+.sx-ms-wait {
+  min-height: 3.6rem;
+}
+.sx-ms-wait[data-tone='sleep'] {
+  background: var(--paper-2);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+}
+.sx-ms-wait[data-tone='hot'] {
+  background: var(--neg-soft);
+  box-shadow: inset 0 0 0 1.5px var(--neg);
+}
+.sx-ms-waitrow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+}
+.sx-ms-waitrow .sx-ms-tokens {
+  flex: none;
+  min-width: 2.4rem;
+}
+.sx-ms-note {
+  flex: 1 1 auto;
+  font-size: 0.75rem;
+  line-height: 1.35;
+  color: var(--ink-2);
+}
+.sx-ms-note code {
+  padding: 0;
+  background: none;
+  box-shadow: none;
+  font-size: 0.75rem;
+}
+
+.sx-ms-cost {
+  margin-top: 0.3rem;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--ink-2);
+}
+.sx-ms-rule {
+  padding: 0.55rem 0.8rem;
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--ink-2);
+}
+
+@container (max-width: 40rem) {
+  .sx-ms-panels {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.1rem;
+  }
+  .sx-ms-slot {
+    grid-template-columns: 5.5rem minmax(0, 1fr);
+  }
+}

@@ -1,0 +1,304 @@
+/* Paging: adresseoversættelse. p = accent, d = sekundær farve, f = accent. */
+.spt {
+  --spt-d: var(--fed);
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+/* Vejen: fem celler med pile */
+.spt-path {
+  display: grid;
+  grid-template-columns: auto 1.25rem auto 1.25rem auto 1.25rem auto 1.25rem auto;
+  align-items: stretch;
+  justify-content: start;
+  row-gap: 0.4rem;
+}
+.spt-cell {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.2rem;
+  min-width: 0;
+  padding: 0.4rem 0.6rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+}
+.spt-va[data-on] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.spt-k {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--ink-3);
+  white-space: nowrap;
+}
+.spt-big {
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+.spt-bits {
+  display: inline-flex;
+  gap: 0.15rem;
+  font-size: 0.75rem;
+}
+.spt-bits b {
+  padding: 0 0.2rem;
+  border-radius: 2px;
+  font-weight: 600;
+}
+.spt-eq {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  font-size: 0.8125rem;
+  white-space: nowrap;
+}
+.spt [data-part='p'],
+.spt [data-part='f'] {
+  color: var(--accent);
+  font-weight: 600;
+}
+.spt [data-part='d'] {
+  color: var(--spt-d);
+  font-weight: 600;
+}
+.spt-bits b[data-part='p'] {
+  background: var(--accent-soft);
+}
+.spt-bits b[data-part='d'] {
+  background: color-mix(in oklab, var(--spt-d) 12%, var(--paper));
+}
+.spt-byte .spt-big {
+  color: var(--accent);
+}
+
+.spt-arrow {
+  position: relative;
+  align-self: center;
+  height: 1.5px;
+  margin: 0 3px 0 1px;
+  background: var(--rule-strong);
+  transition: background-color 0.35s var(--ease-out);
+}
+.spt-arrow::after {
+  content: '';
+  position: absolute;
+  right: -3px;
+  top: -3.5px;
+  border-left: 6px solid currentColor;
+  border-top: 4.25px solid transparent;
+  border-bottom: 4.25px solid transparent;
+  color: var(--rule-strong);
+}
+.spt-arrow[data-on] {
+  background: var(--accent);
+}
+.spt-arrow[data-on]::after {
+  color: var(--accent);
+}
+
+/* De tre hukommelser */
+.spt-mem {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-template-areas:
+    'virt tab phys'
+    'sheet sheet phys';
+  grid-template-rows: auto 1fr;
+  justify-content: start;
+  align-items: start;
+  gap: 1rem 2rem;
+}
+.spt-virt { grid-area: virt; }
+.spt-tableblock { grid-area: tab; }
+.spt-phys { grid-area: phys; }
+.spt-sheet { grid-area: sheet; }
+.spt-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  min-width: 0;
+}
+.spt-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.spt-row {
+  display: grid;
+  grid-template-columns: 3.4rem repeat(4, 1.9rem);
+  gap: 2px;
+  align-items: stretch;
+  border-radius: 3px;
+}
+.spt-lab {
+  align-self: center;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--ink-3);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.spt-byte-cell {
+  position: relative;
+  display: grid;
+  place-items: center;
+  height: 1.7rem;
+  border-radius: 2px;
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule);
+  font-size: 0.8125rem;
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out),
+    color 0.35s var(--ease-out);
+}
+.spt-addr {
+  position: absolute;
+  top: 1px;
+  left: 3px;
+  font-size: 0.6875rem;
+  line-height: 1;
+  color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+  opacity: 0.8;
+}
+.spt-byte-cell .mono {
+  padding-top: 0.45rem;
+  font-size: 0.8125rem;
+}
+.spt-row[data-empty] .spt-byte-cell {
+  background: transparent;
+}
+.spt-row[data-hot] .spt-lab {
+  color: var(--accent);
+}
+.spt-row[data-hot] .spt-byte-cell {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1px var(--accent-mid);
+}
+.spt-byte-cell[data-hit],
+.spt-row[data-hot] .spt-byte-cell[data-hit] {
+  background: var(--accent);
+  color: var(--paper);
+  box-shadow: none;
+}
+.spt-byte-cell[data-hit] .spt-addr {
+  color: var(--paper);
+}
+
+.spt-table {
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 0.8125rem;
+  background: var(--paper);
+  border-radius: var(--radius-sm);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+}
+.spt-table th,
+.spt-table td {
+  padding: 0.28rem 0.75rem;
+  text-align: center;
+  transition:
+    background-color 0.35s var(--ease-out),
+    color 0.35s var(--ease-out);
+}
+.spt-table th {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--ink-2);
+  border-bottom: 1px solid var(--rule-strong);
+  font-family: var(--font-mono);
+}
+.spt-table tbody tr + tr td {
+  border-top: 1px solid var(--rule);
+}
+.spt-table tr[data-hot] td {
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* Regnearket */
+.spt-sheet {
+  align-self: start;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 0.8125rem;
+  font-variant-numeric: tabular-nums;
+  background: var(--paper);
+  border-radius: var(--radius-sm);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+}
+.spt-sheet th,
+.spt-sheet td {
+  position: relative;
+  padding: 0.26rem 0.7rem;
+  text-align: left;
+  white-space: nowrap;
+  transition: background-color 0.35s var(--ease-out);
+}
+.spt-sheet th {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--ink-2);
+  border-bottom: 1px solid var(--rule-strong);
+}
+.spt-sheet tbody tr + tr td {
+  border-top: 1px solid var(--rule);
+}
+.spt-sheet tr[data-now] td {
+  background: var(--accent-soft);
+}
+.spt-q {
+  position: absolute;
+  left: 0.7rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--ink-3);
+}
+
+@container (max-width: 40rem) {
+  .spt-path {
+    grid-template-columns: repeat(2, auto);
+    grid-auto-flow: row;
+    gap: 0.4rem;
+  }
+  .spt-arrow {
+    display: none;
+  }
+  .spt-cell {
+    padding: 0.35rem 0.5rem;
+  }
+  .spt-eq {
+    font-size: 0.75rem;
+  }
+  .spt-mem {
+    grid-template-columns: auto auto;
+    grid-template-areas:
+      'virt tab'
+      'phys phys'
+      'sheet sheet';
+    grid-template-rows: auto;
+    gap: 0.9rem 1rem;
+  }
+  .spt-row {
+    grid-template-columns: 1.1rem repeat(4, 1.75rem);
+  }
+  .spt-lab-long {
+    display: none;
+  }
+  .spt-table th,
+  .spt-table td {
+    padding: 0.28rem 0.55rem;
+  }
+  .spt-sheet th,
+  .spt-sheet td {
+    padding: 0.24rem 0.45rem;
+    font-size: 0.75rem;
+  }
+}

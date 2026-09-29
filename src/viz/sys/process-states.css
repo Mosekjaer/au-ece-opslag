@@ -1,0 +1,300 @@
+/* Bred plade: new → ready ⇄ running → terminated på én række, waiting under
+   ready og running (bogens fig. 3.2, rettet ud). */
+.ps {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr) 5.5rem minmax(0, 1fr) 9rem minmax(0, 1fr) 3.5rem
+    minmax(0, 1fr);
+  grid-template-rows: auto 3.5rem auto;
+  column-gap: 0.4rem;
+  align-items: center;
+}
+
+.ps-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  min-width: 0;
+  text-align: center;
+}
+.ps-node .vnode-title {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 0.8125rem;
+}
+.ps-slot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 1.6rem;
+}
+
+.ps-new {
+  grid-area: 1 / 1;
+}
+.ps-admitted {
+  grid-area: 1 / 2;
+}
+.ps-ready {
+  grid-area: 1 / 3;
+}
+.ps-pair {
+  grid-area: 1 / 4;
+}
+.ps-running {
+  grid-area: 1 / 5;
+}
+.ps-exit {
+  grid-area: 1 / 6;
+}
+.ps-terminated {
+  grid-area: 1 / 7;
+}
+.ps-completion {
+  grid-area: 2 / 3;
+}
+.ps-wait {
+  grid-area: 2 / 5;
+}
+.ps-waiting {
+  grid-area: 3 / 3 / 4 / 6;
+}
+
+.ps-l {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+.ps-l > .vlink {
+  flex: 1 1 auto;
+}
+.ps-l .vlink-label {
+  font-size: 0.6875rem;
+}
+
+.ps-hpair {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  gap: 0.35rem;
+  padding: 1rem 0;
+}
+.ps-hpair .vlink {
+  flex: none;
+  width: 100%;
+  height: 1.1rem;
+}
+.ps-below .vlink-label {
+  bottom: auto;
+  top: 100%;
+}
+
+.ps-completion,
+.ps-wait {
+  position: relative;
+  align-self: stretch;
+  justify-content: center;
+}
+.ps-completion .vlink.is-v,
+.ps-wait .vlink.is-v {
+  height: auto;
+  align-self: stretch;
+}
+.ps-completion .ps-vl,
+.ps-wait .ps-vl {
+  position: absolute;
+  top: 50%;
+  left: calc(50% + 1rem);
+  transform: translateY(-50%);
+  white-space: nowrap;
+}
+
+.ps-vl {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: var(--ink-3);
+  transition: color 0.35s var(--ease-out);
+}
+.ps-vl[data-tone='focus'] {
+  color: var(--accent);
+  font-weight: 600;
+}
+.ps-l .vlink[data-tone='focus'] .vlink-label {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* Kun på smal plade. */
+.ps-n {
+  display: none;
+}
+
+@container (max-width: 46rem) {
+  .ps {
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) 1.25rem;
+    grid-template-rows: auto 2.25rem auto 3.25rem auto 3rem auto;
+    column-gap: 0;
+  }
+  .ps-w {
+    display: none;
+  }
+  .ps-n {
+    display: flex;
+  }
+
+  .ps-new {
+    grid-area: 1 / 1;
+  }
+  .ps-admitted {
+    grid-area: 2 / 1;
+  }
+  .ps-ready {
+    grid-area: 3 / 1;
+  }
+  .ps-pair {
+    grid-area: 4 / 1 / 5 / 3;
+  }
+  .ps-running {
+    grid-area: 5 / 1;
+  }
+  .ps-exit {
+    grid-area: 6 / 1;
+  }
+  .ps-terminated {
+    grid-area: 7 / 1;
+    margin-right: 0.4rem;
+  }
+  .ps-waiting {
+    grid-area: 7 / 2;
+    margin-left: 0.4rem;
+  }
+
+  .ps-l {
+    align-self: stretch;
+  }
+  .ps-vrow {
+    align-items: stretch;
+    gap: 0;
+    padding-left: 0.6rem;
+  }
+  .ps-vrow .vlink.is-v {
+    height: auto;
+    align-self: stretch;
+  }
+  .ps-vrow .ps-vl,
+  .ps-vls {
+    align-self: center;
+    margin-left: 0.35rem;
+  }
+  .ps-vls {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+  }
+  .ps-vls .ps-vl {
+    margin-left: 0;
+  }
+
+  /* Vinkelforbindelser. Farven følger tonen via currentColor. */
+  .ps-c {
+    position: relative;
+    align-self: stretch;
+    color: var(--rule-strong);
+    transition: color 0.35s var(--ease-out);
+  }
+  .ps-c[data-tone='focus'] {
+    color: var(--accent);
+  }
+  .ps-c::before {
+    content: '';
+    position: absolute;
+    border: 0 solid currentColor;
+  }
+  .ps-clabel {
+    position: absolute;
+    left: 0.9rem;
+    right: 0.25rem;
+    bottom: calc(50% + 0.3rem);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    line-height: 1.25;
+    color: var(--ink-3);
+  }
+  .ps-c[data-tone='focus'] .ps-clabel {
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  /* completion: fra waiting ud til højre, op langs kanten og ind i ready. */
+  .ps-comp-a {
+    grid-area: 3 / 2 / 4 / 4;
+  }
+  .ps-comp-a::before {
+    left: 0;
+    right: calc(0.625rem - 0.75px);
+    top: calc(50% - 0.75px);
+    bottom: 0;
+    border-top-width: 1.5px;
+    border-right-width: 1.5px;
+    border-top-right-radius: 4px;
+  }
+  /* Pilespids ind i ready. */
+  .ps-comp-a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: calc(50% - 4.25px);
+    border-right: 7px solid currentColor;
+    border-top: 4.25px solid transparent;
+    border-bottom: 4.25px solid transparent;
+  }
+  .ps-comp-b {
+    grid-area: 4 / 3 / 7 / 4;
+  }
+  .ps-comp-b::before {
+    left: 0;
+    right: calc(50% - 0.75px);
+    top: 0;
+    bottom: 0;
+    border-right-width: 1.5px;
+  }
+  .ps-comp-c {
+    grid-area: 7 / 3;
+  }
+  .ps-comp-c::before {
+    left: 0;
+    right: calc(50% - 0.75px);
+    top: 0;
+    bottom: calc(50% - 0.75px);
+    border-bottom-width: 1.5px;
+    border-right-width: 1.5px;
+    border-bottom-right-radius: 4px;
+  }
+
+  /* wait: fra running ud til højre og ned i waiting. */
+  .ps-wait-a {
+    grid-area: 5 / 2;
+  }
+  .ps-wait-a::before {
+    left: 0;
+    right: calc(50% - 0.2rem - 0.75px);
+    top: calc(50% - 0.75px);
+    bottom: 0;
+    border-top-width: 1.5px;
+    border-right-width: 1.5px;
+    border-top-right-radius: 4px;
+  }
+  .ps-wait-a .ps-clabel {
+    left: 0.4rem;
+  }
+  .ps-wait-b {
+    grid-area: 6 / 2;
+    justify-content: center;
+    padding-left: 0.4rem;
+  }
+  .ps-wait-b .vlink.is-v {
+    height: auto;
+    align-self: stretch;
+  }
+}

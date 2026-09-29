@@ -1,0 +1,205 @@
+/* Ressourceallokeringsgraf + Coffman-betingelserne ved siden af. */
+.rg {
+  display: grid;
+  grid-template-columns: minmax(0, 20rem) minmax(0, 1fr);
+  gap: 1.25rem 2rem;
+  align-items: start;
+}
+
+.rg-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  min-width: 0;
+}
+
+.rg-trace {
+  min-height: 1.9rem;
+}
+.rg-trace-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem 0.5rem;
+  font-size: 0.8125rem;
+}
+.rg-trace-row code {
+  font-size: 0.8125rem;
+}
+.rg-trace-row[data-dead] code {
+  color: var(--neg);
+  font-weight: 600;
+}
+.rg-t {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+}
+
+.rg-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+/* Knuder */
+.rg-shape {
+  fill: var(--paper);
+  stroke: var(--rule-strong);
+  stroke-width: 1.25;
+  transition:
+    fill 0.35s var(--ease-out),
+    stroke 0.35s var(--ease-out);
+}
+.rg-name {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  fill: var(--ink);
+  font-variant-ligatures: none;
+}
+.rg-dot {
+  fill: var(--ink-2);
+  transition: fill 0.35s var(--ease-out);
+}
+.rg-node[data-tone='held'] .rg-shape {
+  stroke: var(--accent);
+  stroke-width: 1.5;
+}
+.rg-node[data-tone='focus'] .rg-shape {
+  fill: var(--accent-soft);
+  stroke: var(--accent);
+  stroke-width: 1.75;
+}
+.rg-node[data-tone='neg'] .rg-shape {
+  fill: var(--neg-soft);
+  stroke: var(--neg);
+  stroke-width: 1.75;
+}
+.rg-node[data-tone='neg'] .rg-dot {
+  fill: var(--neg);
+}
+
+/* Kanter */
+.rg-edge {
+  color: var(--ink-2);
+  transition: color 0.35s var(--ease-out);
+}
+.rg-edge[data-tone='focus'] {
+  color: var(--accent);
+}
+.rg-edge[data-tone='neg'] {
+  color: var(--neg);
+}
+.rg-line {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.75;
+}
+.rg-head {
+  fill: currentColor;
+}
+.rg-elabel {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-weight: 500;
+  fill: var(--ink-3);
+}
+
+.rg-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem 1rem;
+}
+.rg-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+.rg-key {
+  display: inline-block;
+  width: 0.8rem;
+  height: 0.8rem;
+  box-shadow: inset 0 0 0 1.25px var(--rule-strong);
+  background: var(--paper);
+}
+.rg-key-circle {
+  border-radius: 50%;
+}
+.rg-key-rect {
+  width: 1.1rem;
+  border-radius: 2px;
+  background: radial-gradient(circle, var(--ink-2) 0 2px, var(--paper) 2.5px);
+}
+
+/* Betingelserne */
+.rg-side {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  min-width: 0;
+  padding-top: 0.2rem;
+}
+.rg-conds {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.rg-cond {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.45rem 0.7rem 0.5rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule);
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.rg-cond[data-state='now'] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.rg-cond[data-state='done'] {
+  box-shadow: inset 0 0 0 1px var(--accent-mid);
+}
+.rg-cond-name {
+  font-weight: 600;
+  font-size: 0.8125rem;
+  color: var(--ink);
+}
+.rg-cond[data-state='off'] .rg-cond-name {
+  color: var(--ink-3);
+}
+.rg-cond-why {
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: var(--ink-2);
+  overflow-wrap: anywhere;
+  hyphens: manual;
+}
+.rg-cond-why code {
+  font-size: 0.75rem;
+}
+.rg-verdict {
+  font-size: 0.8125rem;
+  color: var(--ink-2);
+}
+.rg-verdict strong {
+  color: var(--neg);
+}
+
+@container (max-width: 40rem) {
+  .rg {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .rg-left {
+    max-width: 20rem;
+    width: 100%;
+    margin: 0 auto;
+  }
+}

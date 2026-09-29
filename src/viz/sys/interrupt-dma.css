@@ -1,0 +1,156 @@
+.idm {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.idm-axis {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: -0.4rem;
+}
+
+.idm-lane {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  padding: 0.7rem 0.8rem 0.6rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  transition: box-shadow 0.35s var(--ease-out);
+}
+.idm-lane[data-focus] {
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+
+.idm-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.15rem 0.7rem;
+}
+.idm-name {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+.idm-def {
+  font-size: 0.75rem;
+  color: var(--ink-3);
+}
+
+.idm-tracks {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.idm-track {
+  display: grid;
+  grid-template-columns: 7.5rem minmax(0, 1fr);
+  align-items: center;
+  gap: 0.6rem;
+}
+.idm-who {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--ink-3);
+  text-align: right;
+}
+.idm-bar {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 3px;
+  min-height: 2.2rem;
+  padding: 3px;
+  border-radius: 4px;
+  background: var(--paper-2);
+  box-shadow: inset 0 0 0 1px var(--rule);
+}
+
+.idm-seg {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  padding: 0.2rem 0.45rem;
+  border-radius: 3px;
+  transform-origin: left center;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  line-height: 1.25;
+  transition: box-shadow 0.35s var(--ease-out);
+}
+.idm-seg-label {
+  min-width: 0;
+  overflow-wrap: break-word;
+  hyphens: manual;
+}
+/* CPU’en arbejder med I/O */
+.idm-seg[data-kind='io'] {
+  color: var(--paper);
+  background: var(--accent);
+}
+/* CPU’en venter og spilder tiden */
+.idm-seg[data-kind='waste'] {
+  color: var(--neg);
+  background: var(--neg-soft);
+  box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--neg) 45%, var(--paper));
+}
+/* CPU’en er fri til andet */
+.idm-seg[data-kind='free'] {
+  color: var(--ink-3);
+  background: var(--paper);
+  outline: 1px dashed var(--rule-strong);
+  outline-offset: -1px;
+}
+.idm-seg[data-kind='irq'] {
+  justify-content: center;
+  color: var(--accent);
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+/* Controlleren arbejder */
+.idm-seg[data-kind='dev'] {
+  color: var(--ink);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--ink-3);
+}
+
+.idm-result {
+  min-height: 1.2em;
+  padding-left: 8.1rem;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: var(--ink-2);
+}
+
+.idm-caveat {
+  font-size: 0.75rem;
+  line-height: 1.45;
+  font-style: italic;
+  color: var(--ink-3);
+}
+
+@container (max-width: 40rem) {
+  .idm-track {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.25rem;
+  }
+  .idm-who {
+    text-align: left;
+  }
+  /* Smal plade: segmenterne ligger under hinanden i tidsrækkefølge. */
+  .idm-bar {
+    grid-template-columns: minmax(0, 1fr);
+    min-height: 0;
+  }
+  .idm-seg {
+    grid-column: 1 / -1 !important;
+    min-height: 1.7rem;
+  }
+  .idm-result {
+    padding-left: 0;
+  }
+  .idm-axis {
+    display: none;
+  }
+}

@@ -1,0 +1,222 @@
+.rs {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.rs-cols {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 1.25rem;
+}
+
+.rs-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  min-width: 0;
+}
+
+.rs-kicker {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--ink-2);
+}
+.rs-col[data-side='auto'] .rs-kicker {
+  color: var(--accent);
+}
+
+/* Kodelinjerne */
+.rs-code {
+  display: flex;
+  flex-direction: column;
+  padding: 0.45rem 0;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+}
+.rs-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.2rem 0.6rem;
+  min-height: 1.9rem;
+  padding: 0.15rem 0.7rem;
+  border-left: 3px solid transparent;
+  transition:
+    background-color 0.35s var(--ease-out),
+    border-color 0.35s var(--ease-out),
+    color 0.35s var(--ease-out);
+}
+.rs-line[data-inner] {
+  padding-left: 1.7rem;
+}
+.rs-src {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  font-variant-ligatures: none;
+  color: var(--ink);
+  overflow-wrap: break-word;
+  hyphens: manual;
+}
+.rs-mark {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.3rem;
+}
+.rs-note {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: var(--accent);
+}
+
+.rs-line[data-s='now'] {
+  background: var(--accent-soft);
+  border-left-color: var(--accent);
+}
+.rs-line[data-s='done'] .rs-note {
+  color: var(--ink-3);
+}
+.rs-line[data-s='throw'] {
+  background: var(--neg-soft);
+  border-left-color: var(--neg);
+}
+.rs-line[data-s='skip'] .rs-src {
+  color: var(--ink-3);
+  text-decoration: line-through;
+  text-decoration-color: var(--neg);
+}
+.rs-line[data-s='dtor'] {
+  background: var(--accent-soft);
+  border-left-color: var(--accent);
+}
+
+/* Mutexens tilstand */
+.rs-mutex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.4rem 0.7rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.rs-mutex-name {
+  font-size: 0.75rem;
+  color: var(--ink-2);
+}
+.rs-mutex-name code {
+  font-family: var(--font-mono);
+  font-weight: 600;
+}
+.rs-mutex-state {
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+.rs-mutex[data-tone='focus'] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.rs-mutex[data-tone='neg'] {
+  background: var(--neg-soft);
+  box-shadow: inset 0 0 0 1.5px var(--neg);
+}
+.rs-mutex[data-tone='neg'] .rs-mutex-state {
+  color: var(--neg);
+}
+.rs-mutex[data-tone='ok'] {
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.rs-mutex[data-tone='ok'] .rs-mutex-state {
+  color: var(--accent);
+}
+
+/* Veje ud af scopet */
+.rs-exits {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.rs-exit {
+  display: grid;
+  grid-template-columns: 7.2rem auto minmax(0, 1fr);
+  align-items: baseline;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+}
+.rs-exit-how {
+  color: var(--ink-2);
+  font-weight: 500;
+}
+.rs-exit-arrow {
+  color: var(--ink-3);
+}
+.rs-exit-res {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  color: var(--neg);
+  overflow-wrap: break-word;
+}
+.rs-exit[data-ok] .rs-exit-res {
+  color: var(--accent);
+}
+
+/* Idiomet fra raii.cpp */
+.rs-idiom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--rule);
+}
+.rs-idiom code {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  font-variant-ligatures: none;
+}
+.rs-idiom-file code {
+  font-weight: 600;
+  color: var(--ink-2);
+}
+.rs-idiom-part {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.45rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-sm);
+  box-shadow: inset 0 0 0 1px var(--rule);
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.rs-idiom-verb {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--ink-3);
+}
+.rs-idiom-part[data-on] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.rs-idiom-part[data-on] .rs-idiom-verb {
+  color: var(--accent);
+}
+
+@container (max-width: 40rem) {
+  .rs-cols {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .rs-exit {
+    grid-template-columns: 6.6rem auto minmax(0, 1fr);
+  }
+  .rs-idiom-part {
+    flex-wrap: wrap;
+  }
+}

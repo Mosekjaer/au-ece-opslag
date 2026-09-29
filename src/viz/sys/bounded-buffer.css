@@ -1,0 +1,200 @@
+/* Bounded buffer: semaforer og ringbuffer øverst, producer- og consumerkode under. */
+.bb {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.bb-top {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 1rem 2rem;
+  align-items: start;
+}
+
+/* Semaforerne */
+.bb-sems {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+}
+.bb-sem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.1rem;
+  padding: 0.45rem 0.3rem 0.5rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+  text-align: center;
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.bb-sem[data-tone='zero'] {
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+}
+.bb-sem[data-tone='neg'] {
+  background: var(--neg-soft);
+  box-shadow: inset 0 0 0 1.5px var(--neg);
+}
+.bb-sem-name {
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+.bb-sem-v {
+  font-family: var(--font-mono);
+  font-size: 1.375rem;
+  font-weight: 600;
+  line-height: 1.2;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+}
+.bb-sem[data-tone='neg'] .bb-sem-v {
+  color: var(--neg);
+}
+.bb-sem-note {
+  font-size: 0.6875rem;
+  line-height: 1.3;
+  color: var(--ink-3);
+}
+
+/* Ringbufferen */
+.bb-ring {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  min-width: 0;
+}
+.bb-ring .vcaps code {
+  font-size: 0.6875rem;
+}
+.bb-slots {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+}
+.bb-slot-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.2rem;
+}
+.bb-slot {
+  display: grid;
+  place-items: center;
+  height: 2.6rem;
+  border-radius: var(--radius-sm);
+  outline: 1px dashed var(--rule-strong);
+  outline-offset: -1px;
+  transition: background-color 0.35s var(--ease-out);
+}
+.bb-slot[data-full] {
+  outline: none;
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+}
+.bb-ix {
+  text-align: center;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+}
+.bb-ptrs {
+  display: flex;
+  justify-content: center;
+  gap: 0.3rem;
+  min-height: 1.35rem;
+}
+.bb-ptr {
+  display: inline-block;
+  padding: 0.05rem 0.4rem;
+  border-radius: 3px;
+  font-size: 0.75rem;
+  color: var(--accent);
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1px var(--accent-mid);
+}
+.bb-ptr-out {
+  color: var(--ink-2);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+}
+
+/* Koden */
+.bb-codes {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 1rem 2rem;
+}
+.bb-code {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  min-width: 0;
+}
+.bb-code-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  min-height: 1.7rem;
+}
+.bb-code-title {
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+.bb-hand {
+  display: flex;
+  gap: 0.3rem;
+}
+.bb-lines {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 0.35rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule);
+}
+.bb-line {
+  padding: 0.12rem 0.4rem;
+  border-radius: 3px;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: var(--ink-2);
+  transition:
+    background-color 0.35s var(--ease-out),
+    color 0.35s var(--ease-out);
+}
+.bb-line[data-state='run'] {
+  background: var(--accent-soft);
+  color: var(--ink);
+}
+.bb-line[data-state='block'] {
+  background: var(--neg-soft);
+  color: var(--neg);
+  font-weight: 600;
+}
+.bb-status {
+  min-height: 1.2rem;
+  font-size: 0.8125rem;
+  color: var(--ink-2);
+}
+.bb-code[data-blocked] .bb-status {
+  color: var(--neg);
+}
+.bb-status code {
+  font-size: 0.75rem;
+}
+
+@container (max-width: 40rem) {
+  .bb-top,
+  .bb-codes {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

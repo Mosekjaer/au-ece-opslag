@@ -1,0 +1,336 @@
+/* I2C-ramme og SPI-transfer. Master = accent, slave = sekundær farve. */
+.sis {
+  --sis-m: var(--accent);
+  --sis-s: var(--fed);
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-areas:
+    'i2c i2c'
+    'spi cmp';
+  gap: 1.4rem 2rem;
+  align-items: start;
+}
+.sis-i2c {
+  grid-area: i2c;
+}
+.sis-spibus {
+  grid-area: spi;
+}
+.sis-cmp {
+  grid-area: cmp;
+  align-self: end;
+  max-width: 24rem;
+}
+.sis [data-who='m'] {
+  --c: var(--sis-m);
+}
+.sis [data-who='s'] {
+  --c: var(--sis-s);
+}
+
+.sis-bus {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 0;
+}
+.sis-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.1rem 0.6rem;
+}
+.sis-name {
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+.sis-dev {
+  font-size: 0.75rem;
+  color: var(--ink-3);
+}
+.sis-dev code {
+  font-size: 0.6875rem;
+  white-space: nowrap;
+}
+
+/* Bits: værdi øverst, clockpuls nederst */
+.sis-bits {
+  display: flex;
+  gap: 1px;
+}
+.sis-bit {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 1.05rem;
+}
+.sis-v {
+  display: grid;
+  place-items: center;
+  height: 1.35rem;
+  border-radius: 2px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--c);
+  background: color-mix(in oklab, var(--c) 12%, var(--paper));
+}
+.sis-bit:not([data-on]) {
+  --c: var(--ink-3);
+}
+.sis-bit:not([data-on])::before {
+  content: '';
+}
+.sis-bit:not([data-on]) .sis-v + .sis-clk {
+  opacity: 0.5;
+}
+.sis-bit {
+  position: relative;
+}
+.sis-bit::after {
+  /* Tom celle: stiplet pladsholder bag værdien */
+  content: '';
+  position: absolute;
+  inset: 0 0 0.65rem;
+  border-radius: 2px;
+  outline: 1px dashed var(--rule-strong);
+  outline-offset: -1px;
+  opacity: 1;
+  transition: opacity 0.35s var(--ease-out);
+  pointer-events: none;
+}
+.sis-bit[data-on]::after {
+  opacity: 0;
+}
+.sis-clk {
+  position: relative;
+  height: 0.45rem;
+  margin-top: 0.2rem;
+  border: 1.5px solid var(--ink-3);
+  border-bottom: 0;
+  margin-inline: 3px;
+}
+.sis-clk::before,
+.sis-clk::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  width: 4px;
+  height: 1.5px;
+  background: var(--ink-3);
+}
+.sis-clk::before {
+  left: -5.5px;
+}
+.sis-clk::after {
+  right: -5.5px;
+}
+.sis-clk[data-flat] {
+  border: 0;
+  border-top: 1.5px solid var(--ink-3);
+  margin-inline: 0;
+}
+.sis-clk[data-flat]::before,
+.sis-clk[data-flat]::after {
+  display: none;
+}
+
+/* I2C-rammen */
+.sis-frame {
+  display: flex;
+  gap: 0.5rem;
+  min-width: 0;
+}
+.sis-rowlab {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-top: 1.05rem;
+  gap: 0.05rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--ink-3);
+}
+.sis-rowlab span:first-child {
+  line-height: 1.35rem;
+}
+.sis-fields {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 0.35rem;
+  min-width: 0;
+}
+.sis-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0 0.1rem;
+  border-radius: 3px;
+}
+.sis-flabel {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--ink-3);
+  white-space: nowrap;
+  transition: color 0.35s var(--ease-out);
+}
+.sis-field[data-now] .sis-flabel {
+  color: var(--c);
+}
+.sis-fnote {
+  min-height: 0.9rem;
+  max-width: 8.6rem;
+  font-size: 0.6875rem;
+  line-height: 1.25;
+  color: var(--ink-2);
+}
+
+.sis-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.2rem 1rem;
+  font-size: 0.75rem;
+  color: var(--ink-2);
+}
+.sis-legend span::before {
+  content: '';
+  display: inline-block;
+  width: 0.65rem;
+  height: 0.65rem;
+  margin-right: 0.35rem;
+  vertical-align: -0.05rem;
+  border-radius: 2px;
+  background: color-mix(in oklab, var(--c) 12%, var(--paper));
+  box-shadow: inset 0 0 0 1.5px var(--c);
+}
+
+/* SPI */
+.sis-spi {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.25rem;
+}
+.sis-byte {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 0.4rem 0.5rem 0.5rem;
+  border-radius: var(--radius-sm);
+  box-shadow: inset 0 0 0 1px var(--rule);
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.sis-byte[data-now] {
+  box-shadow: inset 0 0 0 1.5px var(--accent-mid);
+}
+.sis-bytelab code {
+  font-size: 0.6875rem;
+  font-weight: 600;
+}
+.sis-lane {
+  display: grid;
+  grid-template-columns: 2.4rem auto;
+  grid-template-areas: 'lab bits' '. hex';
+  align-items: start;
+  column-gap: 0.4rem;
+}
+.sis-lanelab {
+  grid-area: lab;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  line-height: 1.35rem;
+  color: var(--ink-3);
+}
+.sis-lane .sis-bits {
+  grid-area: bits;
+}
+.sis-hex {
+  grid-area: hex;
+  min-height: 1rem;
+  font-size: 0.6875rem;
+  color: var(--ink-2);
+}
+.sis-hex b {
+  font-size: 0.75rem;
+}
+.sis-cs {
+  grid-area: bits;
+  display: flex;
+  align-items: center;
+  height: 1.35rem;
+  padding-left: 0.4rem;
+  border-top: 1.5px solid var(--ink-3);
+  font-size: 0.6875rem;
+  color: var(--ink-2);
+  transition: border-color 0.35s var(--ease-out);
+}
+.sis-cs[data-low] {
+  border-top-color: transparent;
+  border-bottom: 1.5px solid var(--accent);
+  color: var(--accent);
+  font-weight: 600;
+}
+.sis-cs:not([data-low]) {
+  border-bottom: 1.5px solid transparent;
+}
+
+/* Sammenligning */
+.sis-cmp {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+  font-size: 0.75rem;
+  background: var(--paper);
+  border-radius: var(--radius-sm);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+}
+.sis-cmp th,
+.sis-cmp td {
+  padding: 0.35rem 0.5rem;
+  text-align: left;
+  vertical-align: top;
+}
+.sis-cmp thead th {
+  font-weight: 600;
+  color: var(--ink-2);
+  border-bottom: 1px solid var(--rule-strong);
+}
+.sis-cmp tbody th {
+  font-weight: 600;
+  color: var(--ink-3);
+}
+.sis-cmp tbody tr + tr > * {
+  border-top: 1px solid var(--rule);
+}
+.sis-cmp code {
+  font-size: 0.6875rem;
+  white-space: nowrap;
+  background: none;
+  box-shadow: none;
+  padding: 0;
+}
+
+@container (max-width: 52rem) {
+  .sis {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: 'i2c' 'spi' 'cmp';
+  }
+  .sis-cmp {
+    max-width: none;
+  }
+}
+@container (max-width: 40rem) {
+  .sis-bit {
+    width: 0.95rem;
+  }
+  .sis-spi {
+    flex-direction: column;
+  }
+  .sis-cmp th,
+  .sis-cmp td {
+    padding: 0.3rem 0.35rem;
+  }
+  .sis-cmp code {
+    font-size: 0.6875rem;
+  }
+}

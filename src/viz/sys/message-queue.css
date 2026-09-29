@@ -1,0 +1,163 @@
+/* Én blokerende kø mellem producer1 og consumerThread; std::visit dispatcher. */
+.smq {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 40rem;
+  margin-inline: auto;
+}
+.smq .vcaps code {
+  font-size: 0.6875rem;
+  font-weight: 600;
+}
+.smq-link.vlink.is-v {
+  align-self: flex-start;
+  margin: 0.2rem 0 0.2rem 2rem;
+}
+
+.smq-prod,
+.smq-q,
+.smq-cons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  width: 100%;
+  padding: 0.6rem 0.75rem 0.7rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+}
+.smq-q {
+  width: auto;
+  min-width: 18rem;
+  max-width: 100%;
+}
+
+.smq-code {
+  font-size: 0.75rem;
+  hyphens: manual;
+  overflow-wrap: normal;
+  background: none;
+  box-shadow: none;
+  padding: 0;
+}
+.smq-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.25rem 0.75rem;
+  min-height: 1.9rem;
+  padding: 0.15rem 0.45rem;
+  border-radius: 3px;
+  transition: background-color 0.35s var(--ease-out);
+}
+.smq-line[data-now] {
+  background: var(--accent-soft);
+}
+.smq-slot {
+  display: inline-flex;
+  min-height: 1.4rem;
+  align-items: center;
+}
+
+.smq-slots {
+  display: flex;
+  gap: 4px;
+}
+.smq-cell {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 7.2rem;
+  height: 2rem;
+  border-radius: 3px;
+  box-shadow: inset 0 0 0 1px var(--rule);
+  background: var(--paper-2);
+}
+.smq-cell[data-front] {
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+}
+.smq-qnote {
+  font-size: 0.75rem;
+  color: var(--ink-3);
+}
+.smq-qnote code {
+  font-size: 0.6875rem;
+}
+
+.smq-cons-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+.smq-state {
+  justify-items: end;
+}
+.smq-handlers {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem;
+  margin-top: 0.3rem;
+}
+.smq-h {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  min-width: 0;
+  padding: 0.45rem 0.55rem;
+  border-radius: var(--radius-sm);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.smq-h[data-now] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.smq-h[data-done]:not([data-now]) {
+  box-shadow: inset 0 0 0 1px var(--accent-mid);
+}
+.smq-h-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.25rem 0.5rem;
+  min-height: 1.5rem;
+}
+.smq-out {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--ink-2);
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+  background: var(--paper-2);
+}
+
+@container (max-width: 40rem) {
+  .smq-q {
+    min-width: 0;
+    width: 100%;
+  }
+  .smq-cell {
+    width: auto;
+    flex: 1 1 0;
+    min-width: 0;
+  }
+  .smq-handlers {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .smq-link.vlink.is-v {
+    margin-left: 1rem;
+  }
+  /* Tokenet får sin egen række, så linjen ikke skifter højde, når det lander. */
+  .smq-line,
+  .smq-h-top {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+}

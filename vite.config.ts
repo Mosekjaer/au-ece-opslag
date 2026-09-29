@@ -20,6 +20,7 @@ export default defineConfig({
             { name: 'indhold-fed', test: /src[\\/]content[\\/]fed[\\/]/, priority: 2 },
             { name: 'indhold-swt', test: /src[\\/]content[\\/]swt[\\/]/, priority: 2 },
             { name: 'indhold-swd', test: /src[\\/]content[\\/]swd[\\/]/, priority: 2 },
+            { name: 'indhold-sys', test: /src[\\/]content[\\/]sys[\\/]/, priority: 2 },
             { name: 'indhold', test: /src[\\/]content[\\/]/, priority: 1 },
           ],
         },

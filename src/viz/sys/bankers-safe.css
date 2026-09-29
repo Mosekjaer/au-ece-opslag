@@ -1,0 +1,140 @@
+/* Banker’s sikkerhedstjek: tabellen til venstre, Work og sekvensen til højre. */
+.bk {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 17rem);
+  gap: 1.25rem 2rem;
+  align-items: start;
+}
+.bk-table {
+  min-width: 0;
+  overflow-x: auto;
+}
+.bk-table .vtable-name {
+  font-weight: 500;
+  color: var(--ink-2);
+}
+.bk-abc {
+  display: block;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 0.6875rem;
+  color: var(--ink-3);
+  word-spacing: 0.1em;
+}
+.bk-table td .mono {
+  font-size: 0.8125rem;
+  word-spacing: 0.1em;
+}
+.bk-fin {
+  color: var(--ink-3);
+}
+.bk-fin[data-on] {
+  color: var(--accent);
+  font-weight: 600;
+}
+.bk-table tr[data-tone='muted'] .bk-fin[data-on] {
+  color: var(--accent);
+}
+
+.bk-side {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  min-width: 0;
+}
+
+.bk-work {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.bk-vec {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 3.5rem));
+  gap: 4px;
+}
+.bk-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.3rem 0 0.35rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.bk-cell-r {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--ink-3);
+}
+.bk-cell-v {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.bk-calc {
+  min-height: 3rem;
+}
+.bk-calc-line {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: var(--ink-2);
+}
+.bk-calc-line .mono {
+  font-size: 0.8125rem;
+  color: var(--ink);
+}
+.bk-calc-line sub {
+  font-size: 0.6875rem;
+}
+.bk-calc-line strong {
+  color: var(--accent);
+}
+
+.bk-seq {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.bk-slots {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 4px;
+}
+.bk-slot {
+  display: grid;
+  place-items: center;
+  height: 1.9rem;
+  border-radius: var(--radius-sm);
+  outline: 1px dashed var(--rule-strong);
+  outline-offset: -1px;
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.bk-slot[data-on] {
+  outline: none;
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--accent-mid);
+}
+.bk-slot[data-now] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+
+@container (max-width: 40rem) {
+  .bk {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+.bk-calc-line .bk-res {
+  white-space: pre;
+  color: var(--accent);
+  font-weight: 600;
+}
