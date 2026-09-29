@@ -1,0 +1,133 @@
+.pm {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.pm-panels {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 2rem;
+}
+
+.pm-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  min-width: 0;
+}
+.pm-name {
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.pm-chart {
+  display: grid;
+  grid-template-columns: 2.6rem minmax(0, 1fr);
+  gap: 0.4rem;
+}
+.pm-axis {
+  position: relative;
+  height: 9rem;
+  font-size: 0.6875rem;
+  color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+}
+.pm-axis span {
+  position: absolute;
+  right: 0;
+  transform: translateY(50%);
+  white-space: nowrap;
+}
+.pm-plot {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.6rem;
+}
+.pm-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  min-width: 0;
+}
+.pm-track {
+  position: relative;
+  width: 100%;
+  height: 9rem;
+  border-bottom: 1.5px solid var(--rule-strong);
+  background: repeating-linear-gradient(
+    to top,
+    transparent 0,
+    transparent calc(25% - 1px),
+    var(--rule) calc(25% - 1px),
+    var(--rule) 25%
+  );
+}
+.pm-bar {
+  position: absolute;
+  left: 18%;
+  right: 18%;
+  bottom: 0;
+  height: 100%;
+  border-radius: 2px 2px 0 0;
+  background: var(--accent);
+  transform-origin: bottom center;
+}
+.pm-uc {
+  font-size: 0.75rem;
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+
+.pm-periods {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.3rem;
+}
+.pm-period {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.35rem 0.4rem;
+  border-radius: var(--radius-sm);
+  box-shadow: inset 0 0 0 1px var(--rule);
+  min-width: 0;
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out),
+    opacity 0.35s var(--ease-out);
+}
+.pm-period[data-done] {
+  box-shadow: inset 0 0 0 1px var(--accent-mid);
+}
+.pm-period[data-now] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.pm-period[data-cut] {
+  box-shadow: inset 0 0 0 1px var(--rule);
+  opacity: 0.45;
+  text-decoration: line-through;
+}
+.pm-per-name {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--ink-2);
+  hyphens: manual;
+}
+.pm-count {
+  font-size: 0.6875rem;
+  color: var(--ink-3);
+}
+
+.pm-note {
+  min-height: 1.6rem;
+}
+
+@container (max-width: 40rem) {
+  .pm-panels {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.5rem;
+  }
+}

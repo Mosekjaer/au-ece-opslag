@@ -1,0 +1,282 @@
+.cap {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 15.5rem;
+  gap: 1.25rem;
+  align-items: start;
+}
+
+.cap-page {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  min-width: 0;
+}
+
+.cap-figure {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 0;
+}
+
+/* Selve diagrammet: RESTController — SalgsService, og en bus ned til resten. */
+.cap-diagram {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 0.75rem 0.75rem 0.6rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule);
+}
+
+.cap-top {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 2.5rem minmax(0, 1fr);
+  align-items: center;
+  width: min(100%, 26rem);
+  margin: 0 auto;
+}
+.cap-assoc {
+  height: 1.5px;
+  background: var(--rule-strong);
+  transition: background-color 0.35s var(--ease-out);
+}
+.cap-assoc[data-tone='focus'] {
+  height: 2px;
+  background: var(--accent);
+}
+.cap-hub {
+  position: relative;
+}
+/* Lodret streg fra SalgsService ned til bussen. */
+.cap-hub::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  width: 1.5px;
+  height: 0.75rem;
+  background: var(--rule-strong);
+}
+
+.cap-bottom {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.4rem;
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1.5px solid var(--rule-strong);
+}
+.cap-leaf {
+  position: relative;
+  min-width: 0;
+}
+.cap-leaf::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 100%;
+  width: 1.5px;
+  height: 0.75rem;
+  background: var(--rule-strong);
+}
+
+.cap-cls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.05rem;
+  padding: 0.35rem 0.4rem;
+  border-radius: 3px;
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  border-top: 3px solid transparent;
+  text-align: center;
+  transition:
+    border-color 0.35s var(--ease-out),
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.cap-cls[data-kind='boundary'] {
+  border-top-color: var(--accent-mid);
+}
+.cap-cls[data-kind='control'] {
+  border-top-color: var(--accent);
+}
+.cap-cls[data-kind='domain'] {
+  border-top-color: var(--ink-3);
+}
+.cap-cls[data-tone='focus'] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.cap-stereo {
+  font-size: 0.6875rem;
+  color: var(--ink-3);
+}
+.cap-cname {
+  max-width: 100%;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  font-variant-ligatures: none;
+  hyphens: manual;
+  overflow-wrap: normal;
+}
+
+.cap-legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.3rem 0.75rem;
+  margin-top: 0.7rem;
+  padding: 0.3rem 0.5rem;
+  border-radius: 3px;
+  box-shadow: inset 0 0 0 1px var(--rule);
+  font-size: 0.6875rem;
+  color: var(--ink-2);
+}
+.cap-legend-head {
+  font-weight: 600;
+}
+.cap-key {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+.cap-key::before {
+  content: '';
+  width: 0.9rem;
+  height: 3px;
+  background: var(--rule-strong);
+}
+.cap-key[data-kind='boundary']::before {
+  background: var(--accent-mid);
+}
+.cap-key[data-kind='control']::before {
+  background: var(--accent);
+}
+.cap-key[data-kind='domain']::before {
+  background: var(--ink-3);
+}
+.cap-simpl {
+  margin-top: 0.35rem;
+  font-size: 0.6875rem;
+  font-style: italic;
+  color: var(--ink-3);
+  text-align: right;
+}
+
+.cap-caption {
+  min-width: 0;
+}
+.cap-captext {
+  margin: 0;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+.cap-captext strong {
+  color: var(--ink);
+}
+.cap-captext code,
+.cap-body code {
+  font-size: 0.75rem;
+}
+.cap-captext mark,
+.cap-body mark {
+  padding: 0 0.15rem;
+  border-radius: 2px;
+  color: var(--ink);
+  background: var(--accent-soft);
+  box-shadow: inset 0 -1.5px 0 var(--accent);
+}
+
+.cap-body {
+  margin: 0;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+.cap-file {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin-top: 0.4rem;
+}
+
+.cap-checks {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin: 0;
+  padding: 0;
+}
+.cap-check {
+  display: grid;
+  grid-template-columns: 1.25rem minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2.25rem;
+  padding: 0.3rem 0.5rem;
+  border-radius: var(--radius-sm);
+  box-shadow: inset 0 0 0 1px var(--rule);
+  color: var(--ink-3);
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out),
+    color 0.35s var(--ease-out);
+}
+.cap-check[data-done='true'] {
+  color: var(--ink);
+  box-shadow: inset 0 0 0 1px var(--accent-mid);
+}
+.cap-check[data-now='true'] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.cap-tick {
+  display: grid;
+  place-items: center;
+  width: 1.1rem;
+  height: 1.1rem;
+  border-radius: 3px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--paper);
+  background: var(--accent);
+}
+.cap-check[data-done='false'] .cap-tick {
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+}
+.cap-check-text {
+  font-size: 0.75rem;
+  line-height: 1.3;
+}
+.cap-src {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--ink-3);
+}
+.cap-src[data-src='sem4'] {
+  color: var(--accent);
+}
+
+@container (max-width: 40rem) {
+  .cap {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .cap-bottom {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    row-gap: 0.75rem;
+  }
+  /* I anden række er der ingen bus; stregen ville hænge i luften. */
+  .cap-leaf:nth-child(n + 4)::before {
+    display: none;
+  }
+}

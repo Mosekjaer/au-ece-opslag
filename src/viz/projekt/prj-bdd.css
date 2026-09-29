@@ -1,0 +1,280 @@
+.pbdd {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 17rem);
+  gap: 1.25rem;
+  align-items: start;
+}
+
+.pbdd-frame {
+  position: relative;
+  min-width: 0;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+}
+.pbdd-tab {
+  display: inline-block;
+  padding: 0.25rem 0.9rem 0.3rem 0.6rem;
+  font-size: 0.75rem;
+  color: var(--ink-2);
+  border-right: 1px solid var(--rule-strong);
+  border-bottom: 1px solid var(--rule-strong);
+  border-bottom-right-radius: 10px;
+}
+.pbdd-tab b {
+  font-weight: 700;
+}
+
+.pbdd-canvas {
+  /* Plads til slutrammen, hvor Aircraft har alle tre compartments. */
+  min-height: 25.1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.9rem 0.9rem 0.75rem;
+}
+
+.pbdd-block {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  min-width: 0;
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1.5px var(--ink-2);
+  border-radius: 2px;
+  text-align: center;
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.pbdd-block.is-whole {
+  width: min(15rem, 100%);
+  padding-top: 0.35rem;
+}
+.pbdd-block.is-whole[data-focus] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.pbdd-block.is-part {
+  padding: 0.35rem 0.4rem 0.45rem;
+}
+.pbdd-block[data-muted] {
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+}
+.pbdd-stereo {
+  font-size: 0.6875rem;
+  color: var(--ink-3);
+}
+.pbdd-name {
+  font-weight: 600;
+  font-size: 0.875rem;
+  line-height: 1.3;
+  padding-bottom: 0.3rem;
+}
+.pbdd-comp-wrap {
+  overflow: hidden;
+}
+.pbdd-comp {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.05rem;
+  padding: 0.3rem 0.6rem 0.35rem;
+  border-top: 1px solid var(--rule-strong);
+  text-align: left;
+}
+.pbdd-comp-name {
+  align-self: center;
+  font-size: 0.6875rem;
+  font-style: italic;
+  color: var(--ink-3);
+}
+.pbdd-comp code,
+.pbdd-mul code {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-variant-ligatures: none;
+}
+
+.pbdd-trunk {
+  width: 14px;
+  height: 22px;
+}
+.pbdd-trunk svg,
+.pbdd-sym {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  stroke: var(--ink-2);
+  stroke-width: 1.4;
+  fill: none;
+}
+.is-fill {
+  fill: var(--ink-2);
+}
+.is-hollow {
+  fill: var(--paper);
+}
+
+/* Træ: vandret skinne over børnene, lodret dråbe til hver. */
+.pbdd-kids {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  width: 100%;
+  max-width: 34rem;
+}
+.pbdd-kid {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 0.3rem;
+}
+.pbdd-kid::before,
+.pbdd-kid::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  border-color: var(--ink-2);
+  border-style: solid;
+  border-width: 0;
+  opacity: 0;
+  transition: opacity 0.35s var(--ease-out);
+}
+/* Skinnen: fra midten af første til midten af sidste barn. */
+.pbdd-kid::before {
+  left: 0;
+  right: 0;
+  border-top-width: 1.4px;
+}
+.pbdd-kid:first-child::before {
+  left: 50%;
+}
+.pbdd-kid:last-child::before {
+  right: 50%;
+}
+/* Dråben ned til blokken; labelen står til højre for den. */
+.pbdd-kid::after {
+  left: 50%;
+  height: 2.7rem;
+  border-left-width: 1.4px;
+}
+.pbdd-kids[data-on] .pbdd-kid::before,
+.pbdd-kids[data-on] .pbdd-kid::after {
+  opacity: 1;
+}
+.pbdd-drop {
+  position: relative;
+  width: 100%;
+  height: 2.7rem;
+}
+.pbdd-kid .pbdd-block {
+  width: 100%;
+}
+.pbdd-mul {
+  position: absolute;
+  top: 0.35rem;
+  left: calc(50% + 0.35rem);
+  right: 0;
+  font-size: 0.75rem;
+  color: var(--ink-2);
+  text-align: left;
+  line-height: 1.2;
+}
+.pbdd-two {
+  display: flex;
+  flex-direction: column;
+}
+.pbdd-mul code {
+  white-space: nowrap;
+}
+.pbdd .pbdd-mul code {
+  padding: 0;
+  background: none;
+  box-shadow: none;
+  border: 0;
+}
+
+.pbdd-notes {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  width: 100%;
+  margin-top: 0.7rem;
+  min-height: 2.6rem;
+}
+.pbdd-notes > * {
+  grid-area: 1 / 1;
+  justify-self: center;
+  align-self: start;
+  max-width: 100%;
+}
+
+.pbdd-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  min-width: 0;
+}
+.pbdd-legend ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+.pbdd-legend li {
+  display: grid;
+  grid-template-columns: 3.5rem minmax(0, 1fr);
+  gap: 0.6rem;
+  align-items: start;
+  font-size: 0.8125rem;
+  line-height: 1.35;
+}
+.pbdd-legend li b {
+  display: block;
+  font-weight: 600;
+}
+.pbdd-legend-text {
+  color: var(--ink-2);
+  font-size: 0.75rem;
+}
+.pbdd-legend-text code {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+}
+.pbdd-sym {
+  height: 14px;
+  margin-top: 0.2rem;
+}
+.pbdd-rule {
+  padding: 0.5rem 0.6rem;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: var(--ink);
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1px var(--accent-mid);
+  border-radius: var(--radius-sm);
+}
+
+@container (max-width: 40rem) {
+  .pbdd {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .pbdd-canvas {
+    min-height: 27rem;
+  }
+  /* Smal plade: labelen står centreret på dråben og dækker stregen. */
+  .pbdd-mul {
+    left: 0;
+    top: 0.3rem;
+    text-align: center;
+  }
+  .pbdd-two {
+    align-items: center;
+  }
+  .pbdd .pbdd-mul code {
+    padding: 0 0.15rem;
+    background: var(--paper);
+  }
+}

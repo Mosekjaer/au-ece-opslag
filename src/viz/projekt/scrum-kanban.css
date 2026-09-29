@@ -1,0 +1,137 @@
+.sk {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: 2rem;
+  align-items: start;
+}
+
+.sk-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  min-width: 0;
+}
+.sk-title {
+  font-weight: 600;
+  font-size: 0.875rem;
+  margin-bottom: 0.3rem;
+}
+.sk-src {
+  margin-top: -0.3rem;
+  margin-bottom: 0.3rem;
+  font-size: 0.6875rem;
+  color: var(--ink-3);
+}
+
+.sk-box {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 0.5rem 0.6rem 0.6rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  min-width: 0;
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.sk-box[data-tone='focus'] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.sk-box-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.25rem 0.5rem;
+  min-height: 1.5rem;
+}
+.sk-box-label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+.sk-meta {
+  font-size: 0.6875rem;
+  color: var(--ink-3);
+}
+.sk-items {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  gap: 0.3rem;
+  min-height: 1.5rem;
+}
+
+.sk-event {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-left: 0.75rem;
+  min-height: 2.6rem;
+}
+.sk-event-text {
+  font-size: 0.75rem;
+  line-height: 1.35;
+  color: var(--ink-2);
+}
+
+.sk-end {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.3rem;
+  margin-top: 0.5rem;
+}
+
+.sk-kanban {
+  opacity: 0.55;
+  transition: opacity 0.35s var(--ease-out);
+}
+.sk-kanban[data-on] {
+  opacity: 1;
+}
+.sk-board {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.35rem;
+}
+.sk-board .sk-box {
+  min-height: 12.5rem;
+  padding-inline: 0.45rem;
+}
+.sk-board .sk-items {
+  flex-direction: column;
+  align-items: flex-start;
+}
+.sk-wip {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: var(--ink-3);
+  white-space: nowrap;
+}
+.sk-wip[data-full] {
+  color: var(--neg);
+}
+.sk-kan-notes {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.3rem;
+  margin-top: 0.5rem;
+}
+
+@container (max-width: 40rem) {
+  .sk {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .sk-board .sk-box {
+    min-height: 11rem;
+  }
+  /* Plads til to linjer backlog-items, så pladen ikke hopper. */
+  .sk-panel > .sk-title + .sk-box .sk-items {
+    min-height: 3.3rem;
+  }
+}

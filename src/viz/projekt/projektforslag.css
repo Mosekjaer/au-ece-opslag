@@ -1,0 +1,145 @@
+.pfs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.pfs-head,
+.pfs-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) 5.5rem minmax(0, 1fr);
+}
+.pfs-head-right {
+  text-align: left;
+}
+.pfs-grid {
+  row-gap: 0.4rem;
+  align-items: center;
+}
+
+.pfs-sec {
+  grid-column: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 0.55rem 0.75rem 0.6rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  min-width: 0;
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out),
+    color 0.35s var(--ease-out);
+}
+/* Tragten: hvert afsnit er lidt smallere end det forrige. */
+.pfs-w1 {
+  margin-inline: 0.75rem;
+}
+.pfs-w2 {
+  margin-inline: 1.5rem;
+}
+.pfs-w3 {
+  margin-inline: 2.25rem;
+}
+.pfs-w4 {
+  margin-inline: 3rem;
+}
+.pfs-sec[data-tone='focus'] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.pfs-sec[data-tone='ok'] {
+  box-shadow: inset 0 0 0 1.5px var(--accent-mid);
+}
+.pfs-sec[data-tone='ghost'] {
+  background: transparent;
+  box-shadow: none;
+  outline: 1px dashed var(--rule-strong);
+  outline-offset: -1px;
+  color: var(--ink-3);
+}
+.pfs-sec[data-tone='ghost'] .pfs-body,
+.pfs-sec[data-tone='ghost'] .pfs-small {
+  opacity: 0;
+}
+
+.pfs-sec-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.2rem 0.6rem;
+}
+.pfs-title {
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+.pfs-kind {
+  font-size: 0.6875rem;
+  color: var(--ink-3);
+}
+.pfs-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: var(--ink-2);
+  transition: opacity 0.35s var(--ease-out);
+}
+.pfs-small {
+  font-size: 0.6875rem;
+  color: var(--ink-3);
+  transition: opacity 0.35s var(--ease-out);
+}
+.pfs-qs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+
+.pfs-link {
+  grid-column: 2;
+  display: flex;
+  padding-inline: 0.4rem;
+}
+.pfs-vlink {
+  display: none;
+}
+.pfs-concl {
+  grid-column: 3;
+}
+
+@container (max-width: 40rem) {
+  .pfs-head {
+    display: none;
+  }
+  .pfs-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .pfs-sec,
+  .pfs-concl,
+  .pfs-link {
+    grid-column: 1;
+    grid-row: auto !important;
+    margin-inline: 0;
+  }
+  .pfs-link {
+    display: none;
+  }
+  .pfs-vlink {
+    display: flex;
+    grid-row: 4 !important;
+    padding-left: 1.5rem;
+  }
+  .pfs-concl {
+    grid-row: 5 !important;
+  }
+  .pfs-w3 {
+    grid-row: 6 !important;
+  }
+  .pfs-w4 {
+    grid-row: 7 !important;
+  }
+}

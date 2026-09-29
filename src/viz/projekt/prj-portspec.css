@@ -1,0 +1,130 @@
+.pps {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.pps-head,
+.pps-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr) minmax(0, 1.3fr) minmax(0, 1fr) 8.5rem;
+  column-gap: 0.75rem;
+  align-items: center;
+}
+.pps-head {
+  padding: 0 0.6rem;
+}
+
+.pps-rows {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.pps-row {
+  min-height: 2.6rem;
+  padding: 0.3rem 0.6rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  transition:
+    background-color 0.4s var(--ease-out),
+    box-shadow 0.4s var(--ease-out);
+}
+.pps-row[data-now] {
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.pps-row[data-tone='neg'] {
+  background: var(--neg-soft);
+  box-shadow: inset 0 0 0 1.5px var(--neg);
+}
+.pps-row[data-tone='open'] {
+  background: transparent;
+}
+
+.pps-end {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  line-height: 1.3;
+}
+.pps-part {
+  font-size: 0.6875rem;
+  color: var(--ink-3);
+}
+.pps-end code {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  font-variant-ligatures: none;
+  overflow-wrap: anywhere;
+  padding: 0;
+  background: none;
+  box-shadow: none;
+}
+.pps-to {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+}
+.pps-arrow {
+  color: var(--ink-3);
+  font-size: 0.8125rem;
+}
+.pps-spec {
+  font-size: 0.75rem;
+  line-height: 1.35;
+  color: var(--ink-2);
+}
+.pps-spec[data-open] {
+  font-weight: 600;
+  color: var(--ink-3);
+}
+.pps-verdict {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.pps-sum {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem 0.6rem;
+  margin-top: 0.3rem;
+  font-size: 0.8125rem;
+  color: var(--ink-2);
+}
+
+@container (max-width: 40rem) {
+  .pps-head {
+    display: none;
+  }
+  .pps-row {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-areas:
+      'from to'
+      'fs ts'
+      'v v';
+    row-gap: 0.2rem;
+    padding: 0.45rem 0.6rem;
+    align-items: start;
+  }
+  .pps-from {
+    grid-area: from;
+  }
+  .pps-to {
+    grid-area: to;
+  }
+  .pps-spec.is-from {
+    grid-area: fs;
+  }
+  .pps-spec.is-to {
+    grid-area: ts;
+    padding-left: 1.3rem;
+  }
+  .pps-verdict {
+    grid-area: v;
+    min-height: 1.4rem;
+  }
+}

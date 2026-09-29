@@ -1,0 +1,139 @@
+.ryg {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.ryg-legs {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 6rem minmax(0, 1fr);
+}
+.ryg-right-cap {
+  text-align: right;
+}
+
+.ryg-v {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.ryg-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 6rem minmax(0, 1fr);
+  align-items: center;
+}
+/* V-formen: hver række rykker ind mod midten. */
+.ryg-r1 {
+  padding-inline: 2rem;
+}
+.ryg-r2 {
+  padding-inline: 4rem;
+}
+.ryg-r3 {
+  padding-inline: 6rem;
+}
+.ryg-bottom {
+  display: flex;
+  justify-content: center;
+}
+.ryg-bottom .ryg-node {
+  width: min(16rem, 100%);
+}
+
+.ryg-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.ryg-node {
+  min-width: 0;
+}
+.ryg-title {
+  hyphens: manual;
+  overflow-wrap: normal;
+}
+
+.ryg-link {
+  position: relative;
+  height: 2.25rem;
+  margin-inline: 0.4rem;
+}
+.ryg-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 0;
+  border-top: 1.5px dashed var(--accent);
+  transform-origin: right center;
+}
+.ryg-line::before {
+  content: '';
+  position: absolute;
+  left: -1px;
+  top: -5.25px;
+  border-right: 7px solid var(--accent);
+  border-top: 4.25px solid transparent;
+  border-bottom: 4.25px solid transparent;
+}
+.ryg-link-label {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 55%;
+  text-align: center;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: var(--ink-3);
+}
+
+.ryg-trace {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--rule);
+}
+.ryg-trace-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.3rem;
+}
+.ryg-trace-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  min-width: 0;
+}
+.ryg-arrow {
+  color: var(--ink-3);
+  font-size: 0.8125rem;
+}
+
+@container (max-width: 40rem) {
+  .ryg-legs {
+    grid-template-columns: minmax(0, 1fr) 1.5rem minmax(0, 1fr);
+  }
+  .ryg-row {
+    grid-template-columns: minmax(0, 1fr) 1.5rem minmax(0, 1fr);
+  }
+  .ryg-r1,
+  .ryg-r2,
+  .ryg-r3 {
+    padding-inline: 0;
+  }
+  .ryg-link {
+    margin-inline: 0.2rem;
+  }
+  .ryg-link-label {
+    display: none;
+  }
+  .ryg-node {
+    padding: 0.5rem 0.55rem 0.55rem;
+  }
+  .ryg-node .vnode-title {
+    font-size: 0.8125rem;
+  }
+}

@@ -1,0 +1,122 @@
+.pal {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.pal-head,
+.pal-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 6.5rem minmax(0, 1.35fr);
+  column-gap: 0.75rem;
+  align-items: center;
+}
+
+.pal-rows {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.pal-logical,
+.pal-physical {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  align-items: flex-start;
+  min-width: 0;
+}
+.pal-node {
+  flex: 1 1 8rem;
+  min-width: 0;
+}
+.pal-logical .pal-node {
+  flex-basis: 6.5rem;
+}
+
+.pal-title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.2rem 0.5rem;
+}
+.pal-kind {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--accent);
+  white-space: nowrap;
+}
+.pal-kind[data-kind='hwsw'] {
+  color: var(--ink);
+}
+
+.pal-tasks {
+  list-style: none;
+  margin-top: 0.35rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+.pal-tasks li {
+  font-size: 0.6875rem;
+  line-height: 1.3;
+  padding: 0.08rem 0.4rem;
+  border-radius: 3px;
+  color: var(--ink-2);
+  background: var(--paper-2);
+  box-shadow: inset 0 0 0 1px var(--rule);
+}
+
+.pal-note {
+  flex: 1 1 100%;
+  display: flex;
+}
+
+.pal-link {
+  display: flex;
+  justify-content: center;
+  align-self: center;
+}
+.pal-link .pal-h {
+  width: 100%;
+  flex: 1 1 auto;
+}
+.pal-link .pal-v,
+.pal-vlabel {
+  display: none;
+}
+
+@container (max-width: 40rem) {
+  .pal-head {
+    display: none;
+  }
+  .pal-row {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 0.1rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .pal-row:last-child {
+    border-bottom: 0;
+  }
+  .pal-link .pal-h {
+    display: none;
+  }
+  .pal-link {
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.4rem;
+    padding-left: 1rem;
+  }
+  .pal-link .pal-v {
+    display: block;
+  }
+  .pal-vlabel {
+    display: inline;
+    font-size: 0.6875rem;
+    font-weight: 500;
+    color: var(--ink-3);
+  }
+}

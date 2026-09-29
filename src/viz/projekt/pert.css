@@ -1,0 +1,100 @@
+.pert {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.pert-top {
+  display: flex;
+  justify-content: center;
+}
+.pert-net {
+  width: 100%;
+  max-width: 44rem;
+  height: auto;
+  font-family: var(--font-ui);
+}
+.pert-narrow {
+  display: none;
+  max-width: 19rem;
+}
+
+.pert-edge {
+  stroke: var(--rule-strong);
+  stroke-width: 1.5;
+  transition: stroke 0.35s var(--ease-out);
+}
+.pert-edge.is-crit {
+  stroke: var(--accent);
+  stroke-width: 2.25;
+}
+.pert-head {
+  fill: var(--rule-strong);
+}
+.pert-head-c {
+  fill: var(--accent);
+}
+
+.pert-node circle {
+  fill: var(--paper);
+  stroke: var(--rule-strong);
+  stroke-width: 1.5;
+  transition:
+    fill 0.35s var(--ease-out),
+    stroke 0.35s var(--ease-out);
+}
+.pert-node.is-crit circle {
+  fill: var(--accent);
+  stroke: var(--accent);
+}
+.pert-letter {
+  font-size: 15px;
+  font-weight: 600;
+  text-anchor: middle;
+  fill: var(--ink);
+}
+.pert-node.is-crit .pert-letter {
+  fill: var(--paper);
+}
+.pert-te {
+  font-size: 12.5px;
+  font-variant-numeric: tabular-nums;
+  text-anchor: middle;
+  fill: var(--ink-2);
+}
+.pert-te.is-left {
+  text-anchor: start;
+}
+.pert-te.is-right {
+  text-anchor: end;
+}
+.pert-end circle {
+  fill: var(--ink-3);
+}
+
+.pert-note {
+  min-height: 1.75rem;
+}
+
+.pert-table .vtable {
+  overflow-x: auto;
+}
+.pert-table td,
+.pert-table th {
+  text-align: right;
+}
+.pert-table td:first-child,
+.pert-table th:first-child,
+.pert-table td:nth-child(2),
+.pert-table th:nth-child(2) {
+  text-align: left;
+}
+
+@container (max-width: 40rem) {
+  .pert-wide {
+    display: none;
+  }
+  .pert-narrow {
+    display: block;
+  }
+}

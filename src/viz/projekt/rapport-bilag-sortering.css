@@ -1,0 +1,133 @@
+.rbs {
+  --rbs-cols: 10.5rem repeat(3, minmax(0, 1fr));
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.rbs-head,
+.rbs-row {
+  display: grid;
+  grid-template-columns: var(--rbs-cols);
+  column-gap: 0.5rem;
+  align-items: center;
+}
+
+.rbs-head {
+  align-items: end;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid var(--rule-strong);
+}
+.rbs-colhead {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  padding: 0.3rem 0.5rem;
+  border-radius: var(--radius-sm);
+  color: var(--ink-3);
+  transition:
+    color 0.35s var(--ease-out),
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.rbs-colhead[data-on='true'] {
+  color: var(--ink);
+}
+.rbs-colhead[data-now='true'] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.rbs-colname {
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+.rbs-who {
+  font-size: 0.6875rem;
+  line-height: 1.3;
+  color: var(--ink-3);
+}
+
+.rbs-rows {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+}
+.rbs-row {
+  min-height: 2.1rem;
+  padding: 0.15rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+.rbs-item {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--ink-2);
+}
+.rbs-row[data-split='true'] .rbs-item {
+  color: var(--accent);
+}
+
+.rbs-cell {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.2rem 0.4rem;
+  min-width: 0;
+}
+.rbs-chip {
+  display: inline-block;
+  max-width: 100%;
+  padding: 0.15rem 0.45rem;
+  border-radius: 3px;
+  font-size: 0.75rem;
+  line-height: 1.35;
+  color: var(--ink-2);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out),
+    color 0.35s var(--ease-out);
+}
+.rbs-chip[data-tone='focus'] {
+  color: var(--ink);
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.rbs-chip[data-tone='split'] {
+  color: var(--ink);
+  box-shadow: inset 0 0 0 1.5px var(--accent-mid);
+}
+.rbs-ref {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--accent);
+  white-space: nowrap;
+}
+
+@container (max-width: 40rem) {
+  .rbs {
+    --rbs-cols: repeat(3, minmax(0, 1fr));
+  }
+  .rbs-corner {
+    display: none;
+  }
+  .rbs-colhead {
+    padding: 0.25rem 0.35rem;
+  }
+  /* Artefaktet står over sine tre celler. */
+  .rbs-row {
+    row-gap: 0.2rem;
+    padding: 0.35rem 0;
+  }
+  .rbs-item {
+    grid-column: 1 / -1;
+  }
+  .rbs-chip {
+    font-size: 0.6875rem;
+    padding: 0.1rem 0.35rem;
+  }
+}

@@ -1,0 +1,216 @@
+.pe {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.pe-flow {
+  display: grid;
+  grid-template-columns: 11rem minmax(0, 1fr);
+  gap: 1rem;
+  align-items: stretch;
+}
+
+.pe-pre {
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.2rem;
+  padding: 0.6rem 0.75rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.pe-pre[data-tone='focus'] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.pe-pre-text {
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+.pe-pre-sub {
+  font-size: 0.75rem;
+  color: var(--ink-3);
+}
+
+.pe-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 0;
+}
+.pe-tl {
+  display: grid;
+  grid-template-columns: 10rem minmax(0, 1fr);
+  gap: 0.75rem;
+  align-items: center;
+  padding: 0.3rem 0.4rem;
+  border-radius: var(--radius-sm);
+  transition: background-color 0.35s var(--ease-out);
+}
+.pe-tl[data-now='true'] {
+  background: var(--accent-soft);
+}
+.pe-src {
+  display: flex;
+  flex-direction: column;
+  gap: 0.05rem;
+}
+.pe-src-name {
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+.pe-src-note {
+  font-size: 0.6875rem;
+  color: var(--ink-3);
+}
+
+.pe-bar {
+  display: flex;
+  gap: 3px;
+  min-height: 3rem;
+  padding: 3px;
+  border-radius: var(--radius-sm);
+  box-shadow: inset 0 0 0 1px var(--rule);
+}
+.pe-seg {
+  flex-basis: 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.05rem;
+  padding: 0.3rem 0.5rem;
+  border-radius: 3px;
+  transform-origin: left center;
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1px var(--accent-mid);
+}
+.pe-seg[data-part='1'] {
+  background: var(--accent);
+  box-shadow: none;
+  color: var(--paper);
+}
+.pe-seg-min {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.pe-seg-label {
+  font-size: 0.6875rem;
+  line-height: 1.25;
+}
+
+.pe-disagree {
+  display: flex;
+  justify-content: flex-end;
+  min-height: 1.5rem;
+}
+
+.pe-goals {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.pe-goals-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.2rem 1rem;
+}
+.pe-goals-where {
+  font-size: 0.6875rem;
+  color: var(--ink-3);
+}
+.pe-goal-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-auto-flow: column;
+  grid-template-rows: repeat(6, auto);
+  gap: 3px 1rem;
+  margin: 0;
+  padding: 0;
+}
+.pe-goal {
+  display: grid;
+  grid-template-columns: 1.25rem minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 1.9rem;
+  padding: 0.15rem 0.45rem;
+  border-bottom: 1px solid var(--rule);
+}
+.pe-goal-n {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+.pe-goal-text {
+  font-size: 0.8125rem;
+  line-height: 1.3;
+}
+.pe-goal-where {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: var(--ink-2);
+  text-align: right;
+}
+
+.pe-grade {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+.pe-grade-box {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-sm);
+}
+.pe-grade-box[data-tone='focus'] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.pe-grade-box[data-tone='neg'] {
+  background: var(--neg-soft);
+  box-shadow: inset 0 0 0 1.5px var(--neg);
+}
+.pe-grade-main {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+.pe-grade-sub {
+  font-size: 0.75rem;
+  color: var(--ink-2);
+}
+
+@container (max-width: 40rem) {
+  .pe-flow {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.6rem;
+  }
+  .pe-tl {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.3rem;
+    padding: 0.3rem;
+  }
+  .pe-goal-list {
+    grid-template-columns: minmax(0, 1fr);
+    grid-auto-flow: row;
+    grid-template-rows: none;
+  }
+  .pe-grade {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.5rem;
+  }
+}

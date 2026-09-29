@@ -1,0 +1,127 @@
+.rm {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 1.25rem;
+  align-items: start;
+}
+
+.rm-gridwrap {
+  display: grid;
+  grid-template-columns: 1.1rem auto;
+  grid-template-areas: 'y grid' '. x';
+  gap: 0.3rem;
+}
+.rm-ylabel {
+  grid-area: y;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  justify-self: center;
+  align-self: center;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--ink-3);
+}
+.rm-xlabel {
+  grid-area: x;
+  text-align: center;
+  padding-left: 1.2rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--ink-3);
+}
+.rm-grid {
+  grid-area: grid;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.rm-gridrow {
+  display: grid;
+  grid-template-columns: 1rem repeat(5, 2.5rem);
+  gap: 3px;
+  align-items: center;
+}
+.rm-tick {
+  font-size: 0.6875rem;
+  color: var(--ink-3);
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+.rm-cell {
+  position: relative;
+  height: 2.5rem;
+  border-radius: 3px;
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule);
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.rm-cell[data-hit='yes'] {
+  box-shadow: inset 0 0 0 1.5px var(--accent-mid);
+}
+.rm-cell[data-hit='now'] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.rm-prod {
+  position: absolute;
+  right: 4px;
+  top: 2px;
+  font-size: 0.6875rem;
+  color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+}
+.rm-mark,
+.rm-num {
+  display: inline-grid;
+  place-items: center;
+  width: 1.3rem;
+  height: 1.3rem;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--paper);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+.rm-mark {
+  position: absolute;
+  left: 5px;
+  bottom: 5px;
+}
+
+.rm-table .vtable {
+  overflow-x: auto;
+}
+.rm-name {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.rm-num {
+  width: 1.15rem;
+  height: 1.15rem;
+  font-size: 0.6875rem;
+  flex: none;
+}
+.rm-table td:nth-child(n + 2):nth-child(-n + 4),
+.rm-table th:nth-child(n + 2):nth-child(-n + 4) {
+  text-align: right;
+}
+.rm-table td:last-child {
+  white-space: normal;
+  min-width: 9rem;
+}
+.rm-plan {
+  display: block;
+  line-height: 1.35;
+}
+
+@container (max-width: 44rem) {
+  .rm {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .rm-gridwrap {
+    justify-self: center;
+  }
+}

@@ -1,0 +1,141 @@
+.fdu {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.fdu-form {
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  border: 1px solid var(--rule-strong);
+  overflow: hidden;
+}
+
+.fdu-row {
+  display: grid;
+  grid-template-columns: 11rem minmax(0, 1fr);
+  column-gap: 0.9rem;
+  padding: 0.4rem 0.75rem;
+  border-top: 1px solid var(--rule);
+  transition: background-color 0.35s var(--ease-out);
+}
+.fdu-row:first-child {
+  border-top: 0;
+}
+.fdu-row[data-now] {
+  background: var(--accent-soft);
+}
+
+.fdu-label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.05rem;
+}
+.fdu-name {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--ink-3);
+  transition: color 0.35s var(--ease-out);
+}
+.fdu-row[data-on] .fdu-name {
+  color: var(--ink);
+}
+.fdu-row[data-now] .fdu-name {
+  color: var(--accent);
+}
+.fdu-hint {
+  font-size: 0.6875rem;
+  line-height: 1.3;
+  color: var(--ink-3);
+}
+
+.fdu-value {
+  min-width: 0;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: var(--ink);
+}
+
+.fdu-steps {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+.fdu-steps li {
+  display: grid;
+  grid-template-columns: 1.3rem minmax(0, 1fr);
+}
+.fdu-n {
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-3);
+}
+.fdu-mark,
+.fdu-ext-head {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--accent);
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.fdu-mark {
+  display: block;
+  width: fit-content;
+  margin-top: 0.1rem;
+  padding: 0 0.25rem;
+  border-radius: 3px;
+}
+.fdu-mark[data-hot] {
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--accent);
+}
+
+.fdu-exts {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.fdu-ext {
+  padding: 0.3rem 0.5rem;
+  border-radius: 3px;
+  box-shadow: inset 0 0 0 1px var(--rule);
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.fdu-ext[data-hot] {
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--accent);
+}
+.fdu-ext-step {
+  padding-left: 0.75rem;
+}
+.fdu-empty {
+  font-style: italic;
+  color: var(--ink-3);
+}
+
+.fdu-foot {
+  min-height: 1.6rem;
+}
+
+@container (max-width: 40rem) {
+  .fdu-row {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 0.15rem;
+    padding: 0.4rem 0.6rem;
+  }
+  .fdu-label {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0 0.5rem;
+  }
+  .fdu-foot {
+    min-height: 2.8rem;
+  }
+}

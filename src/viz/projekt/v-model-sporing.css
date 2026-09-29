@@ -1,0 +1,155 @@
+.vms {
+  --step-in: 2.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.vms-legs {
+  display: flex;
+  justify-content: space-between;
+}
+
+.vms-rows {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* V’et: hver række rykker ind fra begge sider. */
+.vms-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(2.5rem, 0.55fr) minmax(0, 1.25fr);
+  align-items: center;
+  padding-inline: calc(var(--depth) * var(--step-in));
+}
+.vms-row .vnode {
+  padding: 0.45rem 0.7rem 0.5rem;
+}
+.vms-row .vnode-title {
+  font-size: 0.8125rem;
+}
+
+.vms-dev .vnode-sub {
+  font-size: 0.6875rem;
+}
+
+.vms-link {
+  position: relative;
+  height: 1.5rem;
+  margin: 0 0.35rem;
+  color: var(--rule-strong);
+  transition: color 0.35s var(--ease-out);
+}
+.vms-link[data-tone='focus'] {
+  color: var(--accent);
+}
+.vms-dash {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  display: block;
+  height: 0;
+  border-top: 1.5px dashed currentColor;
+  transform-origin: left center;
+}
+
+.vms-test-sub {
+  margin-top: 0.15rem;
+  font-size: 0.6875rem;
+  line-height: 1.35;
+  color: var(--ink-2);
+}
+.vms-vv {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  margin-top: 0.3rem;
+  min-height: 1.3rem;
+}
+.vms-vv .vtag {
+  font-family: var(--font-ui);
+  font-size: 0.6875rem;
+}
+
+.vms-row.vms-bottom {
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: center;
+}
+.vms-impl {
+  min-width: 9rem;
+  text-align: center;
+}
+
+.vms-vvlegend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.5rem;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: var(--ink-2);
+}
+.vms-vvlegend strong {
+  color: var(--ink);
+}
+
+.vms-timing {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 0.5rem 1rem;
+}
+.vms-time {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  padding: 0.45rem 0.65rem;
+  border-radius: var(--radius-sm);
+  box-shadow: inset 0 0 0 1px var(--accent-mid);
+  background: var(--paper);
+}
+.vms-time:last-child {
+  text-align: right;
+}
+.vms-time-head {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+.vms-time-body {
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: var(--ink-2);
+}
+
+@container (max-width: 44rem) {
+  .vms {
+    --step-in: 0.6rem;
+  }
+  .vms-row {
+    grid-template-columns: minmax(0, 1fr) 1rem minmax(0, 1.2fr);
+  }
+  .vms-link {
+    margin: 0;
+  }
+  .vms-row.vms-bottom {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@container (max-width: 30rem) {
+  .vms {
+    --step-in: 0rem;
+  }
+  .vms-row .vnode {
+    padding: 0.4rem 0.5rem 0.45rem;
+  }
+  .vms-timing {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .vms-time:last-child {
+    text-align: left;
+  }
+}

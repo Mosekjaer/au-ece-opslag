@@ -1,0 +1,249 @@
+.ro {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.ro-legs {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 15rem) minmax(0, 1fr);
+  align-items: end;
+  gap: 0.5rem;
+  min-height: 2.6rem;
+}
+.ro-legs-mid {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+.ro-legs-r {
+  text-align: right;
+}
+.ro-main {
+  display: inline-block;
+  padding: 0.25rem 0.6rem;
+  border-radius: 3px;
+  font-size: 0.75rem;
+  line-height: 1.35;
+  color: var(--ink-2);
+  box-shadow: inset 0 0 0 1px var(--accent-mid);
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.ro-main strong {
+  color: var(--accent);
+}
+.ro-main[data-now='true'] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+
+.ro-rows {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+/* Én række pr. par. Indrykningen vokser nedad, så kapitlerne danner V’et. */
+.ro-row {
+  --indent: calc(var(--i) * 1.1rem);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 11rem minmax(0, 1fr);
+  align-items: stretch;
+  gap: 0.5rem;
+}
+.ro-row .ro-l {
+  margin-left: var(--indent);
+}
+.ro-row .ro-r {
+  margin-right: var(--indent);
+  align-self: center;
+}
+
+.ro-box {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  min-width: 0;
+  padding: 0.45rem 0.65rem 0.5rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.ro-box[data-tone='focus'] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.ro-box[data-tone='ok'] {
+  box-shadow: inset 0 0 0 1.5px var(--accent-mid);
+}
+
+.ro-name {
+  display: flex;
+  align-items: baseline;
+  gap: 0.45rem;
+  min-width: 0;
+}
+.ro-num {
+  flex: none;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+.ro-title {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+.ro-pages {
+  flex: none;
+  font-size: 0.75rem;
+  color: var(--ink-3);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.ro-figs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+.ro-figs .vtag {
+  font-size: 0.6875rem;
+}
+
+.ro-mid {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.2rem;
+  color: var(--rule-strong);
+  transition: color 0.35s var(--ease-out);
+}
+.ro-mid[data-tone='focus'] {
+  color: var(--accent);
+}
+.ro-link-label {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  line-height: 1.3;
+  text-align: center;
+  color: var(--ink-3);
+}
+.ro-mid[data-tone='focus'] .ro-link-label {
+  color: var(--accent);
+  font-weight: 600;
+}
+.ro-line {
+  position: relative;
+  display: block;
+  height: 1.5px;
+  margin-right: 6px;
+  background: currentColor;
+  transform-origin: left center;
+}
+.ro-link-note {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.15rem;
+}
+.ro-line::after {
+  content: '';
+  position: absolute;
+  right: -6px;
+  top: -3.5px;
+  border-left: 7px solid currentColor;
+  border-top: 4.25px solid transparent;
+  border-bottom: 4.25px solid transparent;
+}
+
+.ro-bilag {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.75rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-sm);
+  color: var(--ink-3);
+  outline: 1px dashed var(--rule-strong);
+  outline-offset: -1px;
+}
+.ro-bilag-head {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--ink-2);
+}
+.ro-bilag-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.6rem;
+  font-size: 0.75rem;
+}
+.ro-bilag-item + .ro-bilag-item::before {
+  content: '·';
+  margin-right: 0.6rem;
+  color: var(--rule-strong);
+}
+.ro-bilag-note {
+  margin-left: auto;
+  font-size: 0.75rem;
+  font-style: italic;
+}
+
+@container (max-width: 40rem) {
+  /* Smal plade: de to kapitler side om side, relationen som en linje under. */
+  .ro-legs {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-areas: 'l r' 'mid mid';
+    row-gap: 0.4rem;
+  }
+  .ro-legs > .vcaps:first-child {
+    grid-area: l;
+  }
+  .ro-legs-r {
+    grid-area: r;
+  }
+  .ro-legs-mid {
+    grid-area: mid;
+  }
+  .ro-rows {
+    gap: 0.7rem;
+  }
+  .ro-row {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-areas: 'l r' 'mid mid';
+    row-gap: 0.25rem;
+    column-gap: 0.4rem;
+  }
+  .ro-row .ro-l {
+    grid-area: l;
+    margin-left: 0;
+  }
+  .ro-row .ro-r {
+    grid-area: r;
+    margin-right: 0;
+  }
+  .ro-mid {
+    grid-area: mid;
+  }
+  .ro-name {
+    flex-wrap: wrap;
+    row-gap: 0.1rem;
+  }
+  .ro-pages {
+    flex-basis: 100%;
+    padding-left: 1.1rem;
+  }
+  .ro-bilag-note {
+    margin-left: 0;
+  }
+}
