@@ -39,6 +39,14 @@ hvert trins `hold`, replay, trin-for-trin, piletaster og `prefers-reduced-motion
 6. **Ét visuelt sprog.** Brug primitiverne i `kit/primitives.tsx` (`Node`, `Link`
    (`vertical` for en lodret pil), `Token`/`Tag` (`wrap` for lange labels), `VTable`, `Swap`
    (varianter stablet i én celle, så højden er stabil)) og tonerne `idle | focus | muted | ok | neg | ghost`.
+   Til algoritmer og datastrukturer har `kit/algo.tsx`: `ArrayRow` (celler med indeks og
+   glidende pointer-markører som `lo`/`mid`/`hi`; med `keys` glider værdierne ved swap),
+   `Graph` (knuder og kanter i SVG med vægte, pile og badges; positionerne tweener, så
+   en rotation eller et bytte ses som bevægelse — hold viewBox-bredden ≤ ca. 340, så
+   teksten er ≥ 11 px ved 375), `layoutTree` (binært træ → knuder/kanter; x efter
+   in-order-rang, y efter dybde; stabile id’er) og `CellGrid` (gitter til pathfinding
+   og DP-tabeller). Eksempler i `doa/`: `doa-binary-search`, `doa-avl-rotation`,
+   `doa-dijkstra`, `doa-astar`.
    Farver kun via CSS-variabler (`--accent`, `--ink-*`, `--rule*`, `--paper*`,
    `--neg`) — aldrig hex-værdier, så lys og mørk tilstand virker.
 7. **Skrift.** Pladen bruger UI-fonten (IBM Plex Sans). Kode og identifikatorer i

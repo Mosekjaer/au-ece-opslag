@@ -1,0 +1,311 @@
+/* Kit: array, graf/træ og gitter (kit/algo.tsx). Kun CSS-variabler. */
+
+/* ------------------------------ ArrayRow ------------------------------ */
+.varr {
+  display: grid;
+  gap: 0.3rem;
+  min-width: 0;
+}
+.varr-label {
+  font-size: 0.75rem;
+  color: var(--ink-3);
+}
+.varr-scroll {
+  overflow-x: auto;
+  min-width: 0;
+}
+.varr-grid {
+  display: grid;
+  width: max-content;
+  gap: 0 3px;
+}
+.varr-col {
+  display: grid;
+  justify-items: stretch;
+  min-width: 0;
+}
+.varr-cell {
+  display: grid;
+  place-items: center;
+  height: 2.1rem;
+  border-radius: 3px;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  font-variant-ligatures: none;
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out),
+    color 0.35s var(--ease-out);
+}
+.varr-cell[data-tone='focus'] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.varr-cell[data-tone='ok'] {
+  color: var(--paper);
+  background: var(--accent);
+  box-shadow: none;
+}
+.varr-cell[data-tone='neg'] {
+  background: var(--neg-soft);
+  box-shadow: inset 0 0 0 1.5px var(--neg);
+}
+.varr-cell[data-tone='muted'] {
+  color: var(--ink-3);
+  background: var(--paper-2);
+  box-shadow: inset 0 0 0 1px var(--rule);
+}
+.varr-cell[data-tone='ghost'] {
+  color: var(--ink-3);
+  background: transparent;
+  box-shadow: none;
+  outline: 1px dashed var(--rule-strong);
+  outline-offset: -1px;
+}
+.varr-idx {
+  padding-top: 0.15rem;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--ink-3);
+}
+.varr-ptrs {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 0.35rem;
+  min-height: 2.05rem;
+}
+.varr-ptrs.is-bottom {
+  align-items: flex-start;
+}
+.varr-ptr {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  line-height: 1.1;
+  white-space: nowrap;
+  color: var(--accent);
+}
+.varr-ptr i {
+  font-style: normal;
+  font-weight: 400;
+}
+.varr-ptr[data-tone='neg'] {
+  color: var(--neg);
+}
+.varr-ptr[data-tone='idle'],
+.varr-ptr[data-tone='muted'] {
+  color: var(--ink-2);
+}
+
+/* -------------------------------- Graph ------------------------------- */
+.vgraph {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-inline: auto;
+  overflow: visible;
+  font-family: var(--font-ui, inherit);
+}
+.vg-line {
+  stroke: var(--rule-strong);
+  stroke-width: 1.5;
+  transition: stroke 0.35s var(--ease-out);
+}
+.vg-head {
+  fill: var(--rule-strong);
+  transition: fill 0.35s var(--ease-out);
+}
+.vg-w {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  fill: var(--ink-2);
+  paint-order: stroke;
+  stroke: var(--paper);
+  stroke-width: 4px;
+  stroke-linejoin: round;
+}
+.vg-edge[data-tone='focus'] .vg-line {
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+.vg-edge[data-tone='focus'] .vg-head {
+  fill: var(--accent);
+}
+.vg-edge[data-tone='focus'] .vg-w {
+  fill: var(--accent);
+}
+.vg-edge[data-tone='ok'] .vg-line {
+  stroke: var(--accent);
+  stroke-width: 3.5;
+}
+.vg-edge[data-tone='ok'] .vg-head {
+  fill: var(--accent);
+}
+.vg-edge[data-tone='ok'] .vg-w {
+  fill: var(--accent);
+  font-weight: 700;
+}
+.vg-edge[data-tone='neg'] .vg-line {
+  stroke: var(--neg);
+  stroke-dasharray: 4 3;
+}
+.vg-edge[data-tone='neg'] .vg-head {
+  fill: var(--neg);
+}
+.vg-edge[data-tone='neg'] .vg-w {
+  fill: var(--neg);
+}
+.vg-edge[data-tone='muted'] .vg-line {
+  stroke: var(--rule);
+}
+.vg-edge[data-tone='muted'] .vg-w {
+  fill: var(--ink-3);
+}
+.vg-edge[data-tone='ghost'] .vg-line {
+  stroke: var(--rule);
+  stroke-dasharray: 3 3;
+}
+.vg-edge[data-tone='ghost'] .vg-w {
+  fill: var(--ink-3);
+}
+
+.vg-circle {
+  fill: var(--paper);
+  stroke: var(--rule-strong);
+  stroke-width: 1.25;
+  transition:
+    fill 0.35s var(--ease-out),
+    stroke 0.35s var(--ease-out);
+}
+.vg-label {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  fill: var(--ink);
+  transition: fill 0.35s var(--ease-out);
+}
+.vg-node[data-tone='focus'] .vg-circle {
+  fill: var(--accent-soft);
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+.vg-node[data-tone='ok'] .vg-circle {
+  fill: var(--accent);
+  stroke: var(--accent);
+}
+.vg-node[data-tone='ok'] .vg-label {
+  fill: var(--paper);
+}
+.vg-node[data-tone='neg'] .vg-circle {
+  fill: var(--neg-soft);
+  stroke: var(--neg);
+  stroke-width: 2;
+}
+.vg-node[data-tone='muted'] .vg-circle {
+  fill: var(--paper-2);
+  stroke: var(--rule);
+}
+.vg-node[data-tone='muted'] .vg-label {
+  fill: var(--ink-3);
+}
+.vg-node[data-tone='ghost'] .vg-circle {
+  fill: none;
+  stroke: var(--rule-strong);
+  stroke-dasharray: 3 3;
+}
+.vg-node[data-tone='ghost'] .vg-label {
+  fill: var(--ink-3);
+}
+.vg-badge {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  font-weight: 600;
+  fill: var(--accent);
+  paint-order: stroke;
+  stroke: var(--paper);
+  stroke-width: 3.5px;
+  stroke-linejoin: round;
+}
+.vg-badge[data-tone='neg'] {
+  fill: var(--neg);
+}
+.vg-badge[data-tone='idle'],
+.vg-badge[data-tone='muted'] {
+  fill: var(--ink-2);
+}
+
+/* ------------------------------ CellGrid ------------------------------ */
+.vgrid-scroll {
+  overflow-x: auto;
+  min-width: 0;
+}
+.vgrid {
+  display: grid;
+  width: max-content;
+  gap: 2px;
+}
+.vgrid-row {
+  display: contents;
+}
+.vgrid-head {
+  display: grid;
+  place-items: center;
+  padding: 0 0.3rem;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--ink-3);
+}
+.vgrid-head.is-row {
+  justify-items: end;
+}
+.vgrid-cell {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  min-height: 1.5rem;
+  border-radius: 2px;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  font-variant-ligatures: none;
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule);
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out),
+    color 0.35s var(--ease-out);
+}
+.vgrid-cell[data-tone='focus'] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.vgrid-cell[data-tone='ok'] {
+  color: var(--paper);
+  background: var(--accent);
+  box-shadow: none;
+}
+.vgrid-cell[data-tone='muted'] {
+  color: var(--ink-2);
+  background: var(--paper-3);
+}
+.vgrid-cell[data-tone='neg'] {
+  background: var(--neg-soft);
+  box-shadow: inset 0 0 0 1.5px var(--neg);
+}
+.vgrid-cell[data-tone='ghost'] {
+  color: var(--ink-3);
+  background: transparent;
+}
+.vgrid-cell[data-wall] {
+  background: var(--ink-3);
+  box-shadow: none;
+}
