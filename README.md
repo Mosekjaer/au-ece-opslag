@@ -1,11 +1,11 @@
 # Opslagsværk — softwareteknologi, AU
 
 Visuelt opslagsværk til eksamenslæsning. 4. semester: BAD, FED, SWT, SWD. 3. semester:
-SYS, KNP, DOA. 2. semester: OOP, PLA, STS. Plus en generisk projektguide. Fagene grupperes
-efter `semester` i datafilen. Materialet til 2. og 3. semester ligger i `context/`. BAD (27 emner) og FED
-(30 emner i to spor: MAUI og web) er fuldt udfyldt med figur, forklaring, kode,
-eksamenssætninger og kildehenvisninger. SWT og SWD har en emneoversigt, der er udledt af
-deres lektionsplaner.
+SYS, KNP, DOA. 2. semester: OOP, PLA, STS. 1. semester: OPRG, IDE, MSYS, LMEK. Plus en generisk projektguide. Fagene grupperes
+efter `semester` i datafilen. Materialet til 1.–3. semester ligger i `context/` (1. semester i `context/sem1/`). BAD (27 emner), FED
+(30 emner i to spor: MAUI og web), SWT (25 emner), SWD (30 emner) og projektguiden (28 emner) er fuldt udfyldt med
+figur, forklaring, kode, eksamenssætninger og kildehenvisninger. De øvrige fag har en stub
+med læringsmål og eksamensform.
 
 ## Start
 
@@ -27,11 +27,10 @@ src/
   content/            Indhold. Én datafil (eller mappe) pr. fag.
     types.ts          Datamodellen: Course → Part → Topic → Concept
     index.ts          Registret over fag
-    bad/ fed/         BAD og FED: index.ts + én fil pr. del
-    swt.ts swd.ts
+    bad/ fed/ swt/ swd/  De udfyldte fag: index.ts + én fil pr. del
   viz/
     kit/              Figur-rammen (autoplay, replay, trin, reduced motion) og primitiver
-    bad/ fed/         Fagenes visualiseringer, én .tsx + .css pr. figur
+    bad/ fed/ swt/ swd/  Fagenes visualiseringer, én .tsx + .css pr. figur
     README.md         Forfatterguide til nye figurer
   components/         Layout og sider. Læser kun datamodellen.
   styles/             Tokens (typeskala, farver, grid), layout, kode, figurer

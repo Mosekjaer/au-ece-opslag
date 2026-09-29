@@ -14,7 +14,7 @@ export function Home() {
         <p className="label">Diplomingeniør i softwareteknologi · AU</p>
         <h1 className="home-title">Opslagsværk</h1>
         <p className="lede">
-          Fagene fra 2.–4. semester og en generisk projektguide, bygget på kursusmaterialet og med henvisning til kilden ved hvert emne. Find et begreb med{' '}
+          Studiets fag og en generisk projektguide, bygget på kursusmaterialet og med henvisning til kilden ved hvert emne. Find et begreb med{' '}
           <kbd>{modKey}</kbd> <kbd>K</kbd> eller <kbd>/</kbd>.
         </p>
       </header>
