@@ -1,0 +1,267 @@
+/* Parallelle loops: tidsproportionale blokke på to tråde. Tråd 1 i accent,
+   tråd 2 i neutral blæk; ledig tid skraveret, ikke rød. */
+.plp {
+  --plp-t1: var(--accent);
+  --plp-t2: var(--ink-3);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.plp-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.plp-narrow {
+  display: none;
+  max-width: 24rem;
+  margin: 0 auto;
+}
+.plp-svg text {
+  font-family: var(--font-ui);
+  fill: var(--ink-2);
+  dominant-baseline: central;
+}
+.plp-svg .plp-title,
+.plp-svg .plp-ptitle {
+  font-weight: 600;
+  fill: var(--ink-2);
+  transition: fill 0.35s var(--ease-out);
+}
+.plp-svg .plp-sub {
+  font-size: 0.92em;
+  fill: var(--ink-3);
+}
+.plp-svg .plp-mono {
+  font-family: var(--font-mono);
+  font-style: italic;
+}
+.plp-svg .plp-illu {
+  font-size: 0.92em;
+  font-style: italic;
+  fill: var(--ink-3);
+}
+
+.plp-block {
+  fill: var(--paper);
+  stroke: var(--rule-strong);
+  stroke-width: 1;
+}
+.plp-block[data-lane='0'] {
+  fill: color-mix(in oklab, var(--plp-t1) 28%, var(--paper));
+  stroke: var(--plp-t1);
+}
+.plp-block[data-lane='1'] {
+  fill: color-mix(in oklab, var(--plp-t2) 26%, var(--paper));
+  stroke: var(--plp-t2);
+}
+.plp-svg .plp-bnum {
+  font-size: 0.9em;
+  font-weight: 600;
+  text-anchor: middle;
+  font-variant-numeric: tabular-nums;
+  fill: var(--ink);
+}
+
+.plp-track {
+  fill: none;
+  stroke: var(--rule);
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+}
+.plp-svg .plp-lane {
+  font-size: 0.92em;
+  font-weight: 600;
+}
+.plp-svg .plp-lane[data-lane='0'] {
+  fill: var(--plp-t1);
+}
+.plp-svg .plp-lane[data-lane='1'] {
+  fill: var(--ink-2);
+}
+.plp-panel .plp-lane,
+.plp-panel .plp-track {
+  opacity: 0.55;
+  transition: opacity 0.35s var(--ease-out);
+}
+.plp-panel[data-on] .plp-lane,
+.plp-panel[data-on] .plp-track {
+  opacity: 1;
+}
+.plp-svg .plp-panel[data-hot] .plp-ptitle {
+  fill: var(--ink);
+}
+.plp-svg .plp-panel:not([data-on]) .plp-ptitle {
+  fill: var(--ink-3);
+}
+
+.plp-hatch-line {
+  stroke: var(--ink-3);
+  stroke-width: 1.2;
+  opacity: 0.55;
+}
+.plp-idle {
+  stroke: var(--rule-strong);
+  stroke-width: 1;
+}
+.plp-svg .plp-idle-label {
+  font-size: 0.9em;
+  font-weight: 600;
+  text-anchor: middle;
+  fill: var(--ink-2);
+  paint-order: stroke;
+  stroke: var(--paper-2);
+  stroke-width: 4px;
+  stroke-linejoin: round;
+}
+.plp-svg .plp-total {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  fill: var(--ink-2);
+}
+.plp-finish {
+  stroke: var(--ink);
+  stroke-width: 1.4;
+  stroke-dasharray: 4 3;
+}
+.plp-svg .plp-flabel {
+  font-size: 0.92em;
+  font-weight: 600;
+  fill: var(--ink);
+}
+.plp-axis {
+  stroke: var(--ink-3);
+  stroke-width: 1.2;
+}
+.plp-svg .plp-tick {
+  font-size: 0.9em;
+  text-anchor: middle;
+  font-variant-numeric: tabular-nums;
+  fill: var(--ink-3);
+}
+
+/* Spektret, s. 11 */
+.plp-spec {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--rule);
+}
+.plp-spec-title {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--ink-3);
+  text-align: center;
+}
+.plp-spec-row {
+  display: grid;
+  grid-template-columns: auto minmax(3rem, 1fr) auto;
+  align-items: center;
+  gap: 0.75rem;
+}
+.plp-end {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  font-size: 0.75rem;
+  color: var(--ink-2);
+}
+.plp-end b {
+  font-size: 0.8125rem;
+  color: var(--ink);
+}
+.plp-end code {
+  align-self: flex-start;
+  font-size: 0.75rem;
+}
+.plp-end-d {
+  text-align: right;
+}
+.plp-end-d code {
+  align-self: flex-end;
+}
+.plp-bar {
+  position: relative;
+  height: 2px;
+  background: var(--ink-3);
+}
+.plp-bar::before,
+.plp-bar::after {
+  content: '';
+  position: absolute;
+  top: -4px;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+}
+.plp-bar::before {
+  left: -2px;
+  border-right: 8px solid var(--ink-3);
+}
+.plp-bar::after {
+  right: -2px;
+  border-left: 8px solid var(--ink-3);
+}
+.plp-spec-notes {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+  font-size: 0.75rem;
+  font-style: italic;
+  color: var(--ink-3);
+}
+.plp-spec-notes span:last-child {
+  text-align: right;
+}
+
+@container (max-width: 40rem) {
+  .plp-wide {
+    display: none;
+  }
+  .plp-narrow {
+    display: block;
+  }
+  /* Spektret stables: Fully Static øverst, Fully Dynamic nederst */
+  .plp-spec-row {
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: start;
+    gap: 0.35rem;
+  }
+  .plp-bar {
+    width: 2px;
+    height: 1.6rem;
+    margin-left: 1rem;
+  }
+  .plp-bar::before {
+    left: -4px;
+    top: -2px;
+    border: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 8px solid var(--ink-3);
+  }
+  .plp-bar::after {
+    left: -4px;
+    right: auto;
+    top: auto;
+    bottom: -2px;
+    border: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 8px solid var(--ink-3);
+  }
+  .plp-end-d {
+    text-align: left;
+  }
+  .plp-end-d code {
+    align-self: flex-start;
+  }
+  .plp-spec-notes {
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+  .plp-spec-notes span:last-child {
+    text-align: left;
+  }
+}

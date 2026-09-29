@@ -1,0 +1,308 @@
+.sfm {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.sfm-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+  overflow: visible;
+}
+.sfm-wide {
+  max-width: 52.5rem;
+}
+.sfm-narrow {
+  display: none;
+  max-width: 22rem;
+}
+
+.sfm-svg text {
+  font-family: var(--font-ui);
+  fill: var(--ink);
+  dominant-baseline: central;
+}
+
+/* Streger */
+.sfm-line {
+  fill: none;
+  stroke: var(--ink-3);
+  stroke-width: 1.4;
+  stroke-linejoin: round;
+}
+.sfm-dash {
+  stroke-dasharray: 5 4;
+}
+.sfm-head {
+  fill: none;
+  stroke: var(--ink-3);
+  stroke-width: 1.4;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+.sfm-tri {
+  fill: var(--paper-2);
+  stroke: var(--ink-3);
+  stroke-width: 1.3;
+  stroke-linejoin: round;
+}
+
+/* Klasser */
+.sfm-box {
+  fill: var(--paper);
+  stroke: var(--ink-3);
+  stroke-width: 1.3;
+  transition:
+    fill 0.4s var(--ease-out),
+    stroke 0.4s var(--ease-out),
+    stroke-width 0.4s var(--ease-out);
+}
+.sfm-div {
+  stroke: var(--ink-3);
+  stroke-width: 1;
+  transition: stroke 0.4s var(--ease-out);
+}
+.sfm-svg .sfm-cname {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  font-weight: 600;
+  font-variant-ligatures: none;
+  text-anchor: middle;
+  transition: fill 0.4s var(--ease-out);
+}
+.sfm-svg .sfm-stereo {
+  font-size: 11.5px;
+  text-anchor: middle;
+  fill: var(--ink-3);
+}
+.sfm-svg .sfm-mem {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-variant-ligatures: none;
+  white-space: pre;
+  fill: var(--ink-2);
+  transition: fill 0.35s var(--ease-out);
+}
+.sfm-memhl {
+  fill: transparent;
+  transition: fill 0.35s var(--ease-out);
+}
+
+.sfm-cls[data-tone='muted'] .sfm-box {
+  fill: var(--paper-2);
+  stroke: var(--rule-strong);
+}
+.sfm-svg .sfm-cls[data-tone='muted'] .sfm-cname {
+  fill: var(--ink-3);
+  font-weight: 500;
+}
+.sfm-cls[data-tone='focus'] .sfm-box,
+.sfm-obj[data-tone='focus'] .sfm-box {
+  fill: var(--accent-soft);
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+.sfm-cls[data-tone='alt'] .sfm-box,
+.sfm-obj[data-tone='alt'] .sfm-box {
+  fill: var(--paper-3);
+  stroke: var(--ink);
+  stroke-width: 2;
+}
+.sfm-cls[data-tone='focus'] .sfm-div {
+  stroke: var(--accent);
+}
+.sfm-cls[data-tone='alt'] .sfm-div {
+  stroke: var(--ink);
+}
+.sfm-cls [data-hot] .sfm-memhl {
+  fill: var(--paper);
+}
+.sfm-svg .sfm-cls[data-tone='focus'] [data-hot] .sfm-mem {
+  fill: var(--accent);
+  font-weight: 600;
+}
+.sfm-svg .sfm-cls[data-tone='alt'] [data-hot] .sfm-mem {
+  fill: var(--ink);
+  font-weight: 600;
+}
+
+/* Note med konstruktøren */
+.sfm-note-box {
+  fill: var(--paper);
+  stroke: var(--ink-3);
+  stroke-width: 1.2;
+  transition: stroke 0.35s var(--ease-out);
+}
+.sfm-note-fold {
+  fill: none;
+  stroke: var(--ink-3);
+  stroke-width: 1.2;
+}
+.sfm-anchor {
+  stroke: var(--ink-3);
+  stroke-width: 1.2;
+  stroke-dasharray: 3 3;
+}
+.sfm-svg .sfm-code {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-variant-ligatures: none;
+  white-space: pre;
+  fill: var(--ink-2);
+}
+.sfm-svg .sfm-code-dim {
+  fill: var(--ink-3);
+}
+.sfm-svg .sfm-code-call {
+  transition: fill 0.35s var(--ease-out);
+}
+.sfm-note[data-hot] .sfm-note-box {
+  stroke: var(--accent);
+}
+.sfm-svg .sfm-note[data-hot] .sfm-code-call {
+  fill: var(--accent);
+  font-weight: 700;
+}
+
+/* Kaldpile */
+.sfm-call-line,
+.sfm-call-head {
+  fill: none;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.sfm-call[data-tone='focus'] path {
+  stroke: var(--accent);
+}
+.sfm-call[data-tone='alt'] path {
+  stroke: var(--ink);
+}
+
+/* Gruppemærker ved kanalerne */
+.sfm-group path {
+  fill: none;
+  stroke-width: 1.6;
+}
+.sfm-svg .sfm-group text {
+  font-size: 11.5px;
+  font-weight: 600;
+  text-anchor: end;
+}
+.sfm-group[data-tone='focus'] path {
+  stroke: var(--accent);
+}
+.sfm-svg .sfm-group[data-tone='focus'] text {
+  fill: var(--accent);
+}
+.sfm-group[data-tone='alt'] path {
+  stroke: var(--ink);
+}
+
+/* Objekterne */
+.sfm-svg .sfm-obj-name {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  font-weight: 600;
+  font-variant-ligatures: none;
+  text-anchor: middle;
+  text-decoration: underline;
+}
+.sfm-svg .sfm-obj-new {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  font-variant-ligatures: none;
+  fill: var(--ink-3);
+  dominant-baseline: auto;
+}
+.sfm-obj[data-tone='idle'] .sfm-box {
+  fill: var(--paper);
+}
+
+/* Kanal-objekter i _channels */
+.sfm-chip rect {
+  transition:
+    fill 0.4s var(--ease-out),
+    stroke 0.4s var(--ease-out);
+}
+.sfm-svg .sfm-chip text {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  font-weight: 500;
+  font-variant-ligatures: none;
+  text-anchor: middle;
+  transition: fill 0.4s var(--ease-out);
+}
+.sfm-chip[data-tone='focus'] rect {
+  fill: var(--accent);
+}
+.sfm-svg .sfm-chip[data-tone='focus'] text,
+.sfm-svg .sfm-chip[data-tone='alt'] text {
+  fill: var(--paper);
+}
+.sfm-chip[data-tone='alt'] rect {
+  fill: var(--ink-2);
+}
+.sfm-chip[data-tone='muted'] rect {
+  fill: var(--paper-3);
+  stroke: var(--rule-strong);
+}
+.sfm-svg .sfm-chip[data-tone='muted'] text {
+  fill: var(--ink-3);
+}
+
+/* Kontrasten til Abstract Factory */
+.sfm-vs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem;
+}
+.sfm-vs-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.45rem 0.65rem 0.5rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: var(--ink-2);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+}
+.sfm-vs-col[data-me] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+  color: var(--ink);
+}
+.sfm-vs-name {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--ink-3);
+}
+.sfm-vs-col[data-me] .sfm-vs-name {
+  color: var(--accent);
+}
+.sfm-vs b {
+  font-weight: 600;
+}
+
+@container (max-width: 40rem) {
+  .sfm-wide {
+    display: none;
+  }
+  .sfm-narrow {
+    display: block;
+  }
+  .sfm-narrow .sfm-mem,
+  .sfm-narrow .sfm-code {
+    font-size: 11.5px;
+  }
+  .sfm-narrow .sfm-cname,
+  .sfm-narrow .sfm-obj-name {
+    font-size: 12px;
+  }
+  .sfm-vs {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

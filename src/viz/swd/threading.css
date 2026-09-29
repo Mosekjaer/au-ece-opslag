@@ -1,0 +1,262 @@
+/* Amdahl’s lov. Fire kurver i hver sin farve (kun CSS-variabler), valgt så de
+   ikke ligner slidets. 95 % er fagets accent, fordi den bærer pointen. */
+.thr {
+  --thr-c50: var(--ink-3);
+  --thr-c75: var(--sts);
+  --thr-c90: var(--fed);
+  --thr-c95: var(--accent);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 15rem;
+  grid-template-areas:
+    'graph formula'
+    'graph side';
+  grid-template-rows: auto 1fr;
+  gap: 0.9rem 1.5rem;
+  align-items: start;
+}
+.thr [data-c='c50'] { --c: var(--thr-c50); }
+.thr [data-c='c75'] { --c: var(--thr-c75); }
+.thr [data-c='c90'] { --c: var(--thr-c90); }
+.thr [data-c='c95'] { --c: var(--thr-c95); }
+
+.thr-graph {
+  grid-area: graph;
+  min-width: 0;
+}
+.thr-formula {
+  grid-area: formula;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  min-width: 0;
+}
+.thr-side {
+  grid-area: side;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  min-width: 0;
+}
+
+.thr-kicker {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--ink-3);
+}
+.thr-f {
+  display: block;
+  padding: 0.4rem 0.55rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--ink);
+  white-space: nowrap;
+}
+.thr-def {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.15rem 0.45rem;
+  font-size: 0.75rem;
+  line-height: 1.35;
+  color: var(--ink-2);
+}
+.thr-def dt code {
+  font-weight: 600;
+  background: none;
+  box-shadow: none;
+  padding: 0;
+}
+.thr-ex {
+  margin-top: 0.1rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-sm);
+  box-shadow: inset 0 0 0 1px var(--rule);
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.thr-ex code {
+  padding: 0;
+  background: none;
+  box-shadow: none;
+  font-size: 0.75rem;
+  color: var(--ink-2);
+}
+.thr-ex[data-now] {
+  background: color-mix(in oklab, var(--thr-c90) 10%, var(--paper));
+  box-shadow: inset 0 0 0 1.5px var(--thr-c90);
+}
+.thr-ex[data-now] code {
+  color: var(--ink);
+}
+
+/* Tabellen: P → loft */
+.thr-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.75rem;
+}
+.thr-table th {
+  padding: 0 0.4rem 0.3rem;
+  text-align: left;
+  font-weight: 600;
+  color: var(--ink-3);
+  border-bottom: 1px solid var(--rule-strong);
+}
+.thr-table th code {
+  padding: 0;
+  background: none;
+  box-shadow: none;
+  font-size: 0.6875rem;
+}
+.thr-table td {
+  padding: 0.3rem 0.4rem;
+  border-bottom: 1px solid var(--rule);
+  white-space: nowrap;
+  color: var(--ink-3);
+  transition:
+    background-color 0.35s var(--ease-out),
+    color 0.35s var(--ease-out);
+}
+.thr-table td:first-child {
+  font-weight: 600;
+}
+.thr-table tr[data-on] td {
+  color: var(--ink);
+}
+.thr-table tr[data-now] td {
+  background: color-mix(in oklab, var(--c) 12%, var(--paper));
+}
+.thr-table td code {
+  display: inline-block;
+  padding: 0;
+  background: none;
+  box-shadow: none;
+  font-size: 0.75rem;
+  color: var(--ink-2);
+}
+.thr-table td code b {
+  color: var(--ink);
+}
+.thr-swatch {
+  display: inline-block;
+  width: 0.9rem;
+  height: 3px;
+  margin-right: 0.4rem;
+  vertical-align: middle;
+  border-radius: 2px;
+  background: var(--c);
+}
+.thr-note {
+  font-size: 0.75rem;
+  line-height: 1.4;
+  font-style: italic;
+  color: var(--ink-3);
+}
+
+/* Grafen */
+.thr-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.thr-narrow {
+  display: none;
+  max-width: 24rem;
+  margin: 0 auto;
+}
+.thr-svg text {
+  font-family: var(--font-ui);
+  fill: var(--ink-2);
+}
+.thr-grid {
+  stroke: var(--rule);
+  stroke-width: 1;
+}
+.thr-axis,
+.thr-tick {
+  stroke: var(--ink-3);
+  stroke-width: 1.2;
+}
+.thr-svg .thr-num {
+  font-size: 0.9em;
+  font-variant-numeric: tabular-nums;
+  fill: var(--ink-3);
+}
+.thr-svg .thr-axis-title {
+  font-size: 0.92em;
+  font-weight: 600;
+  fill: var(--ink-2);
+}
+.thr-curve {
+  fill: none;
+  stroke: var(--c);
+  stroke-width: 2.2;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+.thr-curve[data-now] {
+  stroke-width: 2.8;
+}
+.thr-roof {
+  stroke: var(--c);
+  stroke-width: 1.2;
+  stroke-dasharray: 4 4;
+}
+.thr-svg .thr-end {
+  font-weight: 600;
+}
+.thr-svg .thr-end-pct {
+  fill: var(--c);
+}
+.thr-svg .thr-end-roof {
+  fill: var(--ink-2);
+  font-weight: 500;
+}
+.thr-dot circle {
+  fill: var(--thr-c90);
+  stroke: var(--paper-2);
+  stroke-width: 1.5;
+}
+.thr-leader {
+  fill: none;
+  stroke: var(--ink-3);
+  stroke-width: 1;
+}
+.thr-svg .thr-dot text {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  fill: var(--ink);
+}
+.thr-svg .thr-dot .thr-dot-sub {
+  font-weight: 400;
+  fill: var(--ink-3);
+}
+.thr-svg .thr-inf {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  fill: var(--ink);
+}
+
+@container (max-width: 40rem) {
+  .thr {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      'formula'
+      'graph'
+      'side';
+    grid-template-rows: auto;
+  }
+  .thr-wide {
+    display: none;
+  }
+  .thr-narrow {
+    display: block;
+  }
+  .thr-f {
+    white-space: normal;
+  }
+}

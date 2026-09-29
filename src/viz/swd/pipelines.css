@@ -1,0 +1,269 @@
+.swd-pl {
+  --pl-c1: var(--doa);
+  --pl-c2: var(--swt);
+  --pl-c3: var(--neg);
+  --pl-c4: color-mix(in oklab, var(--swd) 55%, var(--fed));
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.swd-pl-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.swd-pl-svg text {
+  font-family: var(--font-ui);
+  fill: var(--ink-2);
+  dominant-baseline: central;
+}
+.swd-pl-narrow {
+  display: none;
+  max-width: 22rem;
+  margin: 0 auto;
+}
+
+/* Billedfarver (billede 1–4 som på sliden: blå, grøn, rød, orange) */
+.swd-pl-c1 { fill: var(--pl-c1); }
+.swd-pl-c2 { fill: var(--pl-c2); }
+.swd-pl-c3 { fill: var(--pl-c3); }
+.swd-pl-c4 { fill: var(--pl-c4); }
+
+/* Stages */
+.swd-pl-box {
+  fill: var(--paper);
+  stroke: var(--ink-3);
+  stroke-width: 1.3;
+  transition:
+    fill 0.35s var(--ease-out),
+    stroke 0.35s var(--ease-out);
+}
+.swd-pl-stage[data-tone='focus'] .swd-pl-box {
+  fill: var(--accent-soft);
+  stroke: var(--accent);
+  stroke-width: 2.2;
+}
+.swd-pl-svg .swd-pl-name {
+  font-size: 1.1em;
+  font-weight: 600;
+  fill: var(--ink);
+}
+.swd-pl-svg .swd-pl-sub {
+  font-size: 1em;
+  font-weight: 400;
+  fill: var(--ink-3);
+}
+.swd-pl-svg .swd-pl-try {
+  font-family: var(--font-mono);
+  font-size: 1em;
+  font-weight: 500;
+  fill: var(--accent);
+}
+.swd-pl-check {
+  fill: var(--accent);
+}
+.swd-pl-svg .swd-pl-checkmark {
+  font-size: 0.95em;
+  font-weight: 700;
+  text-anchor: middle;
+  fill: var(--paper);
+}
+
+/* Køer: rør med pladser, så de ikke ligner stages */
+.swd-pl-tube {
+  fill: var(--paper-3);
+  stroke: var(--rule-strong);
+  stroke-width: 1.2;
+  transition:
+    fill 0.35s var(--ease-out),
+    stroke 0.35s var(--ease-out);
+}
+.swd-pl-slot {
+  stroke: var(--rule-strong);
+  stroke-width: 1;
+  stroke-dasharray: 2 2;
+}
+.swd-pl-queue[data-hot] .swd-pl-tube {
+  fill: var(--accent-soft);
+  stroke: var(--accent);
+  stroke-width: 1.8;
+}
+.swd-pl-svg .swd-pl-qname {
+  font-family: var(--font-mono);
+  font-size: 1em;
+  font-weight: 500;
+  fill: var(--ink-2);
+}
+.swd-pl-svg .swd-pl-completed {
+  font-size: 1em;
+  font-weight: 600;
+  text-anchor: middle;
+  fill: var(--accent);
+}
+
+/* Dataflowpile */
+.swd-pl-flowline {
+  fill: none;
+  stroke: var(--ink-3);
+  stroke-width: 1.4;
+}
+.swd-pl-flowhead {
+  fill: var(--ink-3);
+  stroke: none;
+}
+.swd-pl-flow[data-hot] .swd-pl-flowline {
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+.swd-pl-flow[data-hot] .swd-pl-flowhead {
+  fill: var(--accent);
+}
+
+.swd-pl-chip {
+  stroke: var(--paper);
+  stroke-width: 1;
+}
+.swd-pl-svg .swd-pl-chipnum {
+  font-size: 1em;
+  font-weight: 700;
+  text-anchor: middle;
+  fill: var(--paper);
+}
+.swd-pl-svg .swd-pl-io {
+  font-size: 1em;
+  fill: var(--ink-3);
+}
+.swd-pl-svg .swd-pl-note {
+  font-size: 1em;
+  font-style: italic;
+  fill: var(--ink-2);
+}
+.swd-pl-svg .swd-pl-note.is-hot {
+  font-style: normal;
+  font-weight: 600;
+  fill: var(--accent);
+}
+.swd-pl-svg .swd-pl-note.swd-pl-try {
+  font-style: normal;
+  fill: var(--accent);
+}
+
+.swd-pl-legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.25rem 1rem;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: var(--ink-3);
+}
+.swd-pl-legend code {
+  padding: 0;
+  background: none;
+  box-shadow: none;
+  font-size: 0.75rem;
+  color: var(--ink-2);
+}
+.swd-pl-legend-check {
+  display: inline-grid;
+  place-items: center;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: var(--paper);
+  background: var(--accent);
+}
+.swd-pl-legend-note {
+  font-style: italic;
+}
+.swd-pl-legend-note code {
+  font-style: normal;
+}
+
+/* Tidslinjen */
+.swd-pl-gantt-wrap {
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--rule);
+}
+.swd-pl-track {
+  fill: var(--paper);
+  stroke: var(--rule);
+  stroke-width: 1;
+}
+.swd-pl-svg .swd-pl-rowlabel {
+  font-weight: 600;
+  fill: var(--ink);
+}
+.swd-pl-svg .swd-pl-task {
+  fill: var(--ink-3);
+}
+.swd-pl-block {
+  stroke: var(--paper);
+  stroke-width: 1;
+}
+.swd-pl-svg .swd-pl-blocknum {
+  font-size: 0.95em;
+  font-weight: 700;
+  text-anchor: middle;
+  fill: var(--paper);
+}
+.swd-pl-axis {
+  stroke: var(--ink-3);
+  stroke-width: 1;
+}
+.swd-pl-svg .swd-pl-tick {
+  font-size: 0.95em;
+  text-anchor: middle;
+  fill: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+}
+.swd-pl-svg .swd-pl-axistitle {
+  font-size: 0.95em;
+  font-style: italic;
+  fill: var(--ink-3);
+}
+.swd-pl-end line {
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+.swd-pl-svg .swd-pl-end text {
+  font-weight: 700;
+  text-anchor: middle;
+  fill: var(--accent);
+}
+.swd-pl-end[data-tone='ghost'] line {
+  stroke: var(--ink-3);
+  stroke-width: 1.2;
+  stroke-dasharray: 3 3;
+}
+.swd-pl-svg .swd-pl-end[data-tone='ghost'] text {
+  font-weight: 500;
+  fill: var(--ink-3);
+  text-decoration: line-through;
+}
+.swd-pl-now line {
+  stroke: var(--ink-2);
+  stroke-width: 1.2;
+  stroke-dasharray: 4 3;
+}
+.swd-pl-svg .swd-pl-now text {
+  font-style: italic;
+  text-anchor: middle;
+  fill: var(--ink-2);
+}
+
+@container (max-width: 40rem) {
+  .swd-pl-wide {
+    display: none;
+  }
+  .swd-pl-narrow {
+    display: block;
+  }
+  .swd-pl-legend {
+    flex-direction: column;
+  }
+}

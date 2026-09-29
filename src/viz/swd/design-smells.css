@@ -1,0 +1,199 @@
+.swd-ds {
+  --swd-ds-warn: var(--accent);
+  --swd-ds-warn-soft: var(--accent-soft);
+  --swd-ds-warn-trail: var(--accent-mid);
+  --swd-ds-neg-trail: color-mix(in oklab, var(--neg) 42%, var(--paper));
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.swd-ds-panels {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem 2rem;
+}
+
+.swd-ds-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  min-width: 0;
+}
+
+.swd-ds-h {
+  font-family: var(--font-ui);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--ink);
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid var(--rule-strong);
+}
+.swd-ds-panel[data-kind='rig'] .swd-ds-h {
+  color: var(--accent);
+}
+.swd-ds-panel[data-kind='fra'] .swd-ds-h {
+  color: var(--neg);
+}
+
+.swd-ds-svg {
+  display: block;
+  width: 100%;
+  max-width: 21rem;
+  height: auto;
+  margin: 0.2rem auto 0;
+  overflow: visible;
+}
+.swd-ds-svg text {
+  font-family: var(--font-ui);
+  fill: var(--ink-2);
+}
+
+/* Afhængighed: stiplet linje, åben pilespids. */
+.swd-ds-line,
+.swd-ds-head {
+  fill: none;
+  stroke: var(--ink-3);
+  stroke-width: 1.4;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  transition: stroke 0.35s var(--ease-out) var(--d, 0s);
+}
+.swd-ds-line {
+  stroke-dasharray: 5 4;
+  stroke-linecap: butt;
+}
+.swd-ds-panel[data-kind='rig'] .swd-ds-dep[data-on] :is(.swd-ds-line, .swd-ds-head) {
+  stroke: var(--swd-ds-warn);
+}
+.swd-ds-panel[data-kind='fra'] .swd-ds-dep[data-on] :is(.swd-ds-line, .swd-ds-head) {
+  stroke: var(--neg);
+}
+
+/* Sporet, som ændringen/fejlen løber ad. */
+.swd-ds-trail {
+  fill: none;
+  stroke-width: 8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.swd-ds-panel[data-kind='rig'] .swd-ds-trail {
+  stroke: var(--swd-ds-warn-trail);
+}
+.swd-ds-panel[data-kind='fra'] .swd-ds-trail {
+  stroke: var(--swd-ds-neg-trail);
+}
+
+.swd-ds-svg .swd-ds-deplabel {
+  font-size: 11.5px;
+  font-style: italic;
+  fill: var(--ink-3);
+}
+
+/* Komponenter */
+.swd-ds-box rect {
+  fill: var(--paper);
+  stroke: var(--ink-3);
+  stroke-width: 1.4;
+  transition:
+    fill 0.4s var(--ease-out) var(--d, 0s),
+    stroke 0.4s var(--ease-out) var(--d, 0s);
+}
+.swd-ds-svg .swd-ds-name {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 600;
+  text-anchor: middle;
+  dominant-baseline: central;
+  fill: var(--ink);
+}
+.swd-ds-svg .swd-ds-mark {
+  font-size: 11.5px;
+  font-weight: 600;
+  text-anchor: middle;
+  dominant-baseline: central;
+}
+.swd-ds-box:is([data-s='chg'], [data-s='must']) rect {
+  fill: var(--swd-ds-warn-soft);
+  stroke: var(--swd-ds-warn);
+  stroke-width: 2;
+}
+.swd-ds-svg .swd-ds-box:is([data-s='chg'], [data-s='must']) .swd-ds-mark {
+  fill: var(--swd-ds-warn);
+}
+.swd-ds-box[data-s='fixed'] rect {
+  fill: var(--paper);
+  stroke: var(--ink-2);
+  stroke-width: 2;
+}
+.swd-ds-svg .swd-ds-box[data-s='fixed'] .swd-ds-mark {
+  fill: var(--ink-2);
+}
+.swd-ds-box[data-s='broken'] rect {
+  fill: var(--neg-soft);
+  stroke: var(--neg);
+  stroke-width: 2;
+}
+.swd-ds-svg .swd-ds-box[data-s='broken'] .swd-ds-mark {
+  fill: var(--neg);
+}
+
+.swd-ds-count {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+.swd-ds-panel[data-kind='rig'] .swd-ds-count {
+  color: var(--accent);
+}
+.swd-ds-panel[data-kind='fra'] .swd-ds-count {
+  color: var(--neg);
+}
+
+.swd-ds-sp {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.2rem 0.6rem;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+}
+.swd-ds-sp dt {
+  font-weight: 600;
+  color: var(--ink-2);
+}
+.swd-ds-sp dd {
+  color: var(--ink-2);
+}
+
+.swd-ds-note {
+  font-size: 0.75rem;
+  font-style: italic;
+  line-height: 1.4;
+  color: var(--ink-3);
+}
+
+.swd-ds-bottom {
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.875rem;
+  text-align: center;
+  color: var(--ink);
+}
+.swd-ds-bottom em {
+  font-weight: 600;
+}
+
+@container (max-width: 40rem) {
+  .swd-ds-panels {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.5rem;
+  }
+  .swd-ds-svg {
+    max-width: 19rem;
+  }
+  .swd-ds-bottom {
+    text-align: left;
+  }
+}

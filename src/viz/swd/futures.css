@@ -1,0 +1,325 @@
+/* Futures og continuations: kode/build-DAG til venstre, F1–F4-grafen med baner og
+   .Result-tilfældene til højre. Pile går fra forudsætning til afhængig. */
+.fut {
+  display: grid;
+  grid-template-columns: 24rem minmax(0, 1fr);
+  grid-template-areas:
+    'left right'
+    'cases cases'
+    'bottom bottom';
+  gap: 1rem 1.5rem;
+  align-items: start;
+}
+.fut-left {
+  grid-area: left;
+  min-width: 0;
+}
+.fut-right {
+  grid-area: right;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  min-width: 0;
+}
+.fut-casewrap {
+  grid-area: cases;
+  min-width: 0;
+}
+.fut-case-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.5rem 1.25rem;
+}
+.fut-bottom {
+  grid-area: bottom;
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.8125rem;
+  color: var(--ink-2);
+  text-align: center;
+}
+.fut-bottom code {
+  font-size: 0.75rem;
+}
+
+/* Koden */
+.fut-code-title {
+  margin-bottom: 0.35rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--ink-3);
+}
+.fut-code-title code {
+  font-size: 0.6875rem;
+}
+.fut-code pre {
+  margin: 0;
+  padding: 0.6rem 0.75rem;
+  overflow-x: auto;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  font-size: 0.75rem;
+  line-height: 1.6;
+  color: var(--code-foreground);
+}
+.fut-code pre code {
+  font-variant-ligatures: none;
+  white-space: pre;
+}
+.fut-code mark {
+  padding: 0.05em 0.15em;
+  border-radius: 2px;
+  background: transparent;
+  color: inherit;
+  transition:
+    background-color 0.35s var(--ease-out),
+    color 0.35s var(--ease-out);
+}
+.fut-code[data-hot] mark {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1px var(--accent-mid);
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* SVG-fællestræk */
+.fut-dag,
+.fut-build {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.fut-dag text,
+.fut-build text {
+  font-family: var(--font-ui);
+  fill: var(--ink-2);
+}
+.fut-dn,
+.fut-bn {
+  display: none;
+}
+.fut-edge {
+  stroke: var(--ink-3);
+  stroke-width: 1.4;
+  transition: stroke 0.35s var(--ease-out);
+}
+.fut-edge[data-hot],
+.fut-edge.is-lit {
+  stroke: var(--accent);
+  stroke-width: 1.8;
+}
+.fut-arrhead {
+  fill: var(--ink-3);
+}
+.fut-arrhead.is-hot {
+  fill: var(--accent);
+}
+.fut-dag .fut-elabel {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-style: italic;
+  fill: var(--ink-2);
+}
+.fut-dag .fut-elabel[data-hot] {
+  fill: var(--accent);
+}
+.fut-term {
+  fill: var(--paper);
+  stroke: var(--ink-2);
+  stroke-width: 1.6;
+}
+
+/* Baner */
+.fut-lane {
+  fill: var(--paper);
+  stroke: var(--rule-strong);
+  stroke-width: 1;
+  stroke-dasharray: 4 3;
+}
+.fut-lane.is-task {
+  fill: var(--accent-soft);
+  stroke: var(--accent-mid);
+}
+.fut-dag .fut-lane-name {
+  font-size: 0.88em;
+  font-weight: 600;
+  fill: var(--ink-3);
+}
+.fut-dag .fut-lane-name.is-task {
+  fill: var(--accent);
+}
+
+/* Knuder */
+.fut-node rect {
+  fill: var(--paper);
+  stroke: var(--ink-3);
+  stroke-width: 1.4;
+  transition:
+    fill 0.35s var(--ease-out),
+    stroke 0.35s var(--ease-out);
+}
+.fut-node[data-lane='task'] rect {
+  stroke: var(--accent);
+}
+.fut-node[data-hot] rect {
+  fill: var(--accent-soft);
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+.fut-dag .fut-node text {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  text-anchor: middle;
+  dominant-baseline: central;
+  fill: var(--ink);
+}
+.fut-dag .fut-result {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  font-weight: 600;
+  fill: var(--accent);
+}
+
+/* .Result-tilfældene */
+.fut-cases {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+.fut-cases-head {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--ink-3);
+  transition: color 0.35s var(--ease-out);
+}
+.fut-cases[data-on] .fut-cases-head {
+  color: var(--ink-2);
+}
+.fut-cases-head code {
+  font-size: 0.6875rem;
+}
+.fut-case {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.fut-case-head {
+  font-size: 0.75rem;
+  color: var(--ink-2);
+}
+.fut-case-head b {
+  color: var(--ink);
+}
+.fut-tl {
+  display: grid;
+  grid-template-columns: 2.4rem minmax(0, 1fr);
+  align-items: center;
+  gap: 2px 0.4rem;
+}
+.fut-tl-name {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--ink-3);
+}
+.fut-track {
+  position: relative;
+  height: 1.35rem;
+  border-radius: 3px;
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule);
+}
+.fut-blk {
+  position: absolute;
+  top: 1px;
+  bottom: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 3px;
+  background: var(--paper-3);
+  box-shadow: inset 0 0 0 1px var(--ink-3);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  white-space: nowrap;
+  color: var(--ink);
+}
+.fut-blk[data-kind='f1'] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.fut-blk[data-kind='block'] {
+  background: repeating-linear-gradient(-45deg, transparent 0 3px, var(--rule-strong) 3px 4.2px);
+  box-shadow: inset 0 0 0 1px var(--ink-3);
+  font-family: var(--font-ui);
+  color: var(--ink);
+}
+.fut-blk[data-kind='ghost'] {
+  background: transparent;
+  box-shadow: none;
+  outline: 1px dashed var(--ink-3);
+  outline-offset: -2px;
+  font-family: var(--font-ui);
+  font-weight: 500;
+  font-style: italic;
+  color: var(--ink-3);
+}
+.fut-note {
+  font-size: 0.6875rem;
+  font-style: italic;
+  color: var(--ink-3);
+}
+
+/* Build-DAG'en */
+.fut-bnode {
+  fill: var(--paper);
+  stroke: var(--ink-3);
+  stroke-width: 1.4;
+}
+.fut-bnode.is-lit {
+  fill: var(--accent-soft);
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+.fut-build .fut-bname {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  text-anchor: middle;
+  dominant-baseline: central;
+  fill: var(--ink);
+}
+.fut-build .fut-btime {
+  font-size: 0.88em;
+  text-anchor: middle;
+  dominant-baseline: central;
+  font-variant-numeric: tabular-nums;
+  fill: var(--ink-2);
+}
+
+@container (max-width: 40rem) {
+  .fut {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      'left'
+      'right'
+      'cases'
+      'bottom';
+  }
+  .fut-case-list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .fut-dw,
+  .fut-bw {
+    display: none;
+  }
+  .fut-dn,
+  .fut-bn {
+    display: block;
+  }
+  .fut-bottom {
+    text-align: left;
+  }
+}

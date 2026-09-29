@@ -1,0 +1,352 @@
+/* Template Method. Samme visuelle sprog som strategy.css:
+   variant 1 = blæk, variant 2 = accent, kald = tyk accentpil, UML = tynd blæk. */
+
+.swd-tm {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+/* Øverst: mekanismen og nøglen til stregerne. */
+.swd-tm-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.4rem 1rem;
+}
+.swd-tm-mode {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  padding: 0.18rem 0.65rem 0.2rem;
+  border-radius: 999px;
+  font-size: 0.8125rem;
+  color: var(--ink-2);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+}
+.swd-tm-mode strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+.swd-tm-keys {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.9rem;
+}
+.swd-tm-key {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.75rem;
+  color: var(--ink-3);
+}
+.swd-tm-key svg {
+  width: 1.75rem;
+  height: 0.75rem;
+  overflow: visible;
+}
+.swd-tm-key-call {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+.swd-tm-key-callhead {
+  fill: var(--accent);
+}
+.swd-tm-key-uml {
+  fill: none;
+  stroke: var(--ink-3);
+  stroke-width: 1.3;
+}
+.swd-tm-key-tri {
+  fill: var(--paper);
+  stroke: var(--ink-3);
+  stroke-width: 1.3;
+  stroke-linejoin: round;
+}
+
+/* Diagram + program side om side. */
+.swd-tm-main {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 14rem;
+  gap: 1.25rem;
+  align-items: start;
+}
+.swd-tm-dia {
+  min-width: 0;
+}
+
+.swd-tm-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.swd-tm-narrow {
+  display: none;
+  max-width: 22rem;
+  margin: 0 auto;
+}
+.swd-tm-svg text {
+  font-family: var(--font-mono);
+  font-variant-ligatures: none;
+  dominant-baseline: central;
+  fill: var(--ink);
+}
+
+.swd-tm-box {
+  fill: var(--paper);
+  stroke: var(--ink-3);
+  stroke-width: 1.3;
+}
+.swd-tm-sep {
+  stroke: var(--ink-3);
+  stroke-width: 1;
+}
+.swd-tm-svg .swd-tm-name {
+  font-weight: 600;
+}
+.swd-tm-svg .is-abs {
+  font-style: italic;
+}
+.swd-tm-svg .swd-tm-op {
+  fill: var(--ink-2);
+}
+
+.swd-tm-final {
+  fill: var(--accent-soft);
+  stroke: var(--accent);
+  stroke-width: 1.2;
+}
+.swd-tm-svg .swd-tm-final-t {
+  font-weight: 600;
+  fill: var(--accent);
+}
+
+/* Skelettets trin. Hullerne er stiplede. */
+.swd-tm-slot-r {
+  fill: var(--paper-2);
+  stroke: var(--rule-strong);
+  stroke-width: 1;
+}
+.swd-tm-slot[data-hole] .swd-tm-slot-r {
+  fill: transparent;
+  stroke: var(--ink-3);
+  stroke-dasharray: 4 3;
+}
+.swd-tm-slot-hot {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2.2;
+}
+.swd-tm-badge {
+  fill: var(--paper);
+  stroke: var(--ink-3);
+  stroke-width: 1.1;
+}
+.swd-tm-svg .swd-tm-badge-n {
+  font-family: var(--font-ui);
+  font-weight: 700;
+  fill: var(--ink-2);
+}
+
+/* Varianter: 1 = blæk (Tea), 2 = accent (Coffee). */
+.swd-tm-chip[data-v='1'] rect {
+  fill: var(--ink-2);
+}
+.swd-tm-chip[data-v='2'] rect {
+  fill: var(--accent);
+}
+.swd-tm-svg .swd-tm-chip text {
+  font-weight: 600;
+  fill: var(--paper);
+}
+.swd-tm-row-hot[data-v='1'] {
+  fill: var(--paper-3);
+  stroke: var(--ink-2);
+  stroke-width: 1.2;
+}
+.swd-tm-row-hot[data-v='2'] {
+  fill: var(--accent-soft);
+  stroke: var(--accent);
+  stroke-width: 1.2;
+}
+
+/* UML-streger. */
+.swd-tm-uml {
+  fill: none;
+  stroke: var(--ink-3);
+  stroke-width: 1.3;
+}
+.swd-tm-tri {
+  fill: var(--paper);
+  stroke: var(--ink-3);
+  stroke-width: 1.3;
+  stroke-linejoin: round;
+}
+
+/* Kald på runtime. */
+.swd-tm-call path {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+.swd-tm-call {
+  transition: opacity 0.35s var(--ease-out);
+}
+.swd-tm-call[data-dim] {
+  opacity: 0.3;
+}
+.swd-tm-call .swd-tm-callhead {
+  fill: var(--accent);
+  stroke: none;
+}
+.swd-tm-svg .swd-tm-calllabel {
+  font-weight: 500;
+  fill: var(--accent);
+}
+
+/* Program og output. */
+.swd-tm-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  min-width: 0;
+  padding: 0.65rem 0.75rem 0.75rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule);
+}
+.swd-tm-panel-h {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--ink-3);
+}
+.swd-tm-panel-h + .swd-tm-code,
+.swd-tm-panel-h + .swd-tm-out {
+  margin-bottom: 0.4rem;
+}
+.swd-tm-code {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.swd-tm-ln {
+  padding: 0.08rem 0.35rem;
+  border-radius: 3px;
+  transition:
+    background-color 0.35s var(--ease-out),
+    color 0.35s var(--ease-out),
+    opacity 0.35s var(--ease-out);
+}
+.swd-tm-ln code {
+  font-size: 0.75rem;
+  line-height: 1.45;
+  font-variant-ligatures: none;
+  overflow-wrap: anywhere;
+  hyphens: manual;
+}
+.swd-tm-ln[data-state='todo'] {
+  color: var(--ink-3);
+  opacity: 0.55;
+}
+.swd-tm-ln[data-state='now'] {
+  background: var(--accent-soft);
+  box-shadow: inset 2px 0 0 var(--accent);
+}
+.swd-tm-new[data-hl] {
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 3px;
+}
+
+.swd-tm-out {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+.swd-tm-out-run {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.swd-tm-out-ln {
+  padding: 0.02rem 0 0.02rem 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: var(--ink-2);
+  box-shadow: inset 2px 0 0 var(--rule-strong);
+  font-variant-ligatures: none;
+}
+.swd-tm-out-ln[data-v='1'] {
+  color: var(--ink);
+  font-weight: 600;
+  box-shadow: inset 3px 0 0 var(--ink-2);
+}
+.swd-tm-out-ln[data-v='2'] {
+  color: var(--accent);
+  font-weight: 600;
+  box-shadow: inset 3px 0 0 var(--accent);
+}
+
+/* Slutrammens konklusion. */
+.swd-tm-verdict {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.35rem 0.6rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--ink-2);
+  box-shadow: inset 0 0 0 1px var(--rule);
+}
+.swd-tm-verdict-i {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 1.3rem;
+  height: 1.3rem;
+  border-radius: 50%;
+  font-weight: 700;
+  font-size: 0.75rem;
+}
+.swd-tm-verdict-i[data-neg] {
+  color: var(--neg);
+  background: var(--neg-soft);
+}
+.swd-tm-verdict-t {
+  min-width: 0;
+}
+.swd-tm-verdict code {
+  font-size: 0.75rem;
+  font-variant-ligatures: none;
+}
+
+@container (max-width: 40rem) {
+  .swd-tm-wide {
+    display: none;
+  }
+  .swd-tm-narrow {
+    display: block;
+  }
+  .swd-tm-main {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.9rem;
+  }
+  .swd-tm-verdict {
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: start;
+  }
+  .swd-tm-verdict > .vtag {
+    grid-column: 2;
+    justify-self: start;
+  }
+}

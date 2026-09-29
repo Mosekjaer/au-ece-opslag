@@ -1,0 +1,365 @@
+/* Strategy. Samme visuelle sprog som template-method.css:
+   variant 1 = blæk, variant 2 = accent, kald = tyk accentpil, UML = tynd blæk. */
+
+.swd-st {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+/* Øverst: mekanismen og nøglen til stregerne. */
+.swd-st-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.4rem 1rem;
+}
+.swd-st-mode {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  padding: 0.18rem 0.65rem 0.2rem;
+  border-radius: 999px;
+  font-size: 0.8125rem;
+  color: var(--ink-2);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+}
+.swd-st-mode strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+.swd-st-keys {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.9rem;
+}
+.swd-st-key {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.75rem;
+  color: var(--ink-3);
+}
+.swd-st-key svg {
+  width: 1.75rem;
+  height: 0.75rem;
+  overflow: visible;
+}
+.swd-st-key-call {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+.swd-st-key-callhead {
+  fill: var(--accent);
+}
+.swd-st-key-uml {
+  fill: none;
+  stroke: var(--ink-3);
+  stroke-width: 1.3;
+}
+.swd-st-key-uml.is-dash {
+  stroke-dasharray: 3.5 2.5;
+}
+.swd-st-key-dia {
+  fill: var(--ink-2);
+}
+.swd-st-key-tri {
+  fill: var(--paper);
+  stroke: var(--ink-3);
+  stroke-width: 1.3;
+  stroke-linejoin: round;
+}
+
+/* Diagram + program side om side. */
+.swd-st-main {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 14rem;
+  gap: 1.25rem;
+  align-items: start;
+}
+.swd-st-dia {
+  min-width: 0;
+}
+
+.swd-st-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.swd-st-narrow {
+  display: none;
+  max-width: 22rem;
+  margin: 0 auto;
+}
+.swd-st-svg text {
+  font-family: var(--font-mono);
+  font-variant-ligatures: none;
+  dominant-baseline: central;
+  fill: var(--ink);
+}
+
+.swd-st-box {
+  fill: var(--paper);
+  stroke: var(--ink-3);
+  stroke-width: 1.3;
+}
+.swd-st-sep {
+  stroke: var(--ink-3);
+  stroke-width: 1;
+}
+.swd-st-svg .swd-st-name {
+  font-weight: 600;
+}
+.swd-st-svg .is-abs {
+  font-style: italic;
+}
+.swd-st-svg .swd-st-op {
+  fill: var(--ink-2);
+}
+
+.swd-st-row-hot[data-v='1'] {
+  fill: var(--paper-3);
+  stroke: var(--ink-2);
+  stroke-width: 1.2;
+}
+.swd-st-row-hot[data-v='2'] {
+  fill: var(--accent-soft);
+  stroke: var(--accent);
+  stroke-width: 1.2;
+}
+
+/* UML-streger. */
+.swd-st-uml {
+  fill: none;
+  stroke: var(--ink-3);
+  stroke-width: 1.3;
+}
+.swd-st-tri {
+  fill: var(--paper);
+  stroke: var(--ink-3);
+  stroke-width: 1.3;
+  stroke-linejoin: round;
+}
+
+/* Strategy-specifikt: roller, stereotype, komposition, realisering. */
+.swd-st-svg .swd-st-role text {
+  font-family: var(--font-ui);
+  font-style: italic;
+  fill: var(--ink-3);
+}
+.swd-st-svg .swd-st-stereo {
+  font-family: var(--font-ui);
+  fill: var(--ink-2);
+}
+.swd-st-svg .swd-st-mult {
+  font-family: var(--font-ui);
+  fill: var(--ink-2);
+}
+.swd-st-svg .swd-st-same {
+  font-family: var(--font-ui);
+  font-weight: 600;
+  fill: var(--accent);
+}
+.swd-st-uml.is-dash {
+  stroke-dasharray: 5 4;
+}
+.swd-st-diamond {
+  fill: var(--ink-2);
+  stroke: var(--ink-2);
+  stroke-width: 1;
+  stroke-linejoin: round;
+}
+.swd-st-row-hot {
+  fill: var(--accent-soft);
+  stroke: var(--accent);
+  stroke-width: 1.2;
+}
+.swd-st-sbox {
+  transition:
+    fill 0.4s var(--ease-out),
+    stroke 0.4s var(--ease-out),
+    stroke-width 0.4s var(--ease-out);
+}
+.swd-st-strat[data-cur][data-v='1'] .swd-st-sbox {
+  fill: var(--paper-3);
+  stroke: var(--ink-2);
+  stroke-width: 2.2;
+}
+.swd-st-strat[data-cur][data-v='2'] .swd-st-sbox {
+  fill: var(--accent-soft);
+  stroke: var(--accent);
+  stroke-width: 2.2;
+}
+.swd-st-dot {
+  fill: var(--accent);
+  stroke: var(--paper);
+  stroke-width: 1.5;
+}
+
+/* Kald på runtime. */
+.swd-st-call path {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+.swd-st-call {
+  transition: opacity 0.35s var(--ease-out);
+}
+.swd-st-call[data-dim] {
+  opacity: 0.3;
+}
+.swd-st-call .swd-st-callhead {
+  fill: var(--accent);
+  stroke: none;
+}
+.swd-st-svg .swd-st-calllabel {
+  font-weight: 500;
+  fill: var(--accent);
+}
+
+/* Program og output. */
+.swd-st-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  min-width: 0;
+  padding: 0.65rem 0.75rem 0.75rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule);
+}
+.swd-st-panel-h {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--ink-3);
+}
+.swd-st-panel-h + .swd-st-code,
+.swd-st-panel-h + .swd-st-out {
+  margin-bottom: 0.4rem;
+}
+.swd-st-code {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.swd-st-ln {
+  padding: 0.08rem 0.35rem;
+  border-radius: 3px;
+  transition:
+    background-color 0.35s var(--ease-out),
+    color 0.35s var(--ease-out),
+    opacity 0.35s var(--ease-out);
+}
+.swd-st-ln code {
+  font-size: 0.75rem;
+  line-height: 1.45;
+  font-variant-ligatures: none;
+  overflow-wrap: anywhere;
+  hyphens: manual;
+}
+.swd-st-ln[data-state='todo'] {
+  color: var(--ink-3);
+  opacity: 0.55;
+}
+.swd-st-new[data-hl] {
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 3px;
+}
+.swd-st-ln[data-state='now'] {
+  background: var(--accent-soft);
+  box-shadow: inset 2px 0 0 var(--accent);
+}
+
+.swd-st-out {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+.swd-st-out-run {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.swd-st-out-ln {
+  padding: 0.02rem 0 0.02rem 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: var(--ink-2);
+  box-shadow: inset 2px 0 0 var(--rule-strong);
+  font-variant-ligatures: none;
+}
+.swd-st-out-ln[data-v='1'] {
+  color: var(--ink);
+  font-weight: 600;
+  box-shadow: inset 3px 0 0 var(--ink-2);
+}
+.swd-st-out-ln[data-v='2'] {
+  color: var(--accent);
+  font-weight: 600;
+  box-shadow: inset 3px 0 0 var(--accent);
+}
+
+/* Slutrammens konklusion. */
+.swd-st-verdict {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.35rem 0.6rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--ink-2);
+  box-shadow: inset 0 0 0 1px var(--rule);
+}
+.swd-st-verdict-i {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 1.3rem;
+  height: 1.3rem;
+  border-radius: 50%;
+  font-weight: 700;
+  font-size: 0.75rem;
+}
+.swd-st-verdict-i {
+  color: var(--paper);
+  background: var(--accent);
+}
+.swd-st-verdict-t {
+  min-width: 0;
+}
+.swd-st-verdict code {
+  font-size: 0.75rem;
+  font-variant-ligatures: none;
+}
+
+@container (max-width: 40rem) {
+  .swd-st-wide {
+    display: none;
+  }
+  .swd-st-narrow {
+    display: block;
+  }
+  .swd-st-main {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.9rem;
+  }
+  .swd-st-verdict {
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: start;
+  }
+  .swd-st-verdict > .vtag {
+    grid-column: 2;
+    justify-self: start;
+  }
+}

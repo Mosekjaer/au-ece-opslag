@@ -1,0 +1,278 @@
+.ast {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.ast-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+  overflow: visible;
+  font-family: var(--font-ui);
+}
+.ast-wide {
+  max-width: 54rem;
+}
+.ast-narrow {
+  display: none;
+  max-width: 21rem;
+}
+.ast-svg text {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  fill: var(--ink-2);
+}
+
+/* Kagen */
+.ast-frame {
+  fill: none;
+  stroke: var(--rule-strong);
+  stroke-width: 1.2;
+  stroke-dasharray: 2 3;
+}
+.ast-svg .ast-tag {
+  font-size: 12px;
+  font-weight: 600;
+  fill: var(--accent);
+}
+.ast-box {
+  fill: var(--paper);
+  stroke: var(--ink-3);
+  stroke-width: 1;
+}
+.ast-svg .ast-box-t {
+  font-weight: 600;
+  text-anchor: middle;
+  dominant-baseline: central;
+  fill: var(--ink);
+}
+.ast-layer rect {
+  fill: var(--paper-3);
+  stroke: var(--ink-3);
+  stroke-width: 1;
+  transition:
+    fill 0.35s var(--ease-out),
+    stroke 0.35s var(--ease-out);
+}
+.ast-svg .ast-layer text {
+  font-size: 12.5px;
+  font-weight: 600;
+  text-anchor: middle;
+  dominant-baseline: central;
+  fill: var(--ink);
+}
+
+/* Streger */
+.ast-conn path,
+.ast-up path {
+  fill: none;
+  stroke: var(--ink-3);
+  stroke-width: 1.3;
+}
+.ast-svg .ast-fill {
+  fill: var(--ink-3);
+  stroke: none;
+}
+.ast-conn-hot path {
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+.ast-svg .ast-conn-hot .ast-fill {
+  fill: var(--accent);
+}
+.ast-dep path {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.4;
+  stroke-dasharray: 4 3;
+}
+.ast-dep .ast-vee {
+  stroke-dasharray: none;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+.ast-event path {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.2;
+}
+.ast-svg .ast-event .ast-fill {
+  fill: var(--accent);
+}
+.ast-svg .ast-event text {
+  font-size: 11.5px;
+  font-style: italic;
+  dominant-baseline: central;
+  fill: var(--accent);
+}
+
+/* Tiers */
+.ast-band {
+  fill: var(--paper);
+  stroke: var(--rule);
+  stroke-width: 1;
+}
+.ast-svg .ast-tier-name {
+  font-weight: 600;
+  fill: var(--ink);
+}
+.ast-svg .ast-cap {
+  font-size: 11.5px;
+  fill: var(--ink-2);
+}
+.ast-icon rect,
+.ast-icon path,
+.ast-icon ellipse {
+  fill: var(--paper-3);
+  stroke: var(--ink-3);
+  stroke-width: 1.2;
+}
+.ast-icon > path:not(:first-child) {
+  fill: none;
+}
+.ast-net path {
+  fill: none;
+  stroke: var(--ink-2);
+  stroke-width: 2;
+  stroke-dasharray: 9 6;
+}
+.ast-svg .ast-net-l {
+  font-size: 11.5px;
+  font-style: italic;
+  fill: var(--ink-2);
+}
+
+/* Application overview */
+.ast-node,
+.ast-cyl path,
+.ast-cyl ellipse {
+  fill: var(--paper);
+  stroke: var(--ink-2);
+  stroke-width: 2;
+  transition: stroke 0.35s var(--ease-out);
+}
+.ast-chain[data-key] .ast-node,
+.ast-chain[data-key] .ast-cyl path,
+.ast-chain[data-key] .ast-cyl ellipse {
+  stroke: var(--ink);
+}
+.ast-svg .ast-node-t {
+  font-size: 12.5px;
+  font-weight: 700;
+  text-anchor: middle;
+  dominant-baseline: central;
+  fill: var(--ink);
+}
+.ast-svg .ast-proto {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  font-weight: 500;
+  fill: var(--ink);
+}
+.ast-svg .ast-db-b {
+  font-weight: 600;
+  text-anchor: middle;
+  fill: var(--ink);
+}
+.ast-svg .ast-db {
+  font-size: 11.5px;
+  text-anchor: middle;
+}
+.ast-db-rule {
+  stroke: var(--rule-strong);
+  stroke-width: 1;
+}
+.ast-svg .ast-note {
+  font-size: 11.5px;
+  font-style: italic;
+  fill: var(--accent);
+}
+.ast-up path {
+  stroke: var(--accent);
+}
+.ast-svg .ast-up .ast-fill {
+  fill: var(--accent);
+}
+
+/* Nøgle */
+.ast-legend {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.3rem 1.1rem;
+  font-size: 0.75rem;
+  color: var(--ink-2);
+}
+.ast-legend li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.ast-legend-sw {
+  display: inline-grid;
+  place-items: center;
+  width: 2rem;
+  height: 0.9rem;
+}
+.ast-legend-sw svg {
+  width: 2rem;
+  height: 0.75rem;
+  overflow: visible;
+}
+.ast-dep-l {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.4;
+}
+.ast-dep-l:first-child {
+  stroke-dasharray: 4 3;
+}
+.ast-ev-l,
+.ast-conn-l {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.3;
+}
+.ast-conn-l {
+  stroke: var(--ink-3);
+}
+.ast-ev-h {
+  fill: var(--accent);
+}
+.ast-legend li:nth-child(4) .ast-ev-h {
+  fill: var(--ink-3);
+}
+.ast-net-sw {
+  fill: none;
+  stroke: var(--ink-2);
+  stroke-width: 2;
+  stroke-dasharray: 7 4;
+}
+.ast-sw {
+  display: block;
+  width: 1.6rem;
+  height: 0.8rem;
+  border-radius: 2px;
+}
+.ast-sw-tier {
+  background: var(--paper);
+  box-shadow: inset 0 0 0 2px var(--ink);
+}
+.ast-sw-layer {
+  background: var(--paper-3);
+  box-shadow: inset 0 0 0 1px var(--ink-3);
+}
+
+@container (max-width: 40rem) {
+  .ast-wide {
+    display: none;
+  }
+  .ast-narrow {
+    display: block;
+  }
+  .ast-legend {
+    justify-content: flex-start;
+  }
+}

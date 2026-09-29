@@ -1,0 +1,483 @@
+.c4 {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* Niveau-stigen */
+.c4-ladder {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.35rem;
+}
+.c4-rung {
+  display: flex;
+  flex-direction: column;
+  gap: 0.05rem;
+  padding: 0.35rem 0.55rem 0.4rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule);
+  color: var(--ink-3);
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out),
+    color 0.35s var(--ease-out);
+}
+.c4-rung-n {
+  font-size: 0.6875rem;
+  font-weight: 600;
+}
+.c4-rung-name {
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+.c4-rung[data-past] {
+  color: var(--ink-2);
+  box-shadow: inset 0 0 0 1px var(--accent-mid);
+}
+.c4-rung[data-now] {
+  color: var(--ink);
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.c4-rung[data-now] .c4-rung-n {
+  color: var(--accent);
+}
+
+.c4-stage {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.c4-title {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+.c4-opt {
+  margin-left: 0.5rem;
+  padding: 0.05rem 0.4rem;
+  border-radius: 3px;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--accent);
+  box-shadow: inset 0 0 0 1px var(--accent-mid);
+}
+
+/* ------------------------------ SVG ------------------------------ */
+.c4-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.c4-svg text {
+  font-family: var(--font-ui);
+  fill: var(--ink-2);
+}
+.c4-narrow,
+.c4-narrow-code {
+  display: none;
+}
+
+.c4-shape {
+  fill: var(--accent-soft);
+  stroke: var(--accent);
+  stroke-width: 1.3;
+  transition:
+    fill 0.35s var(--ease-out),
+    stroke 0.35s var(--ease-out),
+    stroke-width 0.35s var(--ease-out);
+}
+.c4-el[data-ext] .c4-shape {
+  fill: var(--paper-3);
+  stroke: var(--ink-3);
+}
+.c4-el[data-hot] .c4-shape {
+  stroke-width: 3;
+}
+.c4-pkg {
+  fill: none;
+  stroke: var(--ink-2);
+  stroke-width: 1.2;
+}
+.c4-bound {
+  fill: none;
+  stroke: var(--ink-3);
+  stroke-width: 1.4;
+  stroke-dasharray: 6 4;
+}
+.c4-svg .c4-name {
+  font-size: 13px;
+  font-weight: 700;
+  text-anchor: middle;
+  fill: var(--ink);
+}
+.c4-svg .c4-type {
+  font-size: 11.5px;
+  text-anchor: middle;
+  fill: var(--ink-2);
+}
+.c4-svg .c4-desc {
+  font-size: 11.5px;
+  text-anchor: middle;
+  fill: var(--ink-2);
+}
+.c4-svg .c4-bound-t {
+  font-size: 11.5px;
+  fill: var(--ink-2);
+}
+.c4-svg .c4-bound-n {
+  font-weight: 700;
+  fill: var(--ink);
+}
+
+/* Relationer */
+.c4-rel-l {
+  fill: none;
+  stroke: var(--ink-3);
+  stroke-width: 1.2;
+  stroke-dasharray: 5 3;
+}
+.c4-rel-h,
+.c4-dep-h {
+  fill: none;
+  stroke: var(--ink-3);
+  stroke-width: 1.3;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+.c4-svg .c4-rel-t {
+  font-size: 11.5px;
+  font-weight: 500;
+  fill: var(--ink-2);
+  paint-order: stroke;
+  stroke: var(--paper-2);
+  stroke-width: 3px;
+  stroke-linejoin: round;
+}
+.c4-svg .c4-rel-t .c4-tech {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  fill: var(--ink);
+}
+
+/* UML (level 4) */
+.c4-tab {
+  fill: none;
+}
+.c4-cls rect {
+  fill: var(--paper);
+  stroke: var(--ink-2);
+  stroke-width: 1.2;
+}
+.c4-cls path {
+  stroke: var(--ink-2);
+  stroke-width: 1;
+}
+.c4-svg .c4-cls-n {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  font-weight: 600;
+  text-anchor: middle;
+  fill: var(--ink);
+  font-variant-ligatures: none;
+}
+.c4-svg .c4-iface {
+  font-weight: 500;
+  paint-order: stroke;
+  stroke: var(--paper-2);
+  stroke-width: 3px;
+}
+.c4-svg .c4-pkg-n {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  font-weight: 600;
+  fill: var(--ink);
+}
+.c4-uml,
+.c4-gen path {
+  fill: none;
+  stroke: var(--ink-2);
+  stroke-width: 1.2;
+}
+.c4-gen .c4-gen-h {
+  fill: var(--paper);
+  stroke-linejoin: round;
+}
+.c4-lolly {
+  fill: var(--paper);
+  stroke: var(--ink-2);
+  stroke-width: 1.3;
+}
+.c4-dep-l {
+  fill: none;
+  stroke: var(--ink-2);
+  stroke-width: 1.1;
+  stroke-dasharray: 4 3;
+}
+.c4-dep .c4-dep-h {
+  stroke: var(--ink-2);
+}
+.c4-svg .c4-dep-t {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  fill: var(--ink-2);
+  paint-order: stroke;
+  stroke: var(--paper-2);
+  stroke-width: 3px;
+}
+
+/* Nøgle */
+.c4-legend {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem 1rem;
+  font-size: 0.75rem;
+  color: var(--ink-2);
+}
+.c4-legend li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.c4-sw {
+  display: inline-block;
+  width: 1.5rem;
+  height: 0.85rem;
+  border-radius: 2px;
+}
+.c4-sw-person {
+  border-radius: 0.45rem 0.45rem 0.2rem 0.2rem;
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.3px var(--accent);
+}
+.c4-sw-own {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.3px var(--accent);
+}
+.c4-sw-ext {
+  background: var(--paper-3);
+  box-shadow: inset 0 0 0 1.3px var(--ink-3);
+}
+.c4-sw-bound {
+  border: 1.4px dashed var(--ink-3);
+}
+.c4-sw-rel {
+  width: 1.9rem;
+  height: 0.7rem;
+  fill: none;
+  stroke: var(--ink-3);
+  stroke-width: 1.3;
+}
+.c4-sw-uml {
+  width: 1.9rem;
+  height: 0.75rem;
+  overflow: visible;
+  fill: none;
+  stroke: var(--ink-2);
+  stroke-width: 1.2;
+}
+.c4-sw-uml .c4-sw-tri,
+.c4-sw-uml circle {
+  fill: var(--paper);
+}
+.c4-sw-dep path:first-child {
+  stroke-dasharray: 4 2.5;
+}
+.c4-legend .mono {
+  font-size: 0.75rem;
+}
+.c4-sw-rel path:first-child {
+  stroke-dasharray: 4 2.5;
+}
+
+/* ------------------------------ Slutramme ------------------------------ */
+.c4-final {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem 1.25rem;
+  align-items: start;
+  align-self: center;
+  width: 100%;
+}
+.c4-final-lv {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+.c4-thumb {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-bottom: 0.3rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule);
+}
+.c4-th-box {
+  fill: var(--accent-soft);
+  stroke: var(--accent);
+  stroke-width: 5;
+}
+.c4-th-box[data-ext] {
+  fill: var(--paper-3);
+  stroke: var(--ink-3);
+}
+.c4-th-box[data-target] {
+  fill: var(--accent);
+  stroke: var(--accent);
+}
+.c4-th-bound {
+  fill: none;
+  stroke: var(--ink-3);
+  stroke-width: 5;
+  stroke-dasharray: 18 12;
+}
+.c4-th-rel {
+  stroke: var(--ink-3);
+  stroke-width: 4;
+}
+.c4-final-n {
+  font-size: 0.75rem;
+  color: var(--ink-2);
+}
+.c4-final-n b {
+  color: var(--ink);
+}
+.c4-final-who {
+  font-size: 0.6875rem;
+  line-height: 1.35;
+  color: var(--ink-3);
+}
+.c4-final-into {
+  font-size: 0.6875rem;
+  line-height: 1.35;
+  color: var(--accent);
+}
+
+/* -------------------------------- Smal -------------------------------- */
+.c4n {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.c4n-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.c4n-row > .c4n-card {
+  flex: 1 1 8rem;
+}
+.c4n-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.05rem;
+  min-width: 0;
+  padding: 0.4rem 0.55rem 0.45rem;
+  border-radius: var(--radius-sm);
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.3px var(--accent);
+  font-size: 0.75rem;
+  line-height: 1.35;
+  text-align: center;
+}
+.c4n-card[data-kind='person'] {
+  border-radius: 1rem 1rem var(--radius-sm) var(--radius-sm);
+}
+.c4n-card[data-kind='db'] {
+  border-radius: 50% 50% 0.6rem 0.6rem / 0.7rem 0.7rem 0.6rem 0.6rem;
+}
+.c4n-card[data-ext] {
+  background: var(--paper-3);
+  box-shadow: inset 0 0 0 1.3px var(--ink-3);
+}
+.c4n-card[data-hot] {
+  box-shadow: inset 0 0 0 3px var(--accent);
+}
+.c4n-card b {
+  font-size: 0.8125rem;
+  color: var(--ink);
+}
+.c4n-type {
+  font-size: 0.6875rem;
+  color: var(--ink-2);
+}
+.c4n-desc {
+  margin-top: 0.15rem;
+  font-size: 0.6875rem;
+  color: var(--ink-2);
+}
+.c4n-frame {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 0.5rem;
+  border: 1.4px dashed var(--ink-3);
+  border-radius: var(--radius-sm);
+}
+.c4n-inside {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.4rem;
+}
+.c4n-frame-l {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--ink-2);
+}
+.c4n-rels {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.6875rem;
+  line-height: 1.35;
+}
+.c4n-rels li {
+  display: flex;
+  flex-direction: column;
+  padding-left: 0.5rem;
+  border-left: 2px dashed var(--ink-3);
+}
+.c4n-rel-who {
+  font-weight: 600;
+  color: var(--ink);
+}
+.c4n-rel-what {
+  color: var(--ink-2);
+}
+
+@container (max-width: 40rem) {
+  .c4-wide {
+    display: none;
+  }
+  .c4-narrow {
+    display: block;
+  }
+  .c4-narrow-code {
+    display: block;
+    max-width: 21rem;
+    margin: 0 auto;
+  }
+  .c4-ladder {
+    gap: 0.2rem;
+  }
+  .c4-rung {
+    padding: 0.3rem 0.35rem;
+  }
+  .c4-rung-name {
+    font-size: 0.6875rem;
+    hyphens: manual;
+  }
+  .c4-final {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.9rem;
+  }
+}

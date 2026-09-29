@@ -1,0 +1,227 @@
+.sno {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.sno-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+  overflow: visible;
+}
+.sno-wide {
+  max-width: 53rem;
+}
+.sno-narrow {
+  display: none;
+  flex-direction: column;
+  gap: 1.1rem;
+  max-width: 22rem;
+  margin: 0 auto;
+  width: 100%;
+}
+.sno-svg text {
+  font-family: var(--font-ui);
+  fill: var(--ink);
+  dominant-baseline: central;
+}
+
+/* Tilstandsdiagrammet */
+.sno-frame {
+  fill: none;
+  stroke: var(--ink-3);
+  stroke-width: 1.2;
+}
+.sno-tab {
+  fill: var(--paper);
+  stroke: var(--ink-3);
+  stroke-width: 1.2;
+}
+.sno-svg .sno-tabtext {
+  font-size: 11.5px;
+  fill: var(--ink-2);
+}
+.sno-svg .sno-kw {
+  font-weight: 700;
+  fill: var(--ink);
+}
+.sno-on rect {
+  fill: var(--paper);
+  stroke: var(--ink-3);
+  stroke-width: 1.4;
+  transition: stroke 0.4s var(--ease-out);
+  transition-delay: inherit;
+}
+.sno-onrule {
+  stroke: var(--ink-3);
+  stroke-width: 1.2;
+  transition: stroke 0.4s var(--ease-out);
+  transition-delay: inherit;
+}
+.sno-on[data-on] rect,
+.sno-on[data-on] .sno-onrule {
+  stroke: var(--accent-mid);
+  stroke-width: 2;
+}
+.sno-sep {
+  stroke: var(--ink-3);
+  stroke-width: 1.4;
+  stroke-dasharray: 7 5;
+}
+.sno-init {
+  fill: var(--ink);
+}
+.sno-tr,
+.sno-head {
+  fill: none;
+  stroke: var(--ink-3);
+  stroke-width: 1.4;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+.sno-tr-hot {
+  stroke: var(--accent);
+  stroke-width: 2.2;
+}
+.sno-trg[data-hot] .sno-head {
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+.sno-trg[data-hot] .sno-init {
+  fill: var(--accent);
+}
+.sno-svg .sno-label {
+  font-size: 11.5px;
+  font-weight: 500;
+  fill: var(--ink-2);
+}
+.sno-svg .sno-trg[data-hot] .sno-label {
+  fill: var(--accent);
+  font-weight: 700;
+}
+.sno-state rect {
+  fill: var(--paper);
+  stroke: var(--ink-3);
+  stroke-width: 1.4;
+  transition:
+    fill 0.4s var(--ease-out),
+    stroke 0.4s var(--ease-out);
+  transition-delay: inherit;
+}
+.sno-svg .sno-sname {
+  font-size: 12.5px;
+  font-weight: 600;
+  text-anchor: middle;
+}
+.sno-state[data-on] rect {
+  fill: var(--accent-soft);
+  stroke: var(--accent);
+  stroke-width: 2.2;
+}
+
+/* Klassediagrammerne */
+.sno-cline,
+.sno-chead {
+  fill: none;
+  stroke: var(--ink-3);
+  stroke-width: 1.4;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+.sno-tri {
+  fill: var(--paper-2);
+  stroke: var(--ink-3);
+  stroke-width: 1.3;
+  stroke-linejoin: round;
+}
+.sno-inherit {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2.4;
+  stroke-linecap: round;
+}
+.sno-svg .sno-role {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  font-variant-ligatures: none;
+  fill: var(--ink-3);
+}
+.sno-box {
+  fill: var(--paper);
+  stroke: var(--ink-3);
+  stroke-width: 1.3;
+  transition:
+    fill 0.4s var(--ease-out),
+    stroke 0.4s var(--ease-out);
+  transition-delay: inherit;
+}
+.sno-div {
+  stroke: var(--ink-3);
+  stroke-width: 1;
+}
+.sno-svg .sno-cname {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  font-weight: 600;
+  font-variant-ligatures: none;
+  text-anchor: middle;
+}
+.sno-svg .sno-mem {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  font-variant-ligatures: none;
+  fill: var(--ink-2);
+}
+.sno-memhl {
+  fill: transparent;
+  transition: fill 0.35s var(--ease-out);
+}
+.sno-cls[data-on] .sno-box {
+  fill: var(--accent-soft);
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+.sno-cls[data-on] .sno-div {
+  stroke: var(--accent);
+}
+.sno-cls [data-hot] .sno-memhl {
+  fill: var(--accent-soft);
+}
+.sno-svg .sno-cls [data-hot] .sno-mem {
+  fill: var(--accent);
+  font-weight: 700;
+}
+.sno-svg .sno-cnote {
+  font-size: 11px;
+  font-style: italic;
+  text-anchor: end;
+  fill: var(--ink-3);
+}
+
+.sno-collapse {
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--ink-3);
+}
+.sno-collapse-head {
+  font-weight: 600;
+  color: var(--ink-2);
+}
+
+@container (max-width: 40rem) {
+  .sno-wide {
+    display: none;
+  }
+  .sno-narrow {
+    display: flex;
+  }
+  .sno-narrow .sno-mem {
+    font-size: 11.4px;
+  }
+  .sno-narrow .sno-cname,
+  .sno-narrow .sno-sname {
+    font-size: 12px;
+  }
+}

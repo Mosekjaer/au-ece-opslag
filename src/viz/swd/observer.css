@@ -1,0 +1,270 @@
+/* Observer: objektdiagram med beskeder. Links = fulde linjer, beskeder = accent,
+   pull-tilbagekaldet = --neg (det er koblingen, slide 11 advarer om). */
+
+.swd-obs {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.swd-obs-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.swd-obs-narrow {
+  display: none;
+  max-width: 22rem;
+  margin: 0 auto;
+}
+.swd-obs-svg text {
+  font-family: var(--font-mono);
+  font-variant-ligatures: none;
+  dominant-baseline: central;
+  fill: var(--ink);
+}
+
+.swd-obs-box {
+  fill: var(--paper);
+  stroke: var(--ink-3);
+  stroke-width: 1.3;
+}
+.swd-obs-sep {
+  stroke: var(--ink-3);
+  stroke-width: 1;
+}
+.swd-obs-svg .swd-obs-name {
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.swd-obs-svg .swd-obs-slot {
+  fill: var(--ink-2);
+}
+.swd-obs-svg .swd-obs-val {
+  font-weight: 600;
+  fill: var(--ink);
+}
+.swd-obs-svg .swd-obs-role text {
+  font-family: var(--font-ui);
+  font-style: italic;
+  fill: var(--ink-3);
+}
+.swd-obs-svg .swd-obs-empty {
+  font-family: var(--font-ui);
+  font-style: italic;
+  fill: var(--ink-3);
+}
+
+/* Listen af observers. */
+.swd-obs-row rect {
+  fill: var(--paper-2);
+  stroke: var(--rule-strong);
+  stroke-width: 1;
+}
+.swd-obs-svg .swd-obs-row text {
+  fill: var(--ink-2);
+}
+.swd-obs-notify rect {
+  fill: var(--accent);
+}
+.swd-obs-svg .swd-obs-notify text {
+  font-weight: 600;
+  fill: var(--paper);
+}
+
+.swd-obs-link {
+  fill: none;
+  stroke: var(--ink-3);
+  stroke-width: 1.3;
+}
+
+/* Displays. */
+.swd-obs-disp {
+  transition: opacity 0.5s var(--ease-out);
+}
+.swd-obs-disp[data-off] {
+  opacity: 0.5;
+}
+.swd-obs-svg .swd-obs-recv {
+  fill: var(--accent);
+  font-weight: 500;
+}
+.swd-obs-svg .swd-obs-recv.is-pull {
+  fill: var(--neg);
+}
+.swd-obs-svg .swd-obs-recv.is-off {
+  font-family: var(--font-ui);
+  font-style: italic;
+  fill: var(--ink-3);
+}
+.swd-obs-disp[data-off] .swd-obs-recv:not(.is-off) {
+  fill: var(--ink-3);
+}
+
+/* Beskeder. */
+.swd-obs-call path {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+.swd-obs-call .swd-obs-callhead {
+  fill: var(--accent);
+  stroke: none;
+}
+.swd-obs-svg .swd-obs-calllabel {
+  font-weight: 600;
+  fill: var(--accent);
+}
+.swd-obs-dot {
+  fill: var(--accent);
+  stroke: var(--paper);
+  stroke-width: 1.5;
+}
+.swd-obs-dot[data-neg] {
+  fill: var(--neg);
+}
+.swd-obs-msg rect {
+  fill: var(--paper);
+  stroke: var(--accent);
+  stroke-width: 1.2;
+}
+.swd-obs-svg .swd-obs-msg text {
+  font-weight: 600;
+  fill: var(--accent);
+}
+.swd-obs-msg[data-neg] rect {
+  stroke: var(--neg);
+}
+.swd-obs-svg .swd-obs-msg[data-neg] text {
+  fill: var(--neg);
+}
+
+.swd-obs-pull path {
+  fill: none;
+  stroke: var(--neg);
+  stroke-width: 1.8;
+  stroke-linejoin: round;
+}
+.swd-obs-pull .swd-obs-pullhead {
+  fill: var(--neg);
+  stroke: none;
+}
+.swd-obs-svg .swd-obs-pulllabel {
+  font-family: var(--font-ui);
+  font-weight: 600;
+  fill: var(--neg);
+}
+
+/* Push og pull side om side. */
+.swd-obs-cmp {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+.swd-obs-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  min-width: 0;
+  padding: 0.6rem 0.75rem 0.7rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule);
+}
+.swd-obs-card[data-pull] {
+  box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--neg) 40%, var(--paper));
+}
+.swd-obs-card header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  font-size: 0.8125rem;
+}
+.swd-obs-card header span {
+  font-size: 0.6875rem;
+  color: var(--ink-3);
+}
+.swd-obs-card p {
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--ink-2);
+}
+.swd-obs-card p em {
+  display: block;
+  margin-top: 0.15rem;
+  color: var(--ink-3);
+}
+.swd-obs-card code {
+  font-size: 0.75rem;
+  font-variant-ligatures: none;
+  overflow-wrap: anywhere;
+}
+
+.swd-obs-seq {
+  display: block;
+  width: 100%;
+  max-width: 19.5rem;
+  height: auto;
+  font-size: 11px;
+}
+.swd-obs-seq text {
+  font-family: var(--font-mono);
+  font-variant-ligatures: none;
+  dominant-baseline: central;
+  fill: var(--ink);
+}
+.swd-obs-seq-head {
+  fill: var(--paper-2);
+  stroke: var(--ink-3);
+  stroke-width: 1.1;
+}
+.swd-obs-seq-life {
+  stroke: var(--ink-3);
+  stroke-width: 1;
+  stroke-dasharray: 4 3;
+}
+.swd-obs-seq-msg,
+.swd-obs-seq-ret {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.5;
+}
+.swd-obs-seq-ret {
+  stroke-dasharray: 4 3;
+}
+.swd-obs-seq-mh {
+  fill: var(--accent);
+}
+.swd-obs-seq-rh {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.5;
+}
+.swd-obs-seq-msg.is-neg {
+  stroke: var(--neg);
+}
+.swd-obs-seq-mh.is-neg {
+  fill: var(--neg);
+}
+.swd-obs-seq .swd-obs-seq-l {
+  fill: var(--ink-2);
+}
+.swd-obs-seq .swd-obs-seq-l.is-neg {
+  fill: var(--neg);
+  font-weight: 600;
+}
+
+@container (max-width: 40rem) {
+  .swd-obs-wide {
+    display: none;
+  }
+  .swd-obs-narrow {
+    display: block;
+  }
+  .swd-obs-cmp {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

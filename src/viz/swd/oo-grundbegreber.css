@@ -1,0 +1,319 @@
+.ooe {
+  min-width: 0;
+}
+.ooe-scene {
+  display: flex;
+  justify-content: center;
+}
+
+.ooe-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.ooe-wide {
+  max-width: 52.5rem;
+}
+.ooe-narrow {
+  display: none;
+  max-width: 21rem;
+}
+.ooe-svg text {
+  white-space: pre;
+  font-family: var(--font-mono);
+  font-variant-ligatures: none;
+  fill: var(--ink);
+}
+
+/* Klassens grænse */
+.ooe-frame {
+  fill: color-mix(in oklab, var(--paper) 55%, transparent);
+  stroke: var(--ink-2);
+  stroke-width: 2;
+}
+.ooe-svg .ooe-title,
+.ooe-svg .ooe-client-name {
+  font-size: 1.12em;
+  font-weight: 600;
+}
+.ooe-svg .ooe-field {
+  fill: var(--ink-2);
+}
+.ooe-svg .ooe-kw {
+  font-weight: 600;
+  fill: var(--ink);
+}
+
+/* Listen */
+.ooe-list {
+  fill: var(--paper-2);
+  stroke: var(--rule-strong);
+  stroke-width: 1;
+  transition:
+    fill 0.35s var(--ease-out),
+    stroke 0.35s var(--ease-out);
+}
+.ooe-list[data-tone='neg'] {
+  fill: var(--neg-soft);
+  stroke: var(--neg);
+  transition-delay: 0.8s;
+}
+.ooe-svg .ooe-list-head {
+  font-size: 0.95em;
+  fill: var(--ink-3);
+}
+.ooe-svg .ooe-empty {
+  font-family: var(--font-ui);
+  font-style: italic;
+  fill: var(--neg);
+}
+.ooe-chip {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.ooe-chip rect {
+  fill: var(--paper);
+  stroke: var(--ink-3);
+  stroke-width: 1.2;
+  transition:
+    fill 0.35s var(--ease-out),
+    stroke 0.35s var(--ease-out);
+}
+.ooe-chip[data-tone='neg'] rect {
+  fill: var(--neg-soft);
+  stroke: var(--neg);
+  stroke-width: 1.6;
+  transition-delay: 0.35s;
+}
+.ooe-svg .ooe-chip-t.is-neg {
+  fill: var(--neg);
+  font-weight: 600;
+}
+.ooe-svg .ooe-chip-t.is-anon {
+  fill: var(--ink-3);
+}
+.ooe-svg .ooe-note {
+  font-family: var(--font-ui);
+  font-size: 0.95em;
+  fill: var(--ink-3);
+}
+
+/* Døre: det offentlige, der sidder i grænsen. */
+.ooe-door {
+  transform-box: fill-box;
+  transform-origin: left center;
+}
+.ooe-door rect {
+  fill: var(--paper);
+  stroke: var(--ink-2);
+  stroke-width: 1.4;
+  transition:
+    fill 0.35s var(--ease-out),
+    stroke 0.35s var(--ease-out);
+}
+.ooe-door[data-tone='neg'] rect {
+  fill: var(--neg-soft);
+  stroke: var(--neg);
+  stroke-width: 1.8;
+}
+.ooe-door[data-tone='focus'] rect {
+  fill: var(--accent-soft);
+  stroke: var(--accent);
+  stroke-width: 1.8;
+}
+
+/* Pile og referencen */
+.ooe-path {
+  fill: none;
+  stroke-linecap: round;
+}
+.ooe-arrow .ooe-path {
+  stroke-width: 2.2;
+}
+.ooe-arrow[data-tone='neg'] .ooe-path {
+  stroke: var(--neg);
+}
+.ooe-arrow[data-tone='neg'] .ooe-tip {
+  fill: var(--neg);
+}
+.ooe-arrow[data-tone='focus'] .ooe-path {
+  stroke: var(--accent);
+}
+.ooe-arrow[data-tone='focus'] .ooe-tip {
+  fill: var(--accent);
+}
+.ooe-ref .ooe-path {
+  stroke: var(--neg);
+  stroke-width: 1.2;
+}
+.ooe-ref .ooe-tip,
+.ooe-ref .ooe-dot {
+  fill: var(--neg);
+}
+.ooe-svg .ooe-ref-label {
+  font-family: var(--font-ui);
+  font-size: 0.95em;
+  font-style: italic;
+  fill: var(--neg);
+}
+.ooe-svg .ooe-marker {
+  font-family: var(--font-ui);
+  font-weight: 600;
+  fill: var(--accent);
+}
+.ooe-svg .ooe-marker .ooe-mono {
+  font-family: var(--font-mono);
+}
+
+/* Klienten */
+.ooe-client {
+  fill: var(--paper);
+  stroke: var(--ink-2);
+  stroke-width: 1.4;
+}
+.ooe-sep {
+  stroke: var(--ink-3);
+  stroke-width: 1;
+}
+.ooe-svg .ooe-method {
+  fill: var(--ink-3);
+}
+.ooe-svg .ooe-line {
+  fill: var(--ink-2);
+  transition: fill 0.35s var(--ease-out);
+}
+.ooe-svg .ooe-line[data-tone='neg'] {
+  fill: var(--neg);
+  font-weight: 600;
+}
+.ooe-svg .ooe-line[data-tone='focus'] {
+  fill: var(--accent);
+  font-weight: 600;
+}
+
+/* Kald */
+.ooe-token rect {
+  fill: var(--accent);
+}
+.ooe-token[data-tone='neg'] rect {
+  fill: var(--neg);
+}
+.ooe-svg .ooe-token text {
+  font-weight: 500;
+  text-anchor: middle;
+  fill: var(--paper);
+}
+
+/* ------------------------------ Slutrammen ------------------------------ */
+.ooe-sum {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+  align-content: center;
+  height: 100%;
+}
+.ooe-col {
+  min-width: 0;
+  padding: 0.7rem 0.8rem 0.8rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+}
+.ooe-col-head {
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+.ooe-col dl {
+  display: grid;
+  gap: 0.15rem;
+}
+.ooe-col dt {
+  margin-top: 0.45rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--ink-3);
+}
+.ooe-col dt:first-child {
+  margin-top: 0;
+}
+.ooe-col dd {
+  margin: 0;
+  min-width: 0;
+  font-size: 0.875rem;
+  line-height: 1.45;
+  color: var(--ink-2);
+}
+.ooe-col code {
+  padding: 0;
+  background: none;
+  box-shadow: none;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: var(--ink-2);
+  hyphens: manual;
+  overflow-wrap: normal;
+}
+.ooe-col code.is-nw {
+  white-space: nowrap;
+}
+.ooe-crossed {
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+.ooe-col[data-tone='neg'] {
+  box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--neg) 45%, var(--paper));
+}
+.ooe-col[data-tone='neg'] .ooe-crossed {
+  color: var(--neg);
+}
+.ooe-col[data-tone='focus'] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.ooe-col[data-tone='focus'] .ooe-crossed {
+  color: var(--accent);
+}
+
+/* Den brede scene er tegnet 1:1 til fuld pladebredde; under ca. 50rem tager den
+   smalle (klient over manager, døre i overkanten) over, og slutrammen stables. */
+@container (max-width: 50rem) {
+  .ooe-wide {
+    display: none;
+  }
+  .ooe-narrow {
+    display: block;
+  }
+  .ooe-sum {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.5rem;
+  }
+  .ooe-col {
+    padding: 0.55rem 0.65rem 0.6rem;
+  }
+  .ooe-col-head {
+    margin-bottom: 0.3rem;
+    font-size: 0.8125rem;
+  }
+  .ooe-col dd,
+  .ooe-crossed {
+    font-size: 0.8125rem;
+  }
+  .ooe-col code {
+    font-size: 0.75rem;
+  }
+  .ooe-col dt {
+    font-size: 0.6875rem;
+  }
+  /* Etiket og værdi på samme række, så de tre versioner fylder som scenen. */
+  .ooe-col dl {
+    grid-template-columns: 6.2rem minmax(0, 1fr);
+    gap: 0.25rem 0.5rem;
+    align-items: baseline;
+  }
+  .ooe-col dt {
+    margin-top: 0;
+  }
+}

@@ -1,0 +1,285 @@
+/* Fra tre løsninger til ét mønster og videre ind i GoF-kataloget.
+   Afsender = fyldt accent, modtagere = blød accent; UML i tynd blæk. */
+
+.swd-dp {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.swd-dp-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.swd-dp-narrow {
+  display: none;
+  max-width: 22rem;
+  margin: 0 auto;
+}
+.swd-dp-svg text {
+  font-family: var(--font-mono);
+  font-variant-ligatures: none;
+  dominant-baseline: central;
+  fill: var(--ink);
+}
+
+/* Kortene. */
+.swd-dp-card {
+  transition: opacity 0.6s var(--ease-out);
+}
+.swd-dp-card[data-dim] {
+  opacity: 0.5;
+}
+.swd-dp-card-r {
+  fill: var(--paper);
+  stroke: var(--rule);
+  stroke-width: 1;
+}
+.swd-dp-svg .swd-dp-src {
+  font-family: var(--font-ui);
+  font-weight: 600;
+  fill: var(--ink-3);
+}
+.swd-dp-wire {
+  fill: none;
+  stroke: var(--ink-3);
+  stroke-width: 1.2;
+  transition:
+    stroke 0.4s var(--ease-out),
+    stroke-width 0.4s var(--ease-out);
+}
+.swd-dp-wirehead {
+  fill: var(--ink-3);
+  transition: fill 0.4s var(--ease-out);
+}
+.swd-dp-sender,
+.swd-dp-recv {
+  fill: var(--paper);
+  stroke: var(--ink-3);
+  stroke-width: 1.2;
+  transition:
+    fill 0.45s var(--ease-out),
+    stroke 0.45s var(--ease-out);
+}
+.swd-dp-svg .swd-dp-sender-t,
+.swd-dp-svg .swd-dp-recv-t {
+  font-weight: 600;
+  transition: fill 0.45s var(--ease-out);
+}
+.swd-dp-svg .swd-dp-call {
+  fill: var(--ink-3);
+}
+.swd-dp-card[data-lit] .swd-dp-sender {
+  fill: var(--accent);
+  stroke: var(--accent);
+}
+.swd-dp-svg .swd-dp-card[data-lit] .swd-dp-sender-t {
+  fill: var(--paper);
+}
+.swd-dp-card[data-lit] .swd-dp-recv {
+  fill: var(--accent-soft);
+  stroke: var(--accent);
+}
+.swd-dp-card[data-lit] .swd-dp-wire {
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+.swd-dp-card[data-lit] .swd-dp-wirehead {
+  fill: var(--accent);
+}
+
+.swd-dp-ghost[data-kind='s'] {
+  fill: var(--accent);
+}
+.swd-dp-ghost[data-kind='r'] {
+  fill: var(--accent-soft);
+  stroke: var(--accent);
+  stroke-width: 1.2;
+}
+
+.swd-dp-svg .swd-dp-quote {
+  font-family: var(--font-text);
+  font-style: italic;
+  fill: var(--ink-2);
+  dominant-baseline: auto;
+}
+.swd-dp-svg .swd-dp-quote-src {
+  font-family: var(--font-ui);
+  font-style: normal;
+  fill: var(--ink-3);
+}
+
+/* Mønsterkortet. */
+.swd-dp-pat-r {
+  fill: var(--paper);
+  stroke: var(--accent);
+  stroke-width: 1.5;
+  stroke-dasharray: 5 4;
+  transition: stroke-dasharray 0.3s var(--ease-out);
+}
+.swd-dp-pat[data-named] .swd-dp-pat-r {
+  stroke-dasharray: none;
+  stroke-width: 2;
+}
+.swd-dp-svg .swd-dp-pat-empty {
+  font-family: var(--font-ui);
+  font-style: italic;
+  fill: var(--ink-3);
+  transition: opacity 0.3s var(--ease-out);
+}
+.swd-dp-svg .swd-dp-pat-title {
+  font-family: var(--font-ui);
+  font-weight: 700;
+  fill: var(--accent);
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.swd-dp-box {
+  fill: var(--paper);
+  stroke: var(--ink-3);
+  stroke-width: 1.3;
+}
+.swd-dp-box.is-s {
+  fill: var(--accent);
+  stroke: var(--accent);
+}
+.swd-dp-svg .swd-dp-box.is-s + .swd-dp-name {
+  fill: var(--paper);
+}
+.swd-dp-box.is-r {
+  fill: var(--accent-soft);
+  stroke: var(--accent);
+}
+.swd-dp-sep {
+  stroke: var(--accent);
+  stroke-width: 1;
+}
+.swd-dp-svg .swd-dp-name {
+  font-weight: 600;
+}
+.swd-dp-svg .is-abs {
+  font-style: italic;
+}
+.swd-dp-svg .swd-dp-stereo {
+  font-family: var(--font-ui);
+  fill: var(--ink-2);
+}
+.swd-dp-svg .swd-dp-op {
+  fill: var(--ink-2);
+}
+.swd-dp-uml {
+  fill: none;
+  stroke: var(--ink-2);
+  stroke-width: 1.3;
+  stroke-linejoin: round;
+}
+.swd-dp-svg .swd-dp-role {
+  font-family: var(--font-ui);
+  fill: var(--ink-2);
+}
+.swd-dp-down path {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+.swd-dp-down .swd-dp-downhead {
+  fill: var(--accent);
+  stroke: none;
+}
+
+/* Kataloget. */
+.swd-dp-cat {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-areas: 'c s b';
+  gap: 0.75rem;
+  align-items: start;
+}
+.swd-dp-col[data-cat='c'] {
+  grid-area: c;
+}
+.swd-dp-col[data-cat='s'] {
+  grid-area: s;
+}
+.swd-dp-col[data-cat='b'] {
+  grid-area: b;
+}
+.swd-dp-col {
+  min-width: 0;
+  padding: 0.5rem 0.6rem 0.6rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule);
+}
+.swd-dp-col-h {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.35rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+.swd-dp-col-h span {
+  font-weight: 500;
+  color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+}
+.swd-dp-col ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.swd-dp-col li {
+  padding: 0.08rem 0.4rem;
+  border-radius: 3px;
+  font-size: 0.8125rem;
+  line-height: 1.35;
+  color: var(--ink-2);
+  transition:
+    background-color 0.4s var(--ease-out),
+    color 0.4s var(--ease-out),
+    opacity 0.4s var(--ease-out);
+}
+.swd-dp-land {
+  display: inline-block;
+}
+.swd-dp-col li[data-state='obs'] {
+  font-weight: 700;
+  color: var(--paper);
+  background: var(--accent);
+}
+.swd-dp-col li[data-state='course'] {
+  font-weight: 600;
+  color: var(--ink);
+  background: var(--accent-soft);
+  box-shadow: inset 2px 0 0 var(--accent);
+}
+.swd-dp-col li[data-state='rest'] {
+  color: var(--ink-3);
+  opacity: 0.6;
+}
+
+.swd-dp-note {
+  font-size: 0.6875rem;
+  font-style: italic;
+  color: var(--ink-3);
+}
+
+@container (max-width: 40rem) {
+  .swd-dp-wide {
+    display: none;
+  }
+  .swd-dp-narrow {
+    display: block;
+  }
+  .swd-dp-cat {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-areas:
+      'c b'
+      's b';
+    gap: 0.5rem;
+  }
+}

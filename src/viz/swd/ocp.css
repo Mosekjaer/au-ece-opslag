@@ -1,0 +1,247 @@
+.swd-ocp {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.swd-ocp-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+}
+.swd-ocp-phases {
+  list-style: none;
+  display: flex;
+  gap: 0.35rem;
+}
+.swd-ocp-phases li {
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--ink-3);
+  box-shadow: inset 0 0 0 1px var(--rule);
+  transition:
+    color 0.35s var(--ease-out),
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.swd-ocp-phases li[data-on] {
+  color: var(--accent);
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.swd-ocp-req {
+  padding: 0.2rem 0.55rem;
+  border-radius: 3px;
+  font-size: 0.8125rem;
+  color: var(--ink-2);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+}
+.swd-ocp-req b {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.swd-ocp-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+  overflow: visible;
+}
+.swd-ocp-wide {
+  max-width: 53rem;
+}
+.swd-ocp-narrow {
+  display: none;
+  max-width: 19rem;
+}
+.swd-ocp-svg text {
+  font-family: var(--font-ui);
+  fill: var(--ink-2);
+}
+
+/* Klasser */
+.swd-ocp-cls rect {
+  fill: var(--paper);
+  stroke: var(--ink-3);
+  stroke-width: 1.4;
+  transition:
+    fill 0.4s var(--ease-out),
+    stroke 0.4s var(--ease-out);
+}
+.swd-ocp-cls line {
+  stroke: var(--ink-3);
+  stroke-width: 1.2;
+  transition: stroke 0.4s var(--ease-out);
+}
+.swd-ocp-svg .swd-ocp-stereo {
+  font-size: 11.5px;
+  text-anchor: middle;
+  fill: var(--ink-3);
+}
+.swd-ocp-svg .swd-ocp-name {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  text-anchor: middle;
+  fill: var(--ink);
+  font-variant-ligatures: none;
+}
+.swd-ocp-svg .swd-ocp-op,
+.swd-ocp-svg .swd-ocp-code {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  fill: var(--ink);
+  font-variant-ligatures: none;
+}
+
+.swd-ocp-editor[data-s='neg'] .swd-ocp-cls rect {
+  fill: var(--neg-soft);
+  stroke: var(--neg);
+  stroke-width: 2;
+}
+.swd-ocp-editor[data-s='neg'] .swd-ocp-cls line {
+  stroke: var(--neg);
+}
+.swd-ocp-editor[data-s='ok'] .swd-ocp-cls rect {
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+.swd-ocp-db[data-new] .swd-ocp-cls rect {
+  fill: var(--accent-soft);
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+
+/* Note */
+.swd-ocp-note path {
+  fill: var(--paper);
+  stroke: var(--ink-3);
+  stroke-width: 1.2;
+  stroke-linejoin: round;
+}
+.swd-ocp-note .swd-ocp-ear {
+  fill: none;
+}
+.swd-ocp-notelink {
+  fill: none;
+  stroke: var(--ink-3);
+  stroke-width: 1.2;
+  stroke-dasharray: 4 3;
+}
+.swd-ocp-svg .swd-ocp-notet {
+  font-size: 11.5px;
+  font-style: italic;
+  fill: var(--ink-3);
+}
+.swd-ocp-hl {
+  fill: transparent;
+}
+[data-hl='acc'] > .swd-ocp-hl {
+  fill: var(--accent-soft);
+  stroke: var(--accent-mid);
+}
+[data-hl='neg'] > .swd-ocp-hl {
+  fill: var(--neg-soft);
+  stroke: color-mix(in oklab, var(--neg) 45%, var(--paper));
+}
+.swd-ocp-svg [data-hl='acc'] > .swd-ocp-code {
+  fill: var(--accent);
+  font-weight: 600;
+}
+.swd-ocp-svg [data-hl='neg'] > .swd-ocp-code {
+  fill: var(--neg);
+  font-weight: 600;
+}
+
+/* Forbindelser */
+.swd-ocp-assoc {
+  fill: none;
+  stroke: var(--ink-2);
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.swd-ocp-realline {
+  fill: none;
+  stroke: var(--ink-2);
+  stroke-width: 1.4;
+  stroke-dasharray: 5 4;
+  stroke-linejoin: round;
+}
+.swd-ocp-tri {
+  fill: var(--paper);
+  stroke: var(--ink-2);
+  stroke-width: 1.4;
+  stroke-linejoin: round;
+}
+
+/* Mærker */
+.swd-ocp-tag rect {
+  fill: var(--accent-soft);
+  stroke: var(--accent-mid);
+  stroke-width: 1;
+}
+.swd-ocp-svg .swd-ocp-tag text {
+  font-size: 11.5px;
+  font-weight: 600;
+  fill: var(--accent);
+}
+.swd-ocp-tag[data-neg] rect {
+  fill: var(--neg-soft);
+  stroke: color-mix(in oklab, var(--neg) 45%, var(--paper));
+}
+.swd-ocp-svg .swd-ocp-tag[data-neg] text {
+  fill: var(--neg);
+}
+.swd-ocp-ny rect {
+  fill: var(--accent-soft);
+  stroke: var(--accent-mid);
+  stroke-width: 1;
+}
+.swd-ocp-svg .swd-ocp-ny text {
+  font-size: 11.5px;
+  font-weight: 600;
+  text-anchor: middle;
+  dominant-baseline: central;
+  fill: var(--accent);
+}
+.swd-ocp-svg .swd-ocp-open {
+  font-size: 12px;
+  font-weight: 600;
+  fill: var(--accent);
+}
+.swd-ocp-svg .swd-ocp-count {
+  font-size: 12px;
+  font-weight: 600;
+  fill: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+.swd-ocp-svg .swd-ocp-count[data-neg] {
+  fill: var(--neg);
+}
+
+.swd-ocp-def {
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.875rem;
+  text-align: center;
+  color: var(--ink);
+}
+
+@container (max-width: 40rem) {
+  .swd-ocp-wide {
+    display: none;
+  }
+  .swd-ocp-narrow {
+    display: block;
+  }
+  .swd-ocp-def {
+    text-align: left;
+  }
+}

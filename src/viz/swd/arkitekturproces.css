@@ -1,0 +1,426 @@
+.apr {
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) 1rem minmax(0, 1.08fr) 1rem minmax(0, 1.1fr);
+  gap: 0.5rem;
+  align-items: start;
+}
+.apr-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  min-width: 0;
+}
+.apr-head {
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid var(--rule);
+}
+.apr-arrow {
+  align-self: center;
+  color: var(--ink-3);
+}
+.apr-arrow svg {
+  display: block;
+  width: 1rem;
+  height: 1rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ------------------------------ Venn ------------------------------ */
+.apr-venn {
+  position: relative;
+  width: 100%;
+  max-width: 17rem;
+  margin: 0 auto;
+}
+.apr-venn svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.apr-c {
+  stroke: var(--ink-3);
+  stroke-width: 1.2;
+}
+.apr-c-u {
+  fill: color-mix(in oklab, var(--ink-3) 10%, transparent);
+}
+.apr-c-b {
+  fill: color-mix(in oklab, var(--ink-3) 16%, transparent);
+}
+.apr-c-s {
+  fill: color-mix(in oklab, var(--ink-3) 22%, transparent);
+}
+.apr-core {
+  fill: var(--accent);
+}
+.apr-vl {
+  font-family: var(--font-ui);
+  font-size: 12.5px;
+  font-weight: 600;
+  fill: var(--ink-2);
+  text-anchor: middle;
+}
+.apr-land {
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+.apr-land .vtoken,
+.apr-badge-tok .vtoken {
+  min-width: 1.35rem;
+  justify-content: center;
+  padding-inline: 0.3rem;
+  font-family: var(--font-ui);
+  font-weight: 700;
+}
+
+/* Kravkort */
+.apr-reqs {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.apr-req {
+  display: grid;
+  grid-template-columns: 1.35rem minmax(0, 1fr);
+  gap: 0.45rem;
+  align-items: start;
+  padding: 0.35rem 0.5rem 0.4rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule);
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: var(--ink-2);
+}
+.apr-req b {
+  color: var(--ink);
+}
+.apr-badge {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  height: 1.3rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--ink-3);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+}
+.apr-req[data-in] .apr-badge {
+  color: var(--accent);
+  box-shadow: inset 0 0 0 1px var(--accent-mid);
+}
+.apr-badge-tok {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+}
+
+/* Key scenario */
+.apr-ks {
+  padding: 0.5rem 0.6rem 0.55rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--accent-mid);
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.apr-ks[data-hot] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.apr-ks-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.4rem;
+  min-height: 1.4rem;
+  margin-bottom: 0.2rem;
+}
+.apr-ks-head .vcaps {
+  color: var(--accent);
+}
+.apr-ks p {
+  font-size: 0.75rem;
+  line-height: 1.45;
+  color: var(--ink);
+}
+.apr .vtoken[data-tone='idle'] {
+  font-family: var(--font-ui);
+  font-size: 0.6875rem;
+  padding: 0.1rem 0.45rem;
+}
+
+/* ------------------------- Kvantificering ------------------------- */
+.apr-quant {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.apr-q {
+  padding: 0.4rem 0.55rem 0.45rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule);
+  font-size: 0.75rem;
+  line-height: 1.4;
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.apr-q-text {
+  color: var(--ink);
+  text-decoration: line-through;
+  text-decoration-color: transparent;
+  text-decoration-thickness: 1.5px;
+  transition:
+    text-decoration-color 0.5s var(--ease-out) 0.45s,
+    color 0.5s var(--ease-out) 0.45s;
+}
+.apr-q-ok .apr-q-text {
+  text-decoration: none;
+}
+.apr-q-note {
+  margin-top: 0.15rem;
+  font-size: 0.6875rem;
+  font-style: italic;
+  color: var(--ink-3);
+}
+.apr-q-neg[data-struck] {
+  background: var(--neg-soft);
+  box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--neg) 40%, var(--paper));
+}
+.apr-q-neg[data-struck] .apr-q-text {
+  color: var(--ink-2);
+  text-decoration-color: var(--neg);
+}
+.apr-q-neg .apr-q-note {
+  color: var(--neg);
+}
+.apr-q-ok {
+  box-shadow: inset 0 0 0 1px var(--accent-mid);
+}
+.apr-q-ok[data-hot] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+
+/* ---------------------------- QA-tabel ---------------------------- */
+.apr-qa {
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  font-size: 0.6875rem;
+  line-height: 1.35;
+}
+.apr-qa-row {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.6fr) 2.4rem;
+  gap: 0.4rem;
+  padding: 0.28rem 0.45rem;
+  color: var(--ink-3);
+}
+.apr-qa-row + .apr-qa-row {
+  border-top: 1px solid var(--rule);
+}
+.apr-qa-th {
+  font-weight: 600;
+  color: var(--ink-2);
+  border-bottom: 1px solid var(--rule-strong);
+}
+.apr-qa-row[data-on] {
+  color: var(--ink);
+}
+.apr-qa-row[data-on] .apr-qa-cat {
+  font-weight: 600;
+  color: var(--accent);
+}
+.apr-qa-test {
+  text-align: center;
+  color: var(--ink-3);
+}
+.apr-qa-test-l {
+  display: none;
+}
+.apr-qa-empty {
+  color: var(--rule-strong);
+}
+.apr-qa-foot {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 0.4rem;
+  padding: 0.35rem 0.45rem 0.4rem;
+  border-top: 1px solid var(--rule-strong);
+  font-style: italic;
+  color: var(--ink-3);
+}
+.apr-qa-foot .vtoken {
+  font-style: normal;
+  flex: none;
+}
+
+/* ------------------------------ Hjulet ------------------------------ */
+.apr-wheel {
+  position: relative;
+  width: 100%;
+  max-width: 19rem;
+  margin: 0 auto;
+}
+.apr-wheel svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.apr-st rect {
+  fill: var(--paper);
+  stroke: var(--ink-3);
+  stroke-width: 1.2;
+  transition:
+    fill 0.35s var(--ease-out),
+    stroke 0.35s var(--ease-out);
+}
+.apr-st text {
+  font-family: var(--font-ui);
+  font-size: 11.5px;
+  font-weight: 600;
+  fill: var(--ink);
+  text-anchor: middle;
+}
+.apr-st-1 rect {
+  fill: var(--paper-3);
+}
+.apr-st[data-hot] rect {
+  fill: var(--accent-soft);
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+.apr-ring {
+  fill: none;
+  stroke: var(--rule);
+  stroke-width: 10;
+}
+.apr-arc path {
+  fill: none;
+  stroke: var(--ink-3);
+  stroke-width: 2;
+}
+.apr-arc .apr-arc-h {
+  fill: var(--ink-3);
+  stroke: none;
+}
+.apr-io path {
+  fill: none;
+  stroke: var(--ink-3);
+  stroke-width: 2;
+  transition: stroke 0.35s var(--ease-out);
+}
+.apr-io .apr-io-h {
+  fill: var(--ink-3);
+  stroke: none;
+  transition: fill 0.35s var(--ease-out);
+}
+.apr-io[data-hot] path {
+  stroke: var(--accent);
+}
+.apr-io[data-hot] .apr-io-h {
+  fill: var(--accent);
+}
+.apr-marker {
+  fill: var(--accent);
+  stroke: var(--paper);
+  stroke-width: 1.5;
+}
+.apr-in {
+  position: absolute;
+  left: 0;
+  transform: translateY(-50%);
+}
+.apr-in-qa {
+  top: 21%;
+}
+.apr-in-ks {
+  top: 34%;
+}
+
+/* Noter til trinene */
+.apr-notes {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.apr-notes li {
+  display: grid;
+  grid-template-columns: 1.1rem minmax(0, 1fr);
+  gap: 0.35rem;
+  padding: 0.3rem 0.45rem 0.35rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule);
+  font-size: 0.6875rem;
+  line-height: 1.4;
+  color: var(--ink-2);
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.apr-notes li[data-hot] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.apr-notes b {
+  color: var(--ink);
+  font-weight: 600;
+}
+.apr-notes-n {
+  font-weight: 700;
+  color: var(--accent);
+}
+.apr-src {
+  font-size: 0.6875rem;
+  color: var(--ink-3);
+}
+
+@container (max-width: 40rem) {
+  .apr {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.75rem;
+  }
+  .apr-arrow {
+    justify-self: center;
+    transform: rotate(90deg);
+  }
+  .apr-qa-th {
+    display: none;
+  }
+  .apr-qa-row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.1rem;
+    padding: 0.35rem 0.55rem;
+  }
+  .apr-qa-test {
+    text-align: left;
+  }
+  .apr-qa-test-l {
+    display: inline;
+    font-style: italic;
+  }
+  .apr-qa-test-q,
+  .apr-qa-req[data-empty] {
+    display: none;
+  }
+  .apr-venn {
+    max-width: 15rem;
+  }
+  .apr-wheel {
+    max-width: 20rem;
+  }
+}

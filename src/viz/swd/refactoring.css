@@ -1,0 +1,384 @@
+.rf {
+  --rf-g: 1.25rem; /* mellemrum mellem underklasserne */
+  --rf-line: var(--ink-3);
+  --rf-bar: 1.05rem; /* generaliseringslinjens y i .rf-gen */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Bird-cellen: skjult fuld kopi reserverer højden; før- og efter-boksen og
+   opskriften ligger i samme celle. */
+.rf-top {
+  display: grid;
+}
+.rf-top > * {
+  grid-area: 1 / 1;
+  min-width: 0;
+}
+.rf-ghost {
+  visibility: hidden;
+  justify-self: center;
+}
+.rf-before {
+  align-self: end;
+  justify-self: center;
+}
+/* Efter: opskriften og noten står lige over den abstrakte Bird. */
+.rf-after-wrap {
+  align-self: end;
+  justify-self: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+.rf-after-note {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  max-width: 34rem;
+  padding-top: 0.25rem;
+  text-align: center;
+}
+
+/* UML-klasse */
+.rf-cls {
+  min-width: 0;
+  border-radius: 2px;
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1.4px var(--rf-line);
+  transition: box-shadow 0.35s var(--ease-out);
+}
+.rf-name {
+  padding: 0.35rem 0.8rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.3;
+  text-align: center;
+  color: var(--ink);
+  transition: color 0.35s var(--ease-out);
+}
+.rf-abstract {
+  font-style: italic;
+}
+.rf-comp {
+  border-top: 1.4px solid var(--rf-line);
+  padding: 0.3rem 0.6rem 0.4rem;
+}
+.rf-attrs {
+  min-height: 0.55rem;
+  padding: 0 0.6rem;
+}
+.rf-attrs code {
+  display: block;
+  padding: 0.25rem 0;
+}
+.rf-clip {
+  overflow: hidden;
+}
+.rf-cls code {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-variant-ligatures: none;
+  color: var(--ink-2);
+}
+.rf-op {
+  display: block;
+  line-height: 1.4;
+}
+.rf-cls .rf-op {
+  color: var(--ink);
+}
+
+/* Kode: hængende indrykning, så ombrudte linjer står under deres egen linje. */
+.rf-body,
+.rf-slot {
+  margin-top: 0.25rem;
+  padding: 0.35rem 0.5rem;
+  border-radius: 3px;
+  background: var(--paper-2);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+.rf-slot {
+  background: transparent;
+  transition: background-color 0.35s var(--ease-out);
+}
+.rf-slot[data-has] {
+  background: var(--paper-2);
+}
+.rf-ln {
+  padding-left: calc(var(--ind, 0) * 2ch);
+  white-space: normal;
+  overflow-wrap: normal;
+  hyphens: manual;
+}
+.rf-ln-slot,
+.rf-slot {
+  display: grid;
+}
+.rf-ln-slot > *,
+.rf-slot > * {
+  grid-area: 1 / 1;
+  min-width: 0;
+}
+.rf-leg,
+.rf-txt {
+  display: block;
+  padding: 0 3px 0 calc(2ch + 3px);
+  text-indent: -2ch;
+}
+.rf-leg {
+  border-radius: 3px;
+  transition:
+    color 0.35s var(--ease-out),
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.rf-cls .rf-leg[data-hot] {
+  color: var(--accent);
+  background: var(--accent-soft);
+  box-shadow: 0 0 0 2px var(--accent-soft), 0 0 0 3px var(--accent);
+}
+.rf-cls .rf-leg[data-moved]:not([data-hot]) {
+  color: var(--ink);
+}
+.rf-left {
+  opacity: 0;
+  transition: opacity 0.35s var(--ease-out);
+}
+.rf-cls .rf-left[data-on] {
+  opacity: 1;
+  color: var(--ink-3);
+  text-decoration: line-through;
+  text-decoration-color: var(--ink-3);
+}
+.rf-hold {
+  visibility: hidden;
+}
+.rf-cls .rf-txt[data-gone] {
+  color: var(--ink-3);
+  text-decoration: line-through;
+}
+.rf-cls .rf-txt[data-now] {
+  color: var(--accent);
+}
+
+.rf-sub[data-now] {
+  box-shadow: inset 0 0 0 2px var(--accent);
+}
+.rf-sub[data-now] .rf-name,
+.rf-after[data-now] .rf-name {
+  color: var(--accent);
+}
+.rf-after[data-now] {
+  box-shadow: inset 0 0 0 2px var(--accent);
+}
+
+/* Opskriften og noten i den plads, switchen efterlod. */
+.rf-recipe {
+  margin: 0;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+.rf-recipe p {
+  font-style: italic;
+}
+.rf-recipe-hl {
+  border-radius: 2px;
+  transition:
+    color 0.35s var(--ease-out),
+    background-color 0.35s var(--ease-out);
+}
+.rf-recipe-hl[data-now] {
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+.rf-recipe cite {
+  display: block;
+  margin-top: 0.15rem;
+  font-size: 0.6875rem;
+  font-style: normal;
+  color: var(--ink-3);
+}
+.rf-newtype {
+  display: inline-block;
+  padding: 0.15rem 0.55rem;
+  border-radius: 3px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--accent);
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1px var(--accent-mid);
+}
+.rf-newtype code {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+
+/* Generalisering: hul trekant ved Bird, stamme, fælles bjælke, dråber. */
+.rf-gen {
+  position: relative;
+  height: 1.9rem;
+}
+.rf-tri {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 16px;
+  height: 13px;
+  margin-left: -8px;
+  overflow: visible;
+}
+.rf-tri path {
+  fill: var(--paper-2);
+  stroke: var(--rf-line);
+  stroke-width: 1.4;
+  stroke-linejoin: round;
+}
+.rf-stem,
+.rf-bar,
+.rf-drop {
+  position: absolute;
+  background: var(--rf-line);
+}
+.rf-stem {
+  top: 12px;
+  left: 50%;
+  width: 1.4px;
+  height: calc(var(--rf-bar) - 12px);
+  margin-left: -0.7px;
+  transform-origin: top;
+}
+.rf-bar {
+  top: var(--rf-bar);
+  left: calc((100% - 2 * var(--rf-g)) / 6);
+  right: calc((100% - 2 * var(--rf-g)) / 6);
+  height: 1.4px;
+}
+.rf-drop {
+  top: var(--rf-bar);
+  bottom: 0;
+  width: 1.4px;
+  margin-left: -0.7px;
+  transform-origin: top;
+}
+.rf-drop[data-k='0'] {
+  left: calc((100% - 2 * var(--rf-g)) / 6);
+}
+.rf-drop[data-k='1'] {
+  left: 50%;
+}
+.rf-drop[data-k='2'] {
+  left: calc(100% - (100% - 2 * var(--rf-g)) / 6);
+}
+
+.rf-subs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--rf-g);
+  align-items: stretch;
+}
+.rf-sub-cell {
+  position: relative;
+  display: flex;
+  min-width: 0;
+}
+.rf-sub {
+  flex: 1;
+}
+.rf-trunk,
+.rf-stub {
+  display: none;
+}
+
+/* Smalt: underklasserne stables, én fælles linje langs venstre kant. */
+@container (max-width: 40rem) {
+  .rf {
+    --rf-x: 0.8rem; /* linjens x */
+    --rf-in: 1.8rem; /* underklassernes indrykning */
+    --rf-gap: 0.6rem;
+    --rf-stub: 0.95rem; /* stubbens y i hver underklasse */
+  }
+  .rf-ghost,
+  .rf-before,
+  .rf-after-wrap {
+    justify-self: start;
+  }
+  .rf-after-wrap {
+    align-items: flex-start;
+  }
+  .rf-after-note {
+    align-items: flex-start;
+    text-align: left;
+  }
+  .rf-after {
+    min-width: 8rem;
+  }
+  .rf-cls code,
+  .rf-body,
+  .rf-slot {
+    font-size: 0.75rem;
+  }
+  .rf-comp,
+  .rf-attrs {
+    padding-inline: 0.45rem;
+  }
+  .rf-body {
+    padding-inline: 0.4rem;
+  }
+  .rf-ln {
+    padding-left: calc(var(--ind, 0) * 1ch);
+  }
+
+  .rf-gen {
+    height: 0.8rem;
+  }
+  .rf-tri {
+    left: var(--rf-x);
+  }
+  .rf-stem {
+    left: var(--rf-x);
+    height: calc(100% - 12px);
+  }
+  .rf-bar,
+  .rf-drop {
+    display: none;
+  }
+
+  .rf-subs {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--rf-gap);
+    padding-left: var(--rf-in);
+  }
+  .rf-trunk,
+  .rf-stub {
+    display: block;
+    position: absolute;
+    background: var(--rf-line);
+  }
+  .rf-trunk {
+    left: calc(var(--rf-x) - var(--rf-in) - 0.7px);
+    top: calc(-1 * var(--rf-gap));
+    bottom: 0;
+    width: 1.4px;
+    transform-origin: top;
+  }
+  .rf-sub-cell:first-child .rf-trunk {
+    top: 0;
+  }
+  .rf-sub-cell[data-last] .rf-trunk {
+    bottom: auto;
+    height: calc(var(--rf-gap) + var(--rf-stub));
+  }
+  .rf-stub {
+    left: calc(var(--rf-x) - var(--rf-in));
+    top: var(--rf-stub);
+    width: calc(var(--rf-in) - var(--rf-x));
+    height: 1.4px;
+    transform-origin: left;
+  }
+}

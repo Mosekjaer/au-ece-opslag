@@ -1,0 +1,282 @@
+.dip {
+  --dip-g: var(--swt);
+  --dip-b: var(--doa);
+  --dip-r: var(--fed);
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.dip-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  font-size: 12px;
+}
+.dip-narrow {
+  display: none;
+  max-width: 22rem;
+  margin: 0 auto;
+}
+.dip-svg text {
+  font-family: var(--font-mono);
+  fill: var(--ink);
+}
+
+/* Niveauer */
+.dip-sep {
+  stroke: var(--rule-strong);
+  stroke-width: 1;
+  stroke-dasharray: 6 5;
+}
+.dip-svg .dip-level {
+  font-family: var(--font-ui);
+  font-size: 12.5px;
+  font-style: italic;
+  font-weight: 600;
+  fill: var(--ink-3);
+  paint-order: stroke;
+  stroke: var(--paper-2);
+  stroke-width: 5px;
+  stroke-linejoin: round;
+}
+
+/* Klasser */
+.dip-cls > rect:first-child,
+.dip-cls line {
+  fill: var(--paper);
+  stroke: var(--ink-3);
+  stroke-width: 1.3;
+  transition:
+    fill 0.35s var(--ease-out),
+    stroke 0.35s var(--ease-out);
+}
+.dip-cls[data-tone='focus'] > rect:first-child {
+  fill: var(--accent-soft);
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+.dip-cls[data-tone='neg'] > rect:first-child {
+  fill: var(--neg-soft);
+  stroke: var(--neg);
+  stroke-width: 2;
+  transition-delay: 0.9s;
+}
+.dip-cls[data-tone='ok'] > rect:first-child {
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+.dip-mark circle {
+  fill: var(--accent);
+}
+.dip-svg .dip-mark text {
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 12px;
+  text-anchor: middle;
+  fill: var(--paper);
+}
+.dip-svg .dip-cname {
+  font-weight: 600;
+  font-size: 12.5px;
+  text-anchor: middle;
+}
+.dip-svg .dip-stereo {
+  font-family: var(--font-ui);
+  font-size: 11.5px;
+  text-anchor: middle;
+  fill: var(--ink-3);
+}
+.dip-svg .dip-op {
+  font-size: 11.5px;
+  fill: var(--ink-2);
+}
+.dip-svg .dip-hw {
+  font-family: var(--font-ui);
+  font-size: 12.5px;
+  font-weight: 600;
+  text-anchor: middle;
+}
+
+/* Relationer */
+.dip-line {
+  fill: none;
+  stroke: var(--ink-3);
+  stroke-width: 1.3;
+  stroke-linejoin: round;
+  transition: stroke 0.35s var(--ease-out);
+}
+.dip-line.is-dash {
+  stroke-dasharray: 5 4;
+}
+.dip-line[data-hot] {
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+.dip-line[data-neg] {
+  stroke: var(--neg);
+}
+.dip-line.dip-wave {
+  stroke: var(--neg);
+  stroke-width: 3.5;
+  stroke-linecap: round;
+  opacity: 0.8;
+}
+.dip-open {
+  fill: none;
+  stroke: var(--ink-3);
+  stroke-width: 1.3;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+.dip-tri {
+  fill: var(--paper);
+  stroke: var(--ink-3);
+  stroke-width: 1.3;
+  stroke-linejoin: round;
+}
+.dip-open[data-hot],
+.dip-tri[data-hot] {
+  stroke: var(--accent);
+  stroke-width: 1.8;
+}
+.dip-open[data-neg] {
+  stroke: var(--neg);
+}
+
+/* DIP-grupper */
+.dip-ring[data-g='g'] {
+  --c: var(--dip-g);
+}
+.dip-ring[data-g='b'] {
+  --c: var(--dip-b);
+}
+.dip-ring[data-g='r'] {
+  --c: var(--dip-r);
+}
+.dip-ring > rect:first-child {
+  fill: none;
+  stroke: var(--c);
+  stroke-width: 2;
+}
+.dip-ring .dip-ring-chip {
+  fill: var(--paper-2);
+  stroke: var(--c);
+  stroke-width: 1;
+}
+.dip-svg .dip-ring text {
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 11.5px;
+  text-anchor: middle;
+  fill: var(--c);
+}
+.dip-strip[data-g='g'] {
+  fill: var(--dip-g);
+}
+.dip-strip[data-g='b'] {
+  fill: var(--dip-b);
+}
+.dip-strip[data-g='r'] {
+  fill: var(--dip-r);
+}
+
+/* Mærker */
+.dip-badge rect {
+  fill: var(--paper);
+  stroke-width: 1.2;
+}
+.dip-svg .dip-badge text {
+  font-family: var(--font-ui);
+  font-size: 11.5px;
+  font-weight: 600;
+  text-anchor: middle;
+}
+.dip-badge[data-tone='ok'] rect,
+.dip-badge[data-tone='focus'] rect {
+  stroke: var(--accent);
+  fill: var(--accent-soft);
+}
+.dip-svg .dip-badge[data-tone='ok'] text,
+.dip-svg .dip-badge[data-tone='focus'] text {
+  fill: var(--accent);
+}
+.dip-badge[data-tone='neg'] rect {
+  stroke: var(--neg);
+  fill: var(--neg-soft);
+}
+.dip-svg .dip-badge[data-tone='neg'] text {
+  fill: var(--neg);
+}
+
+/* Forklaring til de smalle striber (kun smal plade) */
+.dip-legend {
+  display: none;
+  list-style: none;
+  flex-wrap: wrap;
+  gap: 0.3rem 0.9rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--ink-2);
+}
+.dip-legend li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+.dip-legend li::before {
+  content: '';
+  width: 0.3rem;
+  height: 0.9rem;
+  border-radius: 1px;
+  background: var(--c);
+}
+.dip-legend li[data-g='g'] {
+  --c: var(--dip-g);
+}
+.dip-legend li[data-g='b'] {
+  --c: var(--dip-b);
+}
+.dip-legend li[data-g='r'] {
+  --c: var(--dip-r);
+}
+
+.dip-quote {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding-top: 0.7rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--ink-2);
+}
+.dip-key {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.2rem 0.9rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+.dip-key .dip-key-note {
+  font-weight: 400;
+  font-style: italic;
+  color: var(--ink-3);
+}
+.dip-quote b {
+  color: var(--ink);
+}
+
+@container (max-width: 40rem) {
+  .dip-wide {
+    display: none;
+  }
+  .dip-narrow {
+    display: block;
+  }
+  .dip-legend {
+    display: flex;
+  }
+}
