@@ -368,6 +368,7 @@
 .source-file {
   color: var(--ink);
   font-weight: 500;
+  overflow-wrap: anywhere;
 }
 .source-pages {
   color: var(--accent);
@@ -375,6 +376,7 @@
 }
 .source-note {
   color: var(--ink-3);
+  overflow-wrap: anywhere;
 }
 .sources .source-path {
   margin-top: 0.1rem;
@@ -1125,4 +1127,34 @@ a.topic-row:hover .topic-row-num {
   body {
     font-size: 1.0625rem;
   }
+}
+
+/* Fold det aktive fag sammen/ud. Knappen ligger over linkets øverste højre hjørne. */
+.nav-course {
+  position: relative;
+}
+.nav-course-toggle {
+  position: absolute;
+  top: var(--s-1);
+  right: calc(-1 * var(--s-1));
+  display: grid;
+  place-items: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--ink-3);
+  cursor: pointer;
+  transition: background-color 0.2s var(--ease-out), color 0.2s var(--ease-out);
+}
+.nav-course-toggle:hover {
+  background: var(--paper-3);
+  color: var(--ink);
+}
+.nav-course-toggle svg {
+  transition: transform 0.2s var(--ease-out);
+}
+.nav-course-toggle[aria-expanded='false'] svg {
+  transform: rotate(-90deg);
 }

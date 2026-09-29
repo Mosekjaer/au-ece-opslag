@@ -114,6 +114,16 @@ export function Shell({ children }: { children: ReactNode }) {
 }
 
 function CourseNav({ course, active }: { course: Course; active: boolean }) {
+  // Det aktive fag er foldet ud. Brugeren kan folde det sammen; skifter man fag og
+  // kommer tilbage, er det foldet ud igen.
+  const [open, setOpen] = useState(true)
+  const [wasActive, setWasActive] = useState(active)
+  if (active !== wasActive) {
+    setWasActive(active)
+    if (active) setOpen(true)
+  }
+  const expandable = active && !!course.parts
+  const partsId = `nav-parts-${course.id}`
   return (
     <li className="nav-course" data-course={course.id} data-active={active}>
       <NavLink to={`/${course.id}`} end className="nav-course-link">
@@ -122,9 +132,23 @@ function CourseNav({ course, active }: { course: Course; active: boolean }) {
         <span className="nav-course-name">{course.name}</span>
         {course.status === 'soon' && <span className="nav-soon">kommer</span>}
       </NavLink>
-      {active && course.parts && (
-        <ol className="nav-parts">
-          {course.parts.map((p, pi) => (
+      {expandable && (
+        <button
+          type="button"
+          className="nav-course-toggle"
+          aria-expanded={open}
+          aria-controls={partsId}
+          aria-label={open ? `Fold ${course.short} sammen` : `Fold ${course.short} ud`}
+          onClick={() => setOpen((o) => !o)}
+        >
+          <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true">
+            <path d="M3 4.5 6 7.5l3-3" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </button>
+      )}
+      {expandable && open && (
+        <ol className="nav-parts" id={partsId}>
+          {course.parts!.map((p, pi) => (
             <li key={p.id}>
               <div className="nav-part">
                 <span className="nav-part-num">{roman(pi + 1)}</span>
