@@ -21,6 +21,8 @@ const LANG_LABEL: Record<CodeSample['lang'], string> = {
   c: 'C',
   python: 'Python',
   gherkin: 'Gherkin',
+  cmake: 'CMake',
+  makefile: 'Makefile',
   text: 'Tekst',
 }
 

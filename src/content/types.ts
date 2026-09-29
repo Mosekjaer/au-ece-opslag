@@ -14,7 +14,7 @@ export interface SourceRef {
 }
 
 export interface CodeSample {
-  lang: 'csharp' | 'sql' | 'json' | 'yaml' | 'bash' | 'dockerfile' | 'javascript' | 'graphql' | 'xml' | 'http' | 'html' | 'css' | 'typescript' | 'jsx' | 'tsx' | 'cpp' | 'c' | 'python' | 'gherkin' | 'text'
+  lang: 'csharp' | 'sql' | 'json' | 'yaml' | 'bash' | 'dockerfile' | 'javascript' | 'graphql' | 'xml' | 'http' | 'html' | 'css' | 'typescript' | 'jsx' | 'tsx' | 'cpp' | 'c' | 'python' | 'gherkin' | 'cmake' | 'makefile' | 'text'
   title?: string
   code: string
   /** Kort kildehenvisning vist under koden. */

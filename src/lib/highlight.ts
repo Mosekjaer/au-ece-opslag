@@ -40,6 +40,8 @@ const lazyLangs: Record<string, LanguageInput> = {
   c: () => import('shiki/langs/c.mjs'),
   python: () => import('shiki/langs/python.mjs'),
   gherkin: () => import('shiki/langs/gherkin.mjs'),
+  cmake: () => import('shiki/langs/cmake.mjs'),
+  makefile: () => import('shiki/langs/makefile.mjs'),
 }
 
 export async function getHighlighterFor(lang: string): Promise<HighlighterCore> {
