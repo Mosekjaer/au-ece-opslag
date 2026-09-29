@@ -178,7 +178,7 @@ const viz: VizDef = {
   title: 'Tællende semafor med ventekø',
   steps: [
     {
-      caption: '`std::counting_semaphore sem{2}` — to pladser. Figuren følger de tråde, der optræder i slidets første fire par.',
+      caption: '`std::counting_semaphore sem{2}` — to pladser. Figuren følger de tråde, der optræder i slidets første fire par; køens rækkefølge er udledt af parrene.',
       hold: 2400,
     },
     { caption: 'T0 kalder `sem.acquire()`: tælleren går fra 2 til 1, og T0 er inde.', hold: 1700 },
