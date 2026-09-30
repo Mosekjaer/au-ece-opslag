@@ -1,0 +1,252 @@
+.kdl {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.kdl-net {
+  display: grid;
+  grid-template-columns: 7.5rem auto minmax(8rem, 1fr) 9rem;
+  gap: 0.75rem;
+  align-items: stretch;
+}
+
+.kdl-lbl {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--ink-3);
+}
+.kdl-mini {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-size: 0.6875rem;
+  color: var(--ink-3);
+}
+
+.kdl-slot {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  align-items: center;
+  min-height: 1.7rem;
+}
+
+.kdl-up,
+.kdl-b {
+  display: flex;
+  flex-direction: column;
+}
+.kdl-drop {
+  min-height: 1.6rem;
+  margin-top: 0.3rem;
+}
+.kdl-lost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.75rem;
+  color: var(--neg);
+}
+
+.kdl-router {
+  padding: 0.55rem 0.7rem 0.65rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+}
+.kdl-inside {
+  display: flex;
+  gap: 0.6rem;
+  align-items: stretch;
+}
+.kdl-proc,
+.kdl-queue {
+  padding: 0.35rem 0.5rem 0.45rem;
+  border-radius: 3px;
+  box-shadow: inset 0 0 0 1px var(--rule);
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.kdl-proc {
+  min-width: 5.5rem;
+}
+.kdl-proc[data-tone='focus'],
+.kdl-queue[data-tone='focus'] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.kdl-queue[data-tone='neg'] {
+  background: var(--neg-soft);
+  box-shadow: inset 0 0 0 1.5px var(--neg);
+}
+.kdl-cells {
+  display: grid;
+  grid-template-columns: repeat(4, 4.25rem);
+  gap: 3px;
+}
+.kdl-cell {
+  display: grid;
+  place-items: center;
+  min-height: 1.7rem;
+  border-radius: 2px;
+  box-shadow: inset 0 0 0 1px var(--rule);
+  background: var(--paper);
+}
+
+.kdl-link {
+  display: flex;
+  flex-direction: column;
+}
+.kdl-wire {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  min-height: 2.4rem;
+}
+.kdl-wire::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 2px;
+  margin-top: -1px;
+  background: var(--rule-strong);
+  transition: background-color 0.35s var(--ease-out);
+}
+.kdl-link[data-tone='focus'] .kdl-wire::before {
+  background: var(--accent);
+}
+.kdl-wire .kdl-slot {
+  position: relative;
+  padding-left: 0.25rem;
+}
+.kdl-slot.is-b {
+  padding: 0.3rem 0.45rem;
+  border-radius: var(--radius-sm);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  background: var(--paper);
+}
+
+.kdl-rows {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.kdl-row {
+  display: grid;
+  grid-template-columns: 7rem 8.5rem minmax(0, 1fr) 13rem;
+  gap: 0.2rem 0.9rem;
+  align-items: baseline;
+  padding: 0.4rem 0.7rem;
+  border-radius: var(--radius-sm);
+  box-shadow: inset 0 0 0 1px var(--rule);
+  background: var(--paper);
+  font-size: 0.8125rem;
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.kdl-row[data-tone='focus'] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.kdl-row[data-tone='ok'] {
+  box-shadow: inset 0 0 0 1px var(--accent-mid);
+}
+.kdl-name {
+  font-weight: 600;
+}
+.kdl-sym {
+  font-size: 0.8125rem;
+  color: var(--accent);
+}
+.kdl-what {
+  color: var(--ink-2);
+}
+.kdl-size {
+  color: var(--ink-3);
+  font-size: 0.75rem;
+}
+
+.kdl-foot {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.75rem 1.5rem;
+  align-items: end;
+}
+.kdl-car dl {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1.25rem;
+  margin: 0.35rem 0 0;
+}
+.kdl-car dl > div {
+  display: flex;
+  gap: 0.4rem;
+  align-items: baseline;
+}
+.kdl-car dt {
+  font-size: 0.75rem;
+  color: var(--ink-3);
+}
+.kdl-car dd {
+  margin: 0;
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+.kdl-sum code {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+@container (max-width: 52rem) {
+  .kdl-net {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+  .kdl-router {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+  .kdl-up {
+    grid-row: 1;
+    grid-column: 1 / -1;
+  }
+  .kdl-link {
+    grid-row: 3;
+  }
+  .kdl-b {
+    grid-row: 3;
+  }
+  .kdl-row {
+    grid-template-columns: 7rem minmax(0, 1fr);
+  }
+  .kdl-what,
+  .kdl-size {
+    grid-column: 1 / -1;
+  }
+}
+
+@container (max-width: 40rem) {
+  .kdl-inside {
+    flex-direction: column;
+  }
+  .kdl-cells {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .kdl-foot {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .kdl-sum code {
+    font-size: 0.75rem;
+    white-space: normal;
+  }
+}

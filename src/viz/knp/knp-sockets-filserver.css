@@ -1,0 +1,117 @@
+/* knp-sockets-filserver: sekvens med to søjler (klient | server) og beskedrækker
+   på tværs. Alle rækker findes fra trin 0; højden er stabil. */
+.kf-flag {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0.9rem;
+}
+.kf-flag .vtag {
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  text-align: center;
+}
+.kf-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  column-gap: 2.5rem;
+  row-gap: 0.7rem;
+}
+.kf-head .vnode-sub {
+  font-family: var(--font-mono);
+  font-variant-ligatures: none;
+}
+.kf-conn {
+  grid-column: 1 / -1;
+  padding: 0.35rem 0.6rem;
+  border-radius: var(--radius-sm);
+  outline: 1px dashed var(--rule-strong);
+  outline-offset: -1px;
+  font-size: 0.75rem;
+  line-height: 1.35;
+  text-align: center;
+  color: var(--ink-3);
+}
+.kf-conn code {
+  font-size: 0.75rem;
+}
+.kf-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.2rem;
+  min-width: 0;
+}
+.kf-empty {
+  min-height: 1px;
+}
+.kf-code {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-variant-ligatures: none;
+  color: var(--ink);
+  white-space: normal;
+  hyphens: manual;
+}
+.kf-note {
+  font-size: 0.75rem;
+  line-height: 1.35;
+  color: var(--ink-3);
+}
+.kf-note code {
+  font-size: 0.75rem;
+  white-space: normal;
+  hyphens: manual;
+}
+
+.kf-msg {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+}
+.kf-msg .vlink {
+  flex: none;
+  align-self: stretch;
+}
+.kf-call {
+  font-size: 0.8125rem;
+  text-align: center;
+}
+.kf-call code {
+  white-space: normal;
+}
+.kf-bytes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 3px;
+}
+.kf-b {
+  padding: 0.2rem 0.55rem 0.25rem;
+  border-radius: 3px;
+  font-size: 0.75rem;
+  line-height: 1.3;
+  color: var(--ink);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+}
+.kf-b[data-kind='nul'] {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--accent);
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1px var(--accent-mid);
+}
+.kf-b[data-kind='data'] {
+  background: var(--paper-2);
+}
+
+@container (max-width: 40rem) {
+  .kf-grid {
+    column-gap: 0.75rem;
+  }
+  .kf-code {
+    font-size: 0.75rem;
+  }
+}

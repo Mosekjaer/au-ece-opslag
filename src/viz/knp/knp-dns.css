@@ -1,0 +1,149 @@
+.kd {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: 1.5rem;
+  align-items: start;
+}
+
+/* Sekvensdiagrammet: 10 lige brede halvspor; deltager k har sin livslinje på
+   grænsen mellem spor 2k+1 og 2k+2, så en pil fra i til j er grid-column
+   2i+2 / 2j+2. */
+.kd-grid {
+  display: grid;
+  grid-template-columns: repeat(10, minmax(0, 1fr));
+  grid-template-rows: auto repeat(8, 1.85rem);
+  row-gap: 0;
+}
+.kd-head {
+  grid-row: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.1rem;
+  min-width: 0;
+  margin: 0 0.1rem 0.4rem;
+  padding: 0.35rem 0.2rem 0.4rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  text-align: center;
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.kd-head[data-on] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.kd-role {
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+.kd-name {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  line-height: 1.25;
+  color: var(--ink-3);
+  font-variant-ligatures: none;
+}
+.kd-life {
+  grid-row: 2 / 10;
+  position: relative;
+}
+.kd-life::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  border-left: 1.5px dashed var(--rule-strong);
+}
+.kd-arrow {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: 0.2rem;
+}
+.kd-arrow .vlink {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 0.9rem;
+}
+.kd-arrow .vlink-label {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--ink-2);
+}
+.kd-arrow .vlink[data-tone='focus'] .vlink-label {
+  color: var(--accent);
+}
+
+.kd-foot {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.8rem;
+  min-height: 1.5rem;
+}
+
+/* Beskedlisten. */
+.kd-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.kd-item {
+  display: grid;
+  grid-template-columns: 1.4rem minmax(0, 1fr);
+  gap: 0.4rem;
+  padding: 0.3rem 0.45rem;
+  border-radius: var(--radius-sm);
+  transition: background-color 0.35s var(--ease-out);
+}
+.kd-item[data-now] {
+  background: var(--accent-soft);
+}
+.kd-num {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+.kd-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.05rem;
+  min-width: 0;
+}
+.kd-route {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+.kd-kind {
+  font-style: italic;
+  font-weight: 500;
+  color: var(--accent);
+}
+.kd-body {
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: var(--ink-2);
+}
+.kd-body code {
+  font-size: 0.6875rem;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+@container (max-width: 48rem) {
+  .kd {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

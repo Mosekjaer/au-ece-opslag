@@ -1,0 +1,143 @@
+/* knp-flow-control: afsender A · kanal · modtager B med receive buffer. */
+.kfc {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+.kfc-note {
+  margin: 0;
+}
+
+.kfc-hosts {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 0.8fr) minmax(0, 1.3fr);
+  gap: 1rem 1.25rem;
+  align-items: start;
+}
+
+.kfc-host {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 0;
+  padding: 0.75rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+}
+.kfc-name {
+  font-weight: 600;
+  font-size: 0.8125rem;
+}
+.kfc-rule {
+  font-size: 0.75rem;
+  color: var(--ink-2);
+  overflow-wrap: anywhere;
+}
+
+.kfc-chan {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-top: 1.6rem;
+  min-width: 0;
+}
+.kfc-lane {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 1.8rem;
+  border-bottom: 1px dashed var(--rule-strong);
+  padding-bottom: 0.3rem;
+}
+.kfc-lane[data-dir='right'] {
+  justify-content: space-between;
+}
+.kfc-arrow {
+  color: var(--ink-3);
+  font-size: 0.875rem;
+}
+.kfc-slot {
+  min-width: 0;
+}
+.kfc-silence {
+  margin: 0;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: var(--ink-2);
+}
+.kfc-silence[data-neg] {
+  color: var(--neg);
+}
+
+.kfc-buf {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  gap: 3px;
+}
+.kfc-cell {
+  display: grid;
+  place-items: center;
+  min-height: 2.1rem;
+  border-radius: 3px;
+  background: var(--paper-2);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  font-size: 0.75rem;
+  font-weight: 600;
+  transition:
+    background-color 0.4s var(--ease-out),
+    color 0.4s var(--ease-out);
+}
+.kfc-cell[data-full] {
+  background: var(--accent);
+  color: var(--paper);
+  box-shadow: none;
+}
+
+.kfc-scale {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.2rem 0.6rem;
+  font-size: 0.75rem;
+  color: var(--ink-3);
+}
+.kfc-rwnd {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--accent);
+}
+.kfc-rwnd[data-zero] {
+  color: var(--neg);
+}
+
+.kfc-vars {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.2rem 0.9rem;
+  margin: 0;
+  font-size: 0.75rem;
+}
+.kfc-vars div {
+  display: flex;
+  gap: 0.3rem;
+}
+.kfc-vars dt {
+  font-family: var(--font-mono);
+  color: var(--ink-3);
+}
+.kfc-vars dd {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+@container (max-width: 48rem) {
+  .kfc-hosts {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .kfc-chan {
+    padding-top: 0;
+  }
+}

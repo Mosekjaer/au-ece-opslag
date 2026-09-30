@@ -1,0 +1,163 @@
+/* knp-congestion-control: cwnd-kurven fra figur 3.52 + noter pr. fase. */
+.kcc {
+  display: grid;
+  grid-template-columns: minmax(0, 27rem) minmax(0, 1fr);
+  gap: 1.25rem 2rem;
+  align-items: start;
+}
+
+.kcc-plot {
+  min-width: 0;
+}
+.kcc-svg {
+  display: block;
+  width: 100%;
+  max-width: 27rem;
+  height: auto;
+  overflow: visible;
+}
+
+.kcc-grid {
+  stroke: var(--rule);
+  stroke-width: 1;
+}
+.kcc-axis {
+  stroke: var(--rule-strong);
+  stroke-width: 1.25;
+}
+.kcc-tick {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  fill: var(--ink-3);
+}
+.kcc-axt {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  fill: var(--ink-2);
+}
+
+.kcc-thresh {
+  stroke: var(--ink-3);
+  stroke-width: 1.25;
+  stroke-dasharray: 4 3;
+  transition: stroke 0.35s var(--ease-out);
+}
+.kcc-thresh[data-now] {
+  stroke: var(--accent);
+  stroke-width: 1.75;
+}
+.kcc-legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0.4rem 0 0;
+  font-size: 0.75rem;
+  color: var(--ink-2);
+}
+.kcc-legend > span:last-child {
+  margin-left: -0.4rem;
+}
+.kcc-dash {
+  display: inline-block;
+  width: 1.4rem;
+  border-top: 1.5px dashed var(--ink-3);
+}
+
+.kcc-line {
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.kcc-series.is-both .kcc-line,
+.kcc-series.is-tahoe .kcc-line {
+  stroke: var(--ink-2);
+}
+.kcc-series.is-reno .kcc-line {
+  stroke: var(--accent);
+}
+.kcc-series.is-tahoe .kcc-line {
+  stroke-dasharray: 5 3;
+}
+.kcc-series[data-now] .kcc-line {
+  stroke: var(--accent);
+  stroke-width: 2.75;
+}
+.kcc-dot {
+  fill: var(--ink-2);
+}
+.kcc-series.is-reno .kcc-dot,
+.kcc-series[data-now] .kcc-dot {
+  fill: var(--accent);
+}
+
+.kcc-loss {
+  fill: none;
+  stroke: var(--neg);
+  stroke-width: 1.75;
+}
+.kcc-llab {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  fill: var(--neg);
+}
+.kcc-name {
+  font-family: var(--font-ui);
+  font-size: 12.5px;
+  font-weight: 600;
+}
+.kcc-name.is-tahoe {
+  fill: var(--ink-2);
+}
+.kcc-name.is-reno {
+  fill: var(--accent);
+}
+
+.kcc-notes {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  min-width: 0;
+}
+.kcc-note {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  padding: 0.35rem 0.6rem;
+  border-left: 2px solid var(--rule-strong);
+  transition: border-color 0.35s var(--ease-out);
+}
+.kcc-note[data-now] {
+  border-left-color: var(--accent);
+}
+.kcc-note-head {
+  font-weight: 600;
+  font-size: 0.8125rem;
+}
+.kcc-note[data-now] .kcc-note-head {
+  color: var(--accent);
+}
+.kcc-note-body {
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: var(--ink-2);
+}
+
+@container (max-width: 44rem) {
+  .kcc {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* Smal plade: SVG’en skaleres ned, så teksten skal op for at holde ≥ 11 px. */
+@container (max-width: 26rem) {
+  .kcc-tick,
+  .kcc-axt,
+  .kcc-llab,
+  .kcc-name {
+    font-size: 13.5px;
+  }
+}

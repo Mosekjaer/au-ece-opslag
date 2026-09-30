@@ -1,0 +1,154 @@
+/* ARP i et LAN: switch + fire stationer til venstre, ARP-tabel og frames til højre. */
+.arp {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 1.25rem 1.75rem;
+  align-items: start;
+  min-width: 0;
+}
+.arp-lan,
+.arp-side {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  min-width: 0;
+}
+
+/* Switchen er en lodret skinne; hver station hænger på den med sin egen pil. */
+.arp-bus {
+  display: grid;
+  grid-template-columns: 3.1rem minmax(0, 1fr);
+  grid-template-rows: repeat(4, auto);
+  row-gap: 0.5rem;
+}
+.arp-switch {
+  grid-column: 1;
+  grid-row: 1 / -1;
+  display: flex;
+  justify-content: center;
+  padding-top: 0.5rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper-2);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--ink-2);
+  align-items: flex-start;
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.arp-switch[data-on] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.arp-row {
+  grid-column: 2;
+  display: grid;
+  grid-template-columns: 2rem minmax(0, 1fr);
+  align-items: center;
+  min-width: 0;
+}
+.arp-link {
+  min-width: 0;
+  width: 100%;
+}
+.arp-st {
+  min-width: 0;
+  padding: 0.4rem 0.6rem 0.45rem;
+}
+.arp-st .vnode-title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 0.4rem;
+}
+.arp-name {
+  font-weight: 700;
+}
+.arp-ip {
+  font-size: 0.75rem;
+}
+.arp-mac {
+  font-size: 0.6875rem;
+}
+.arp-say {
+  margin-top: 0.2rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--ink-2);
+}
+.arp-st[data-tone='focus'] .arp-say,
+.arp-st[data-tone='ok'] .arp-say {
+  color: var(--accent);
+}
+
+/* Frames der er sendt, i rækkefølge. */
+.arp-frames {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.arp-frame {
+  padding: 0.4rem 0.6rem 0.45rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.arp-frame[data-now] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.arp-frame-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
+  font-size: 0.8125rem;
+}
+.arp-frame-head .vtag {
+  font-size: 0.6875rem;
+}
+.arp-fields {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  column-gap: 0.6rem;
+  row-gap: 0.05rem;
+  font-size: 0.6875rem;
+  line-height: 1.4;
+}
+.arp-fields dt {
+  color: var(--ink-3);
+}
+.arp-fields dd {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.arp-fields dd[data-bc] {
+  color: var(--accent);
+  font-weight: 600;
+}
+.arp-body {
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+}
+
+.arp-side .vtable td,
+.arp-side .vtable th {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+}
+
+@container (max-width: 40rem) {
+  .arp {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .arp-side .vtable {
+    overflow-x: auto;
+  }
+}

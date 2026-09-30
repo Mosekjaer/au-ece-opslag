@@ -1,0 +1,124 @@
+/* knp-sockets-udp: sekvens med to søjler (server | klient) og beskedrækker på
+   tværs. Alle rækker findes fra trin 0, så højden er stabil. */
+.ku-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  column-gap: 2.5rem;
+  row-gap: 0.75rem;
+}
+.ku-head .vnode-sub code {
+  font-size: inherit;
+}
+.ku-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.3rem;
+  min-width: 0;
+}
+.ku-empty {
+  min-height: 1px;
+}
+.ku-code {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-variant-ligatures: none;
+  color: var(--ink);
+  white-space: normal;
+  overflow-wrap: normal;
+  hyphens: manual;
+}
+.ku-note {
+  font-size: 0.75rem;
+  line-height: 1.35;
+  color: var(--ink-3);
+}
+.ku-note code {
+  font-size: 0.75rem;
+}
+
+/* Beskedrække: kald, pil og pakke på tværs af begge søjler. */
+.ku-msg {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0.25rem 0;
+}
+.ku-msg .vlink {
+  flex: none;
+  align-self: stretch;
+}
+.ku-call {
+  font-size: 0.8125rem;
+  text-align: center;
+}
+.ku-call code {
+  white-space: normal;
+}
+
+.ku-pkt {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  box-shadow: inset 0 0 0 1px var(--accent-mid);
+  background: var(--paper);
+  overflow: hidden;
+}
+.ku-f {
+  display: flex;
+  flex-direction: column;
+  padding: 0.25rem 0.6rem 0.3rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.3;
+  color: var(--ink);
+  font-variant-ligatures: none;
+}
+.ku-f + .ku-f {
+  box-shadow: inset 1px 0 0 var(--accent-mid);
+}
+.ku-f.is-addr {
+  background: var(--accent-soft);
+}
+.ku-fk {
+  font-family: var(--font-ui);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+.ku-nohs {
+  max-width: 34rem;
+  font-size: 0.75rem;
+  line-height: 1.35;
+  color: var(--ink-3);
+  text-align: center;
+}
+
+@container (max-width: 40rem) {
+  .ku-grid {
+    column-gap: 0.75rem;
+  }
+  .ku-code {
+    font-size: 0.75rem;
+  }
+  .ku-pkt {
+    flex-direction: column;
+    align-self: stretch;
+  }
+  .ku-f {
+    flex-direction: row;
+    align-items: baseline;
+    gap: 0.5rem;
+    padding: 0.2rem 0.5rem 0.25rem;
+  }
+  .ku-fk {
+    flex: none;
+    width: 2rem;
+  }
+  .ku-f + .ku-f {
+    box-shadow: inset 0 1px 0 var(--accent-mid);
+  }
+}

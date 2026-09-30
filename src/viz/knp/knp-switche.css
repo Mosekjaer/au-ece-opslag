@@ -1,0 +1,160 @@
+/* Self-learning switch: seks interfaces omkring switchen, tabel og log nedenunder. */
+.sw {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  min-width: 0;
+}
+
+.sw-net {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 6rem minmax(0, 1fr);
+  grid-template-rows: repeat(3, auto);
+  column-gap: 0;
+  row-gap: 0.5rem;
+  max-width: 44rem;
+  width: 100%;
+  margin-inline: auto;
+}
+.sw-row {
+  display: grid;
+  align-items: center;
+  min-width: 0;
+}
+.sw-row.is-l {
+  grid-column: 1;
+  grid-template-columns: minmax(0, 1fr) 3rem;
+  grid-template-areas: 'st ln';
+}
+.sw-row.is-r {
+  grid-column: 3;
+  grid-template-columns: 3rem minmax(0, 1fr);
+  grid-template-areas: 'ln st';
+}
+.sw-st {
+  grid-area: st;
+  min-width: 0;
+  padding: 0.45rem 0.6rem;
+}
+.sw-st .vnode-title {
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
+.sw-link {
+  grid-area: ln;
+  min-width: 0;
+  width: 100%;
+}
+/* Kablet ligger der altid; pilen tegnes ovenpå, når en frame bruger det. */
+.sw-link::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1px;
+  background: var(--rule-strong);
+}
+.sw-link .vlink-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--ink-2);
+  opacity: 1 !important;
+}
+
+.sw-box {
+  grid-column: 2;
+  grid-row: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.15rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper-2);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  text-align: center;
+  transition:
+    background-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+.sw-box[data-on] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.sw-box-name {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+.sw-box-sub {
+  font-size: 0.6875rem;
+  color: var(--ink-3);
+}
+
+/* Tabel og log. */
+.sw-bottom {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 1rem 1.5rem;
+  align-items: start;
+}
+.sw-tname {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.sw-bottom .vtable td {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+}
+.sw-log {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin: 0;
+  padding: 0 0 0 1.1rem;
+  font-size: 0.75rem;
+  color: var(--ink-2);
+}
+.sw-log li {
+  padding: 0.25rem 0.4rem;
+  border-radius: var(--radius-sm);
+  transition: background-color 0.35s var(--ease-out);
+}
+.sw-log li[data-now] {
+  background: var(--accent-soft);
+}
+.sw-log-f {
+  margin-right: 0.4rem;
+  overflow-wrap: anywhere;
+}
+.sw-log .vtag {
+  font-size: 0.6875rem;
+}
+
+@container (max-width: 40rem) {
+  .sw-net {
+    grid-template-columns: minmax(0, 1fr) 3.4rem minmax(0, 1fr);
+  }
+  .sw-row.is-l {
+    grid-template-columns: minmax(0, 1fr) 1.9rem;
+  }
+  .sw-row.is-r {
+    grid-template-columns: 1.9rem minmax(0, 1fr);
+  }
+  .sw-st {
+    padding: 0.35rem 0.45rem;
+  }
+  .sw-st .vnode-title {
+    font-size: 0.75rem;
+  }
+  .sw-box-sub {
+    display: none;
+  }
+  .sw-box-name {
+    font-size: 0.75rem;
+  }
+  .sw-bottom {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

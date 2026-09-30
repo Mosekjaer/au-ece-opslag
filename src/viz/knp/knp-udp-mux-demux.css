@@ -1,0 +1,169 @@
+/* knp-udp-mux-demux: UDP (figur 3.4) og TCP (figur 3.5) side om side. */
+.kmx {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: 1rem 1.5rem;
+  align-items: start;
+}
+
+.kmx-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-width: 0;
+  opacity: 0.5;
+  transition: opacity 0.35s var(--ease-out);
+}
+.kmx-panel[data-on] {
+  opacity: 1;
+}
+
+.kmx-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.2rem 0.6rem;
+}
+.kmx-proto {
+  font-weight: 600;
+  font-size: 0.9375rem;
+  color: var(--ink);
+}
+
+.kmx-udp {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.kmx-host {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.kmx-host-name {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--ink-2);
+}
+
+.kmx-sock {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.3rem 0.6rem;
+  min-height: 2.5rem;
+  padding: 0.3rem 0.6rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  font-size: 0.8125rem;
+  transition:
+    background-color 0.4s var(--ease-out),
+    box-shadow 0.4s var(--ease-out);
+}
+.kmx-sock[data-tone='focus'] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.kmx-sock[data-tone='ok'] {
+  box-shadow: inset 0 0 0 1px var(--accent-mid);
+}
+.kmx-sock[data-tone='muted'] {
+  background: transparent;
+  color: var(--ink-3);
+  box-shadow: inset 0 0 0 1px var(--rule);
+}
+
+.kmx-slot {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  min-height: 1.6rem;
+  min-width: 0;
+}
+
+.kmx-seg {
+  font-size: 0.75rem;
+}
+
+.kmx-tcp {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.75rem 1rem;
+  align-items: start;
+}
+.kmx-queue {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  min-width: 8.5rem;
+}
+.kmx-queue .kmx-slot {
+  justify-content: flex-start;
+}
+
+.kmx-socks {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+.kmx-tuple {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.1rem 0.6rem;
+  min-width: 0;
+}
+.kmx-tuple b {
+  font-weight: 500;
+}
+.kmx-tuple b[data-clash] {
+  color: var(--accent);
+  font-weight: 700;
+}
+.kmx-note {
+  font-size: 0.75rem;
+  color: var(--ink-3);
+}
+
+.kmx-notes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  min-height: 1.6rem;
+}
+
+@container (max-width: 52rem) {
+  .kmx {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@container (max-width: 40rem) {
+  .kmx-tcp {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .kmx-queue {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    min-width: 0;
+  }
+  .kmx-queue .vcaps {
+    width: 100%;
+  }
+  .kmx-queue .kmx-slot {
+    width: 8.5rem;
+  }
+  .kmx-sock {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .kmx-slot {
+    justify-content: flex-start;
+  }
+}
+.kmx-queue > .vtag {
+  align-self: flex-start;
+}

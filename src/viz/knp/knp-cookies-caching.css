@@ -1,0 +1,136 @@
+.kcc {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.kcc-heads {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.5rem;
+}
+.kcc-head {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  min-width: 0;
+}
+.kcc-head[data-col='b'] {
+  align-items: flex-start;
+}
+.kcc-head[data-col='c'] {
+  align-items: center;
+  text-align: center;
+}
+.kcc-head[data-col='o'] {
+  align-items: flex-end;
+  text-align: right;
+}
+.kcc-name {
+  font-weight: 600;
+  font-size: 0.875rem;
+  transition: color 0.35s var(--ease-out);
+}
+.kcc-head[data-on] .kcc-name {
+  color: var(--accent);
+}
+.kcc-sub {
+  font-size: 0.75rem;
+  line-height: 1.3;
+  color: var(--ink-3);
+  hyphens: manual;
+}
+.kcc-sub.mono {
+  font-size: 0.6875rem;
+  font-weight: 400;
+}
+
+.kcc-store {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem 0.5rem;
+  min-height: 1.6rem;
+}
+
+/* Sekvensen: venstre bane = browser ↔ cache, højre = cache ↔ origin.
+   Tre livslinjer: venstre kant, midte og højre kant. */
+.kcc-seq {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  row-gap: 0.35rem;
+  padding: 0.3rem 0;
+  border-left: 1.5px solid var(--rule-strong);
+  border-right: 1.5px solid var(--rule-strong);
+}
+.kcc-seq::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  border-left: 1.5px solid var(--rule-strong);
+}
+.kcc-row {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-width: 0;
+  min-height: 2.2rem;
+}
+.kcc-row[data-lane='L'] {
+  grid-column: 1;
+}
+.kcc-row[data-lane='R'] {
+  grid-column: 2;
+}
+.kcc-row .vlink {
+  flex: none;
+  align-self: stretch;
+  height: 0.8rem;
+  min-width: 0;
+}
+.kcc-label {
+  display: flex;
+  flex-direction: column;
+  padding: 0 0.45rem;
+}
+.kcc-label[data-back] {
+  align-items: flex-end;
+  text-align: right;
+}
+.kcc-label code {
+  font-size: 0.6875rem;
+  line-height: 1.35;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  color: var(--ink-2);
+}
+.kcc-label[data-kind='cond'] code:last-child,
+.kcc-label[data-kind='ok304'] code:first-child {
+  color: var(--accent);
+  font-weight: 600;
+}
+.kcc-later {
+  grid-column: 1 / -1;
+  grid-row: 5;
+  justify-self: center;
+  position: relative;
+  z-index: 1;
+  margin: 0.3rem 0;
+  padding: 0.1rem 0.5rem;
+  border-radius: 999px;
+  background: var(--paper-2);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--ink-2);
+}
+
+@container (max-width: 40rem) {
+  .kcc-label {
+    padding: 0 0.3rem;
+  }
+}

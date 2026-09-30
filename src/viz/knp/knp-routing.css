@@ -1,0 +1,85 @@
+/* Link-state (Dijkstra) fra u: graf til venstre, tabel 5.1 og forwarding-tabel til højre. */
+.lsr {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: 1.25rem 1.75rem;
+  align-items: start;
+  min-width: 0;
+}
+.lsr-graph,
+.lsr-side {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  min-width: 0;
+}
+
+.lsr-scroll {
+  overflow-x: auto;
+  min-width: 0;
+}
+.lsr-table {
+  border-collapse: collapse;
+  font-size: 0.75rem;
+  font-variant-numeric: tabular-nums;
+}
+.lsr-table th {
+  padding: 0.2rem 0.3rem;
+  border-bottom: 1px solid var(--rule-strong);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  text-align: left;
+  white-space: nowrap;
+  color: var(--ink-2);
+}
+.lsr-table td {
+  padding: 0.22rem 0.3rem;
+  border-bottom: 1px solid var(--rule);
+  white-space: nowrap;
+  transition:
+    background-color 0.35s var(--ease-out),
+    color 0.35s var(--ease-out);
+}
+.lsr-table tr[data-cur] td {
+  background: var(--accent-soft);
+}
+.lsr-table td[data-hi] {
+  color: var(--accent);
+  font-weight: 600;
+}
+.lsr-n {
+  min-width: 3.4rem;
+}
+
+/* Forwarding-tabellen i u. */
+.lsr-fwd {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.lsr-fwd-grid {
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: start;
+  column-gap: 1.5rem;
+  font-size: 0.75rem;
+}
+.lsr-fwd-h {
+  padding-bottom: 0.2rem;
+  border-bottom: 1px solid var(--rule-strong);
+  font-weight: 600;
+  color: var(--ink-2);
+}
+.lsr-fwd-row {
+  display: contents;
+}
+.lsr-fwd-row > span {
+  padding: 0.12rem 0;
+}
+
+@container (max-width: 40rem) {
+  .lsr {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
